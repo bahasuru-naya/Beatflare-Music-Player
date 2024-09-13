@@ -20,8 +20,7 @@ body {
 }
 
 main {
-    height: 100vh;
-    overflow-y: scroll;
+    
     scroll-behavior: smooth;
     -ms-scroll-snap-type: y mandatory;
     scroll-snap-type: y mandatory;
