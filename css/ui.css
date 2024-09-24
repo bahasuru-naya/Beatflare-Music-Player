@@ -16,7 +16,6 @@ body {
     font-family: 'Alata', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     padding: 0;
 }
 
