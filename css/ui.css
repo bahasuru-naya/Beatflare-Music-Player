@@ -17,23 +17,27 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     padding: 0;
+    margin: 0;
+}
+
+nav{
+    z-index: 99;
 }
 
 main {
 
-    scroll-behavior: smooth;
-    -ms-scroll-snap-type: y mandatory;
-    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;    
+    width: auto;
 }
 
 section {
     align-items: center;
     display: flex;
     font-size: 3rem;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     scroll-snap-align: center;
-    width: 100vw;
+    width: auto;
 }
 
 .menu {
@@ -202,16 +206,17 @@ section {
     text-decoration: underline;
 }
 
-#player {
+#playersec {
     display: block;    
     background: #f5abc9;
     color: grey;
 }
-#player h1
+#playersec h1
 {
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 0;
 }
 
 .section-center {
@@ -227,11 +232,7 @@ section {
     margin-bottom: 2rem;
 }
 
-.play img {
-    border-radius: 0.5rem;
-    object-fit: cover;
-    height: 30rem;
-}
+
 
 .tabs {
     background: #ffe5e2;
@@ -242,6 +243,9 @@ section {
 .tbtn-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+    margin: 0;
+
 }
 
 .tbutton:nth-child(1) {
@@ -255,11 +259,13 @@ section {
 .tbutton {
     padding: 1rem 0;
     border: none;
+    width: auto;
     font-size: 1rem;
     background: #b6c9f0;
     cursor: pointer;
     transition: all 0.3s linear;
     letter-spacing: 0.25rem;
+    margin: 0;
 }
 
 .tbutton:hover:not(.live) {
@@ -268,8 +274,9 @@ section {
 }
 
 .tabs-content {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
     font-size: 1rem;
+
 }
 
 /* hide content */
