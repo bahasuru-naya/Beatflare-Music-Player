@@ -98,6 +98,7 @@ fileInput.addEventListener('change', function(event) {
     files = [...files, ...newFiles];
     updatePlaylist();
     setCanvasHeight();
+    updateButtonsState(currentIndex)
     audiovisual(audioPlayer);
     if (currentIndex === -1 && files.length > 0) {
         playFile(0);
@@ -125,7 +126,9 @@ function updatePlaylist() {
 
         playlist.appendChild(listItem);
         listItemMap.set(index, listItem);
+        
     });
+    updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
 }
 
@@ -181,7 +184,7 @@ function handleRemoveFile(index) {
 }
 
 function updateIndicesAndMap() {
-    files.forEach((file, index) => {
+    files.forEach((index) => {
         const listItem = listItemMap.get(index);
         if (listItem) {
             listItem.setAttribute('data-index', index);
@@ -233,12 +236,16 @@ playPauseButton.addEventListener('click', function() {
 });
 
 prevButton.addEventListener('click', function() {
+    updateIndicesAndMap();
+    updatePlaylist();
     if (currentIndex > 0) {
         playFile(currentIndex - 1);
     }
 });
 
 nextButton.addEventListener('click', function() {
+    updateIndicesAndMap();
+    updatePlaylist();
     if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
     }
