@@ -8,8 +8,12 @@ const volumeSlider = document.getElementById('volume');
 const playlist = document.getElementById('playlist');
 const currentTimeLabel = document.getElementById('current-time');
 const durationLabel = document.getElementById('duration');
-const canvas = document.getElementById('canvas');
-const visual = document.getElementById('visual');
+const canvas1 = document.getElementById('canvas1');
+const canvas2 = document.getElementById('canvas2');
+const canvas3 = document.getElementById('canvas3');
+const visual1 = document.getElementById('visual1');
+const visual2 = document.getElementById('visual2');
+const visual3 = document.getElementById('visual3');
 const player = document.getElementById('player');
 
 let files = [];
@@ -17,14 +21,16 @@ let currentIndex = -1;
 let listItemMap = new Map();
 let isAudioConnected = false;
 
-const ctx = canvas.getContext('2d');
+const ctx1 = canvas1.getContext('2d');
+const ctx2 = canvas2.getContext('2d');
+const ctx3 = canvas3.getContext('2d');
 let audio;
 let audiosrc;
 let analyser;
 let animation;
 let audioctx;
 
-document.addEventListener('DOMContentLoaded', function() {   
+document.addEventListener('DOMContentLoaded', function () {
 
     // Set the canvas height initially
     setCanvasHeight();
@@ -35,8 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function setCanvasHeight() {
-    if (player && visual) {
-        visual.style.height = player.offsetHeight-20 + 'px';
+    if (player && visual1) {
+        visual1.style.height = player.offsetHeight - 20 + 'px';
+    }
+    if (player && visual2) {
+        visual2.style.height = player.offsetHeight - 20 + 'px';
+    }
+    if (player && visual3) {
+        visual3.style.height = player.offsetHeight - 20 + 'px';
     }
 }
 
@@ -44,12 +56,12 @@ function setCanvasHeight() {
 //visualizer
 
 function audiovisual(player) {
-        audio = player;
-        audioctx = new AudioContext();
-        setCanvasHeight();
-    
+    audio = player;
+    audioctx = new AudioContext();
+    setCanvasHeight();
+
     if (!isAudioConnected) {
-        
+
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
         audiosrc.connect(analyser);
@@ -59,22 +71,84 @@ function audiovisual(player) {
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    let barWidth = (canvas.width / bufferLength) * 2.5;
+    let barWidth = (canvas1.width / bufferLength) * 2.5;
     let barHeight;
     let x;
-    function animate() {
+    function animate1() {
         x = 0;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
         analyser.getByteFrequencyData(dataArray);
         for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i]/2;            
-            ctx.fillStyle = generateRandomColor(dataArray[i]);
-            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+            barHeight = dataArray[i] / 2;
+            ctx1.fillStyle = generateRandomColor(dataArray[i]);
+            ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
             x += barWidth + 1;
         }
-        animation = requestAnimationFrame(animate);
+        animation = requestAnimationFrame(animate1);
     }
-    animate();
+
+    let hue = 0;
+    function animate2() {
+        // Clear the canvas
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+        // Get frequency data
+        analyser.getByteFrequencyData(dataArray);
+
+        // Set the background color
+        ctx2.fillStyle = '#000'; // Black background
+        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+
+        // Circle parameters
+        let radius = 40; // Base radius
+        let cX = canvas2.width / 2; // Center X
+        let cY = canvas2.height / 2; // Center Y
+
+        // Scaling factors for roundness
+        let scaleX = canvas2.width / Math.max(canvas2.width, canvas2.height);
+        let scaleY = canvas2.height / Math.max(canvas2.width, canvas2.height);
+
+        // Calculate radians per data point
+        let radianAdd = ((Math.PI * 6)) / dataArray.length; // Full circle
+        let radian = 0;
+        
+
+        // Line styles
+        ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
+        ctx2.lineWidth = 3;
+
+        // Draw frequency-based radial lines
+        for (let i = 10; i < dataArray.length - 10; i++) {
+            // Calculate starting point of the line
+            let xStart = radius * Math.cos(radian) * scaleX + cX;
+            let yStart = radius * Math.sin(radian) * scaleY + cY;
+
+            // Clamp the data value
+            let v = Math.max(dataArray[i] / 2, radius);
+
+            // Calculate ending point of the line
+            let xEnd = v * Math.cos(radian) * scaleX + cX;
+            let yEnd = v * Math.sin(radian) * scaleY + cY;
+
+            // Draw the line
+            ctx2.beginPath();
+            ctx2.moveTo(xStart, yStart);
+            ctx2.lineTo(xEnd, yEnd);
+            ctx2.stroke();
+
+            // Increment radian for the next line
+            radian += radianAdd;
+        }
+        hue += 0.5;
+        if (hue > 360) {
+            hue = 0;
+        }
+
+        // Request the next animation frame
+        animation = requestAnimationFrame(animate2);
+    }
+    animate1();
+    animate2();
 }
 
 //generate random color
@@ -93,7 +167,7 @@ function generateRandomColor(barHeight) {
 
 
 
-fileInput.addEventListener('change', function(event) {
+fileInput.addEventListener('change', function (event) {
     const newFiles = Array.from(event.target.files);
     files = [...files, ...newFiles];
     updatePlaylist();
@@ -103,7 +177,7 @@ fileInput.addEventListener('change', function(event) {
     if (currentIndex === -1 && files.length > 0) {
         playFile(0);
     }
-    
+
 });
 
 function updatePlaylist() {
@@ -126,7 +200,7 @@ function updatePlaylist() {
 
         playlist.appendChild(listItem);
         listItemMap.set(index, listItem);
-        
+
     });
     updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
@@ -145,9 +219,9 @@ function handleRemoveFile(index) {
             listItemMap.clear();
             playlist.innerHTML = '';
             currentIndex = -1;
-            playPauseButton.textContent = 'Play';            
+            playPauseButton.textContent = 'Play';
             audioPlayer.src = '';
-            
+
         } else {
             // Determine the next or previous file to play
             if (index < files.length - 1) {
@@ -202,10 +276,10 @@ function playFile(index) {
         playPauseButton.textContent = 'Pause';
         updatePlaylistHighlight(index);
         updateButtonsState(index);
-        currentIndex = index; 
-        audioctx.resume();                
-        audiovisual(audioPlayer); 
-              
+        currentIndex = index;
+        audioctx.resume();
+        audiovisual(audioPlayer);
+
     }
 }
 
@@ -221,9 +295,9 @@ function updateButtonsState(index) {
     nextButton.disabled = index >= files.length - 1;
 }
 
-playPauseButton.addEventListener('click', function() {
+playPauseButton.addEventListener('click', function () {
     if (audioPlayer.paused) {
-        audioPlayer.play();        
+        audioPlayer.play();
         playPauseButton.textContent = 'Pause';
         audioctx.resume();
         audiovisual(audioPlayer);
@@ -235,7 +309,7 @@ playPauseButton.addEventListener('click', function() {
     }
 });
 
-prevButton.addEventListener('click', function() {
+prevButton.addEventListener('click', function () {
     updateIndicesAndMap();
     updatePlaylist();
     if (currentIndex > 0) {
@@ -243,7 +317,7 @@ prevButton.addEventListener('click', function() {
     }
 });
 
-nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', function () {
     updateIndicesAndMap();
     updatePlaylist();
     if (currentIndex < files.length - 1) {
@@ -251,29 +325,29 @@ nextButton.addEventListener('click', function() {
     }
 });
 
-audioPlayer.addEventListener('timeupdate', function() {
+audioPlayer.addEventListener('timeupdate', function () {
     const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     seekBar.value = progress;
-   
+
     currentTimeLabel.textContent = formatTime(audioPlayer.currentTime);
-    if (audioPlayer.duration){
-    durationLabel.textContent = formatTime(audioPlayer.duration);
-    }else{
+    if (audioPlayer.duration) {
+        durationLabel.textContent = formatTime(audioPlayer.duration);
+    } else {
         durationLabel.textContent = '0:00';
     }
-    
+
 });
 
-seekBar.addEventListener('input', function() {
+seekBar.addEventListener('input', function () {
     const time = (seekBar.value / 100) * audioPlayer.duration;
     audioPlayer.currentTime = time;
 });
 
-volumeSlider.addEventListener('input', function() {
+volumeSlider.addEventListener('input', function () {
     audioPlayer.volume = volumeSlider.value;
 });
 
-audioPlayer.addEventListener('ended', function() {
+audioPlayer.addEventListener('ended', function () {
     if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
     } else {

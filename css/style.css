@@ -101,7 +101,7 @@ li button {
     margin-top: 10px;
 }
 
-#visual {
+#visual1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,7 +115,61 @@ li button {
 
 }
 
-#canvas {
+#canvas1 {
+    display: flex;
+    flex-direction: column;    
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+
+}
+
+#visual2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 100px;
+    max-height: 400px;
+
+}
+
+#canvas2 {
+    display: flex;
+    flex-direction: column;    
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+
+}
+
+#visual3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 100px;
+    max-height: 400px;
+
+}
+
+#canvas3 {
     display: flex;
     flex-direction: column;    
     padding: 10px;
