@@ -53,6 +53,7 @@ function setCanvasHeight() {
 }
 
 
+
 //visualizer
 
 function audiovisual(player) {
@@ -72,14 +73,16 @@ function audiovisual(player) {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
     let barWidth = (canvas1.width / bufferLength) * 2.5;
-    let barHeight;
+    let barHeight;    
     let x;
     function animate1() {
         x = 0;
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+        let points = 300; // Number of points to draw
         analyser.getByteFrequencyData(dataArray);
+        
         for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] / 2;
+            barHeight = Math.max(dataArray[i] / 2 , 10);
             ctx1.fillStyle = generateRandomColor(dataArray[i]);
             ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
             x += barWidth + 1;
@@ -100,6 +103,7 @@ function audiovisual(player) {
         ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
         // Circle parameters
+        let points = 300; // Number of points to draw
         let radius = 40; // Base radius
         let cX = canvas2.width / 2; // Center X
         let cY = canvas2.height / 2; // Center Y
@@ -111,11 +115,38 @@ function audiovisual(player) {
         // Calculate radians per data point
         let radianAdd = ((Math.PI * 6)) / dataArray.length; // Full circle
         let radian = 0;
-        
+        let radianc = 0;
+
 
         // Line styles
         ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
-        ctx2.lineWidth = 3;
+        ctx2.lineWidth = 2;
+        ctx2.lineCap = 'round';
+        ctx2.lineJoin = 'round';
+
+        // draw circle
+
+        for (let i = 0; i < points; i++) {
+            // Calculate starting point of the line
+            let xStart = radius * Math.cos(radianc) * scaleX + cX;
+            let yStart = radius * Math.sin(radianc) * scaleY + cY;
+
+            // Clamp the data value
+            let v = 30;
+
+            // Calculate ending point of the line
+            let xEnd = v * Math.cos(radianc) * scaleX + cX;
+            let yEnd = v * Math.sin(radianc) * scaleY + cY;
+
+            // Draw the line
+            ctx2.beginPath();
+            ctx2.moveTo(xStart, yStart);
+            ctx2.lineTo(xEnd, yEnd);
+            ctx2.stroke();
+
+            // Increment radian for the next line
+            radianc += ((Math.PI * 2)) / points;
+        }
 
         // Draw frequency-based radial lines
         for (let i = 10; i < dataArray.length - 10; i++) {
