@@ -73,16 +73,16 @@ function audiovisual(player) {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
     let barWidth = (canvas1.width / bufferLength) * 2.5;
-    let barHeight;    
+    let barHeight;
     let x;
     function animate1() {
         x = 0;
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
         let points = 300; // Number of points to draw
         analyser.getByteFrequencyData(dataArray);
-        
+
         for (let i = 0; i < bufferLength; i++) {
-            barHeight = Math.max(dataArray[i] / 2 , 10);
+            barHeight = Math.max(dataArray[i] / 2, 10);
             ctx1.fillStyle = generateRandomColor(dataArray[i]);
             ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
             x += barWidth + 1;
@@ -178,8 +178,58 @@ function audiovisual(player) {
         // Request the next animation frame
         animation = requestAnimationFrame(animate2);
     }
+    const bubbles = []; // Array to hold bubble objects
+    const numBubbles = 50; // Fixed number of bubbles
+
+    // Initialize bubbles with random positions and sizes
+    for (let i = 0; i < numBubbles; i++) {
+        bubbles.push({
+            x: Math.random() * canvas3.width,
+            y: Math.random() * canvas3.height,
+            radius: Math.random() * 20 + 10,
+            dx: (Math.random() - 0.5) * 2, // Random horizontal velocity
+            dy: (Math.random() - 0.5) * 2, // Random vertical velocity
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`
+        });
+    }
+
+    function animate3() {
+        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+
+        analyser.getByteFrequencyData(dataArray);
+
+        bubbles.forEach((bubble, index) => {
+            // Update bubble position
+            bubble.x += bubble.dx;
+            bubble.y += bubble.dy;
+
+            // Bounce off edges
+            if (bubble.x - bubble.radius < 0 || bubble.x + bubble.radius > canvas3.width) {
+                bubble.dx *= -1;
+            }
+            if (bubble.y - bubble.radius < 0 || bubble.y + bubble.radius > canvas3.height) {
+                bubble.dy *= -1;
+            }
+
+            // Update bubble size and color based on audio data
+            const audioValue = dataArray[index % dataArray.length] / 255;
+            bubble.radius = 10 + audioValue * 20;
+            bubble.color = `hsl(${audioValue * 360}, 100%, 50%)`;
+
+            // Draw bubble
+            ctx3.beginPath();
+            ctx3.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+            ctx3.fillStyle = bubble.color;
+            ctx3.fill();
+        });
+
+        // Request the next animation frame
+        animation = requestAnimationFrame(animate3);
+    }
+
     animate1();
     animate2();
+    animate3();
 }
 
 //generate random color
