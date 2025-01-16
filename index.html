@@ -7,12 +7,31 @@
     <title>Local MP3 Player</title>
     <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="css/style.css">
+    <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/logo.png">
     <script>
         window.console = window.console || function (t) { };
     </script>
 </head>
 
 <body>
+    <div class="preloaderback">
+        <div id="preloader">
+            <div class="plate">
+                <div class="black">
+                    <div class="border">
+                        <div class="white">
+                            <div class="center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p">
+                <div class="rect"></div>
+                <div class="circ"></div>
+            </div>
+        </div>
+    </div>
     <nav class="menu" style="--hue: 323.2997510156527">
         <input class="menu__toggle" type="checkbox" id="menu-toggle" />
         <label class="menu__toggle-label" for="menu-toggle"></label>
@@ -48,11 +67,11 @@
 
         </section>
         <section id="playersec">
-            
+
             <h1> MP3 Player</h1>
             <div class="section-center">
                 <div class="play">
-                    <div  id="player" class="player">
+                    <div id="player" class="player">
                         <input type="file" id="file-input" accept="audio/*" multiple>
                         <ul id="playlist"></ul>
                         <audio id="audio-player"></audio>

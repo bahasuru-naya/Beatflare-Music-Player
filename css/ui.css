@@ -20,13 +20,150 @@ body {
     margin: 0;
 }
 
-nav{
+nav {
     z-index: 99;
+}
+
+.preloaderback {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 999;
+
+}
+
+@-webkit-keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#preloader {
+    width: 175px;
+    height: 175px;
+    background-color: #ABC4AA;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 0 0 #675D50;
+    z-index: 99;
+}
+
+#preloader .plate {
+    width: fit-content;
+}
+
+#preloader .plate .black,
+#preloader .plate .white,
+#preloader .plate .center,
+#preloader .plate .border {
+    border-radius: 100%;
+}
+
+#preloader,
+#preloader .plate .black,
+#preloader .plate .white,
+#preloader .plate .border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#preloader .plate .black {
+    width: 150px;
+    height: 150px;
+    background-color: #675D50;
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+#preloader .plate .white {
+    width: 70px;
+    height: 70px;
+    background-color: #F3DEBA;
+}
+
+#preloader .plate .center {
+    width: 20px;
+    height: 20px;
+    background-color: #675D50;
+}
+
+#preloader .plate .border {
+    width: 111px;
+    height: 111px;
+    border-top: 3px solid #F3DEBA;
+    border-bottom: 3px solid #F3DEBA;
+    border-left: 3px solid #675D50;
+    border-right: 3px solid #675D50;
+}
+
+#preloader .p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    rotate: -45deg;
+}
+
+#preloader .p .circ {
+    width: 25px;
+    height: 25px;
+    background-color: #F3DEBA;
+    border-radius: 100%;
+    z-index: 1;
+}
+
+#preloader .p .rect {
+    width: 10px;
+    height: 55px;
+    background-color: #F3DEBA;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 5px;
 }
 
 main {
 
-    scroll-behavior: smooth;    
+    scroll-behavior: smooth;
     width: auto;
 }
 
@@ -207,12 +344,12 @@ section {
 }
 
 #playersec {
-    display: block;    
+    display: block;
     background: #f5abc9;
     color: grey;
 }
-#playersec h1
-{
+
+#playersec h1 {
     display: flex;
     flex-direction: column;
     text-align: center;
