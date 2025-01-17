@@ -1,3 +1,4 @@
+//preloader
 const preloader = document.querySelector(".preloaderback");
 window.addEventListener("load", () => {
   
@@ -11,6 +12,10 @@ window.addEventListener("load", () => {
 
 });
 
+//add button
+document.querySelector('.buttonadd').addEventListener('click', function () {
+  document.getElementById('file-input').click();
+});
 
 const menutoggle = document.getElementById('menu-toggle');
 const menuitems = document.getElementsByClassName('menu__item');

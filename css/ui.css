@@ -171,7 +171,7 @@ section {
     align-items: center;
     display: flex;
     font-size: 3rem;
-    height: 100%;
+    height: 100vh;
     justify-content: center;
     scroll-snap-align: center;
     width: auto;
@@ -347,6 +347,8 @@ section {
     display: block;
     background: #f5abc9;
     color: grey;
+    min-height: 100vh;
+    height: auto;
 }
 
 #playersec h1 {
@@ -362,7 +364,7 @@ section {
     margin: 0 auto;
     max-width: 1170px;
     min-width: 340px;
-    padding: 5rem 0;
+    padding: 10px;
 }
 
 .play {
@@ -380,8 +382,14 @@ section {
 .tbtn-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    border-radius: 0.5rem;
+    background-color:#f5abc9 ;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    
+
 
 }
 
@@ -399,30 +407,40 @@ section {
     width: auto;
     font-size: 1rem;
     background: #b6c9f0;
-    cursor: pointer;
-    transition: all 0.3s linear;
-    letter-spacing: 0.25rem;
+    border-radius: 0.5rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;    
     margin: 0;
 }
 
 .tbutton:hover:not(.live) {
     background: #e93b81;
     color: white;
+    border-radius: 0.5rem;    
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .tabs-content {
     padding: 1.5rem;
     font-size: 1rem;
-
 }
 
 /* hide content */
 .tcontent {
     display: none;
+
+
 }
 
 .tbutton.live {
     background: #ffe5e2;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);   
+    border-radius: 0.5rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    
 }
 
 .tcontent.live {

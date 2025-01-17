@@ -1,3 +1,14 @@
+:root {
+    --main-focus: #2d8cf0;
+    --font-color: #323232;
+    --bg-color-sub: #dedede;
+    --bg-color: #eee;
+    --main-color: #323232;
+    --black: #000000;
+    --white: #ffffff;
+
+}
+
 #content {
     position: relative;
     display: flex;
@@ -18,7 +29,6 @@
     background: white;
     padding: 20px;
     border-radius: 10px;
-
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 300px;
     font-size: 1.3rem;
@@ -26,14 +36,10 @@
 
 #file-input {
     align-self: flex-start;
+    display: none;
 }
 
 .buttonadd {
-    --main-focus: #2d8cf0;
-    --font-color: #323232;
-    --bg-color-sub: #dedede;
-    --bg-color: #eee;
-    --main-color: #323232;
     position: relative;
     width: 150px;
     height: 40px;
@@ -122,6 +128,7 @@ input[type="range"] {
     overflow-y: auto;
     max-height: 250px;
     min-height: 250px;
+    width: 100%;
 }
 
 #playlist::-webkit-scrollbar {
@@ -140,11 +147,14 @@ ul {
 }
 
 li {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     padding: 5px;
+    padding-right: 10px;
+    width: 100%;
     cursor: pointer;
     align-items: center;
+
 }
 
 li.active {
@@ -152,9 +162,14 @@ li.active {
 }
 
 li button {
-    margin-left: 10px;
-    padding: 5px 10px;
+
+    margin: 2px;
+    padding: 5px;
     font-size: 12px;
+    width: 80px;
+    justify-self: end;
+
+
 }
 
 .seek-bar-container {

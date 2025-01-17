@@ -33,7 +33,7 @@
         </div>
     </div>
     <nav class="menu" style="--hue: 323.2997510156527">
-        <input class="menu__toggle" type="checkbox" id="menu-toggle" />
+        <input class="menu__toggle" title="menu" type="checkbox" id="menu-toggle" />
         <label class="menu__toggle-label" for="menu-toggle"></label>
         <label class="menu__toggle-label menu__toggle-label--closer" for="menu-toggle">
             <svg class="menu__icon" preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
                                     <line x1="5" x2="19" y1="12" y2="12"></line>
                                 </svg></span>
                         </button>
-                        <input type="file" id="file-input" accept="audio/*" multiple>
+                        <input title="file-input"  type="file" id="file-input" accept=".mp3,.wav" multiple>
                         <ul id="playlist"></ul>
                         <audio id="audio-player"></audio>
                         <div class="controls">
@@ -91,7 +91,7 @@
                         </div>
                         <div class="seek-bar-container">
                             <span id="current-time">0:00</span>
-                            <input type="range" id="seek-bar" value="0">
+                            <input title="seek" type="range" id="seek-bar" value="0">
                             <span id="duration">0:00</span>
                         </div>
                         <label for="volume">Volume: </label>
