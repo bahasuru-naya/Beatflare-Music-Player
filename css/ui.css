@@ -198,6 +198,7 @@ section {
     width: 100vw;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    transition: backdrop-filter calc(var(--speed, 1) * 1s) var(--ease), clip-path 0s, -webkit-clip-path 0s;
 
 
 }
@@ -217,7 +218,7 @@ section {
     display: block;
     --clip: circle(100% at 0% 0%);
     -webkit-clip-path: var(--clip);
-    clip-path: var(--clip);
+    clip-path: var(--clip);    
     position: absolute;
     top: 0;
     left: 0;
@@ -226,7 +227,7 @@ section {
 
 .menu__toggle-label--closer {
     z-index: 3;
-    --scale: 0;
+    --scale: 0;  
 
 }
 
@@ -374,9 +375,13 @@ section {
 
 
 .tabs {
+    display: grid;
     background: #ffe5e2;
-    border-radius: 0.5rem;
-    grid-template-rows: auto 1fr;
+    border-radius: 0.8rem;
+    grid-template-rows: 1fr auto
+
+
+    
 }
 
 .tbtn-container {
@@ -384,7 +389,7 @@ section {
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0;
     padding: 0;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
     background-color:#f5abc9 ;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -394,11 +399,11 @@ section {
 }
 
 .tbutton:nth-child(1) {
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 0.8rem;
 }
 
 .tbutton:nth-child(3) {
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 0.8rem;
 }
 
 .tbutton {
@@ -406,8 +411,10 @@ section {
     border: none;
     width: auto;
     font-size: 1rem;
+    letter-spacing: 2px;
     background: #b6c9f0;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
+    border: #000000 2px solid;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     cursor: pointer;    
@@ -417,14 +424,20 @@ section {
 .tbutton:hover:not(.live) {
     background: #e93b81;
     color: white;
-    border-radius: 0.5rem;    
+    border-radius: 0.8rem;    
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
 .tabs-content {
-    padding: 1.5rem;
+    padding: 2rem;
     font-size: 1rem;
+    height: auto;
+    border-radius: 0.8rem;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border: #000000 2px solid;
+    border-top: none;   
 }
 
 /* hide content */
@@ -436,8 +449,9 @@ section {
 
 .tbutton.live {
     background: #ffe5e2;
-    border: 0.5px solid rgba(0, 0, 0, 0.04);   
-    border-radius: 0.5rem;
+    border: #000000 2px solid;
+    border-bottom: none;   
+    border-radius: 0.8rem;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     

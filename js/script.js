@@ -4,6 +4,8 @@ const playPauseButton = document.getElementById('play-pause');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const seekBar = document.getElementById('seek-bar');
+const repeatsong = document.querySelector("#repeatsong");
+const randomsong = document.querySelector("#randomsong");
 const volumeSlider = document.getElementById('volume');
 const playlist = document.getElementById('playlist');
 const currentTimeLabel = document.getElementById('current-time');
@@ -15,6 +17,9 @@ const visual1 = document.getElementById('visual1');
 const visual2 = document.getElementById('visual2');
 const visual3 = document.getElementById('visual3');
 const player = document.getElementById('player');
+
+repeatsong.disabled = true;
+randomsong.disabled = true;
 
 let files = [];
 let currentIndex = -1;
@@ -245,18 +250,32 @@ function generateRandomColor(barHeight) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+repeatsong.addEventListener('change', () => {
+    if (repeatsong.checked) {
+        // Checkbox is checked
+        randomsong.checked = false;
+    }
 
+});
+randomsong.addEventListener('change', () => {
+    if (randomsong.checked) {
+        // Checkbox is checked
+        repeatsong.checked = false;
+    }
+});
 
 
 fileInput.addEventListener('change', function (event) {
     const newFiles = Array.from(event.target.files);
     files = [...files, ...newFiles];
+
     updatePlaylist();
     setCanvasHeight();
     updateButtonsState(currentIndex)
     audiovisual(audioPlayer);
     if (currentIndex === -1 && files.length > 0) {
         playFile(0);
+
     }
 
 });
@@ -285,6 +304,14 @@ function updatePlaylist() {
     });
     updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
+    if (files.length > 0) {
+        repeatsong.disabled = false;
+    }
+    if (files.length < 2) {
+        randomsong.disabled = true;
+    } else if (files.length > 1) {
+        randomsong.disabled = false;
+    }
 }
 
 function handleRemoveFile(index) {
@@ -415,6 +442,7 @@ audioPlayer.addEventListener('timeupdate', function () {
         durationLabel.textContent = formatTime(audioPlayer.duration);
     } else {
         durationLabel.textContent = '0:00';
+        seekBar.value = 0;
     }
 
 });
@@ -429,7 +457,17 @@ volumeSlider.addEventListener('input', function () {
 });
 
 audioPlayer.addEventListener('ended', function () {
-    if (currentIndex < files.length - 1) {
+    if (repeatsong.checked) {
+        playFile(currentIndex);
+    }
+    else if (randomsong.checked) {
+        var randomIndex = Math.floor(Math.random() * files.length);
+        while (randomIndex === currentIndex) {
+            randomIndex = Math.floor(Math.random() * files.length);
+        }
+        playFile(randomIndex);
+    }
+    else if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
     } else {
         playPauseButton.textContent = 'Play';
