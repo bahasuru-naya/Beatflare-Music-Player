@@ -81,15 +81,38 @@
                                     <line x1="5" x2="19" y1="12" y2="12"></line>
                                 </svg></span>
                         </button>
-                        <input title="file-input"  type="file" id="file-input" accept=".mp3,.wav" multiple>
+                        <input title="file-input" type="file" id="file-input" accept=".mp3,.wav" multiple>
                         <ul id="playlist"></ul>
                         <audio id="audio-player"></audio>
                         <div class="controls">
-                            <input title="randomsong" type="checkbox" name="randomsong" id="randomsong">random
+                            <div class="checkb">
+                                <input title="random song" type="checkbox" name="randomsong" id="randomsong"
+                                    class="cbox">
+                                <div class="c-icon">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3" />
+                                    </svg>
+                                </div>
+                            </div>
                             <button id="prev" disabled>Previous</button>
                             <button id="play-pause">Play</button>
                             <button id="next" disabled>Next</button>
-                            <input title="repeatsong" type="checkbox" name="repeat" id="repeatsong">repeat
+                            <div class="checkb">
+                                <input title="repeat song" type="checkbox" name="repeat" id="repeatsong" class="cbox">
+                                <div class="c-icon">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                         <div class="seek-bar-container">
                             <span id="current-time">0:00</span>
