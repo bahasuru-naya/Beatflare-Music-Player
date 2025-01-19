@@ -86,7 +86,7 @@
                         <audio id="audio-player"></audio>
                         <div class="controls">
                             <div class="checkb">
-                                <input title="random song" type="checkbox" name="randomsong" id="randomsong"
+                                <input title="Shuffle Song" type="checkbox" name="randomsong" id="randomsong"
                                     class="cbox">
                                 <div class="c-icon">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
@@ -98,11 +98,32 @@
                                     </svg>
                                 </div>
                             </div>
-                            <button id="prev" disabled>Previous</button>
-                            <button id="play-pause">Play</button>
-                            <button id="next" disabled>Next</button>
+                            <button id="prev" title="Previous Song" class="controlbtn" disabled><svg
+                                    class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="3" d="m15 19-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button id="play-pause" title="Play-Pause" ><svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button id="next" title="Next Song" class="controlbtn" disabled><svg
+                                    class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="3" d="m9 5 7 7-7 7" />
+                                </svg>
+                            </button>
                             <div class="checkb">
-                                <input title="repeat song" type="checkbox" name="repeat" id="repeatsong" class="cbox">
+                                <input title="Repeat song" type="checkbox" name="repeat" id="repeatsong" class="cbox">
                                 <div class="c-icon">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"

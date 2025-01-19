@@ -327,7 +327,7 @@ function handleRemoveFile(index) {
             listItemMap.clear();
             playlist.innerHTML = '';
             currentIndex = -1;
-            playPauseButton.textContent = 'Play';
+            playPauseButton.innerHTML = playsvg;
             audioPlayer.src = '';
 
         } else {
@@ -381,7 +381,7 @@ function playFile(index) {
         audioPlayer.src = fileURL;
         audioPlayer.currentTime = 0; // Reset current time to 0
         audioPlayer.play();
-        playPauseButton.textContent = 'Pause';
+        playPauseButton.innerHTML = pausesvg;
         updatePlaylistHighlight(index);
         updateButtonsState(index);
         currentIndex = index;
@@ -403,15 +403,25 @@ function updateButtonsState(index) {
     nextButton.disabled = index >= files.length - 1;
 }
 
+const playsvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z" clip-rule="evenodd"/>
+</svg>
+`;
+
+const pausesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M8 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H8Zm7 0a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1Z" clip-rule="evenodd"/>
+</svg>
+`;
+
 playPauseButton.addEventListener('click', function () {
     if (audioPlayer.paused) {
         audioPlayer.play();
-        playPauseButton.textContent = 'Pause';
+        playPauseButton.innerHTML = pausesvg;
         audioctx.resume();
         audiovisual(audioPlayer);
     } else {
         audioPlayer.pause();
-        playPauseButton.textContent = 'Play';
+        playPauseButton.innerHTML = playsvg;
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);
     }
@@ -470,7 +480,7 @@ audioPlayer.addEventListener('ended', function () {
     else if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
     } else {
-        playPauseButton.textContent = 'Play';
+        playPauseButton.innerHTML = playsvg;
     }
 });
 

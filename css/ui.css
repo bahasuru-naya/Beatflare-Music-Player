@@ -389,8 +389,8 @@ section {
     z-index: 999;
 }
 
-.cbox:disabled+.c-icon {    
-    opacity: 0.3; 
+.cbox:disabled+.c-icon {
+    opacity: 0.3;
 }
 
 .c-icon {
@@ -432,6 +432,38 @@ section {
 
 .cbox:checked+.c-icon svg {
     color: rgb(255, 255, 255);
+}
+
+.controlbtn {
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+#play-pause {
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+
+
+}
+
+#play-pause svg {
+    height: 40px;
+    width: 40px;
+
 }
 
 
