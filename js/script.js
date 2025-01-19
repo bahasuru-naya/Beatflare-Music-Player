@@ -395,7 +395,7 @@ function playFile(index) {
         songNameMarquee.textContent = `Now Playing: ${songTitle}`;
         songNameMarquee.style.display = 'block';
 
-        
+
         const img = document.getElementById('albumArt');
         // Use jsmediatags to read the MP3 file
         jsmediatags.read(file, {
@@ -410,10 +410,10 @@ function playFile(index) {
                     const dataUrl = `data:${picture.format};base64,${btoa(base64String)}`;
 
                     // Set the image source to the album art
-                    
+
                     img.src = dataUrl;
                     img.style.display = 'block';
-                    
+
                 } else {
                     img.style.display = 'block';
                     img.src = "./images/art.png";
@@ -423,7 +423,7 @@ function playFile(index) {
                 console.error('Error reading MP3 file:', error);
                 img.style.display = 'block';
                 img.src = "./images/art.png";
-                
+
             }
         });
 

@@ -28,7 +28,7 @@ nav {
     position: fixed;
     height: 100%;
     width: 100%;
-    background: white;    
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
