@@ -106,9 +106,10 @@
                                         stroke-width="3" d="m15 19-7-7 7-7" />
                                 </svg>
                             </button>
-                            <button id="play-pause" title="Play-Pause" ><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="currentColor" viewBox="0 0 24 24">
+                            <button id="play-pause" title="Play/Pause"><svg
+                                    class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
                                         clip-rule="evenodd" />
@@ -140,8 +141,12 @@
                             <input title="seek" type="range" id="seek-bar" value="0">
                             <span id="duration">0:00</span>
                         </div>
-                        <label for="volume">Volume: </label>
-                        <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+                        <div class="details-volume">
+                            <img id="albumArt" alt="Album Art" style="max-width: 300px; display: none;" src="./images/art.png">
+                            <marquee id="songName"  behavior="scroll" direction="left" style="font-size: 20px; color: blue; display: none; width: 100%;" ></marquee>
+                            <label for="volume">Volume: </label>
+                            <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+                        </div>
                     </div>
                 </div>
                 <div class="tabs">
@@ -187,6 +192,7 @@
     </main>
     <script src="js/script.js"></script>
     <script src="js/ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 </body>
 
 </html>

@@ -388,6 +388,45 @@ function playFile(index) {
         audioctx.resume();
         audiovisual(audioPlayer);
 
+        const file = files[index];
+        const songNameMarquee = document.getElementById('songName');
+        const songTitle = file.name.replace('.mp3', '');
+        // Display the song name in the marquee
+        songNameMarquee.textContent = `Now Playing: ${songTitle}`;
+        songNameMarquee.style.display = 'block';
+
+        
+        const img = document.getElementById('albumArt');
+        // Use jsmediatags to read the MP3 file
+        jsmediatags.read(file, {
+            onSuccess: function (tag) {
+                const { picture } = tag.tags;
+
+                if (picture) {
+                    // Convert the album art data into a Blob URL
+                    const base64String = picture.data
+                        .map((char) => String.fromCharCode(char))
+                        .join('');
+                    const dataUrl = `data:${picture.format};base64,${btoa(base64String)}`;
+
+                    // Set the image source to the album art
+                    
+                    img.src = dataUrl;
+                    img.style.display = 'block';
+                    
+                } else {
+                    img.style.display = 'block';
+                    img.src = "./images/art.png";
+                }
+            },
+            onError: function (error) {
+                console.error('Error reading MP3 file:', error);
+                img.style.display = 'block';
+                img.src = "./images/art.png";
+                
+            }
+        });
+
     }
 }
 
