@@ -100,9 +100,7 @@
     box-shadow: 0px 0px var(--main-color);
 }
 
-#play-pause {
-    align-self: center;
-}
+
 
 button {   
     font-size: 16px;

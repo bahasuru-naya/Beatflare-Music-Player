@@ -28,8 +28,7 @@ nav {
     position: fixed;
     height: 100%;
     width: 100%;
-    background: white;
-    border-radius: 16px;
+    background: white;    
     display: flex;
     flex-direction: column;
     justify-content: center;
