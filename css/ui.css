@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Alata&display=swap");
 
-* {
-    box-sizing: border-box;
-}
+
 
 :root {
     --speed: 0.85;
@@ -355,6 +353,8 @@ section {
     display: flex;
     flex-direction: column;
     text-align: center;
+    font-size: 4rem;
+    padding: 5px;
     margin: 0;
 }
 
@@ -465,15 +465,45 @@ section {
 
 }
 
+.details-volume {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#albumArt {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 100%;
+    display: block;
+    align-self: center;
+}
+
+.volume-contain {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+#songName {
+
+    color: blue;
+    display: block;
+    width: 100%;
+}
+
 
 .tabs {
     display: grid;
     background: #ffe5e2;
     border-radius: 0.8rem;
-    grid-template-rows: 1fr auto
+    grid-template-rows: 1fr 8fr
 }
 
 .tbtn-container {
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0;
@@ -519,6 +549,7 @@ section {
 }
 
 .tabs-content {
+    display: block;
     padding: 2rem;
     font-size: 1rem;
     height: auto;
@@ -527,6 +558,9 @@ section {
     border-top-left-radius: 0;
     border: #000000 2px solid;
     border-top: none;
+    align-items: center;
+    justify-content: center;
+
 }
 
 /* hide content */

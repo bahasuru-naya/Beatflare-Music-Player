@@ -215,6 +215,8 @@ li button {
     min-width: 100px;
     max-height: 400px;
 
+
+
 }
 
 #canvas2 {
@@ -224,7 +226,7 @@ li button {
     border-radius: 10px;
     width: 380px;
     height: 380px;
-    max-width: 500px;
+
     position: relative;
     z-index: 1;
 
