@@ -250,6 +250,28 @@ function generateRandomColor(barHeight) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+//update current song name
+function updateSongName(newText) {
+    const songNameElement = document.getElementById("songName");
+
+    // Update the text content
+    songNameElement.textContent = newText;
+
+    // Reset animation
+    songNameElement.style.animation = "none";
+
+    // Wait for a reflow to apply the animation again
+    void songNameElement.offsetWidth;
+
+    // Calculate the animation duration based on text width
+    const containerWidth = document.querySelector(".marquee").offsetWidth;
+    const textWidth = songNameElement.offsetWidth;
+    const animationDuration = (textWidth + containerWidth) / 100; // Adjust speed factor as needed
+
+    // Apply the new animation with dynamic duration
+    songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
+}
+
 repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
         // Checkbox is checked
@@ -266,19 +288,39 @@ randomsong.addEventListener('change', () => {
 
 
 fileInput.addEventListener('change', function (event) {
-    const newFiles = Array.from(event.target.files);
-    files = [...files, ...newFiles];
+    try {
+        // Ensure files exist in the input event
+        if (!event.target.files) {
+            throw new Error('No files were selected.');
+        }
 
-    updatePlaylist();
-    setCanvasHeight();
-    updateButtonsState(currentIndex)
-    audiovisual(audioPlayer);
-    if (currentIndex === -1 && files.length > 0) {
-        playFile(0);
+        const newFiles = Array.from(event.target.files);
 
+        // Validate files array before updating
+        if (!Array.isArray(newFiles) || newFiles.length === 0) {
+            throw new Error('No valid files to add.');
+        }
+
+        // Safely update the files array
+        files = [...files, ...newFiles];
+
+        // Call necessary update functions
+        updatePlaylist();
+        setCanvasHeight();
+        updateButtonsState(currentIndex);
+        audiovisual(audioPlayer);
+
+        // Handle edge case when no file is playing
+        if (currentIndex === -1 && files.length > 0) {
+            playFile(0);
+        }
+    } catch (error) {
+        console.error('An error occurred while processing the file input:', error.message);
+        // Optionally show an error message to the user
+        alert('Error: ' + error.message);
     }
-
 });
+
 
 function updatePlaylist() {
     playlist.innerHTML = '';
@@ -316,7 +358,8 @@ function updatePlaylist() {
 
 function handleRemoveFile(index) {
     const listItem = listItemMap.get(index);
-    listItem.style.display = 'none';
+    listItem.remove();
+    updateSongName('Add songs to playlist...');
 
     if (index === currentIndex) {
         audioPlayer.pause();
@@ -325,6 +368,8 @@ function handleRemoveFile(index) {
             // If only one file, remove it completely
             files = [];
             listItemMap.clear();
+            updateIndicesAndMap();
+            updatePlaylist();
             playlist.innerHTML = '';
             currentIndex = -1;
             playPauseButton.innerHTML = playsvg;
@@ -375,6 +420,8 @@ function updateIndicesAndMap() {
     });
 }
 
+
+
 function playFile(index) {
     if (index >= 0 && index < files.length) {
         const fileURL = URL.createObjectURL(files[index]);
@@ -387,13 +434,11 @@ function playFile(index) {
         currentIndex = index;
         audioctx.resume();
         audiovisual(audioPlayer);
-
         const file = files[index];
-        const songNameMarquee = document.getElementById('songName');
+
         const songTitle = file.name.replace('.mp3', '');
-        // Display the song name in the marquee
-        songNameMarquee.textContent = `Now Playing: ${songTitle}`;
-        songNameMarquee.style.display = 'block';
+        // Display the song name in the marquee        
+        updateSongName(`Now Playing: ${songTitle}`);
 
 
         const img = document.getElementById('albumArt');

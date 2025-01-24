@@ -487,13 +487,34 @@ section {
     grid-column: 2;
 }
 
-#songName {
+.marquee {
 
-    color: blue;
-    display: block;
-    width: 100%;
+    width: 380px;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+
 }
 
+#songName {
+    color: blue;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+
+    animation: marquee 10s linear infinite;
+
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(380px);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 .tabs {
     display: grid;
@@ -549,7 +570,8 @@ section {
 }
 
 .tabs-content {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr;
     padding: 2rem;
     font-size: 1rem;
     height: auto;
@@ -581,7 +603,7 @@ section {
 }
 
 .tcontent.live {
-    display: block;
+    display: flex;
 }
 
 @media (min-width: 992px) {

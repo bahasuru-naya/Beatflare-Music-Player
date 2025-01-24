@@ -12,6 +12,9 @@ window.addEventListener("load", () => {
 
 });
 
+
+
+
 //add button
 document.querySelector('.buttonadd').addEventListener('click', function () {
   document.getElementById('file-input').click();
