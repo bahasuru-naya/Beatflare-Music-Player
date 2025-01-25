@@ -170,11 +170,23 @@ li button {
 }
 
 .seek-bar-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    justify-items: center;
     align-items: center;
     width: 100%;
     margin-top: 10px;
+}
+#current-time{
+    grid-column: 1;
+
+}
+#seek-bar {
+    grid-column: 2;
+}
+#duration{
+    grid-column: 3;
+
 }
 
 #visual1 {

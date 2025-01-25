@@ -26,6 +26,8 @@ let currentIndex = -1;
 let listItemMap = new Map();
 let isAudioConnected = false;
 
+audioPlayer.volume = 0.5;
+
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
 const ctx3 = canvas3.getContext('2d');
@@ -38,14 +40,15 @@ let audioctx;
 document.addEventListener('DOMContentLoaded', function () {
 
     // Set the canvas height initially
-    setCanvasHeight();
+    setWidthHeight();
 
     // Optionally, update the canvas height on window resize
-    window.addEventListener('resize', setCanvasHeight);
+    window.addEventListener('resize', setWidthHeight);
 });
 
+window.addEventListener('resize', setWidthHeight);
 
-function setCanvasHeight() {
+function setWidthHeight() {
     if (player && visual1) {
         visual1.style.height = player.offsetHeight - 20 + 'px';
     }
@@ -55,6 +58,7 @@ function setCanvasHeight() {
     if (player && visual3) {
         visual3.style.height = player.offsetHeight - 20 + 'px';
     }
+    
 }
 
 
@@ -64,7 +68,7 @@ function setCanvasHeight() {
 function audiovisual(player) {
     audio = player;
     audioctx = new AudioContext();
-    setCanvasHeight();
+    setWidthHeight();
 
     if (!isAudioConnected) {
 
@@ -260,8 +264,12 @@ function updateSongName(newText) {
     // Reset animation
     songNameElement.style.animation = "none";
 
+
+
     // Wait for a reflow to apply the animation again
     void songNameElement.offsetWidth;
+
+
 
     // Calculate the animation duration based on text width
     const containerWidth = document.querySelector(".marquee").offsetWidth;
@@ -270,6 +278,7 @@ function updateSongName(newText) {
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
+
 }
 
 repeatsong.addEventListener('change', () => {
@@ -288,7 +297,7 @@ randomsong.addEventListener('change', () => {
 
 
 fileInput.addEventListener('change', function (event) {
-    
+
     try {
         // Ensure files exist in the input event
         if (!event.target.files) {
@@ -307,7 +316,7 @@ fileInput.addEventListener('change', function (event) {
 
         // Call necessary update functions
         updatePlaylist();
-        setCanvasHeight();
+        setWidthHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
         fileInput.value = ''; // Reset the input value to allow selecting the same file again
@@ -548,8 +557,18 @@ seekBar.addEventListener('input', function () {
     audioPlayer.currentTime = time;
 });
 
+const vpresent = document.getElementById('vpresentage');
+
 volumeSlider.addEventListener('input', function () {
     audioPlayer.volume = volumeSlider.value;
+    vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
+    if (Math.floor(volumeSlider.value * 100) === 0) {
+        mute.checked = true;
+        muteicon.innerHTML = mutesvg;
+    } else {
+        mute.checked = false;
+        muteicon.innerHTML = unmutesvg;
+    }
 });
 
 audioPlayer.addEventListener('ended', function () {
@@ -577,7 +596,39 @@ function formatTime(seconds) {
 }
 
 
+const unmutesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z"/>
+</svg>
+`;
+const mutesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 8.43A4.985 4.985 0 0 1 17 12c0 1.126-.5 2.5-1.5 3.5m2.864-9.864A8.972 8.972 0 0 1 21 12c0 2.023-.5 4.5-2.5 6M7.8 7.5l2.56-2.133a1 1 0 0 1 1.64.768V12m0 4.5v1.365a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m1-4 14 14"/>
+</svg>
+`;
 
+const mute = document.getElementById('mute');
+const muteicon = document.getElementById('mutei');
+var vvalue = 0;
 
+mute.addEventListener('click', function () {
+    if (mute.checked) {
+        muteicon.innerHTML = mutesvg;
+        vvalue = volumeSlider.value;
+        volumeSlider.value = 0;
+        vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
+        audioPlayer.volume = volumeSlider.value;
+
+    } else {
+        if (Math.floor(vvalue * 100) === 0) {
+            volumeSlider.value = 0.5;
+        }
+        else {
+            volumeSlider.value = vvalue;
+        }
+        muteicon.innerHTML = unmutesvg;
+        vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
+        audioPlayer.volume = volumeSlider.value;
+
+    }
+});
 
 
