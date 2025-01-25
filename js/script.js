@@ -288,6 +288,7 @@ randomsong.addEventListener('change', () => {
 
 
 fileInput.addEventListener('change', function (event) {
+    
     try {
         // Ensure files exist in the input event
         if (!event.target.files) {
@@ -309,6 +310,7 @@ fileInput.addEventListener('change', function (event) {
         setCanvasHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
+        fileInput.value = ''; // Reset the input value to allow selecting the same file again
 
         // Handle edge case when no file is playing
         if (currentIndex === -1 && files.length > 0) {
