@@ -61,8 +61,6 @@ function setWidthHeight() {
     
 }
 
-
-
 //visualizer
 
 function audiovisual(player) {

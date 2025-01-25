@@ -183,6 +183,7 @@ li button {
 }
 #seek-bar {
     grid-column: 2;
+    width: 100%;
 }
 #duration{
     grid-column: 3;

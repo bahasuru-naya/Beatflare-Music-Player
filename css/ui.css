@@ -481,8 +481,7 @@ section {
     width: 100px;
     height: 100px;
     border-radius: 10px;
-    display: block;
-    align-self: center;
+    
 }
 
 .volume-contain {
@@ -491,7 +490,8 @@ section {
 }
 
 .marquee {
-    width: 390px;  
+
+    width: 380px;  
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
@@ -503,6 +503,7 @@ section {
     grid-template-columns: 1fr 6fr 2fr;
     justify-items: center;
     align-items: center;
+    width: 100%;
     
 }
 .volumemute .checkb{
@@ -519,7 +520,8 @@ section {
     
 }
 
-#songName {
+#songName {    
+    width: max-content;
     color: blue;
     display: inline-block;
     margin: 0px;
