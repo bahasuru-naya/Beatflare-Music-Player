@@ -477,59 +477,61 @@ section {
 
 #albumArt {
     grid-column: 1;
-    
+
     width: 100px;
     height: 100px;
     border-radius: 10px;
-    
+
 }
 
 .volume-contain {
-    
+
     grid-column: 2;
 }
 
 .marquee {
-
-    width: 380px;  
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
 
 }
 
-.volumemute {   
+#songName {
+    display: inline-block;
+    color: blue;
+    margin: 0px;
+    padding: 0px;
+    animation: marquee 10s linear infinite;
+
+}
+
+.volumemute {
     display: grid;
     grid-template-columns: 1fr 6fr 2fr;
     justify-items: center;
     align-items: center;
     width: 100%;
-    
+
 }
-.volumemute .checkb{
+
+.volumemute .checkb {
     grid-column: 1;
     height: 50px;
     width: 50px;
 }
+
 #volume {
     grid-column: 2;
-    
+
 }
-#vpresentage{
+
+#vpresentage {
     grid-column: 3;
-    
-}
-
-#songName {    
-    width: max-content;
-    color: blue;
-    display: inline-block;
-    margin: 0px;
-    padding: 0px;
-
-    animation: marquee 10s linear infinite;
 
 }
+
+
 
 @keyframes marquee {
     0% {

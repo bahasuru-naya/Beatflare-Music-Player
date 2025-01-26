@@ -59,6 +59,25 @@ function setWidthHeight() {
         visual3.style.height = player.offsetHeight - 20 + 'px';
     }
     
+    const songNameElement = document.getElementById("songName");
+    var maqcontainer = 0;
+    document.querySelector(".marquee").style.width = maqcontainer + 'px';
+
+    maqcontainer = document.querySelector(".volumemute").offsetWidth;
+
+    document.querySelector(".marquee").style.width = maqcontainer + 'px';
+
+    // Reset animation
+    songNameElement.style.animation = "none";
+
+    // Calculate the animation duration based on text width
+    const containerWidth = maqcontainer;
+    const textWidth = songNameElement.offsetWidth;
+    const animationDuration = (textWidth + containerWidth) / 100; // Adjust speed factor as needed
+
+    // Apply the new animation with dynamic duration
+    songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
+
 }
 
 //visualizer
@@ -255,19 +274,18 @@ function generateRandomColor(barHeight) {
 //update current song name
 function updateSongName(newText) {
     const songNameElement = document.getElementById("songName");
+    const maqcontainer = document.querySelector(".volumemute").offsetWidth;
 
     // Update the text content
     songNameElement.textContent = newText;
 
+    document.querySelector(".marquee").style.width = maqcontainer + 'px';
+
     // Reset animation
     songNameElement.style.animation = "none";
 
-
-
     // Wait for a reflow to apply the animation again
     void songNameElement.offsetWidth;
-
-
 
     // Calculate the animation duration based on text width
     const containerWidth = document.querySelector(".marquee").offsetWidth;

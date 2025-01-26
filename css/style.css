@@ -177,15 +177,18 @@ li button {
     width: 100%;
     margin-top: 10px;
 }
-#current-time{
+
+#current-time {
     grid-column: 1;
 
 }
+
 #seek-bar {
     grid-column: 2;
     width: 100%;
 }
-#duration{
+
+#duration {
     grid-column: 3;
 
 }
