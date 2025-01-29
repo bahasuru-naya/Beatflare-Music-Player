@@ -58,7 +58,7 @@ function setWidthHeight() {
     if (player && visual3) {
         visual3.style.height = player.offsetHeight - 20 + 'px';
     }
-    
+
     const songNameElement = document.getElementById("songName");
     var maqcontainer = 0;
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
@@ -80,6 +80,25 @@ function setWidthHeight() {
 
 }
 
+const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+const eqcontainer = document.querySelector('#equ');
+
+const sliders = eqBands.map(() => {
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.orient = 'vertical';
+    slider.style.direction = 'rtl';
+    slider.style.writingMode = 'vertical-lr';
+    slider.style.width = '8%';
+    slider.min = -40;
+    slider.max = 40;
+    slider.value = Math.random() * 40 - 20;
+    slider.step = 0.1;
+    eqcontainer.appendChild(slider);
+    return slider
+});
+
+
 //visualizer
 
 function audiovisual(player) {
@@ -92,9 +111,9 @@ function audiovisual(player) {
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
         audiosrc.connect(analyser);
-        analyser.connect(audioctx.destination);
+        analyser.connect(audioctx.destination); 
         analyser.fftSize = 256;
-        isAudioConnected = true;
+        isAudioConnected = true; 
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -366,8 +385,8 @@ function updatePlaylist() {
         removeButtonspan.textContent = 'Remove';
         const removeButtonicon = document.createElement('span');
         removeButtonicon.classList.add('removeicon');
-        removeButtonicon.innerHTML =`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg>`;
-        
+        removeButtonicon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg>`;
+
         removeButton.appendChild(removeButtonspan);
         removeButton.appendChild(removeButtonicon);
         listItem.appendChild(listItemtext);
@@ -398,7 +417,7 @@ function updatePlaylist() {
 function handleRemoveFile(index) {
     const listItem = listItemMap.get(index);
     listItem.remove();
-    updateSongName('Add songs to playlist...');
+
 
     if (index === currentIndex) {
         audioPlayer.pause();
@@ -413,6 +432,7 @@ function handleRemoveFile(index) {
             currentIndex = -1;
             playPauseButton.innerHTML = playsvg;
             audioPlayer.src = '';
+            updateSongName('Add songs to playlist...');
 
         } else {
             // Determine the next or previous file to play
@@ -659,4 +679,37 @@ mute.addEventListener('click', function () {
     }
 });
 
+//changing speed of audio
+
+const speedControl = document.getElementById("speed");
+const speedreset = document.getElementById("speed-reset");
+const speedlablel = document.getElementById("speedlabel");
+
+
+speedControl.addEventListener("input", function () {
+
+    audioPlayer.playbackRate = parseFloat(this.value);
+    speedlablel.textContent = this.value + 'x';
+
+});
+
+speedreset.addEventListener("click", function () {
+    speedControl.value = 1;
+    audioPlayer.playbackRate = 1;
+    speedlablel.textContent = '1x';
+});
+
+
+//change audio pitch
+const pitchControl = document.getElementById("pitch");
+
+
+
+
+// Event listener for pitch control
+pitchControl.addEventListener("input", function () {
+    const pitchValue = parseFloat(this.value);
+    //audioPlayer. = pitchValue;
+    pitchlablel.textContent = pitchValue + 'x';
+});
 
