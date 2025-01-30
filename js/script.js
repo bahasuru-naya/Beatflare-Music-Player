@@ -83,19 +83,46 @@ function setWidthHeight() {
 const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const eqcontainer = document.querySelector('#equ');
 
-const sliders = eqBands.map(() => {
+let filters;
+
+
+
+const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
+    const divslider = document.createElement('div');
+    divslider.classList.add('divslider');
+    const sliderlabel = document.createElement('label');
+    sliderlabel.classList.add('sliderlabel');
+    sliderlabel.textContent = freq + 'Hz';
+    const slidervlabel = document.createElement('label');
+    slidervlabel.classList.add('sliderlabel');
+    slidervlabel.id = 'slidervlabel'+idx;
+    slidervlabel.textContent = '0';
     const slider = document.createElement('input');
     slider.type = 'range';
     slider.orient = 'vertical';
     slider.style.direction = 'rtl';
     slider.style.writingMode = 'vertical-lr';
-    slider.style.width = '8%';
+    slider.style.width = '10%';
+    slider.style.height = '300px';
+    slider.style.alignSelf = 'center';
     slider.min = -40;
     slider.max = 40;
-    slider.value = Math.random() * 40 - 20;
+    slider.value = 0;
     slider.step = 0.1;
-    eqcontainer.appendChild(slider);
-    return slider
+
+    slider.addEventListener('input', (event) => {
+        if (filters) {
+            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
+            
+        }
+        slidervlabel.textContent = parseFloat(event.target.value);
+    });
+
+    divslider.appendChild(slidervlabel);
+    divslider.appendChild(slider);
+    divslider.appendChild(sliderlabel);    
+    eqcontainer.appendChild(divslider);
+    return slider;
 });
 
 
@@ -114,6 +141,24 @@ function audiovisual(player) {
         analyser.connect(audioctx.destination); 
         analyser.fftSize = 256;
         isAudioConnected = true; 
+
+        filters = eqBands.map(freq => {
+            const filter = audioctx.createBiquadFilter();
+            filter.type = 'peaking';
+            filter.frequency.value = freq;
+            filter.Q.value = 1;
+            filter.gain.value = 0;
+            return filter;
+        });
+        
+        filters.reduce((prev, curr) => {
+            prev.connect(curr);
+            return curr;
+        });        
+        
+        // Connect last filter to destination
+        filters[filters.length - 1].connect(audioctx.destination);
+        audiosrc.connect(filters[0]);
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -711,5 +756,19 @@ pitchControl.addEventListener("input", function () {
     const pitchValue = parseFloat(this.value);
     //audioPlayer. = pitchValue;
     pitchlablel.textContent = pitchValue + 'x';
+});
+
+
+//equlizer
+const eqreset = document.getElementById("equalizer-reset");
+
+eqreset.addEventListener("click", function () {
+    sliders.forEach((slider) => {
+        slider.value = 0;
+        const  vtext = document.getElementsByClassName("slidervlabel");
+        for (let i = 0; i < vtext.length; i++) {
+            vtext[i].textContent = 0;
+        }
+    }); 
 });
 
