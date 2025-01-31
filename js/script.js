@@ -84,49 +84,9 @@ const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const eqcontainer = document.querySelector('#equ');
 
 let filters;
+let pitchNode;
 
-
-
-const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
-    const divslider = document.createElement('div');
-    divslider.classList.add('divslider');
-    const sliderlabel = document.createElement('label');
-    sliderlabel.classList.add('sliderlabel');
-    sliderlabel.textContent = freq + 'Hz';
-    const slidervlabel = document.createElement('label');
-    slidervlabel.classList.add('sliderlabel');
-    slidervlabel.id = 'slidervlabel'+idx;
-    slidervlabel.textContent = '0';
-    const slider = document.createElement('input');
-    slider.type = 'range';
-    slider.orient = 'vertical';
-    slider.style.direction = 'rtl';
-    slider.style.writingMode = 'vertical-lr';
-    slider.style.width = '10%';
-    slider.style.height = '300px';
-    slider.style.alignSelf = 'center';
-    slider.min = -40;
-    slider.max = 40;
-    slider.value = 0;
-    slider.step = 0.1;
-
-    slider.addEventListener('input', (event) => {
-        if (filters) {
-            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
-            
-        }
-        slidervlabel.textContent = parseFloat(event.target.value);
-    });
-
-    divslider.appendChild(slidervlabel);
-    divslider.appendChild(slider);
-    divslider.appendChild(sliderlabel);    
-    eqcontainer.appendChild(divslider);
-    return slider;
-});
-
-
-//visualizer
+//visualizer and other effects
 
 function audiovisual(player) {
     audio = player;
@@ -141,6 +101,13 @@ function audiovisual(player) {
         analyser.connect(audioctx.destination); 
         analyser.fftSize = 256;
         isAudioConnected = true; 
+
+        pitchNode = audioctx.createBiquadFilter();
+        pitchNode.type = "allpass"; // Allows smooth frequency shift
+        pitchNode.detune.value = 0; // Default to middle A (can be adjusted)
+
+        audiosrc.connect(pitchNode);
+        pitchNode.connect(audioctx.destination);
 
         filters = eqBands.map(freq => {
             const filter = audioctx.createBiquadFilter();
@@ -747,6 +714,7 @@ speedreset.addEventListener("click", function () {
 
 //change audio pitch
 const pitchControl = document.getElementById("pitch");
+const pitchLabel = document.getElementById("pitchlabel");
 
 
 
@@ -754,21 +722,75 @@ const pitchControl = document.getElementById("pitch");
 // Event listener for pitch control
 pitchControl.addEventListener("input", function () {
     const pitchValue = parseFloat(this.value);
-    //audioPlayer. = pitchValue;
-    pitchlablel.textContent = pitchValue + 'x';
+    if (pitchNode) {        
+        pitchNode.detune.value =  pitchValue * 100; // Detune in cents        
+    }
+    pitchLabel.textContent = pitchValue + " semi-tones";
+
 });
 
 
 //equlizer
+
+const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
+    const divslider = document.createElement('div');
+    divslider.classList.add('divslider');
+    const sliderlabel = document.createElement('label');
+    sliderlabel.classList.add('sliderlabel');
+    sliderlabel.textContent = freq + 'Hz';
+    const slidervlabel = document.createElement('label');
+    slidervlabel.classList.add('sliderlabelvalue');    
+    slidervlabel.textContent = '0';
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.orient = 'vertical';
+    slider.style.direction = 'rtl';
+    slider.style.writingMode = 'vertical-lr';
+    slider.style.width = '10%';
+    slider.style.height = '300px';
+    slider.style.alignSelf = 'center';
+    slider.min = -40;
+    slider.max = 40;
+    slider.value = 0;
+    slider.step = 0.1;
+
+    slider.addEventListener('input', (event) => {
+        if (filters) {
+            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
+            
+        }
+        slidervlabel.textContent = parseFloat(event.target.value);
+    });
+    slider.addEventListener('change', (event) => {  
+        if (filters) {
+            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
+        }
+        slidervlabel.textContent = parseFloat(event.target.value);
+    });
+    divslider.appendChild(slidervlabel);
+    divslider.appendChild(slider);
+    divslider.appendChild(sliderlabel);    
+    eqcontainer.appendChild(divslider);
+    return slider;
+});
+
 const eqreset = document.getElementById("equalizer-reset");
+const eqlablels = document.querySelectorAll(".sliderlabelvalue");
 
 eqreset.addEventListener("click", function () {
     sliders.forEach((slider) => {
-        slider.value = 0;
-        const  vtext = document.getElementsByClassName("slidervlabel");
-        for (let i = 0; i < vtext.length; i++) {
-            vtext[i].textContent = 0;
-        }
+        slider.value = 0;        
     }); 
+    if (filters) {
+        filters.forEach((filter) => {
+            filter.gain.value = 0;
+            
+        }); 
+    }    
+    eqlablels.forEach((label) => {      
+        label.textContent = '0';
+        
+    });
+    
 });
 
