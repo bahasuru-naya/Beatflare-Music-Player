@@ -130,7 +130,7 @@ function audiovisual(player) {
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    let barWidth = (canvas1.width / bufferLength) * 2.5;
+    let barWidth = (canvas1.width / bufferLength) * 1.5;
     let barHeight;
     let x;
     function animate1() {
