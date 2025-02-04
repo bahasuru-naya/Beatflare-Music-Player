@@ -680,8 +680,7 @@ section {
 }
 #pitchlabel{
     display: inline-flex;
-    grid-column: 3;    
-    font-size: 1rem; 
+    grid-column: 3;     
     align-items: center;   
     
 }

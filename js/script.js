@@ -84,7 +84,10 @@ const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const eqcontainer = document.querySelector('#equ');
 
 let filters;
-let pitchNode;
+
+let gainNode;
+let jungle;
+
 
 //visualizer and other effects
 
@@ -97,17 +100,13 @@ function audiovisual(player) {
 
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
-        audiosrc.connect(analyser);
-        analyser.connect(audioctx.destination); 
+        audiosrc.connect(analyser);        
         analyser.fftSize = 256;
-        isAudioConnected = true; 
+        isAudioConnected = true;
 
-        pitchNode = audioctx.createBiquadFilter();
-        pitchNode.type = "allpass"; // Allows smooth frequency shift
-        pitchNode.detune.value = 0; // Default to middle A (can be adjusted)
-
-        audiosrc.connect(pitchNode);
-        pitchNode.connect(audioctx.destination);
+        jungle = new Jungle(audioctx); 
+        jungle.setPitchTranspose(0, 0);       
+        audiosrc.connect(jungle.input);            
 
         filters = eqBands.map(freq => {
             const filter = audioctx.createBiquadFilter();
@@ -117,15 +116,17 @@ function audiovisual(player) {
             filter.gain.value = 0;
             return filter;
         });
-        
+
         filters.reduce((prev, curr) => {
             prev.connect(curr);
             return curr;
-        });        
+        });
+
         
-        // Connect last filter to destination
+        jungle.output.connect(filters[0]);
+        //audiosrc.connect(filters[0]);
         filters[filters.length - 1].connect(audioctx.destination);
-        audiosrc.connect(filters[0]);
+        
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -492,7 +493,6 @@ function updateIndicesAndMap() {
 }
 
 
-
 function playFile(index) {
     if (index >= 0 && index < files.length) {
         const fileURL = URL.createObjectURL(files[index]);
@@ -574,11 +574,13 @@ playPauseButton.addEventListener('click', function () {
         playPauseButton.innerHTML = pausesvg;
         audioctx.resume();
         audiovisual(audioPlayer);
+
     } else {
         audioPlayer.pause();
         playPauseButton.innerHTML = playsvg;
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);
+
     }
 });
 
@@ -715,20 +717,25 @@ speedreset.addEventListener("click", function () {
 //change audio pitch
 const pitchControl = document.getElementById("pitch");
 const pitchLabel = document.getElementById("pitchlabel");
-
-
+const pitchRest = document.getElementById("pitch-reset");
 
 
 // Event listener for pitch control
 pitchControl.addEventListener("input", function () {
     const pitchValue = parseFloat(this.value);
-    if (pitchNode) {        
-        pitchNode.detune.value =  pitchValue * 100; // Detune in cents        
+    if (jungle) {
+        jungle.setPitchTranspose(0, pitchValue);
     }
-    pitchLabel.textContent = pitchValue + " semi-tones";
+    pitchLabel.textContent = pitchValue + "x";
 
 });
 
+// Event listener for pitch reset
+pitchRest.addEventListener("click", function () {
+    pitchControl.value = 0;
+    jungle.setPitchTranspose(0, 0);
+    pitchLabel.textContent = "0x";
+});
 
 //equlizer
 
@@ -739,7 +746,7 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     sliderlabel.classList.add('sliderlabel');
     sliderlabel.textContent = freq + 'Hz';
     const slidervlabel = document.createElement('label');
-    slidervlabel.classList.add('sliderlabelvalue');    
+    slidervlabel.classList.add('sliderlabelvalue');
     slidervlabel.textContent = '0';
     const slider = document.createElement('input');
     slider.type = 'range';
@@ -757,11 +764,11 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     slider.addEventListener('input', (event) => {
         if (filters) {
             filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
-            
+
         }
         slidervlabel.textContent = parseFloat(event.target.value);
     });
-    slider.addEventListener('change', (event) => {  
+    slider.addEventListener('change', (event) => {
         if (filters) {
             filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
         }
@@ -769,7 +776,7 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     });
     divslider.appendChild(slidervlabel);
     divslider.appendChild(slider);
-    divslider.appendChild(sliderlabel);    
+    divslider.appendChild(sliderlabel);
     eqcontainer.appendChild(divslider);
     return slider;
 });
@@ -779,18 +786,18 @@ const eqlablels = document.querySelectorAll(".sliderlabelvalue");
 
 eqreset.addEventListener("click", function () {
     sliders.forEach((slider) => {
-        slider.value = 0;        
-    }); 
+        slider.value = 0;
+    });
     if (filters) {
         filters.forEach((filter) => {
             filter.gain.value = 0;
-            
-        }); 
-    }    
-    eqlablels.forEach((label) => {      
+
+        });
+    }
+    eqlablels.forEach((label) => {
         label.textContent = '0';
-        
+
     });
-    
+
 });
 

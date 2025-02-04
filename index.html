@@ -217,15 +217,15 @@
                     <button id="speed-reset">Reset</button>
                 </div>
                 <div id="con-pitch">
-                    <label for="pitch" class="s-text" >Pitch: </label>
+                    <label for="pitch" class="s-text">Pitch: </label>
                     <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
-                    <label id="pitchlabel" for="pitch">0 semi-tones</label>
+                    <label id="pitchlabel" for="pitch">0x</label>
                     <button id="pitch-reset">Reset</button>
                 </div>
                 <div id="equalizer">
-                    <label for="equalizer" class="s-text" >Equalizer: </label>
+                    <label for="equalizer" class="s-text">Equalizer: </label>
                     <button id="equalizer-reset">Reset</button>
-                    <select id="equ-select">Flat</select>                              
+                    <select id="equ-select">Flat</select>
                 </div>
                 <div id="equ"></div>
             </div>
@@ -235,10 +235,11 @@
 
         </section>
     </main>
-    <script src="js/script.js"></script>
+    <script src="js/script.js" type="module"></script>
     <script src="js/ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>    
+    <script src="js/jungle.js"></script>
+    
 </body>
 
 </html>
