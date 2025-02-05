@@ -59,6 +59,19 @@ function setWidthHeight() {
         visual3.style.height = player.offsetHeight - 20 + 'px';
     }
 
+    const acontrol = document.querySelector('#audio-control');
+    acontrol.style.display = 'block'
+    const playerWidth = document.querySelector(".player").offsetWidth;
+    console.log(playerWidth);    
+    if (playerWidth >= 800) {
+        acontrol.style.display = 'inline-flex';
+        playlist.style.height ='300px';
+    }
+    else {
+        acontrol.style.display = 'block';
+        playlist.style.height ='250px';
+    }
+
     const songNameElement = document.getElementById("songName");
     var maqcontainer = 0;
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
@@ -77,6 +90,8 @@ function setWidthHeight() {
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
+
+
 
 }
 
@@ -100,13 +115,13 @@ function audiovisual(player) {
 
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
-        audiosrc.connect(analyser);        
+        audiosrc.connect(analyser);
         analyser.fftSize = 256;
         isAudioConnected = true;
 
-        jungle = new Jungle(audioctx); 
-        jungle.setPitchTranspose(0, 0);       
-        audiosrc.connect(jungle.input);            
+        jungle = new Jungle(audioctx);
+        jungle.setPitchTranspose(0, 0);
+        audiosrc.connect(jungle.input);
 
         filters = eqBands.map(freq => {
             const filter = audioctx.createBiquadFilter();
@@ -122,11 +137,11 @@ function audiovisual(player) {
             return curr;
         });
 
-        
+
         jungle.output.connect(filters[0]);
         //audiosrc.connect(filters[0]);
         filters[filters.length - 1].connect(audioctx.destination);
-        
+
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -237,7 +252,7 @@ function audiovisual(player) {
         animation = requestAnimationFrame(animate2);
     }
     const bubbles = []; // Array to hold bubble objects
-    const numBubbles = 50; // Fixed number of bubbles
+    const numBubbles = 100; // Fixed number of bubbles
 
     // Initialize bubbles with random positions and sizes
     for (let i = 0; i < numBubbles; i++) {
@@ -799,5 +814,27 @@ eqreset.addEventListener("click", function () {
 
     });
 
+});
+
+//visualizer on off
+
+const visualonoff = document.getElementById("visualizer-on-off");
+const playersection = document.querySelector(".section-center");
+
+visualonoff.addEventListener("click", function () {
+    if (visualonoff.checked) {
+        tabs.style.display = 'grid';
+        playersection.style.gridTemplateColumns = '1fr 1fr';
+        playersection.style.maxWidth = '1170px';
+        playersection.style.justifyContent = 'none';
+        setWidthHeight();
+    } else {
+        tabs.style.display = 'none';
+        playersection.style.gridTemplateColumns = 'none';
+        playersection.style.maxWidth = 'none';
+        playersection.style.justifyContent = 'center';
+        setWidthHeight();
+
+    }
 });
 
