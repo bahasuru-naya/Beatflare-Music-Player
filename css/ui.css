@@ -536,6 +536,8 @@ section {
 
 
 
+
+
 @keyframes marquee {
     0% {
         transform: translateX(380px);
@@ -742,13 +744,14 @@ section {
     grid-column: 1;
     grid-row: 5;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: auto auto;
     align-items: center;
     
 }
 
-/* From Uiverse.io by Galahhad */
+
 .switch {
+   
     /* switch */
     --switch-width: 75px;
     --switch-height: 36px;

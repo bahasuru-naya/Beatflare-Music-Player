@@ -62,14 +62,14 @@ function setWidthHeight() {
     const acontrol = document.querySelector('#audio-control');
     acontrol.style.display = 'block'
     const playerWidth = document.querySelector(".player").offsetWidth;
-    console.log(playerWidth);    
+    console.log(playerWidth);
     if (playerWidth >= 800) {
         acontrol.style.display = 'inline-flex';
-        playlist.style.height ='300px';
+        playlist.style.height = '300px';
     }
     else {
         acontrol.style.display = 'block';
-        playlist.style.height ='250px';
+        playlist.style.height = '250px';
     }
 
     const songNameElement = document.getElementById("songName");
@@ -753,6 +753,7 @@ pitchRest.addEventListener("click", function () {
 });
 
 //equlizer
+const equSelect = document.getElementById("equ-select");
 
 const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     const divslider = document.createElement('div');
@@ -762,7 +763,7 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     sliderlabel.textContent = freq + 'Hz';
     const slidervlabel = document.createElement('label');
     slidervlabel.classList.add('sliderlabelvalue');
-    slidervlabel.textContent = '0';
+    slidervlabel.textContent = '0 dB';
     const slider = document.createElement('input');
     slider.type = 'range';
     slider.orient = 'vertical';
@@ -771,8 +772,9 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     slider.style.width = '10%';
     slider.style.height = '300px';
     slider.style.alignSelf = 'center';
-    slider.min = -40;
-    slider.max = 40;
+    slider.style.transition = "all 0.5s ease-in-out";
+    slider.min = -12;
+    slider.max = 12;
     slider.value = 0;
     slider.step = 0.1;
 
@@ -781,13 +783,15 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
             filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
 
         }
-        slidervlabel.textContent = parseFloat(event.target.value);
+        slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
+        equSelect.value = 'Custom';
     });
     slider.addEventListener('change', (event) => {
         if (filters) {
             filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
         }
-        slidervlabel.textContent = parseFloat(event.target.value);
+        slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
+        equSelect.value = 'Custom';
     });
     divslider.appendChild(slidervlabel);
     divslider.appendChild(slider);
@@ -800,8 +804,10 @@ const eqreset = document.getElementById("equalizer-reset");
 const eqlablels = document.querySelectorAll(".sliderlabelvalue");
 
 eqreset.addEventListener("click", function () {
+    equSelect.value = 'Flat';
     sliders.forEach((slider) => {
         slider.value = 0;
+        
     });
     if (filters) {
         filters.forEach((filter) => {
@@ -810,11 +816,44 @@ eqreset.addEventListener("click", function () {
         });
     }
     eqlablels.forEach((label) => {
-        label.textContent = '0';
+        label.textContent = '0 dB';
 
     });
 
 });
+
+// EQ Preset Select
+
+// EQ Preset Gain Values (in dB)
+const eqPresets = {
+    "Flat": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "Treble boost": [-4, -3, -2, -1, 0, +1, +2, +3, +4, +6],
+    "Bass boost": [6, 5, 4, 3, 2, 0, -1, -2, -3, -4],
+    "Laptop": [-3, -3, -2, -1, 0, +1, +2, +3, +3, +4],
+    "Portable speakers": [3, 3, 2, 1, 0, -1, -2, -3, -3, -4],
+    "TV": [0, 0, 1, 1, 2, 3, 2, 1, 0, -1],
+    "Custom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // Custom values will be set manually
+};
+
+document.querySelector("#equ-select option[value='Custom']").style.display = "none";
+
+equSelect.addEventListener("change", function () {
+    const preset = this.value;
+    const gains = eqPresets[preset];
+    if (gains) {
+        sliders.forEach((slider, idx) => {
+            slider.value = gains[idx];
+            if (filters) {
+                filters[idx].gain.value = gains[idx];
+            }
+        });
+        eqlablels.forEach((label, idx) => {
+            label.textContent = gains[idx] + ' dB';
+        });
+    }
+});
+
+
 
 //visualizer on off
 
