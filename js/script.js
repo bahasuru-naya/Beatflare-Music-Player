@@ -99,7 +99,7 @@ const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const eqcontainer = document.querySelector('#equ');
 
 let filters;
-
+let panNode;
 let gainNode;
 let jungle;
 
@@ -137,10 +137,13 @@ function audiovisual(player) {
             return curr;
         });
 
+        panNode = new StereoPannerNode(audioctx);
+        panNode.pan.value =0;
 
         jungle.output.connect(filters[0]);
-        //audiosrc.connect(filters[0]);
-        filters[filters.length - 1].connect(audioctx.destination);
+        
+        filters[filters.length - 1].connect(panNode);
+        panNode.connect(audioctx.destination);
 
     }
     const bufferLength = analyser.frequencyBinCount;
@@ -748,7 +751,9 @@ pitchControl.addEventListener("input", function () {
 // Event listener for pitch reset
 pitchRest.addEventListener("click", function () {
     pitchControl.value = 0;
+    if (jungle){
     jungle.setPitchTranspose(0, 0);
+    }
     pitchLabel.textContent = "0x";
 });
 
@@ -851,6 +856,34 @@ equSelect.addEventListener("change", function () {
             label.textContent = gains[idx] + ' dB';
         });
     }
+});
+
+//stereo change
+const stereoControl = document.getElementById("Stereo");
+const stereoLabel1 = document.getElementById("Stereolabel1");
+const stereoLabel2 = document.getElementById("Stereolabel2");
+const stereoRest = document.getElementById("Stereo-reset");
+
+
+// Event listener for pitch control
+stereoControl.addEventListener("input", function () {
+    const stereoValue = parseFloat(this.value);
+    if (panNode) {
+        panNode.pan.value = stereoValue;
+    }
+    stereoLabel1.textContent = -stereoValue ;
+    stereoLabel2.textContent = stereoValue ;
+
+});
+
+// Event listener for pitch reset
+stereoRest.addEventListener("click", function () {
+    stereoControl.value = 0;
+    if (panNode){
+        panNode.pan.value + 0;
+    }
+    stereoLabel1.textContent = "0";
+    stereoLabel2.textContent = "0";
 });
 
 
