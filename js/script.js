@@ -463,6 +463,7 @@ function handleRemoveFile(index) {
             currentIndex = -1;
             playPauseButton.innerHTML = playsvg;
             audioPlayer.src = '';
+            img.src = "./images/art.png";
             updateSongName('Add songs to playlist...');
 
         } else {
@@ -510,6 +511,7 @@ function updateIndicesAndMap() {
     });
 }
 
+const img = document.getElementById('albumArt');
 
 function playFile(index) {
     if (index >= 0 && index < files.length) {
@@ -530,7 +532,7 @@ function playFile(index) {
         updateSongName(`Now Playing: ${songTitle}`);
 
 
-        const img = document.getElementById('albumArt');
+        
         // Use jsmediatags to read the MP3 file
         jsmediatags.read(file, {
             onSuccess: function (tag) {
@@ -907,6 +909,26 @@ visualonoff.addEventListener("click", function () {
         playersection.style.justifyContent = 'center';
         setWidthHeight();
 
+    }
+});
+
+//remove all songs
+const removeAll = document.getElementById("remove-all");
+
+removeAll.addEventListener('click', function () {
+    if (files.length > 0) {
+        files = [];
+        listItemMap.clear();
+        updateIndicesAndMap();
+        updatePlaylist();
+        playlist.innerHTML = '';
+        currentIndex = -1;
+        playPauseButton.innerHTML = playsvg;
+        audioPlayer.src = '';
+        updateSongName('Add songs to playlist...');
+        img.src = "./images/art.png";
+        if (audioctx) audioctx.suspend();
+        if (animation) window.cancelAnimationFrame(animation);
     }
 });
 
