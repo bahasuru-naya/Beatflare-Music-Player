@@ -138,10 +138,10 @@ function audiovisual(player) {
         });
 
         panNode = new StereoPannerNode(audioctx);
-        panNode.pan.value =0;
+        panNode.pan.value = 0;
 
         jungle.output.connect(filters[0]);
-        
+
         filters[filters.length - 1].connect(panNode);
         panNode.connect(audioctx.destination);
 
@@ -751,8 +751,8 @@ pitchControl.addEventListener("input", function () {
 // Event listener for pitch reset
 pitchRest.addEventListener("click", function () {
     pitchControl.value = 0;
-    if (jungle){
-    jungle.setPitchTranspose(0, 0);
+    if (jungle) {
+        jungle.setPitchTranspose(0, 0);
     }
     pitchLabel.textContent = "0x";
 });
@@ -812,7 +812,7 @@ eqreset.addEventListener("click", function () {
     equSelect.value = 'Flat';
     sliders.forEach((slider) => {
         slider.value = 0;
-        
+
     });
     if (filters) {
         filters.forEach((filter) => {
@@ -871,15 +871,15 @@ stereoControl.addEventListener("input", function () {
     if (panNode) {
         panNode.pan.value = stereoValue;
     }
-    stereoLabel1.textContent = -stereoValue ;
-    stereoLabel2.textContent = stereoValue ;
+    stereoLabel1.textContent = -stereoValue;
+    stereoLabel2.textContent = stereoValue;
 
 });
 
 // Event listener for pitch reset
 stereoRest.addEventListener("click", function () {
     stereoControl.value = 0;
-    if (panNode){
+    if (panNode) {
         panNode.pan.value + 0;
     }
     stereoLabel1.textContent = "0";

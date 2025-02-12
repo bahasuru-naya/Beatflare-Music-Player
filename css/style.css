@@ -61,7 +61,7 @@
 }
 
 .buttonadd .button__text {
-    transform: translateX(22px);
+    transform: translateX(15px);
     color: var(--font-color);
     font-weight: 600;
 }

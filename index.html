@@ -75,15 +75,60 @@
             <div class="section-center">
                 <div class="play">
                     <div id="player" class="player">
-                        <button class="buttonadd" type="button">
-                            <span class="button__text">Add Songs</span>
-                            <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                                    width="24" xmlns="http://www.w3.org/2000/svg">
-                                    <line x1="12" x2="12" y1="5" y2="19"></line>
-                                    <line x1="5" x2="19" y1="12" y2="12"></line>
-                                </svg></span>
-                        </button>
+                        <div id="playerhead">
+                            <button class="buttonadd" type="button">
+                                <span class="button__text">Add Songs</span>
+                                <span class="button__icon"><svg class="svg" fill="none" height="24"
+                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" viewBox="0 0 24 24" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="12" x2="12" y1="5" y2="19"></line>
+                                        <line x1="5" x2="19" y1="12" y2="12"></line>
+                                    </svg></span>
+                            </button>
+                            <button type="button" class="delbutton">
+                                <span class="delbutton__text">Remove all</span>
+                                <span class="delbutton__icon"><svg xmlns="http://www.w3.org/2000/svg" width="512"
+                                        viewBox="0 0 512 512" height="512" class="svg">
+                                        <title></title>
+                                        <path
+                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                                            d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320">
+                                        </path>
+                                        <line y2="112" y1="112" x2="432" x1="80"
+                                            style="stroke:#ea0b0b;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px">
+                                        </line>
+                                        <path
+                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                                            d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40">
+                                        </path>
+                                        <line y2="400" y1="176" x2="256" x1="256"
+                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                        </line>
+                                        <line y2="400" y1="176" x2="192" x1="184"
+                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                        </line>
+                                        <line y2="400" y1="176" x2="320" x1="328"
+                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                        </line>
+                                    </svg></span>
+                            </button>
+                            <div class="cssbuttons-io">
+                                <input type="text" id="search-list" placeholder="Search for songs">
+                                <span>
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="5"
+                                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                    Search
+                                </span>
+
+                            </div>
+
+                        </div>
+
                         <input title="file-input" type="file" id="file-input" accept=".mp3,.wav" multiple>
                         <ul id="playlist"></ul>
                         <audio id="audio-player"></audio>
@@ -290,11 +335,11 @@
                         <option value="Custom">Custom</option>
                     </select>
                 </div>
-                
+
                 <div id="partymode">
                     <label for="partymode" class="s-text">Party Mode: </label>
                     <label class="switch">
-                        <input  type="checkbox" id="party-on-off">
+                        <input type="checkbox" id="party-on-off">
                         <div class="slider">
                             <div class="circle">
                                 <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
@@ -320,7 +365,7 @@
                             </div>
                         </div>
                     </label>
-                    
+
                 </div>
 
             </div>
