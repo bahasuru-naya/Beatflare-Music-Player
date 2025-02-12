@@ -53,6 +53,8 @@ tabs.addEventListener("click", function (e) {
   }
 });
 
+//search button
+
 const playerhead = document.querySelector("#playerhead");
 const addbtn = document.querySelector(".buttonadd");
 const searchbtn = document.querySelector(".cssbuttons-io");
