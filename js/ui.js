@@ -80,7 +80,7 @@ searchbtntext.addEventListener("click", function () {
     playerhead.style["grid-template-columns"] = "1fr ";
   addbtn.style.display = "none";
   deletebtn.style.display = "none";
-  searchbtn.style["grid-template-columns"] = "7fr  1fr";
+  searchbtn.style["grid-template-columns"] = "7fr  1fr";  
   searchbtn.style["max-width"] = "none";
   searchinput.style.display = "flex";
   searchbtntext.innerHTML = closesvg  + "Close" ;
@@ -90,11 +90,15 @@ searchbtntext.addEventListener("click", function () {
     playerhead.style["grid-template-columns"] = "1fr 1fr 1fr";
     addbtn.style.display = "flex";
     deletebtn.style.display = "flex";
-    searchbtn.style["grid-template-columns"] = "1fr ";
+    searchbtn.style["grid-template-columns"] = "1fr ";    
     searchbtn.style["max-width"] = "150px";
     searchinput.style.display = "none";
     searchbtntext.innerHTML = searchsvg + "Search ";
-    searchinput.value = "";    
+    searchinput.value = ""; 
+    let songs = document.querySelectorAll('#playlist li');
+    songs.forEach((song) => {
+      song.style.display = "grid";
+    });   
   }
   
   

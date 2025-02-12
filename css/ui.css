@@ -381,6 +381,11 @@ section {
     gap: 3px;
 }
 
+#playlist-text{
+    display: none; 
+    justify-self: center;
+}
+
 
 .cssbuttons-io {
     display: grid;

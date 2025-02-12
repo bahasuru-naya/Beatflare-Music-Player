@@ -910,3 +910,28 @@ visualonoff.addEventListener("click", function () {
     }
 });
 
+
+//search songs
+
+const searchinputbox = document.getElementById("search-list");
+
+
+searchinputbox.addEventListener('input', function () {
+    let songs = document.querySelectorAll('#playlist li');
+    songs.forEach((song) => {
+        if (this.value === '') {
+            song.style.display = 'grid';
+
+        } else {
+            if (song.textContent.toLowerCase().includes(searchinputbox.value.toLowerCase())) {
+                song.style.display = 'grid';
+                
+            } else {
+                song.style.display = 'none';
+            }
+        }
+
+
+    });
+});
+
