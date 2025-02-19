@@ -41,11 +41,13 @@
 
 .buttonadd {
     position: relative;
-    width: 150px;
-    height: 40px;
+    width: 100%;
+    max-width: 150px;
+    height: 50px;
     padding: 0px;
     cursor: pointer;
     display: flex;
+    font: 0.8em sans-serif;
     align-items: center;
     border: 2px solid var(--main-color);
     box-shadow: 4px 4px var(--main-color);
@@ -61,16 +63,16 @@
 }
 
 .buttonadd .button__text {
-    transform: translateX(15px);
     color: var(--font-color);
-    font-weight: 600;
+    padding: 10%;    
+    margin-right: 20%;
 }
 
 .buttonadd .button__icon {
     position: absolute;
-    transform: translateX(109px);
+    transform: translateX(400%);
     height: 100%;
-    width: 39px;
+    width: 20%;
     background-color: var(--bg-color-sub);
     display: flex;
     align-items: center;
@@ -91,8 +93,8 @@
 }
 
 .buttonadd:hover .button__icon {
-    width: 148px;
-    transform: translateX(0);
+    width: 100%;
+    transform: translateX(0px);
 }
 
 .buttonadd:active {
@@ -151,6 +153,7 @@ li {
     padding-right: 10px;       
     cursor: pointer;
     align-items: center;
+    margin-right: 5px;
     
     
 }
@@ -164,6 +167,8 @@ li p{
 
 li.active {
     background-color: #d3d3d3;
+    border-radius: 8px;
+    margin-right: 5px;
 }
 
 

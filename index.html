@@ -11,6 +11,8 @@
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script>
         window.console = window.console || function (t) { };
     </script>
@@ -66,7 +68,50 @@
         </defs>
     </svg>
     <main>
-        <section id="home">Home
+        <section id="home">
+            <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+                <defs>
+                    <style>
+                        @keyframes rotate {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        .out-top {
+                            animation: rotate 20s linear infinite;
+                            transform-origin: 13px 25px;
+                        }
+
+                        .in-top {
+                            animation: rotate 10s linear infinite;
+                            transform-origin: 13px 25px;
+                        }
+
+                        .out-bottom {
+                            animation: rotate 25s linear infinite;
+                            transform-origin: 84px 93px;
+                        }
+
+                        .in-bottom {
+                            animation: rotate 15s linear infinite;
+                            transform-origin: 84px 93px;
+                        }
+                    </style>
+                </defs>
+                <path fill="#9b5de5" class="out-top"
+                    d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
+                <path fill="#f15bb5" class="in-top"
+                    d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+                <path fill="#00bbf9" class="out-bottom"
+                    d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
+                <path fill="#00f5d4" class="in-bottom"
+                    d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+            </svg>
 
         </section>
         <section id="playersec">
@@ -119,12 +164,12 @@
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="5"
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="3"
                                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                                     </svg>
-                                    Search                                    
+                                    Search
                                 </span>
-                                
+
                             </div>
 
                         </div>
@@ -373,8 +418,50 @@
             </div>
 
         </section>
-        <section id="about">About
+        <section id="about">
+            <section class="about-creator">
+                <h1 class="section-title">About</h1>
+                <div class="container">
 
+                    <div class="profile">
+                        <img src="./images/logo.jpg" alt="Creator Profile Image" class="profile-img">
+                        <h2 class="creator-name">Your Name</h2>
+                        <p class="creator-description">Passionate developer who built this MP3 player to enhance the
+                            music experience with a sleek UI and great functionality.</p>
+                        <div class="social-links">
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-btn linkedin">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/yourgithub" target="_blank" class="social-btn github">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="mailto:youremail@example.com" class="social-btn email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mp3-info">
+                        <img src="./images/art.png" alt="MP3 Player Logo" class="mp3-logo">
+                        <h2 class="mp3-title">MP3 Player Project</h2>
+                        <p class="mp3-description">
+                            A modern, open-source MP3 player with a user-friendly interface, playlist management,
+                            equalizer, and dark mode.
+                        </p>
+                        <ul class="features">
+                            <li>🎵 Play, Pause, and Skip</li>
+                            <li>📂 Supports multiple formats</li>
+                            <li>🌙 Dark & Light Mode</li>
+                            <li>🎚️ Customizable equalizer</li>
+                            <li>📃 Playlist management</li>
+                        </ul>
+                        <a href="https://github.com/yourgithub/mp3player" target="_blank" class="github-btn">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <p class="contribution-text">This project is open-source. Contributions are welcome!</p>
+                    </div>
+                </div>
+            </section>
         </section>
     </main>
     <script src="js/script.js"></script>
