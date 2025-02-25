@@ -427,6 +427,9 @@ function updatePlaylist() {
         removeButton.addEventListener('click', (e) => {
             e.stopPropagation();
             handleRemoveFile(index);
+            if (search) {
+                searchsongs();
+            }
         });
 
         playlist.appendChild(listItem);
@@ -532,7 +535,7 @@ function playFile(index) {
         updateSongName(`Now Playing: ${songTitle}`);
 
 
-        
+
         // Use jsmediatags to read the MP3 file
         jsmediatags.read(file, {
             onSuccess: function (tag) {
@@ -933,21 +936,92 @@ removeAll.addEventListener('click', function () {
 });
 
 
+//search button
+
+const playerhead = document.querySelector("#playerhead");
+const addbtn = document.querySelector(".buttonadd");
+const searchbtn = document.querySelector(".cssbuttons-io");
+const deletebtn = document.querySelector(".delbutton");
+const searchbtntext = document.querySelector(".cssbuttons-io span");
+const searchinput = document.querySelector("#search-list");
+
+const searchsvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-width="3" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+</svg>
+`;
+
+const closesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18 17.94 6M18 18 6.06 6"/>
+</svg>
+`;
+
+let search = false;
+
+searchbtntext.addEventListener("click", function () {
+    search = !search;
+    if (search) {
+        playerhead.style["grid-template-columns"] = "1fr ";
+        addbtn.style.display = "none";
+        deletebtn.style.display = "none";
+        searchbtn.style["grid-template-columns"] = "75% 25%";
+        searchbtn.style["max-width"] = "none";
+        searchinput.style.display = "flex";
+        searchbtntext.innerHTML = closesvg + "Close";
+
+    }
+    else {
+        playerhead.style["grid-template-columns"] = "1fr 1fr 1fr";
+        addbtn.style.display = "flex";
+        deletebtn.style.display = "flex";
+        searchbtn.style["grid-template-columns"] = "1fr ";
+        searchbtn.style["max-width"] = "150px";
+        searchinput.style.display = "none";
+        searchbtntext.innerHTML = searchsvg + "Search ";
+        searchinput.value = "";
+        document.getElementById("playlist-text").remove();
+        let songs = document.querySelectorAll('#playlist li');
+        songs.forEach((song) => {
+            song.style.display = "grid";
+        });
+    }
+
+
+});
+
+
 //search songs
 
 const searchinputbox = document.getElementById("search-list");
 
 
 searchinputbox.addEventListener('input', function () {
+    searchsongs();
+});
+
+function searchsongs() {
     let songs = document.querySelectorAll('#playlist li');
+    if (document.getElementById('playlist-text')) {
+        document.getElementById('playlist-text').remove();
+    }
+    const playlisttext = document.createElement('p');
+    playlisttext.setAttribute("id", "playlist-text");
+    var referenceLi = document.querySelector('#playlist li[data-index="0"]');
+    if (referenceLi) {
+        playlist.insertBefore(playlisttext, referenceLi);
+    } else {
+        playlist.appendChild(playlisttext);
+    }
+    let numsongs = 0;
     songs.forEach((song) => {
-        if (this.value === '') {
+        if (searchinputbox.value === '') {
             song.style.display = 'grid';
+
 
         } else {
             if (song.textContent.toLowerCase().includes(searchinputbox.value.toLowerCase())) {
                 song.style.display = 'grid';
-                
+                numsongs = numsongs + 1;
+
             } else {
                 song.style.display = 'none';
             }
@@ -955,5 +1029,16 @@ searchinputbox.addEventListener('input', function () {
 
 
     });
-});
+    if (numsongs === 0) {
+        playlisttext.textContent = 'No songs found';
+        if (searchinputbox.value === '') {
+            playlisttext.textContent = 'Type to search';
+        }
 
+    }
+    else {
+        playlisttext.textContent = numsongs + ' song/s found';
+
+    }
+
+}
