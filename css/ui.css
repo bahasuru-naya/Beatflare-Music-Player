@@ -10,10 +10,21 @@
     --main-focus: #2d8cf0;
     --font-color: #323232;
     --bg-color-sub: #dedede;
-    --bg-color: #eee;
-    --main-color: #323232;
+    --bg-color: #eee;    
+    --del-font-color: #f20909;    
+    --main-color: #040404;
     --black: #000000;
     --white: #ffffff;
+    --menu-color: #d435c5;
+    --home-c1-color: #9b5de5;
+    --home-c2-color: #f15bb5;   
+    --home-c3-color: #00bbf9;
+    --home-c4-color: #00f5d4;
+    --player-back-color: #f5abc9;
+    --settings-back-color: #a7f9bc;
+    --about-back-color: #74b5fb;
+
+
 }
 
 body {
@@ -40,6 +51,8 @@ nav {
     align-items: center;
     overflow: hidden;
     z-index: 999;
+    animation: fade-out 0.5s ease-in-out forwards;
+    animation-delay: 1s;
 
 }
 
@@ -101,6 +114,49 @@ nav {
     height: 150px;
     background-color: #675D50;
     animation: rotation 2s infinite linear;
+}
+
+.preloaderback .dance-text {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-contract-bck {
+    0% {
+        letter-spacing: 1em;        
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0.6;
+    }
+
+    100% {
+        
+        opacity: 1;
+    }
+}
+
+@keyframes tracking-in-contract-bck {
+    0% {
+        letter-spacing: 1em;
+        
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0.6;
+    }
+
+    100% {
+        
+        opacity: 1;
+    }
 }
 
 @keyframes rotation {
@@ -252,7 +308,7 @@ section {
 }
 
 .menu__content {
-    background: hsl(var(--hue, 0), 50%, 50%);
+    background: var(--menu-color);
     margin: 0;
     display: block;
     list-style-type: none;
@@ -270,7 +326,7 @@ section {
 }
 
 .menu__content:after {
-    background: hsl(var(--hue, 0), 50%, 50%);
+    background: var(--menu-color);
     content: '';
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -283,7 +339,7 @@ section {
 }
 
 .menu__item {
-    background: hsl(var(--hue, 0), 50%, 50%);
+    background: var(--menu-color);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -333,7 +389,7 @@ section {
 
 .menu__link {
     align-items: center;
-    color: #fff;
+    color:var(--white);
     cursor: pointer;
     text-decoration: none;
     font-weight: bold;
@@ -346,6 +402,87 @@ section {
 
 .menu__link:hover {
     text-decoration: underline;
+}
+
+#home {
+    height: 100vh;
+}
+
+#home svg {
+
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.out-top {
+    animation: rotate 20s linear infinite;
+    transform-origin: 13px 25px;
+    fill: var(--home-c1-color);
+}
+
+.in-top {
+    animation: rotate 10s linear infinite;
+    transform-origin: 13px 25px;
+    fill: var(--home-c2-color);
+}
+
+.out-bottom {
+    animation: rotate 25s linear infinite;
+    transform-origin: 84px 93px;
+    fill: var(--home-c3-color);
+}
+
+.in-bottom {
+    animation: rotate 15s linear infinite;
+    transform-origin: 84px 93px;
+    fill:var(--home-c4-color);
+}
+
+#playersec {
+    display: block;
+    background: var(--player-back-color);    
+    min-height: 100vh;
+    height: auto;
+    justify-items: center;
+    z-index: 3;
+}
+
+#playersec h1 {
+    display: flex;
+    flex-direction: column;
+    color: var(--black);
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 400;
+    padding: 10px;
+    margin: 0;
+}
+
+.section-center {
+    width: 90vw;
+    height: 80%;
+    max-width: 1170px;
+    min-width: 340px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.play {
+    margin-bottom: 2rem;
+
 }
 
 
@@ -404,7 +541,7 @@ section {
 
 .buttonadd .button__text {
     color: var(--font-color);
-    padding: 10%;    
+    padding: 10%;
     margin-right: 20%;
 }
 
@@ -453,7 +590,7 @@ button {
 input[type="range"] {
     width: 100%;
     margin-top: 10px;
-    
+
     /*appearance: none;*/
 }
 
@@ -467,7 +604,7 @@ input[type="range"] {
 #playlist {
     margin-top: 20px;
     overflow-y: auto;
-    height: 250px;    
+    height: 250px;
     width: 100%;
 }
 
@@ -490,19 +627,19 @@ li {
     display: grid;
     grid-template-columns: 5fr 1fr;
     padding: 5px;
-    padding-right: 10px;       
+    padding-right: 10px;
     cursor: pointer;
     align-items: center;
     margin-right: 5px;
-    
-    
+
+
 }
 
-li p{
+li p {
     grid-column: 1;
     padding: 0px;
-    margin: 0px;   
-    
+    margin: 0px;
+
 }
 
 li.active {
@@ -514,7 +651,7 @@ li.active {
 
 .remove {
     grid-column: 2;
-    margin: 0px;    
+    margin: 0px;
     font-size: 12px;
     width: 100px;
     height: 30px;
@@ -566,7 +703,7 @@ li.active {
 
 .remove:hover .removespan {
     color: transparent;
-    
+
 }
 
 .remove:hover .removeicon {
@@ -633,7 +770,7 @@ li.active {
 
 }
 
-#visual2 {    
+#visual2 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -685,49 +822,6 @@ li.active {
 
 }
 
-#home{
-    height: 100vh; 
-}
-
-#home svg {
-    
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-}
-
-#playersec {
-    display: block;
-    background: #f5abc9;
-    color: grey;
-    min-height: 100vh;
-    height: auto;
-    justify-items: center;
-    z-index: 3;
-}
-
-#playersec h1 {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-size: 4rem;
-    padding: 5px;
-    margin: 0;
-}
-
-.section-center {
-    width: 90vw;
-    height: 80%;    
-    max-width: 1170px;
-    min-width: 340px;
-    padding: 5%;
-}
-
-.play {
-    margin-bottom: 2rem;
-
-}
-
 #playerhead {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -737,16 +831,16 @@ li.active {
     gap: 5%;
 }
 
-#playlist-text{
-    display: flex; 
+#playlist-text {
+    display: flex;
     justify-self: center;
 }
 
 
 .cssbuttons-io {
     display: grid;
-    grid-template-columns: 1fr ;
-    position: relative;    
+    grid-template-columns: 1fr;
+    position: relative;
     padding: 0px;
     border-radius: 10px;
     cursor: pointer;
@@ -754,7 +848,7 @@ li.active {
     font: 0.8em sans-serif;
     background: linear-gradient(to right, #cd900e, #bacf1d);
     color: rgb(0, 0, 5);
-    overflow: hidden; 
+    overflow: hidden;
     align-items: center;
     width: 90%;
     height: 50px;
@@ -762,7 +856,7 @@ li.active {
     border: 2px solid black;
     box-shadow: 4px 4px black;
     animation: width-fill 0.3s;
-    
+
 
 }
 
@@ -779,10 +873,10 @@ li.active {
 
 .cssbuttons-io svg {
     width: 19px;
-    height: 27px;   
-    z-index: 10;   
-    margin-right: 5px; 
-    padding-left: 2px;   
+    height: 27px;
+    z-index: 10;
+    margin-right: 5px;
+    padding-left: 2px;
     justify-self: center;
 }
 
@@ -793,19 +887,19 @@ li.active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    
-    width: 100%; 
-    height: 50px;    
+
+    width: 100%;
+    height: 50px;
     padding: 0px;
     user-select: none;
-    
+
 }
 
-#search-list{
+#search-list {
     display: none;
     z-index: 10;
     background-color: linear-gradient(to right, #cd900e, #bacf1d);
-    border:  2px solid;
+    border: 2px solid;
     margin: 0px 10px 0px 10px;
     font-size: 1rem;
     padding: 0px 5px 0px 5px;
@@ -813,7 +907,7 @@ li.active {
     height: 25px;
 }
 
-#close-search{
+#close-search {
     display: none;
 }
 
@@ -831,7 +925,7 @@ li.active {
     content: "";
     background: #dedede;
     width: 120%;
-    right: 10%;    
+    right: 10%;
     transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
 
@@ -845,15 +939,11 @@ li.active {
 
 /* From Uiverse.io by andrew-demchenk0 */
 .delbutton {
-    --main-focus: #2d8cf0;
-    --font-color: #f20909;
-    --bg-color-sub: #dedede;
-    --bg-color: #eee;
-    --main-color: #040404;
+    
     position: relative;
     max-width: 150px;
     width: 100%;
-    height: 50px;   
+    height: 50px;
     font: 0.8em sans-serif;
     cursor: pointer;
     display: flex;
@@ -864,7 +954,7 @@ li.active {
     background-color: var(--bg-color);
     border-radius: 10px;
     overflow: hidden;
-    
+
 }
 
 .delbutton,
@@ -874,9 +964,9 @@ li.active {
 }
 
 .delbutton .delbutton__text {
-    
-    color: var(--font-color);
-    padding: 10%;    
+
+    color: var(--del-font-color);
+    padding: 10%;
     margin-right: 20%;
 }
 
@@ -1115,7 +1205,7 @@ li.active {
     margin: 0;
     padding: 0;
     border-radius: 0.8rem;
-    background-color: #f5abc9;
+    background-color:var(--player-back-color);
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 
@@ -1197,7 +1287,7 @@ li.active {
     display: grid;
     grid-template-rows: 1fr 15fr;
     justify-items: center;
-    background-color: #ABC4AA;
+    background-color:var(--settings-back-color);
     padding: 30px;
     align-items: center;
     height: 100%;
@@ -1470,13 +1560,12 @@ li.active {
 
 }
 
-#about
-{
+#about {
     min-height: 100vh;
     height: auto;
     padding: 0px;
     margin: 0px;
-    background: #1cc4e6;
+    background: var(--about-back-color);
 }
 
 /* About Section */
@@ -1487,10 +1576,10 @@ li.active {
     align-items: center;
     height: inherit;
     width: 100%;
-    background: #1cc4e6;
+    background: var(--about-back-color);
     padding-left: 10%;
     padding-right: 10%;
-    
+
 }
 
 /* Container */
@@ -1512,22 +1601,23 @@ li.active {
 .section-title {
     font-size: 3rem;
     font-weight: bold;
-    color: rgb(0, 0, 0);    
-    text-align: center;    
+    color: rgb(0, 0, 0);
+    text-align: center;
     max-width: 900px;
     width: 100%;
     margin: 0px;
     padding: 15px;
-    
+
     border-radius: 10px;
-    
+
 }
 
 /* Adjust for responsiveness */
 @media (max-width: 768px) {
     .section-title {
         font-size: 28px;
-        top: 15px; /* Adjust position for smaller screens */
+        top: 15px;
+        /* Adjust position for smaller screens */
     }
 }
 
@@ -1624,7 +1714,7 @@ li.active {
 
 .features li {
     display: block;
-    font-size: 14px;   
+    font-size: 14px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -1664,6 +1754,7 @@ li.active {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1731,4 +1822,4 @@ li.active {
     #playerhead {
         font-size: 0.7rem;
     }
-} 
+}

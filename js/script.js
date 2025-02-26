@@ -963,7 +963,7 @@ searchbtntext.addEventListener("click", function () {
         playerhead.style["grid-template-columns"] = "1fr ";
         addbtn.style.display = "none";
         deletebtn.style.display = "none";
-        searchbtn.style["grid-template-columns"] = "75% 25%";
+        searchbtn.style["grid-template-columns"] = "auto 90px";
         searchbtn.style["max-width"] = "none";
         searchinput.style.display = "flex";
         searchbtntext.innerHTML = closesvg + "Close";
