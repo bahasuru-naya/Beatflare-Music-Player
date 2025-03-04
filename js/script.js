@@ -780,7 +780,7 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     slider.style.direction = 'rtl';
     slider.style.writingMode = 'vertical-lr';
     slider.style.width = '10%';
-    slider.style.height = '300px';
+    slider.style.height = '100%';
     slider.style.alignSelf = 'center';
     slider.style.transition = "all 0.5s ease-in-out";
     slider.min = -12;
@@ -1049,28 +1049,28 @@ const themes = {
     default: {
         "--black": "#000000",
         "--white": "#ffffff",
-        "--menu-color": "#d435c5",
-        "--home-c1-color": "#9b5de5",
-        "--home-c2-color": "#f15bb5",
-        "--home-c3-color": "#00bbf9",
-        "--home-c4-color": "#00f5d4",
-        "--player-back-color": "#f5abc9",
-        "--settings-back-color": "#a7f9bc",
-        "--about-back-color": "#74b5fb",
+        "--menu-color": "#463f3a",
         "--menu-text-color": "#ffffff",
+        "--home-c1-color": "#e0afa0",
+        "--home-c2-color": "#f4f3ee",
+        "--home-c3-color": "#8a817c",
+        "--home-c4-color": "#bcb8b1",
+        "--player-back-color": "#f4f3ee",
         "--player-text-color": "#000000",
-        "--player-tab-back-color": "#66bbf0",
+        "--player-tab-back-color": "#E3CAA5",
         "--player-tab-text-color": "#000000",
-        "--player-tab-active-back-color": "#f5abc9",
+        "--player-tab-active-back-color": "#bcb8b1",
         "--player-tab-active-text-color": "#000000",
+        "--settings-back-color": "#e0afa0",
         "--settings-head-text-color": "#000000",
         "--settings-text-color": "#000000",
-        "--about-text-color": "#000000",
+        "--about-back-color": "#AD8B73",
+        "--about-text-color": "#ffffff",
     },
     dark: {
         "--black": "#ffffff",
         "--white": "#121212",
-        "--menu-color": "#bb86fc",
+        "--menu-color": "#000000",
         "--home-c1-color": "#3700b3",
         "--home-c2-color": "#03dac6",
         "--home-c3-color": "#bb86fc",
@@ -1192,7 +1192,7 @@ const themes = {
         "--settings-head-text-color": "#ffffff",
         "--settings-text-color": "#ffffff",
         "--about-text-color": "#ffffff"
-        
+
     },
     royal: {
         "--black": "#1a1a1d",
@@ -1267,7 +1267,7 @@ const themes = {
         "--home-c4-color": "#1982c4",
         "--player-back-color": "#6a4c93",
         "--settings-back-color": "#c77dff",
-        "--about-back-color": "#b392ac",
+        "--about-back-color": "#6d5868",
         "--menu-text-color": "#000000",
         "--player-text-color": "#ffefd5",
         "--player-tab-back-color": "#ffca3a",
@@ -1280,7 +1280,7 @@ const themes = {
     }
 };
 
-document.getElementById("theme-select").addEventListener("change", function() {
+document.getElementById("theme-select").addEventListener("change", function () {
     const selectedTheme = themes[this.value];
     if (selectedTheme) {
         Object.keys(selectedTheme).forEach(key => {

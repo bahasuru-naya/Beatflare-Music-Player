@@ -34,7 +34,7 @@
             <div class="p">
                 <div class="rect"></div>
                 <div class="circ"></div>
-            </div>            
+            </div>
         </div>
         <p class="dance-text">Local Music Player</p>
     </div>
@@ -71,16 +71,22 @@
     <main>
         <section id="home">
             <svg preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
-                
-                <path  class="out-top"
+
+                <path class="out-top"
                     d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
-                <path  class="in-top"
+                <path class="in-top"
                     d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
-                <path  class="out-bottom"
+                <path class="out-bottom"
                     d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
-                <path  class="in-bottom"
+                <path class="in-bottom"
                     d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
             </svg>
+            <div class="home-section">
+                <h1 class="title">Local Music Player</h1>
+                <p class="description">A modern, open-source MP3 player with a user-friendly interface, playlist
+                    management, equalizer, and dark mode.</p>
+                <a href="#playersec" class="btn">Get Started</a>
+            </div>
 
         </section>
         <section id="playersec">
@@ -145,7 +151,7 @@
 
                         <input title="file-input" type="file" id="file-input" accept=".mp3,.wav" multiple>
                         <ul id="playlist">
-                            
+
                         </ul>
                         <audio id="audio-player"></audio>
                         <div id="audio-control">
@@ -275,118 +281,124 @@
         <section id="settings">
             <div id="sethead" class="headding">Settings</div>
             <div class="settings-content">
-                <div id="playback-speed">
-                    <label for="speed" class="s-text">Speed: </label>
-                    <input type="range" id="speed" min="0.3" max="1.7" step="0.1" value="1">
-                    <label id="speedlabel" for="speed">1x</label>
-                    <button id="speed-reset">Reset</button>
+                <div class="column-1">
+                    <label id="audio-set-head" class="s-text">Audio Settings</label>
+                    <div id="playback-speed">
+                        <label for="speed" class="s-text">Speed: </label>
+                        <input type="range" id="speed" min="0.3" max="1.7" step="0.1" value="1">
+                        <label id="speedlabel" for="speed">1x</label>
+                        <button id="speed-reset">Reset</button>
+                    </div>
+                    <div id="con-pitch">
+                        <label for="pitch" class="s-text">Pitch: </label>
+                        <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
+                        <label id="pitchlabel" for="pitch">0x</label>
+                        <button id="pitch-reset">Reset</button>
+                    </div>
+                    <div id="equalizer">
+                        <label for="equalizer" class="s-text">Equalizer: </label>
+                        <button id="equalizer-reset">Reset</button>
+                        <select id="equ-select">
+                            <option selected value="Flat">Flat</option>
+                            <option value="Treble boost">Treble boost</option>
+                            <option value="Bass boost">Bass boost</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Portable speakers">Portable speakers</option>
+                            <option value="TV">TV</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div id="equ"></div>
                 </div>
-                <div id="con-pitch">
-                    <label for="pitch" class="s-text">Pitch: </label>
-                    <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
-                    <label id="pitchlabel" for="pitch">0x</label>
-                    <button id="pitch-reset">Reset</button>
-                </div>
-                <div id="equalizer">
-                    <label for="equalizer" class="s-text">Equalizer: </label>
-                    <button id="equalizer-reset">Reset</button>
-                    <select id="equ-select">
-                        <option selected value="Flat">Flat</option>
-                        <option value="Treble boost">Treble boost</option>
-                        <option value="Bass boost">Bass boost</option>
-                        <option value="Laptop">Laptop</option>
-                        <option value="Portable speakers">Portable speakers</option>
-                        <option value="TV">TV</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </div>
-                <div id="equ"></div>
-                <div id="con-Stereo">
-                    <label for="Stereo" class="s-text">Stereo: </label>
-                    <label id="Stereolabel1" for="Stereo">0</label>
-                    <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
-                    <label id="Stereolabel2" for="Stereo">0</label>
-                    <button id="Stereo-reset">Reset</button>
-                </div>
-                <div id="visualizer-set">
-                    <label for="visualizer" class="s-text">Visualizer On/Off : </label>
-                    <label class="switch">
-                        <input checked="true" type="checkbox" id="visualizer-on-off">
-                        <div class="slider">
-                            <div class="circle">
-                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path data-original="#000000" fill="currentColor"
-                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
-                                        </path>
-                                    </g>
-                                </svg>
-                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path class="" data-original="#000000" fill="currentColor"
-                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
-                                        </path>
-                                    </g>
-                                </svg>
+                <div class="column-2">
+                    <div id="con-Stereo">
+                        <label for="Stereo" class="s-text">Stereo: </label>
+                        <label id="Stereolabel1" for="Stereo">0</label>
+                        <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
+                        <label id="Stereolabel2" for="Stereo">0</label>
+                        <button id="Stereo-reset">Reset</button>
+                    </div>
+                    <label id="ui-set-head" class="s-text">User Interface Settings</label>
+                    <div id="visualizer-set">
+                        <label for="visualizer" class="s-text">Visualizer On/Off : </label>
+                        <label class="switch">
+                            <input checked="true" type="checkbox" id="visualizer-on-off">
+                            <div class="slider">
+                                <div class="circle">
+                                    <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                        viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <path data-original="#000000" fill="currentColor"
+                                                d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <svg class="checkmark" xml:space="preserve"
+                                        style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0"
+                                        height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <path class="" data-original="#000000" fill="currentColor"
+                                                d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                    </label>
+                        </label>
 
-                </div>
-                <div id="theme">
-                    <label for="theme-select" class="s-text">Theme: </label>
-                    <select id="theme-select">
-                        <option value="default" selected>Default</option>
-                        <option value="dark">Dark Mode</option>
-                        <option value="ocean">Ocean Breeze</option>
-                        <option value="sunset">Sunset Glow</option>
-                        <option value="forest">Forest Green</option>
-                        <option value="lavender">Lavender Dreams</option>
-                        <option value="neon">Neon Lights</option>
-                        <option value="royal">Royal Gold</option>
-                        <option value="pastel">Pastel Paradise</option>
-                        <option value="midnight">Midnight Mystery</option>
-                        <option value="retro">Retro Vibes</option>
-                    </select>
-                </div>
-                
+                    </div>
+                    <div id="theme">
+                        <label for="theme-select" class="s-text">Theme: </label>
+                        <select id="theme-select">
+                            <option value="default" selected>Default</option>
+                            <option value="dark">Dark Mode</option>
+                            <option value="ocean">Ocean Breeze</option>
+                            <option value="sunset">Sunset Glow</option>
+                            <option value="forest">Forest Green</option>
+                            <option value="lavender">Lavender Dreams</option>
+                            <option value="neon">Neon Lights</option>
+                            <option value="royal">Royal Gold</option>
+                            <option value="pastel">Pastel Paradise</option>
+                            <option value="midnight">Midnight Mystery</option>
+                            <option value="retro">Retro Vibes</option>
+                        </select>
+                    </div>
 
-                <div id="partymode">
-                    <label for="partymode" class="s-text">Party Mode: </label>
-                    <label class="switch">
-                        <input type="checkbox" id="party-on-off">
-                        <div class="slider">
-                            <div class="circle">
-                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path data-original="#000000" fill="currentColor"
-                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
-                                        </path>
-                                    </g>
-                                </svg>
-                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path class="" data-original="#000000" fill="currentColor"
-                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
-                                        </path>
-                                    </g>
-                                </svg>
+
+                    <div id="partymode">
+                        <label for="partymode" class="s-text">Party Mode: </label>
+                        <label class="switch">
+                            <input type="checkbox" id="party-on-off">
+                            <div class="slider">
+                                <div class="circle">
+                                    <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                        viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <path data-original="#000000" fill="currentColor"
+                                                d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <svg class="checkmark" xml:space="preserve"
+                                        style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0"
+                                        height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <path class="" data-original="#000000" fill="currentColor"
+                                                d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                    </label>
+                        </label>
 
+                    </div>
                 </div>
 
             </div>
