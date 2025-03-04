@@ -489,8 +489,8 @@ section {
     flex-direction: column;
     color: var(--player-text-color);
     text-align: center;
+    font-weight: bold;
     font-size: 3rem;
-    font-weight: 400;
     padding: 10px;
     margin: 0;
 }
@@ -501,7 +501,7 @@ section {
     max-width: 1170px;
     min-width: 340px;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -1149,7 +1149,6 @@ li.active {
 
 #albumArt {
     grid-column: 1;
-
     width: 100px;
     height: 100px;
     border-radius: 10px;
@@ -1157,7 +1156,6 @@ li.active {
 }
 
 .volume-contain {
-
     grid-column: 2;
 }
 
@@ -1203,10 +1201,6 @@ li.active {
 
 }
 
-
-
-
-
 @keyframes marquee {
     0% {
         transform: translateX(380px);
@@ -1225,7 +1219,6 @@ li.active {
 }
 
 .tbtn-container {
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0;
@@ -1234,9 +1227,6 @@ li.active {
     background-color: var(--player-back-color);
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-
-
-
 }
 
 .tbutton:nth-child(1) {
@@ -1290,8 +1280,6 @@ li.active {
 /* hide content */
 .tcontent {
     display: none;
-
-
 }
 
 .tbutton.live {
@@ -1302,7 +1290,6 @@ li.active {
     border-radius: 0.8rem;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-
 }
 
 .tcontent.live {
@@ -1317,6 +1304,7 @@ li.active {
     justify-items: center;
     background-color: var(--settings-back-color);
     padding: 10px;
+    padding-top: 10px;
     padding-left: 5%;
     padding-right: 5%;
     align-items: center;
@@ -1325,16 +1313,24 @@ li.active {
 }
 
 .s-text {
-    
+
+    width: 100%;
+    align-items: center;
+}
+
+.s-head-text {
+    font-weight: 700;
     width: 100%;
     align-items: center;
 }
 
 #sethead {
-
     color: var(--settings-head-text-color);
     padding: 10px;
-    align-items: center;
+    padding-top: 0px;
+    font-weight: bold;
+    justify-items: center;
+    align-self: center;
     z-index: 1;
 
 }
@@ -1348,7 +1344,7 @@ li.active {
     padding: 10px;
     z-index: 1;
     width: 100%;
-   
+
 }
 
 .column-1 {
@@ -1365,6 +1361,38 @@ li.active {
     grid-column: 1;
     grid-row: 1;
 }
+
+.rest-btn {    
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid var(--settings-text-color);
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    cursor: pointer;
+}
+
+.rest-btn:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
+
+.rest-btn:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+}
+
+.select-menu{
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid var(--settings-text-color);
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+}
+
 
 #playback-speed {
     grid-column: 1;
