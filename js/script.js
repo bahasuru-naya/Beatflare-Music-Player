@@ -1065,28 +1065,7 @@ const themes = {
         "--settings-head-text-color": "#000000",
         "--settings-text-color": "#000000",
         "--about-back-color": "#AD8B73",
-        "--about-text-color": "#ffffff",
-    },
-    dark: {
-        "--black": "#ffffff",
-        "--white": "#121212",
-        "--menu-color": "#000000",
-        "--home-c1-color": "#3700b3",
-        "--home-c2-color": "#03dac6",
-        "--home-c3-color": "#bb86fc",
-        "--home-c4-color": "#6200ee",
-        "--player-back-color": "#333333",
-        "--settings-back-color": "#444444",
-        "--about-back-color": "#222222",
-        "--menu-text-color": "#ffffff",
-        "--player-text-color": "#ffffff",
-        "--player-tab-back-color": "#555555",
-        "--player-tab-text-color": "#ffffff",
-        "--player-tab-active-back-color": "#4b4646",
-        "--player-tab-active-text-color": "#ffffff",
-        "--settings-head-text-color": "#ffffff",
-        "--settings-text-color": "#ffffff",
-        "--about-text-color": "#ffffff",
+        "--about-text-color": "#302b28",
     },
     ocean: {
         "--black": "#003049",
@@ -1246,7 +1225,7 @@ const themes = {
         "--home-c4-color": "#9a8c98",
         "--player-back-color": "#2d2a32",
         "--settings-back-color": "#6b705c",
-        "--about-back-color": "#14213d",
+        "--about-back-color": "#1a2a4d",
         "--menu-text-color": "#ffffff",
         "--player-text-color": "#f4f3ee",
         "--player-tab-back-color": "#5d5d81",
@@ -1280,11 +1259,61 @@ const themes = {
     }
 };
 
-document.getElementById("theme-select").addEventListener("change", function () {
+const themeSelect = document.getElementById("theme-select");
+
+themeSelect.addEventListener("change", function () {
     const selectedTheme = themes[this.value];
     if (selectedTheme) {
         Object.keys(selectedTheme).forEach(key => {
             document.documentElement.style.setProperty(key, selectedTheme[key]);
         });
+    }
+});
+
+
+//dark mode
+const darktheme = {
+    dark: {
+        "--black": "#ffffff",
+        "--white": "#121212",
+        "--menu-color": "#000000",
+        "--home-c1-color": "#3700b3",
+        "--home-c2-color": "#03dac6",
+        "--home-c3-color": "#bb86fc",
+        "--home-c4-color": "#6200ee",
+        "--player-back-color": "#333333",
+        "--settings-back-color": "#444444",
+        "--about-back-color": "#222222",
+        "--menu-text-color": "#ffffff",
+        "--player-text-color": "#ffffff",
+        "--player-tab-back-color": "#555555",
+        "--player-tab-text-color": "#ffffff",
+        "--player-tab-active-back-color": "#4b4646",
+        "--player-tab-active-text-color": "#ffffff",
+        "--settings-head-text-color": "#ffffff",
+        "--settings-text-color": "#ffffff",
+        "--about-text-color": "#ffffff",
+    },
+};
+
+const darkModeToggle = document.getElementById("darkmode-on-off");
+darkModeToggle.addEventListener("click", function () {
+    if (darkModeToggle.checked) {
+        themeSelect.disabled = true;
+        const dtheme = darktheme['dark'];
+        Object.keys(dtheme).forEach(key => {
+            document.documentElement.style.setProperty(key, dtheme[key]);
+        });
+
+
+    } else {
+        themeSelect.disabled = false;
+        const selectedTheme = themes[themeSelect.value];
+        if (selectedTheme) {
+            Object.keys(selectedTheme).forEach(key => {
+                document.documentElement.style.setProperty(key, selectedTheme[key]);
+            });
+        }
+
     }
 });

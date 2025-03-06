@@ -32,7 +32,7 @@
     --settings-head-text-color: #000000;
     --settings-text-color: #000000;
     --about-back-color: #AD8B73;
-    --about-text-color: #ffffff;
+    --about-text-color: #302b28;
 
 
 }
@@ -535,6 +535,7 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 300px;
     font-size: 1.3rem;
+    border: #000000 2px solid;
 }
 
 #file-input {
@@ -1658,10 +1659,18 @@ li.active {
     grid-template-columns: 1fr 3fr;
     justify-items: center;
 }
+#darkmode-set {
+    grid-column: 1;
+    grid-row: 5;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    align-items: center;
+
+}
 
 #partymode {
     grid-column: 1;
-    grid-row: 5;
+    grid-row: 6;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
     align-items: center;
@@ -1687,6 +1696,7 @@ li.active {
     background: var(--about-back-color);
     padding-left: 10%;
     padding-right: 10%;
+    
 
 
 }
@@ -1700,10 +1710,12 @@ li.active {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 900px;
-    width: 100%;
+    width: 100%;    
     padding: 20px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
+    box-shadow:  0.2em 0.2em ;
+    margin-bottom: 40px;
 }
 
 /* Section Title */
