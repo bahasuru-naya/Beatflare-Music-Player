@@ -752,9 +752,12 @@ input[type="range"] {
 
 #playlist {
     margin-top: 20px;
+    margin-bottom: 10px;
     overflow-y: auto;
     height: 250px;
     width: 100%;
+    border-top: #000000 2px solid;
+    border-bottom: #000000 2px solid;
 }
 
 #playlist::-webkit-scrollbar {
@@ -876,6 +879,7 @@ li.active {
     align-items: center;
     width: 100%;
     margin-top: 10px;
+    
 }
 
 #current-time {
@@ -1162,7 +1166,7 @@ li.active {
     width: 60px;
     height: 60px;
     border-radius: 100%;
-    background-color: rgb(205, 191, 247);
+    background-color: rgb(181, 180, 184);
     overflow: hidden;
     position: relative;
 }
@@ -1270,6 +1274,7 @@ li.active {
     align-items: center;
     justify-items: center;
     gap: 5px;
+   
 
 }
 
@@ -1295,7 +1300,7 @@ li.active {
 
 #songName {
     display: inline-block;
-    color: blue;
+    color: var(--menu-color);
     margin: 0px;
     padding: 0px;
     animation: marquee 10s linear infinite;
@@ -1933,8 +1938,9 @@ li.active {
 }
 
 .mp3-logo {
-    width: 80px;
-    margin-bottom: 10px;
+    width: 110px;
+    margin-bottom: 5px;
+    border-radius: 10px;
 }
 
 .mp3-title {
