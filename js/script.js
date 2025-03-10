@@ -876,8 +876,8 @@ stereoControl.addEventListener("input", function () {
     if (panNode) {
         panNode.pan.value = stereoValue;
     }
-    stereoLabel1.textContent = -stereoValue;
-    stereoLabel2.textContent = stereoValue;
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + -stereoValue;
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue;    
 
 });
 
@@ -885,10 +885,11 @@ stereoControl.addEventListener("input", function () {
 stereoRest.addEventListener("click", function () {
     stereoControl.value = 0;
     if (panNode) {
-        panNode.pan.value + 0;
+        panNode.pan.value = 0;
     }
-    stereoLabel1.textContent = "0";
-    stereoLabel2.textContent = "0";
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
+    
 });
 
 
