@@ -14,7 +14,7 @@
     --del-font-color: #f20909;
     --main-color: #4b4646;
 
-    --black: #000000;
+    --black: rgb(46, 36, 30);
     --white: #ffffff;
     --menu-color: #463f3a;
     --menu-text-color: #ffffff;
@@ -54,7 +54,8 @@ nav {
     position: fixed;
     height: 100%;
     width: 100%;
-    background: white;
+    background-image: url("/images/pre-back.jpg");
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,6 +65,18 @@ nav {
     animation: fade-out 0.5s ease-in-out forwards;
     animation-delay: 1s;
 
+}
+
+.pre-back{
+    background: white;
+    border: #000000 8px solid;
+    border-radius: 30px;
+    position: fixed;
+    height: 400px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @-webkit-keyframes fade-out {
@@ -92,7 +105,7 @@ nav {
     background-color: #CEAB93;
     border-radius: 10px;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 5px 5px 0 0 #675D50;
@@ -129,9 +142,9 @@ nav {
 .preloaderback .dance-text {
     font-size: 2rem;
     position: absolute;
-    bottom: 20%;
+    top: calc(30% + 150px);
     left: 50%;
-    width: 50%;
+    width: 300px;
     text-align: center;
     transform: translate(-50%, -50%);
     -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
@@ -487,12 +500,15 @@ section {
     width: 100%;
     height: inherit;
     z-index: 1;
+    color: var(--black);
 }
 
 .home-text h1 {
 
     padding: 10px;
     margin: 0;
+    color: var(--black);
+
 }
 
 .home-text p {
@@ -502,6 +518,7 @@ section {
     font-weight: bold;
     padding: 10px;
     margin: 0;
+    color: var(--black);
 }
 
 .wrapper-get-started {
@@ -903,9 +920,10 @@ li.active {
     align-items: center;
     text-align: center;
     background: white;
-    padding: 10px;
+    padding: 0px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: #000000 2px solid;
     min-width: 100px;
     max-height: 400px;
 
@@ -929,7 +947,7 @@ li.active {
     align-items: center;
     text-align: center;
     background: rgb(0, 0, 0);
-    padding: 10px;
+    padding: 0px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -955,9 +973,10 @@ li.active {
     align-items: center;
     text-align: center;
     background: white;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0px;
+    border-radius: 10px;    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: #000000 2px solid;
     min-width: 100px;
     max-height: 400px;
 
@@ -1648,6 +1667,7 @@ li.active {
     --switch-checked-bg: rgb(0, 218, 80);
     --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
     --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+
     /* circle */
     --circle-diameter: 25px;
     --circle-bg: #fff;
@@ -1704,6 +1724,7 @@ li.active {
     height: var(--switch-height);
     background: var(--switch-bg);
     border-radius: 999px;
+    box-shadow: 0.1em 0.1em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
