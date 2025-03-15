@@ -877,7 +877,7 @@ stereoControl.addEventListener("input", function () {
         panNode.pan.value = stereoValue;
     }
     stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + -stereoValue;
-    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue;    
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue;
 
 });
 
@@ -889,7 +889,7 @@ stereoRest.addEventListener("click", function () {
     }
     stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
     stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
-    
+
 });
 
 
@@ -1317,4 +1317,45 @@ darkModeToggle.addEventListener("click", function () {
         }
 
     }
+});
+
+//party mode
+
+const partytoggle = document.getElementById("party-on-off");
+const warn = document.getElementById("warning");
+const agree = document.getElementById("agree");
+const disagree = document.getElementById("disagree");
+
+let firstclick = 0;
+partytoggle.addEventListener("click", function () {
+    if (firstclick === 0) {
+        partytoggle.checked = false;
+        warn.style.display = 'block';
+    } else {
+        if (partytoggle.checked) {
+            themeSelect.disabled = true;
+        }
+        else {
+            themeSelect.disabled = false;
+            const selectedTheme = themes[themeSelect.value];
+            if (selectedTheme) {
+                Object.keys(selectedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, selectedTheme[key]);
+                });
+            }
+        }
+
+    }
+});
+
+agree.addEventListener("click", function () {
+    firstclick = 1;
+    partytoggle.checked = true;
+    warn.style.display = 'none';
+    themeSelect.disabled = true;
+});
+
+disagree.addEventListener("click", function () {
+    partytoggle.checked = false;
+    warn.style.display = 'none';
 });
