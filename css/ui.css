@@ -440,7 +440,7 @@ section {
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 1);
     padding: 1rem;
-    z-index: 800;
+    z-index: 9;
     box-shadow: #000000 0px 0px 10px;
     -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -875,12 +875,54 @@ button {
     width: 100px;
 }
 
-input[type="range"] {
+input[type="range"] {   
     width: 100%;
     margin-top: 10px;
-
     /*appearance: none;*/
 }
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 15px;
+    background: #ccc;
+    border-radius: 16px;
+    
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+    height: 15px;
+    background: #ccc;
+    border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    height: 15px;
+    width: 15px;
+    background-color: var(--home-c2-color);
+    border-radius: 50%;
+    border: none;
+    /* box-shadow: -407px 0 0 400px #f50; emove this line */
+    transition: .2s ease-in-out;
+}
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background-color: var(--home-c2-color);
+    border-radius: 50%;
+    border: none;
+    /* box-shadow: -407px 0 0 400px #f50; emove this line */
+    transition: .2s ease-in-out;
+}
+
+
 
 .controls {
     display: flex;
@@ -1170,7 +1212,7 @@ li.active {
 .cssbuttons-io svg {
     width: 19px;
     height: 27px;
-    z-index: 10;
+    z-index: 5;
     margin-right: 5px;
     padding-left: 2px;
     justify-self: center;
@@ -1178,7 +1220,7 @@ li.active {
 
 .cssbuttons-io span {
     position: relative;
-    z-index: 10;
+    z-index: 5;
     transition: color 0.4s;
     display: inline-flex;
     align-items: center;
@@ -1599,11 +1641,7 @@ li.active {
 
 }
 
-#settings input[type="range"] {
-    width: 100%;
-    margin-top: 10px;
 
-}
 
 
 .s-text {
