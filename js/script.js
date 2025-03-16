@@ -1224,8 +1224,8 @@ const themes = {
         "--home-c2-color": "rgb(48, 48, 75)",
         "--home-c3-color": " #4a4e69",
         "--home-c4-color": " #9a8c98",
-        "--player-back-color": " #2d2a32",
-        "--settings-back-color": " #6b705c",
+        "--player-back-color": "rgb(72, 70, 75)",
+        "--settings-back-color": "rgb(68, 74, 47)",
         "--about-back-color": " #1a2a4d",
         "--menu-text-color": " #ffffff",
         "--player-text-color": " #f4f3ee",
@@ -1233,8 +1233,8 @@ const themes = {
         "--player-tab-text-color": " #0a0908",
         "--player-tab-active-back-color": " #22223b",
         "--player-tab-active-text-color": " #ffffff",
-        "--settings-head-text-color": " #0a0908",
-        "--settings-text-color": " #0a0908",
+        "--settings-head-text-color": "rgb(255, 255, 255)",
+        "--settings-text-color": "rgb(255, 255, 255)",
         "--about-text-color": " #f4f3ee"
     },
     retro: {

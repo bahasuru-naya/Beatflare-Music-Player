@@ -258,6 +258,7 @@ section {
     justify-content: center;
     scroll-snap-align: center;
     width: auto;
+
 }
 
 .menu {
@@ -504,11 +505,13 @@ section {
 
 .message {
     margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
     color: rgba(107, 114, 128, 1);
+    text-align: justify;
 }
 
 .actions {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .actions a {
@@ -528,8 +531,8 @@ section {
 }
 
 .read {
-    background-color:var(--settings-back-color);
-    color:var(--settings-text-color);
+    background-color: var(--settings-back-color);
+    color: var(--settings-text-color);
 }
 
 .mark-as-read {
@@ -1139,7 +1142,7 @@ li.active {
     cursor: pointer;
     border: none;
     font: 0.8em sans-serif;
-    background: linear-gradient(to right, #cd900e, #bacf1d);
+    background: var(--bg-color);
     color: rgb(0, 0, 5);
     overflow: hidden;
     align-items: center;
@@ -1185,13 +1188,14 @@ li.active {
     padding: 0px;
     user-select: none;
     font-family: 'Alata', sans-serif;
+    background-color: var(--bg-color);
 
 }
 
 #search-list {
     display: none;
     z-index: 10;
-    background-color: linear-gradient(to right, #cd900e, #bacf1d);
+    background-color: var(--bg-color);
     border: 2px solid;
     margin: 0px 10px 0px 10px;
     font-size: 1rem;
@@ -1216,7 +1220,7 @@ li.active {
 
 .cssbuttons-io::before {
     content: "";
-    background: #dedede;
+    background: var(--bg-color);
     width: 120%;
     right: 10%;
     transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
@@ -1230,7 +1234,7 @@ li.active {
     transform: scale(0.95);
 }
 
-/* From Uiverse.io by andrew-demchenk0 */
+
 .delbutton {
 
     position: relative;
@@ -1297,7 +1301,6 @@ li.active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
 }
-
 
 
 .checkb {
@@ -1374,8 +1377,8 @@ li.active {
     position: relative;
 }
 
-.play-pause-back{
-    background: conic-gradient(var(--home-c1-color), var(--home-c2-color),var(--home-c3-color),var(--home-c4-color),var(--home-c1-color));
+.play-pause-back {
+    background: conic-gradient(var(--home-c1-color), var(--home-c2-color), var(--home-c3-color), var(--home-c4-color), var(--home-c1-color));
     width: 65px;
     height: 65px;
     padding: 5px;
@@ -1395,7 +1398,7 @@ li.active {
     justify-content: center;
     cursor: pointer;
     position: relative;
-    border:var(--player-back-color) 2px solid;
+    border: var(--player-back-color) 2px solid;
 
 
 }
@@ -1445,7 +1448,7 @@ li.active {
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    
+
 
 }
 
@@ -1593,7 +1596,15 @@ li.active {
     align-items: center;
     height: auto;
 
+
 }
+
+#settings input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+
+}
+
 
 .s-text {
 
