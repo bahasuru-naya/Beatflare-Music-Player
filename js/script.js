@@ -1298,7 +1298,12 @@ const darktheme = {
 };
 
 const darkModeToggle = document.getElementById("darkmode-on-off");
-darkModeToggle.addEventListener("click", function () {
+darkModeToggle.addEventListener("change", function () {
+    setdarkmode();
+});
+
+setdarkmode();
+function setdarkmode() {
     if (darkModeToggle.checked) {
         themeSelect.disabled = true;
         const dtheme = darktheme['dark'];
@@ -1317,7 +1322,7 @@ darkModeToggle.addEventListener("click", function () {
         }
 
     }
-});
+}
 
 //party mode
 
@@ -1334,15 +1339,20 @@ partytoggle.addEventListener("click", function () {
     } else {
         if (partytoggle.checked) {
             themeSelect.disabled = true;
+            darkModeToggle.checked = false;
+            darkModeToggle.disabled = true;
+
         }
         else {
             themeSelect.disabled = false;
-            const selectedTheme = themes[themeSelect.value];
-            if (selectedTheme) {
-                Object.keys(selectedTheme).forEach(key => {
-                    document.documentElement.style.setProperty(key, selectedTheme[key]);
-                });
-            }
+            darkModeToggle.disabled = false;
+
+        }
+        const selectedTheme = themes[themeSelect.value];
+        if (selectedTheme) {
+            Object.keys(selectedTheme).forEach(key => {
+                document.documentElement.style.setProperty(key, selectedTheme[key]);
+            });
         }
 
     }
@@ -1353,6 +1363,14 @@ agree.addEventListener("click", function () {
     partytoggle.checked = true;
     warn.style.display = 'none';
     themeSelect.disabled = true;
+    darkModeToggle.checked = false;
+    darkModeToggle.disabled = true;
+    const selectedTheme = themes[themeSelect.value];
+    if (selectedTheme) {
+        Object.keys(selectedTheme).forEach(key => {
+            document.documentElement.style.setProperty(key, selectedTheme[key]);
+        });
+    }
 });
 
 disagree.addEventListener("click", function () {
