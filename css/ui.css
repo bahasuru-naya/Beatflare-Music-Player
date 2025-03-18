@@ -54,8 +54,7 @@ nav {
     position: fixed;
     height: 100%;
     width: 100%;
-    background-image: url("/images/pre-back.jpg");
-    background-size: cover;
+    background-image: url("/images/pre-back.jpg");   
     display: flex;
     flex-direction: column;
     justify-content: center;
