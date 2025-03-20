@@ -147,7 +147,7 @@ function audiovisual(player) {
 
     }
     const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    const dataArray = new Uint8Array(bufferLength);    
     let barWidth = (canvas1.width / bufferLength) * 1.5;
     let barHeight;
     let x;
@@ -163,6 +163,32 @@ function audiovisual(player) {
             ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
             x += barWidth + 1;
         }
+        if (partytoggle.checked) {
+            partyTheme();
+        }
+
+        function partyTheme() {
+            if (dataArray.length === 0) return; // handle empty data
+            let avg = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+            console.log("Average:", avg);
+
+            const themeKeys = Object.keys(themes);
+            let themeIndex = Math.floor(avg) % themeKeys.length;
+            console.log("Theme Index:", themeIndex);
+
+            const selectedThemeKey = themeKeys[themeIndex];
+            const selectedTheme = themes[selectedThemeKey];
+            console.log("Selected Theme:", selectedThemeKey);
+
+
+            if (selectedTheme) {
+                Object.keys(selectedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, selectedTheme[key]);
+                });
+            }
+
+        }
+
         animation = requestAnimationFrame(animate1);
     }
 
@@ -1342,6 +1368,7 @@ partytoggle.addEventListener("click", function () {
             darkModeToggle.checked = false;
             darkModeToggle.disabled = true;
 
+
         }
         else {
             themeSelect.disabled = false;
@@ -1371,9 +1398,14 @@ agree.addEventListener("click", function () {
             document.documentElement.style.setProperty(key, selectedTheme[key]);
         });
     }
+
 });
 
 disagree.addEventListener("click", function () {
     partytoggle.checked = false;
     warn.style.display = 'none';
 });
+
+
+
+
