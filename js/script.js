@@ -354,11 +354,35 @@ function generateRandomColor(barHeight) {
     // Ensure barHeight is within a reasonable range
     barHeight = Math.max(0, Math.min(255, barHeight));
 
-    // Option 1: Use barHeight to influence red, green, and blue values differently
-    let r = (barHeight + Math.floor(Math.random() * 100)) % 256;
-    let g = (barHeight * 2 + Math.floor(Math.random() * 100)) % 256;
-    let b = (barHeight / 2 + Math.floor(Math.random() * 100)) % 256;
+    // Use barHeight to influence hue and convert HSL to RGB for rainbow effect
+    let hue = (barHeight * 1.5 + Math.floor(Math.random() * 60)) % 360; // create variation
+    let saturation = 90; // full saturation for bright rainbow colors
+    let lightness = 40; // balanced lightness
 
+    // Convert HSL to RGB
+    function hslToRgb(h, s, l) {
+        s /= 100;
+        l /= 100;
+        const c = (1 - Math.abs(2 * l - 1)) * s;
+        const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+        const m = l - c / 2;
+        let r = 0, g = 0, b = 0;
+
+        if (h >= 0 && h < 60) [r, g, b] = [c, x, 0];
+        else if (h >= 60 && h < 120) [r, g, b] = [x, c, 0];
+        else if (h >= 120 && h < 180) [r, g, b] = [0, c, x];
+        else if (h >= 180 && h < 240) [r, g, b] = [0, x, c];
+        else if (h >= 240 && h < 300) [r, g, b] = [x, 0, c];
+        else if (h >= 300 && h < 360) [r, g, b] = [c, 0, x];
+
+        r = Math.round((r + m) * 255);
+        g = Math.round((g + m) * 255);
+        b = Math.round((b + m) * 255);
+
+        return { r, g, b };
+    }
+
+    const { r, g, b } = hslToRgb(hue, saturation, lightness);
     return `rgb(${r}, ${g}, ${b})`;
 }
 
@@ -431,7 +455,7 @@ fileInput.addEventListener('change', function (event) {
             return !allowedExtensions.includes(extension);
         });
 
-        if (invalidFiles.length > 0) {            
+        if (invalidFiles.length > 0) {
             throw new Error('Only .mp3 and .wav files are allowed. Please try again with valid files.');
         }
 
@@ -450,7 +474,7 @@ fileInput.addEventListener('change', function (event) {
             playFile(0);
         }
     } catch (error) {
-        console.error('An error occurred while processing the file input:', error.message);        
+        console.error('An error occurred while processing the file input:', error.message);
         showerror(error.message);
         fileInput.value = ''; // Clear the input on error
     }
