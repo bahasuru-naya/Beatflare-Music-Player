@@ -72,7 +72,7 @@ nav {
     border: #000000 8px solid;
     border-radius: 30px;
     position: fixed;
-    height: 300px;
+    height: 350px;
     width: 350px;
     top: 50%;
     left: 50%;
@@ -1089,7 +1089,7 @@ li.active {
 
 #seek-bar {
     grid-column: 2;
-    width: 100%;    
+    width: 90%;    
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1506,6 +1506,10 @@ li.active {
         transform: scale(1.3);
     }
 }
+#audio-control {
+    width: 100%;
+    
+}
 
 .details-volume {
     display: grid;
@@ -1528,6 +1532,7 @@ li.active {
 
 .volume-contain {
     grid-column: 2;
+    width: 100%;
 }
 
 .marquee {
@@ -1551,38 +1556,41 @@ li.active {
 
 .volumemute {
     display: grid;
-    grid-template-columns: 1fr 6fr 2fr;
+    grid-template-columns: 2fr 6fr 2fr;
     justify-items: center;
     align-items: center;
     width: 100%;
+    padding: 10px 0px 10px 0px;
 
+}
+#vlabel{
+    font-size: 0.8rem;
 }
 
 .volumemute .checkb {
     grid-column: 1;
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
 }
 
 #volume {
-    --slider-width: 90%;
-    --slider-height: 6px;
+    --slider-width: 95%;
+    --slider-height: 10px;
     --slider-bg: rgb(82, 82, 82);
     --slider-border-radius: 999px;
     /* level */
     --level-color:var(--home-c1-color);
-    --level-transition-duration: .1s;
-    
-
+    --level-transition-duration: .1s;   
 
     grid-column: 2;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     width: var(--slider-width);
-    height: var(--slider-height);
-    background: var(--slider-bg);
+    height: var(--slider-height);   
     overflow: hidden;
+    margin: 0px;
+   
     border-radius: var(--slider-border-radius);
     -webkit-transition: height var(--level-transition-duration);
     -o-transition: height var(--level-transition-duration);
@@ -1594,6 +1602,7 @@ li.active {
     border: 0px;
     margin: 0px;
     border-radius: var(--slider-border-radius);
+    height: 15px;
 
 }
 
@@ -1607,7 +1616,7 @@ li.active {
 }
 
 #volume:hover {
-    height: calc(var(--slider-height) * 2);
+    height: 15px;
 }
 
 #vpresentage {
@@ -2135,7 +2144,7 @@ li.active {
     overflow: hidden;
     max-width: 900px;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
     box-shadow: 0.2em 0.2em;
@@ -2183,8 +2192,13 @@ li.active {
     transform: scale(1.1);
 }
 
-.creator-name {
+.creator-name-head {
     font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.creator-name {
+    font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
 }
@@ -2193,6 +2207,7 @@ li.active {
     font-size: 16px;
     color: #555;
     margin: 10px 0;
+    text-align: justify;
 }
 
 /* Social Links */
@@ -2232,32 +2247,37 @@ li.active {
 
 .mp3-logo {
     width: 110px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     border-radius: 10px;
 }
 
 .mp3-title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .mp3-description {
     font-size: 16px;
     color: #666;
     margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: justify;
 }
 
 .features {
     list-style: none;
     padding: 0;
-    justify-content: center;
+    justify-items: center;
+   
 }
 
 .features li {
     display: block;
     font-size: 14px;
     transition: transform 0.3s ease-in-out;
+    text-align: justify;
 }
 
 .features li:hover {
