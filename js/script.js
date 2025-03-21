@@ -410,7 +410,6 @@ function showerror(message) {
 }
 
 
-
 fileInput.addEventListener('change', function (event) {
     try {
         // Ensure files exist in the input event

@@ -72,8 +72,8 @@ nav {
     border: #000000 8px solid;
     border-radius: 30px;
     position: fixed;
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 350px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -140,7 +140,7 @@ nav {
 }
 
 .preloaderback .dance-text {
-    font-size: 2rem;
+    font-size: 1.5rem;
     position: absolute;
     top: calc(30% + 150px);
     left: 50%;
