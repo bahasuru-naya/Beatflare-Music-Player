@@ -56,5 +56,8 @@ window.onbeforeunload = function (event) {
 };
 
 
-
+//close error msg
+document.querySelector('#error_ok').addEventListener('click', function () {
+  document.querySelector('#error').style.display = 'none';
+});
  

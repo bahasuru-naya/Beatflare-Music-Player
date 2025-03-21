@@ -306,7 +306,7 @@ function audiovisual(player) {
     }
 
     let lastThemeUpdate = 0;
-    let themeUpdateInterval = 500; // update theme every 0.5 seconds max
+    let themeUpdateInterval = 200; // update theme every 0.5 seconds max
 
     function animate4() {
 
@@ -402,9 +402,16 @@ randomsong.addEventListener('change', () => {
     }
 });
 
+function showerror(message) {
+    const error = document.querySelector('#error');
+    const errorText = document.querySelector('#error .message');
+    errorText.textContent = message;
+    error.style.display = 'block';
+}
+
+
 
 fileInput.addEventListener('change', function (event) {
-
     try {
         // Ensure files exist in the input event
         if (!event.target.files) {
@@ -416,6 +423,17 @@ fileInput.addEventListener('change', function (event) {
         // Validate files array before updating
         if (!Array.isArray(newFiles) || newFiles.length === 0) {
             throw new Error('No valid files to add.');
+        }
+
+        // Check for invalid file types
+        const allowedExtensions = ['mp3', 'wav'];
+        const invalidFiles = newFiles.filter(file => {
+            const extension = file.name.split('.').pop().toLowerCase();
+            return !allowedExtensions.includes(extension);
+        });
+
+        if (invalidFiles.length > 0) {            
+            throw new Error('Only .mp3 and .wav files are allowed. Please try again with valid files.');
         }
 
         // Safely update the files array
@@ -433,11 +451,12 @@ fileInput.addEventListener('change', function (event) {
             playFile(0);
         }
     } catch (error) {
-        console.error('An error occurred while processing the file input:', error.message);
-        // Optionally show an error message to the user
-        alert('Error: ' + error.message);
+        console.error('An error occurred while processing the file input:', error.message);        
+        showerror(error.message);
+        fileInput.value = ''; // Clear the input on error
     }
 });
+
 
 
 function updatePlaylist() {
@@ -1379,6 +1398,12 @@ partytoggle.addEventListener("click", function () {
         warn.style.display = 'block';
     } else {
         if (partytoggle.checked) {
+            const selectedTheme = themes[themeSelect.value];
+            if (selectedTheme) {
+                Object.keys(selectedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, selectedTheme[key]);
+                });
+            }
             themeSelect.disabled = true;
             darkModeToggle.checked = false;
             darkModeToggle.disabled = true;
@@ -1388,14 +1413,15 @@ partytoggle.addEventListener("click", function () {
         else {
             themeSelect.disabled = false;
             darkModeToggle.disabled = false;
+            const selectedTheme = themes[themeSelect.value];
+            if (selectedTheme) {
+                Object.keys(selectedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, selectedTheme[key]);
+                });
+            }
 
         }
-        const selectedTheme = themes[themeSelect.value];
-        if (selectedTheme) {
-            Object.keys(selectedTheme).forEach(key => {
-                document.documentElement.style.setProperty(key, selectedTheme[key]);
-            });
-        }
+
 
     }
 });

@@ -7,7 +7,7 @@
     <title>Local MP3 Player</title>
     <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="css/style.css">
-    <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/logo.png">
+    <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/art.png">
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
@@ -87,7 +87,9 @@
             <p class="message">
                 Party Mode will rapidly change UI colors for a dynamic experience. This may cause discomfort for
                 sensitive users, including those prone to seizures or motion sickness.
-                Learn more about photosensitivity and safety <a href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity">here</a>. <br><br>
+                Learn more about photosensitivity and safety <a
+                    href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity">here</a>.
+                <br><br>
 
                 Do you want to continue?
 
@@ -101,6 +103,30 @@
                 <button class="mark-as-read" id="disagree">
                     Cancel
                 </button>
+            </div>
+        </div>
+
+        <div class="card" id="error">
+            <div class="header">
+                <span class="icon">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+                <p class="alert">Error</p>
+            </div>
+
+            <p class="message">
+                Your browser does not support the audio element. Please update your browser to the latest version.
+            </p>
+
+            <div class="actions">
+                <button class="read" id="error_ok">
+                    Ok
+                </button>
+
             </div>
         </div>
 

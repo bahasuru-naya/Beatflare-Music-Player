@@ -34,6 +34,7 @@
     --about-back-color: #AD8B73;
     --about-text-color: #302b28;
 
+    transition: all 0.5s ase-out;
 
 }
 
@@ -344,8 +345,6 @@ section {
     left: 0;
     z-index: 2;
 
-
-
 }
 
 .menu__content:after {
@@ -543,6 +542,24 @@ section {
 
 .mark-as-read:hover {
     background-color: rgb(230, 231, 233);
+}
+
+#error{
+    display: none;
+    height: 200px;
+    top: calc(50% - 100px);
+}
+
+#error .icon{
+    background-color: #f20909;
+    color: white;
+}
+
+#error .read {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    
 }
 
 
