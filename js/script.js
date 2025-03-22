@@ -65,7 +65,7 @@ function setWidthHeight() {
     console.log(playerWidth);
     if (playerWidth >= 800) {
         acontrol.style.display = 'inline-flex';
-        playlist.style.height = '300px';
+        playlist.style.height = '330px';
     }
     else {
         acontrol.style.display = 'block';
@@ -991,8 +991,8 @@ visualonoff.addEventListener("click", function () {
         setWidthHeight();
     } else {
         tabs.style.display = 'none';
-        playersection.style.gridTemplateColumns = 'none';
-        playersection.style.maxWidth = 'none';
+        playersection.style.gridTemplateColumns = '1fr';
+        playersection.style.maxWidth = '1000px';        
         playersection.style.justifyContent = 'center';
         setWidthHeight();
 
