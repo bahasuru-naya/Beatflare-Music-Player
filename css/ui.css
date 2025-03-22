@@ -420,10 +420,12 @@ section {
     justify-content: center;
     height: 100%;
     width: 100%;
+    transition: all 0.5s ease;
 }
 
 .menu__link:hover {
-    text-decoration: underline;
+    transition: all 0.5s ease;
+    transform: scale(1.2);
 }
 
 
@@ -647,10 +649,11 @@ section {
     color: var(--black);
 
 }
+
 .home-text h3 {
     font-size: 1.5rem;
     padding: 5px;
-    margin: 0;
+    margin: 0;    
     color: var(--black);
 
 }
@@ -1675,7 +1678,7 @@ li.active {
     padding: 1rem 0;
     border: none;
     width: auto;
-    font-size: 1.3rem;    
+    font-size: 1.3rem;
     font-family: 'Alata', sans-serif;
     color: var(--player-tab-text-color);
     letter-spacing: 1px;
@@ -2254,6 +2257,8 @@ li.active {
 .mp3-info {
     flex: 1;
     padding: 20px;
+    align-items: center;
+    justify-items: center;
 }
 
 .mp3-logo {
@@ -2272,8 +2277,7 @@ li.active {
 .mp3-description {
     font-size: 16px;
     color: #666;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 0;
     text-align: justify;
 }
 
@@ -2281,6 +2285,8 @@ li.active {
     list-style: none;
     padding: 0;
     justify-items: center;
+    padding: 20px;
+    margin: 0;
 
 }
 
@@ -2297,14 +2303,16 @@ li.active {
 
 /* GitHub Button */
 .github-btn {
-    display: inline-block;
+    display: block;
     padding: 10px 20px;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 150px;
     background: #24292e;
     color: white;
     text-decoration: none;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -2378,14 +2386,14 @@ li.active {
 
 @media (min-width: 1050px) {
     .play {
-        margin-bottom: 0;        
+        margin-bottom: 0;
     }
 
     .section-center {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        column-gap: 2rem;    
-        width: 90vw;   
+        column-gap: 2rem;
+        width: 90vw;
     }
 
     #settings {
