@@ -54,10 +54,18 @@
             </svg>
         </label>
         <ul class="menu__content">
-            <li class="menu__item" style="--x: 34; --y: 18;"><a class="menu__link" href="#home">Home</a></li>
-            <li class="menu__item" style="--x: 57; --y: 32;"><a class="menu__link" href="#playersec">MP3 Player</a></li>
-            <li class="menu__item" style="--x: 40; --y: 73;"><a class="menu__link" href="#settings">Settings</a></li>
-            <li class="menu__item" style="--x: 71; --y: 66;"><a class="menu__link" href="#about">About</a></li>
+            <li class="menu__item" style="--x: 34; --y: 18;"><a class="menu__link" href="#home"
+                    onclick="document.querySelector('#home').scrollIntoView({ behavior: 'smooth' }); return false;">Home</a>
+            </li>
+            <li class="menu__item" style="--x: 57; --y: 32;"><a class="menu__link" href="#playersec"
+                    onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">MP3
+                    Player</a></li>
+            <li class="menu__item" style="--x: 40; --y: 73;"><a class="menu__link" href="#settings"
+                    onclick="document.querySelector('#settings').scrollIntoView({ behavior: 'smooth' }); return false;">Settings</a>
+            </li>
+            <li class="menu__item" style="--x: 71; --y: 66;"><a class="menu__link" href="#about"
+                    onclick="document.querySelector('#about').scrollIntoView({ behavior: 'smooth' }); return false;">About</a>
+            </li>
         </ul>
     </nav>
     <svg style="position: absolute; left: 100%">
@@ -160,7 +168,8 @@
                         </p>
                         <h3>Your music, your way!</h3>
                         <div class="wrapper-get-started">
-                            <a class="cta" href="#playersec">
+                            <a class="cta" href="#playersec"
+                                onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
                                 <span id="s1">Get Started</span>
                                 <span id="s2">
                                     <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1"
@@ -546,10 +555,12 @@
                             it's all about enhancing your music journey. Stay tuned for more updates, and feel free to
                             contribute and make it even better!</p>
                         <div class="social-links">
-                            <a href="https://www.linkedin.com/in/bahasuru-nayanakantha/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin">
+                            <a href="https://www.linkedin.com/in/bahasuru-nayanakantha/" target="_blank"
+                                rel="noopener noreferrer" class="social-btn linkedin">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="https://github.com/bahasuru-naya" target="_blank" rel="noopener noreferrer" class="social-btn github">
+                            <a href="https://github.com/bahasuru-naya" target="_blank" rel="noopener noreferrer"
+                                class="social-btn github">
                                 <i class="fab fa-github"></i>
                             </a>
                             <a href="mailto:bahasuru_nayanakantha@hotmail.com" class="social-btn email">
@@ -573,7 +584,8 @@
                             <li>📃 Effortless playlist management 📃</li>
                             <li>🎉 Party Mode 🎉 </li>
                         </ul>
-                        <a href="https://github.com/bahasuru-naya/Beatflare-Music-Player" target="_blank" rel="noopener noreferrer" class="github-btn">
+                        <a href="https://github.com/bahasuru-naya/Beatflare-Music-Player" target="_blank"
+                            rel="noopener noreferrer" class="github-btn">
                             <i class="fab fa-github"></i> View on GitHub
                         </a>
                         <p class="contribution-text">This project is open-source. Contributions are welcome!</p>

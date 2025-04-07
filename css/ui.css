@@ -1742,34 +1742,29 @@ li.active {
     justify-items: center;
     background-color: var(--settings-back-color);
     padding: 10px;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 5%;
     padding-right: 5%;
     align-items: center;
     height: auto;
-
-
 }
 
-
 .s-text {
-
     width: 100%;
 }
 
 .s-head-text {
     font-weight: 700;
     width: 100%;
-    align-items: center;
 }
 
 #sethead {
     color: var(--settings-head-text-color);
     padding: 10px;
-    padding-top: 0px;
     font-weight: bold;
-    justify-items: center;
+    justify-self: center;
     align-self: center;
+    margin: 0px;
     z-index: 1;
 
 }
@@ -2161,7 +2156,7 @@ li.active {
     overflow: hidden;
     max-width: 900px;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
     box-shadow: 0.2em 0.2em;
@@ -2188,6 +2183,8 @@ li.active {
 .profile {
     flex: 1;
     padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .profile-img {
@@ -2254,6 +2251,8 @@ li.active {
 .mp3-info {
     flex: 1;
     padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     align-items: center;
     justify-items: center;
 }
@@ -2282,7 +2281,7 @@ li.active {
     list-style: none;
     padding: 0;
     justify-items: center;
-    padding: 20px;
+    padding: 10px;
     margin: 0;
 
 }
@@ -2322,7 +2321,7 @@ li.active {
 .contribution-text {
     font-size: 14px;
     color: #777;
-    margin-top: 10px;
+    margin: 0px;
     font-style: italic;
 }
 
