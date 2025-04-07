@@ -665,6 +665,7 @@ section {
     font-weight: bold;
     padding: 10px;
     margin: 0;
+    text-align: justify;
     color: var(--black);
 }
 
@@ -903,7 +904,8 @@ button {
 
 input[type="range"] {
     width: 100%;
-    margin-top: 10px;
+   
+    
     /*appearance: none;*/
 }
 
@@ -1750,12 +1752,9 @@ li.active {
 }
 
 
-
-
 .s-text {
 
-    width: 100%;
-    align-items: center;
+    width: 100%;    
 }
 
 .s-head-text {
@@ -1795,6 +1794,8 @@ li.active {
     width: 100%;
     align-items: center;
     justify-items: center;
+    
+    
 }
 
 #audio-set-head {
@@ -1840,6 +1841,7 @@ li.active {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 1fr;
     justify-items: center;
+    align-items: center;
     width: 100%;
 
 }
@@ -1850,6 +1852,7 @@ li.active {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 1fr;
     justify-items: center;
+    align-items: center;
     width: 100%;
 
 }
@@ -1927,8 +1930,9 @@ li.active {
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
     justify-items: center;
+    align-items: center;
 
 }
 
@@ -2406,6 +2410,7 @@ li.active {
         grid-template-columns: 1fr 1fr;
         font-size: 2rem;
     }
+    
 }
 
 @media (max-width: 768px) {
@@ -2413,10 +2418,50 @@ li.active {
         flex-direction: column;
         text-align: center;
     }
+    .home-sec-head {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 2fr;            
+    }
+    #homelogo-svg {        
+        height: 200px;
+        width: 200px;
+        max-width: 200px;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 550px) {
+    #playerhead {
+        font-size: 1rem;
+    }
+    .settings-content {
+        
+        font-size: 1.2rem;
+        align-items: center;
+    
+    }
 }
 
 @media (max-width: 500px) {
     #playerhead {
+        font-size: 0.9rem;
+    }
+    .settings-content {
+        
+        font-size: 1.1rem;
+        align-items: center;
+    
+    }
+}
+@media (max-width: 370px) {
+    #playerhead {
         font-size: 0.7rem;
+    }
+    .settings-content {
+        
+        font-size: 0.9rem;
+        align-items: center;
+    
     }
 }
