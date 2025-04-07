@@ -2182,14 +2182,7 @@ li.active {
 
 }
 
-/* Adjust for responsiveness */
-@media (max-width: 768px) {
-    .section-title {
-        font-size: 28px;
-        top: 15px;
-        /* Adjust position for smaller screens */
-    }
-}
+
 
 /* Profile Section */
 .profile {
@@ -2412,12 +2405,15 @@ li.active {
     }
     
 }
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .container {
         flex-direction: column;
         text-align: center;
     }
+    
+}
+
+@media (max-width: 768px) {    
     .home-sec-head {
         display: grid;
         grid-template-columns: 1fr;
