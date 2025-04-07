@@ -60,13 +60,13 @@ window.onbeforeunload = function (event) {
 document.querySelector('#error_ok').addEventListener('click', function () {
   document.querySelector('#error').style.display = 'none';
 });
- 
+
 
 // handle small screen
 // Script to detect small screens and show the warning message
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const overlay = document.getElementById('mobileWarning');
-  
+
   // Function to check screen width and show/hide warning
   function checkScreenWidth() {
     if (window.innerWidth < 500) {
@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.style.overflow = ''; // Enable scrolling
     }
   }
-  
+
   // Check on initial load
   checkScreenWidth();
-  
+
   // Check when window is resized
   window.addEventListener('resize', checkScreenWidth);
 });

@@ -432,10 +432,10 @@ section {
 .card {
     display: none;
     position: fixed;
-    top: calc(50% - 180px);
+    top: calc(50% - 200px);
     left: calc(50% - 160px);
     width: 320px;
-    height: 360px;
+    height: 400px;
     border: #000000 2px solid;
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 1);
@@ -653,7 +653,7 @@ section {
 .home-text h3 {
     font-size: 1.5rem;
     padding: 5px;
-    margin: 0;    
+    margin: 0;
     color: var(--black);
 
 }
@@ -904,8 +904,8 @@ button {
 
 input[type="range"] {
     width: 100%;
-   
-    
+
+
     /*appearance: none;*/
 }
 
@@ -1754,7 +1754,7 @@ li.active {
 
 .s-text {
 
-    width: 100%;    
+    width: 100%;
 }
 
 .s-head-text {
@@ -1794,8 +1794,8 @@ li.active {
     width: 100%;
     align-items: center;
     justify-items: center;
-    
-    
+
+
 }
 
 #audio-set-head {
@@ -2403,23 +2403,25 @@ li.active {
         grid-template-columns: 1fr 1fr;
         font-size: 2rem;
     }
-    
+
 }
+
 @media (max-width: 900px) {
     .container {
         flex-direction: column;
         text-align: center;
     }
-    
+
 }
 
-@media (max-width: 824px) {    
+@media (max-width: 824px) {
     .home-sec-head {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto 2fr;            
+        grid-template-rows: auto 2fr;
     }
-    #homelogo-svg {        
+
+    #homelogo-svg {
         height: 200px;
         width: 200px;
         max-width: 200px;
@@ -2427,15 +2429,16 @@ li.active {
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 650px) {
     #playerhead {
         font-size: 1rem;
     }
+
     .settings-content {
-        
-        font-size: 1.2rem;
+
+        font-size: 1.5rem;
         align-items: center;
-    
+
     }
 }
 
@@ -2443,17 +2446,18 @@ li.active {
     #playerhead {
         font-size: 0.9rem;
     }
+
     .settings-content {
-        
+
         font-size: 1.1rem;
         align-items: center;
-    
+
     }
-    
+
 }
 
- /* Mobile warning overlay styles */
- .mobile-warning-overlay {
+/* Mobile warning overlay styles */
+.mobile-warning-overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -2462,27 +2466,27 @@ li.active {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 9999;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  
-  .mobile-warning-message {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.mobile-warning-message {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 20px;
     text-align: center;
     max-width: 90%;
-  }
-  
-  .mobile-warning-message h2 {
+}
+
+.mobile-warning-message h2 {
     margin-top: 0;
-    color: #ff3b30;
-  }
-  
-  .mobile-warning-message p {
+    color: #fe0d00;
+}
+
+.mobile-warning-message p {
     margin-bottom: 20px;
-  }
+}
