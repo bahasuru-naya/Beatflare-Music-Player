@@ -55,7 +55,9 @@ nav {
     position: fixed;
     height: 100%;
     width: 100%;
-    background-image: url("/images/pre-back.jpg");
+    background-image: url("./pre-back.jpg");
+    background-repeat: repeat-x;
+    background-size:contain;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +72,7 @@ nav {
 .pre-back {
     background: white;
     border: #000000 8px solid;
+    box-shadow: #000000 0px 0px 10px;
     border-radius: 30px;
     position: fixed;
     height: 350px;

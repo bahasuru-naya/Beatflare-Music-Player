@@ -61,8 +61,7 @@ function setWidthHeight() {
 
     const acontrol = document.querySelector('#audio-control');
     acontrol.style.display = 'block'
-    const playerWidth = document.querySelector(".player").offsetWidth;
-    console.log(playerWidth);
+    const playerWidth = document.querySelector(".player").offsetWidth;    
     if (playerWidth >= 800) {
         acontrol.style.display = 'inline-flex';
         playlist.style.height = '330px';
