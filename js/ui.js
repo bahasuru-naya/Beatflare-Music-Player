@@ -84,3 +84,4 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check when window is resized
   window.addEventListener('resize', checkScreenWidth);
 });
+

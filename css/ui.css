@@ -244,6 +244,8 @@ nav {
     margin-bottom: 5px;
 }
 
+
+
 main {
 
     scroll-behavior: smooth;
@@ -651,7 +653,7 @@ section {
 }
 
 .home-text h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 5px;
     margin: 0;
     color: var(--black);
@@ -779,6 +781,7 @@ path.two {
     font-weight: bold;
     font-size: 3rem;
     padding: 10px;
+    width: 75%;
     margin: 0;
 }
 
@@ -822,6 +825,7 @@ path.two {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 300px;
     font-size: 1.3rem;
+    font-weight: bold;
     border: #000000 2px solid;
 }
 
@@ -1760,7 +1764,8 @@ li.active {
 
 #sethead {
     color: var(--settings-head-text-color);
-    padding: 10px;
+    padding: 10px; 
+    padding-bottom: 20px;   
     font-weight: bold;
     justify-self: center;
     align-self: center;
@@ -1776,6 +1781,7 @@ li.active {
     color: var(--settings-text-color);
     gap: 2rem;
     padding: 10px;
+    padding-bottom: 40px;
     z-index: 1;
     width: 100%;
 
@@ -1873,6 +1879,7 @@ li.active {
     grid-column: 2;
     grid-row: 1;
     width: 80%;
+    outline: none;
 }
 
 #equalizer-reset {
@@ -2102,6 +2109,9 @@ li.active {
     display: grid;
     grid-template-columns: 1fr 3fr;
     justify-items: center;
+}
+#theme-select{
+    outline: none;
 }
 
 #darkmode-set {
@@ -2339,38 +2349,39 @@ li.active {
 }
 
 /* Responsive Design */
-
-@media (max-width: 1125px) {
+@media (max-width: 1194px) {
     .home-text h1 {
-        font-size: 2.5rem;
+        font-size: 4rem;
     }
 
     .home-text p {
         font-size: 1.5rem;
     }
 
-    .cta {
-        font-size: 1.5rem;
-    }
-
-    .cta svg {
-        width: 33px;
-        height: 21px;
-    }
-
-}
-
-@media (max-width: 1000px) {
-    .home-text h1 {
+    .home-text h3 {
         font-size: 2rem;
     }
 
-    .home-text p {
-        font-size: 1rem;
+    
+
+}
+
+@media (max-width: 1125px) {
+    .home-text h1 {
+        font-size: 3.6rem;
     }
 
+    .home-text p {
+        font-size: 1.3rem;
+    }
+
+    .home-text h3 {
+        font-size: 1.8rem;
+    }
+
+
     .cta {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .cta svg {
@@ -2379,7 +2390,6 @@ li.active {
     }
 
 }
-
 @media (min-width: 1050px) {
     .play {
         margin-bottom: 0;
@@ -2401,6 +2411,30 @@ li.active {
         grid-template-rows: 1fr;
         grid-template-columns: 1fr 1fr;
         font-size: 2rem;
+    }
+
+}
+
+@media (max-width: 1000px) {
+    .home-text h1 {
+        font-size: 3rem;
+    }
+
+    .home-text p {
+        font-size: 1.3rem;
+    }
+
+    .home-text h3 {
+        font-size: 1.6rem;
+    }
+
+    .cta {
+        font-size: 1.2rem;
+    }
+
+    .cta svg {
+        width: 33px;
+        height: 21px;
     }
 
 }
