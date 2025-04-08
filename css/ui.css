@@ -1849,6 +1849,9 @@ li.active {
     width: 100%;
 
 }
+#speedlabel{
+    font-size: 1.5rem;
+}
 
 #con-pitch {
     grid-column: 1;
@@ -1865,6 +1868,7 @@ li.active {
     display: inline-flex;
     grid-column: 3;
     align-items: center;
+    font-size: 1.5rem;
 
 }
 
@@ -1935,10 +1939,17 @@ li.active {
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+    grid-template-columns: 1fr 3fr 5fr 3fr 1fr;
     justify-items: center;
     align-items: center;
 
+}
+#Stereolabel1{
+    font-size: 1.3rem;
+}
+#Stereolabel2{
+    font-size: 1.3rem;
+    
 }
 
 #ui-set-head {

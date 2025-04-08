@@ -323,15 +323,15 @@ function audiovisual(player) {
     function partyTheme() {
         if (dataArray.length === 0) return; // handle empty data
         let avg = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
-        console.log("Average:", avg);
+        //console.log("Average:", avg);
 
         const themeKeys = Object.keys(themes);
         let themeIndex = Math.floor(avg) % themeKeys.length;
-        console.log("Theme Index:", themeIndex);
+        //console.log("Theme Index:", themeIndex);
 
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
-        console.log("Selected Theme:", selectedThemeKey);
+        //console.log("Selected Theme:", selectedThemeKey);
 
 
         if (selectedTheme) {
