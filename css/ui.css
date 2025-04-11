@@ -56,8 +56,8 @@ nav {
     height: 100%;
     width: 100%;
     background-image: url("./pre-back.jpg");
-    background-repeat: repeat-x;
-    background-size:contain;
+    background-repeat: repeat;
+    background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -901,8 +901,6 @@ path.two {
     box-shadow: 0px 0px var(--main-color);
 }
 
-
-
 button {
     font-size: 16px;
     cursor: pointer;
@@ -911,52 +909,11 @@ button {
 
 input[type="range"] {
     width: 100%;
-
-
-    /*appearance: none;*/
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 16px;  
+    cursor: pointer;  
 }
-
-/* Track: webkit browsers */
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 19px;
-    background: #ccc;
-    border-radius: 16px;
-    border: #666 2px solid;
-
-}
-
-/* Track: Mozilla Firefox */
-input[type="range"]::-moz-range-track {
-    height: 15px;
-    background: #ccc;
-    border-radius: 16px;
-}
-
-/* Thumb: webkit */
-input[type="range"]::-webkit-slider-thumb {
-
-    /* creating a custom design */
-    height: 10px;
-    width: 10px;
-    background-color: var(--home-c2-color);
-    border-radius: 50%;
-    border: none;
-    /* box-shadow: -407px 0 0 400px #f50; emove this line */
-    transition: .2s ease-in-out;
-}
-
-/* Thumb: Firefox */
-input[type="range"]::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: var(--home-c2-color);
-    border-radius: 50%;
-    border: none;
-    /* box-shadow: -407px 0 0 400px #f50; emove this line */
-    transition: .2s ease-in-out;
-}
-
-
 
 .controls {
     display: flex;
@@ -1113,17 +1070,21 @@ li.active {
     -moz-appearance: none;
     appearance: none;
     border-radius: 20px;
-    margin: 0;
-    padding: 0;
+    margin: none;
+    padding: none;
     display: block;
     overflow: hidden;
+    cursor: pointer;
+    border: var(--black) 2px solid;
 }
 
 #seek-bar::-webkit-slider-runnable-track {
-    height: 20px;
-    border: 0px;
-
+    height: 25px;
+    border: none;
+    padding: none;
+    border-radius: 10px;   
 }
+
 
 #seek-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -1132,6 +1093,7 @@ li.active {
     height: 0;
     -webkit-box-shadow: -800px 0 0 800px var(--home-c1-color);
     box-shadow: -800px 0 0 800px var(--home-c1-color);
+    
 }
 
 #duration {
@@ -1617,7 +1579,8 @@ li.active {
     -webkit-transition: height var(--level-transition-duration);
     -o-transition: height var(--level-transition-duration);
     transition: height var(--level-transition-duration);
-    cursor: inherit;
+    cursor: pointer;
+    border: var(--black) 2px solid;
 
 }
 
@@ -1625,9 +1588,9 @@ li.active {
     border: 0px;
     margin: 0px;
     border-radius: var(--slider-border-radius);
-    height: 15px;
+    height: 15px;   
 
-}
+}    
 
 #volume::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -1767,8 +1730,8 @@ li.active {
 
 #sethead {
     color: var(--settings-head-text-color);
-    padding: 10px; 
-    padding-bottom: 20px;   
+    padding: 10px;
+    padding-bottom: 20px;
     font-weight: bold;
     justify-self: center;
     align-self: center;
@@ -1849,7 +1812,27 @@ li.active {
     width: 100%;
 
 }
-#speedlabel{
+
+/* Track: webkit browsers */
+#speed::-webkit-slider-runnable-track {
+    height: 19px;
+    background: #ccc;
+    border-radius: 16px;
+    border: var(--black) 2px solid;
+    overflow: hidden;
+}
+/* Thumb: webkit */
+#speed::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
+    box-shadow: -200px 0 0 200px var(--home-c1-color);
+
+}
+
+#speedlabel {
     font-size: 1.5rem;
 }
 
@@ -1861,6 +1844,25 @@ li.active {
     justify-items: center;
     align-items: center;
     width: 100%;
+
+}
+
+/* Track: webkit browsers */
+#pitch::-webkit-slider-runnable-track {
+    height: 19px;
+    background: #ccc;
+    border-radius: 16px;
+    border: var(--black) 2px solid;
+    overflow: hidden;
+}
+/* Thumb: webkit */
+#pitch::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
+    box-shadow: -200px 0 0 200px var(--home-c1-color);
 
 }
 
@@ -1925,6 +1927,30 @@ li.active {
     font-size: 0.7rem;
 }
 
+.eqslider {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 16px;    
+}
+
+.eqslider::-webkit-slider-runnable-track {
+    background: #ccc;
+    border-radius: 16px;
+    width: 100%;
+    border: var(--black) 2px solid;
+    overflow: hidden;
+}
+
+.eqslider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: 0 200px 0 200px var(--home-c1-color);
+    box-shadow: 0 200px 0 200px var(--home-c1-color);
+
+}
+
 .column-2 {
     display: grid;
     width: 100%;
@@ -1944,12 +1970,33 @@ li.active {
     align-items: center;
 
 }
-#Stereolabel1{
+
+/* Track: webkit browsers */
+#Stereo::-webkit-slider-runnable-track {
+    height: 19px;
+    background: #ccc;
+    border-radius: 16px;
+    border: var(--black) 2px solid;
+    overflow: hidden;
+}
+/* Thumb: webkit */
+#Stereo::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+    -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
+    box-shadow: -200px 0 0 200px var(--home-c1-color);
+
+}
+
+#Stereolabel1 {
     font-size: 1.3rem;
 }
-#Stereolabel2{
+
+#Stereolabel2 {
     font-size: 1.3rem;
-    
+
 }
 
 #ui-set-head {
@@ -2124,7 +2171,8 @@ li.active {
     grid-template-columns: 1fr 3fr;
     justify-items: center;
 }
-#theme-select{
+
+#theme-select {
     outline: none;
 }
 
@@ -2214,8 +2262,7 @@ li.active {
 .profile-img {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
-    border: 4px solid var(--about-back-color);
+    border-radius: 50%;    
     transition: transform 0.3s ease-in-out;
 }
 
@@ -2376,7 +2423,7 @@ li.active {
         font-size: 2rem;
     }
 
-    
+
 
 }
 
@@ -2404,6 +2451,7 @@ li.active {
     }
 
 }
+
 @media (min-width: 1050px) {
     .play {
         margin-bottom: 0;

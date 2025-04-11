@@ -857,11 +857,12 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     slidervlabel.classList.add('sliderlabelvalue');
     slidervlabel.textContent = '0 dB';
     const slider = document.createElement('input');
+    slider.classList.add('eqslider');
     slider.type = 'range';
-    slider.orient = 'vertical';
+    slider.orient = 'vertical';       
     slider.style.direction = 'rtl';
     slider.style.writingMode = 'vertical-lr';
-    slider.style.width = '10%';
+    slider.style.width = '30%';
     slider.style.height = '100%';
     slider.style.alignSelf = 'center';
     slider.style.transition = "all 0.5s ease-in-out";
@@ -1357,12 +1358,12 @@ themeSelect.addEventListener("change", function () {
 //dark mode
 const darktheme = {
     dark: {
-        "--black": " #ffffff",
+        "--black": "rgb(204, 204, 204)",
         "--white": " #121212",
         "--menu-color": " #000000",
         "--home-c1-color": " #3700b3",
         "--home-c2-color": " #03dac6",
-        "--home-c3-color": " #bb86fc",
+        "--home-c3-color": "rgb(166, 99, 249)",
         "--home-c4-color": " #6200ee",
         "--player-back-color": " #333333",
         "--settings-back-color": " #444444",
