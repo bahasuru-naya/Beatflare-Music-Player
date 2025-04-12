@@ -4,7 +4,7 @@ window.addEventListener("load", () => {
 
   setTimeout(() => {
     preloader.style.display = "none";
-  }, 1500);
+  }, 3000);
   //preloader.style.animation = "fade-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530)  both";
 
 

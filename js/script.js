@@ -44,6 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Optionally, update the canvas height on window resize
     window.addEventListener('resize', setWidthHeight);
+
+    const playlisttext = document.createElement('p');
+    playlisttext.setAttribute("id", "playlist-text");
+    playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+    playlist.appendChild(playlisttext);
+    document.querySelector(".play-pause-back").style.opacity = "0.5";
+    document.querySelector(".cssbuttons-io").style.opacity = "0.5";
+    document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+    playPauseButton.disabled = true;
+    seekBar.disabled = true;
+    removeAll.disabled = true;
+    searchbtntext.disabled = true;
 });
 
 window.addEventListener('resize', setWidthHeight);
@@ -61,7 +73,7 @@ function setWidthHeight() {
 
     const acontrol = document.querySelector('#audio-control');
     acontrol.style.display = 'block'
-    const playerWidth = document.querySelector(".player").offsetWidth;    
+    const playerWidth = document.querySelector(".player").offsetWidth;
     if (playerWidth >= 800) {
         acontrol.style.display = 'inline-flex';
         playlist.style.height = '330px';
@@ -89,8 +101,6 @@ function setWidthHeight() {
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
-
-
 
 }
 
@@ -461,6 +471,18 @@ fileInput.addEventListener('change', function (event) {
         // Safely update the files array
         files = [...files, ...newFiles];
 
+        if (document.getElementById('playlist-text')) {
+            document.getElementById('playlist-text').remove();
+        }
+
+        document.querySelector(".play-pause-back").style.opacity = "1";
+        document.querySelector(".cssbuttons-io").style.opacity = "1";
+        document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+        playPauseButton.disabled = false;
+        seekBar.disabled = false;
+        removeAll.disabled = false;
+        searchbtntext.disabled = false;
+
         // Call necessary update functions
         updatePlaylist();
         setWidthHeight();
@@ -549,7 +571,18 @@ function handleRemoveFile(index) {
             playPauseButton.innerHTML = playsvg;
             audioPlayer.src = '';
             img.src = "./images/art.png";
-            updateSongName('Add songs to playlist...');
+            updateSongName('Add songs to your playlist and let the music begin! 🎵✨');
+            const playlisttext = document.createElement('p');
+            playlisttext.setAttribute("id", "playlist-text");
+            playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+            playlist.appendChild(playlisttext);
+            document.querySelector(".play-pause-back").style.opacity = "0.5";
+            document.querySelector(".cssbuttons-io").style.opacity = "0.5";
+            document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+            playPauseButton.disabled = true;
+            seekBar.disabled = true;
+            removeAll.disabled = true;
+            searchbtntext.disabled = true;
 
         } else {
             // Determine the next or previous file to play
@@ -859,7 +892,7 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     const slider = document.createElement('input');
     slider.classList.add('eqslider');
     slider.type = 'range';
-    slider.orient = 'vertical';       
+    slider.orient = 'vertical';
     slider.style.direction = 'rtl';
     slider.style.writingMode = 'vertical-lr';
     slider.style.width = '30%';
@@ -992,7 +1025,7 @@ visualonoff.addEventListener("click", function () {
     } else {
         tabs.style.display = 'none';
         playersection.style.gridTemplateColumns = '1fr';
-        playersection.style.maxWidth = '1000px';        
+        playersection.style.maxWidth = '1000px';
         playersection.style.justifyContent = 'center';
         setWidthHeight();
 
@@ -1012,10 +1045,21 @@ removeAll.addEventListener('click', function () {
         currentIndex = -1;
         playPauseButton.innerHTML = playsvg;
         audioPlayer.src = '';
-        updateSongName('Add songs to playlist...');
+        updateSongName('Add songs to your playlist and let the music begin! 🎵✨');
         img.src = "./images/art.png";
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);
+        const playlisttext = document.createElement('p');
+        playlisttext.setAttribute("id", "playlist-text");
+        playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+        playlist.appendChild(playlisttext);
+        document.querySelector(".play-pause-back").style.opacity = "0.5";
+        document.querySelector(".cssbuttons-io").style.opacity = "0.5";
+        document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+        playPauseButton.disabled = true;
+        seekBar.disabled = true;
+        removeAll.disabled = true;
+        searchbtntext.disabled = true;
     }
 });
 
@@ -1042,6 +1086,9 @@ const closesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden
 let search = false;
 
 searchbtntext.addEventListener("click", function () {
+    if (searchbtntext.disabled) {
+        return; // Prevent action if the button is disabled
+    }
     search = !search;
     if (search) {
         playerhead.style["grid-template-columns"] = "1fr ";

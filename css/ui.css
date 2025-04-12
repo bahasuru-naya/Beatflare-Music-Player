@@ -51,6 +51,10 @@ nav {
     z-index: 99;
 }
 
+*:disabled {
+    cursor: not-allowed;
+}
+
 .preloaderback {
     position: fixed;
     height: 100%;
@@ -65,7 +69,7 @@ nav {
     overflow: hidden;
     z-index: 999;
     animation: fade-out 0.5s ease-in-out forwards;
-    animation-delay: 1s;
+    animation-delay: 2.5s;
 
 }
 
@@ -621,7 +625,7 @@ section {
     top: 50%;
     left: 50%;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transform: translate(-50%, -50%);
     padding: 20px;
     width: 70%;
@@ -636,7 +640,6 @@ section {
     grid-template-columns: 1fr 1fr;
     height: 100%;
     align-items: center;
-
 
 }
 
@@ -1095,6 +1098,10 @@ li.active {
     box-shadow: -800px 0 0 800px var(--home-c1-color);
     
 }
+#seek-bar:disabled {
+    cursor: not-allowed;
+    opacity: 0.9;
+}
 
 #duration {
     grid-column: 3;
@@ -1261,6 +1268,7 @@ li.active {
 
 }
 
+
 #search-list {
     display: none;
     z-index: 10;
@@ -1370,6 +1378,18 @@ li.active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
 }
+.delbutton:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.delbutton:disabled .delbutton__icon {
+    width: 20%;
+    transform: translateX(400%);
+}
+.delbutton:disabled .delbutton__text {
+    color: var(--del-font-color);    
+}
+
 
 
 .checkb {
@@ -1390,6 +1410,7 @@ li.active {
 }
 
 .cbox:disabled+.c-icon {
+    cursor: not-allowed;
     opacity: 0.3;
 }
 
@@ -1434,6 +1455,10 @@ li.active {
     color: rgb(255, 255, 255);
 }
 
+.cbox:disabled {
+    cursor: not-allowed;    
+}
+
 .controlbtn {
     border-radius: 100%;
     width: 60px;
@@ -1445,6 +1470,10 @@ li.active {
     cursor: pointer;
     position: relative;
 }
+.controlbtn:disabled {
+    cursor: not-allowed;    
+}
+
 
 .play-pause-back {
     background: conic-gradient(var(--home-c1-color), var(--home-c2-color), var(--home-c3-color), var(--home-c4-color), var(--home-c1-color));
@@ -1455,7 +1484,10 @@ li.active {
     justify-items: center;
     border-radius: 100%;
     border: #000000 2px solid;
+    opacity: 1;
 }
+
+
 
 #play-pause {
     border-radius: 100%;
@@ -1468,8 +1500,13 @@ li.active {
     cursor: pointer;
     position: relative;
     border: var(--player-back-color) 2px solid;
+    opacity: 1;
 
 
+}
+#play-pause:disabled {
+    cursor: not-allowed;
+    opacity: 1;
 }
 
 #play-pause svg {
@@ -1609,6 +1646,7 @@ li.active {
     grid-column: 3;
 
 }
+
 
 @keyframes marquee {
     0% {
@@ -2135,6 +2173,7 @@ li.active {
 
 /* actions */
 .switch input:disabled+.slider {
+    cursor: not-allowed;
     opacity: 0.5;
 }
 
