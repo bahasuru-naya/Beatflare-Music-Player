@@ -583,6 +583,7 @@ function handleRemoveFile(index) {
             seekBar.disabled = true;
             removeAll.disabled = true;
             searchbtntext.disabled = true;
+            repeatsong.disabled = true;
 
         } else {
             // Determine the next or previous file to play
@@ -1043,6 +1044,7 @@ removeAll.addEventListener('click', function () {
         updatePlaylist();
         playlist.innerHTML = '';
         currentIndex = -1;
+        updateButtonsState(currentIndex);
         playPauseButton.innerHTML = playsvg;
         audioPlayer.src = '';
         updateSongName('Add songs to your playlist and let the music begin! 🎵✨');
@@ -1060,6 +1062,7 @@ removeAll.addEventListener('click', function () {
         seekBar.disabled = true;
         removeAll.disabled = true;
         searchbtntext.disabled = true;
+        repeatsong.disabled = true;
     }
 });
 
