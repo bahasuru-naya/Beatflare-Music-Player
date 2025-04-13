@@ -914,8 +914,8 @@ input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 16px;  
-    cursor: pointer;  
+    border-radius: 16px;
+    cursor: pointer;
 }
 
 .controls {
@@ -1085,7 +1085,7 @@ li.active {
     height: 25px;
     border: none;
     padding: none;
-    border-radius: 10px;   
+    border-radius: 10px;
 }
 
 
@@ -1096,8 +1096,9 @@ li.active {
     height: 0;
     -webkit-box-shadow: -800px 0 0 800px var(--home-c1-color);
     box-shadow: -800px 0 0 800px var(--home-c1-color);
-    
+
 }
+
 #seek-bar:disabled {
     cursor: not-allowed;
     opacity: 0.9;
@@ -1378,16 +1379,19 @@ li.active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
 }
+
 .delbutton:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
+
 .delbutton:disabled .delbutton__icon {
     width: 20%;
     transform: translateX(400%);
 }
+
 .delbutton:disabled .delbutton__text {
-    color: var(--del-font-color);    
+    color: var(--del-font-color);
 }
 
 
@@ -1456,7 +1460,7 @@ li.active {
 }
 
 .cbox:disabled {
-    cursor: not-allowed;    
+    cursor: not-allowed;
 }
 
 .controlbtn {
@@ -1470,8 +1474,9 @@ li.active {
     cursor: pointer;
     position: relative;
 }
+
 .controlbtn:disabled {
-    cursor: not-allowed;    
+    cursor: not-allowed;
 }
 
 
@@ -1504,6 +1509,7 @@ li.active {
 
 
 }
+
 #play-pause:disabled {
     cursor: not-allowed;
     opacity: 1;
@@ -1626,9 +1632,9 @@ li.active {
     border: 0px;
     margin: 0px;
     border-radius: var(--slider-border-radius);
-    height: 15px;   
+    height: 15px;
 
-}    
+}
 
 #volume::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -1860,6 +1866,7 @@ li.active {
     border: var(--black) 2px solid;
     overflow: hidden;
 }
+
 /* Thumb: webkit */
 #speed::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -1894,6 +1901,7 @@ li.active {
     border: var(--black) 2px solid;
     overflow: hidden;
 }
+
 /* Thumb: webkit */
 #pitch::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -1969,7 +1977,7 @@ li.active {
 .eqslider {
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 16px;    
+    border-radius: 16px;
 }
 
 .eqslider::-webkit-slider-runnable-track {
@@ -2018,6 +2026,7 @@ li.active {
     border: var(--black) 2px solid;
     overflow: hidden;
 }
+
 /* Thumb: webkit */
 #Stereo::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -2302,7 +2311,7 @@ li.active {
 .profile-img {
     width: 120px;
     height: 120px;
-    border-radius: 50%;    
+    border-radius: 50%;
     transition: transform 0.3s ease-in-out;
 }
 
