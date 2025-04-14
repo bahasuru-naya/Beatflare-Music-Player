@@ -13,6 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet">
+
     <script>
         window.console = window.console || function (t) { };
     </script>
@@ -38,7 +44,7 @@
                     <div class="circ"></div>
                 </div>
             </div>
-            <p class="dance-text"><i class="fa-solid fa-music"></i> Beatflare Music Player</p>
+            <p class="dance-text">Beatflare <br> Music Player</p>
         </div>
     </div>
     <nav class="menu" style="--hue: 323.2997510156527">
@@ -404,9 +410,9 @@
                         <button id="pitch-reset" class="rest-btn">Reset</button>
                     </div>
                     <div id="equalizer">
-                        <label for="equalizer" class="s-text">Equalizer: </label>
+                        <label for="equ-select" class="s-text">Equalizer: </label>
                         <button id="equalizer-reset" class="rest-btn">Reset</button>
-                        <select id="equ-select" class="select-menu">
+                        <select id="equ-select" class="select-menu" title="Equalizer Presets">
                             <option selected value="Flat">Flat</option>
                             <option value="Treble boost">Treble boost</option>
                             <option value="Bass boost">Bass boost</option>
@@ -428,7 +434,7 @@
                     </div>
                     <label id="ui-set-head" class="s-head-text">User Interface Settings</label>
                     <div id="visualizer-set">
-                        <label for="visualizer" class="s-text">Visualizer On/Off : </label>
+                        <label for="visualizer-on-off" class="s-text">Visualizer On/Off : </label>
                         <label class="switch">
                             <input checked="true" type="checkbox" id="visualizer-on-off">
                             <div class="slider">
@@ -473,7 +479,7 @@
                         </select>
                     </div>
                     <div id="darkmode-set">
-                        <label for="darkmode" class="s-text">Dark Mode On/Off : </label>
+                        <label for="darkmode-on-off" class="s-text">Dark Mode On/Off : </label>
                         <label class="switch">
                             <input type="checkbox" id="darkmode-on-off">
                             <div class="slider">
@@ -503,7 +509,7 @@
                         </label>
                     </div>
                     <div id="partymode">
-                        <label for="partymode" class="s-text">Party Mode: </label>
+                        <label for="party-on-off" class="s-text">Party Mode: </label>
                         <label class="switch">
                             <input type="checkbox" id="party-on-off">
                             <div class="slider">

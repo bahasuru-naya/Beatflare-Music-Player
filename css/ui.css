@@ -38,9 +38,15 @@
 
 }
 
+* {
+    font-family: "Rethink Sans", sans-serif;
+    font-weight: 600;
+}
+
 body {
     background: var(--white);
-    font-family: 'Alata', sans-serif;
+    font-family: "Rethink Sans", sans-serif;
+    font-weight: 600;
     min-height: 100vh;
     overflow-x: hidden;
     padding: 0;
@@ -148,6 +154,7 @@ nav {
 
 .preloaderback .dance-text {
     font-size: 1.5rem;
+    font-weight:bold;
     position: absolute;
     top: calc(30% + 150px);
     left: 50%;
@@ -169,6 +176,7 @@ nav {
     }
 
     100% {
+        letter-spacing: 0.2em;
         opacity: 1;
     }
 }
@@ -184,6 +192,7 @@ nav {
     }
 
     100% {
+        letter-spacing: 0.2em;
         opacity: 1;
     }
 }
@@ -630,7 +639,8 @@ section {
     padding: 20px;
     width: 70%;
     height: auto;
-    max-height: 90%;
+    max-height: 90%;    
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 5;
 }
@@ -651,7 +661,7 @@ section {
 }
 
 .home-text h1 {
-
+    font-weight: bolder;
     padding: 5px;
     margin: 0;
     color: var(--black);
@@ -660,6 +670,7 @@ section {
 
 .home-text h3 {
     font-size: 2rem;
+    font-weight: bold;
     padding: 5px;
     margin: 0;
     color: var(--black);
@@ -687,8 +698,7 @@ section {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px 45px;
-    text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    text-decoration: none;    
     font-size: 40px;
     color: white;
     background: var(--home-c1-color);
@@ -848,7 +858,7 @@ path.two {
     padding: 0px;
     cursor: pointer;
     display: flex;
-    font: 0.8em sans-serif;
+    font-size: 0.8em;
     align-items: center;
     border: 2px solid var(--main-color);
     box-shadow: 4px 4px var(--main-color);
@@ -866,8 +876,8 @@ path.two {
 .buttonadd .button__text {
     color: var(--font-color);
     padding: 10%;
-    margin-right: 20%;
-    font-family: 'Alata', sans-serif;
+    margin-right: 20%;  
+    font-family: inherit;  
 }
 
 .buttonadd .button__icon {
@@ -1218,7 +1228,7 @@ li.active {
     border-radius: 10px;
     cursor: pointer;
     border: none;
-    font: 0.8em sans-serif;
+    font-size: 0.8em ;
     background: var(--bg-color);
     color: rgb(0, 0, 5);
     overflow: hidden;
@@ -1262,9 +1272,10 @@ li.active {
     justify-content: center;
     width: 100%;
     height: 45px;
-    padding: 0px;
+    padding: 0px;    
+    -webkit-user-select: none;
     user-select: none;
-    font-family: 'Alata', sans-serif;
+    font-family: inherit;
     background-color: var(--bg-color);
 
 }
@@ -1319,7 +1330,7 @@ li.active {
     max-width: 150px;
     width: 100%;
     height: 50px;
-    font: 0.8em sans-serif;
+    font-size: 0.8em ;
     cursor: pointer;
     display: flex;
     padding: 0px;
@@ -1343,7 +1354,7 @@ li.active {
     color: var(--del-font-color);
     padding: 10%;
     margin-right: 20%;
-    font-family: 'Alata', sans-serif;
+    font-family: inherit;
 }
 
 .delbutton .delbutton__icon {
@@ -1696,7 +1707,7 @@ li.active {
     border: none;
     width: auto;
     font-size: 1.3rem;
-    font-family: 'Alata', sans-serif;
+    font-family: inherit;
     color: var(--player-tab-text-color);
     letter-spacing: 1px;
     background: var(--player-tab-back-color);
@@ -1769,7 +1780,7 @@ li.active {
 }
 
 .s-head-text {
-    font-weight: 700;
+    font-weight: 800;
     width: 100%;
 }
 
@@ -2609,9 +2620,9 @@ li.active {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    backdrop-filter: blur(20px);
+    z-index: 9999;   
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 .mobile-warning-message {
