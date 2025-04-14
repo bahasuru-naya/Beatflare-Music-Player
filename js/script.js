@@ -300,8 +300,8 @@ function audiovisual(player) {
 
             // Update bubble size and color based on audio data
             const audioValue = dataArray[index % dataArray.length] / 255;
-            bubble.radius = 5 + audioValue * 20;
-            bubble.color = `hsl(${audioValue * 360}, 100%, 50%)`;
+            bubble.radius = 5 + (audioValue * 100)/5;
+            bubble.color = `hsl(${audioValue * 700}, 100%, 50%)`;
 
             // Draw bubble
             ctx3.beginPath();

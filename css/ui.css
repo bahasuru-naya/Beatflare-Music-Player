@@ -154,7 +154,7 @@ nav {
 
 .preloaderback .dance-text {
     font-size: 1.5rem;
-    font-weight:bold;
+    font-weight: 600;
     position: absolute;
     top: calc(30% + 150px);
     left: 50%;
@@ -2273,9 +2273,6 @@ li.active {
     background: var(--about-back-color);
     padding-left: 10%;
     padding-right: 10%;
-
-
-
 }
 
 /* Container */
@@ -2288,7 +2285,7 @@ li.active {
     overflow: hidden;
     max-width: 1000px;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
     box-shadow: 0.2em 0.2em;
