@@ -1200,7 +1200,6 @@ li.active {
     height: 100%;
     position: relative;
     z-index: 1;
-
 }
 
 #playerhead {
@@ -1218,7 +1217,6 @@ li.active {
     display: flex;
     justify-self: center;
 }
-
 
 .cssbuttons-io {
     display: grid;
@@ -1239,8 +1237,6 @@ li.active {
     border: 2px solid black;
     box-shadow: 4px 4px black;
     animation: width-fill 0.3s;
-
-
 }
 
 @keyframes width-fill {
@@ -1323,9 +1319,7 @@ li.active {
     transform: scale(0.95);
 }
 
-
 .delbutton {
-
     position: relative;
     max-width: 150px;
     width: 100%;
@@ -1340,7 +1334,6 @@ li.active {
     background-color: var(--bg-color);
     border-radius: 10px;
     overflow: hidden;
-
 }
 
 .delbutton,
@@ -1404,8 +1397,6 @@ li.active {
 .delbutton:disabled .delbutton__text {
     color: var(--del-font-color);
 }
-
-
 
 .checkb {
     width: 60px;

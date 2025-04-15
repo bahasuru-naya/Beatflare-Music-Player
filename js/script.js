@@ -300,7 +300,7 @@ function audiovisual(player) {
 
             // Update bubble size and color based on audio data
             const audioValue = dataArray[index % dataArray.length] / 255;
-            bubble.radius = 5 + (audioValue * 100)/5;
+            bubble.radius = 5 + (audioValue * 100) / 5;
             bubble.color = `hsl(${audioValue * 700}, 100%, 50%)`;
 
             // Draw bubble
@@ -315,7 +315,7 @@ function audiovisual(player) {
     }
 
     let lastThemeUpdate = 0;
-    let themeUpdateInterval = 200; // update theme every 0.5 seconds max
+    let themeUpdateInterval = 250; // update theme every 0.3 seconds 
 
     function animate4() {
 
@@ -329,25 +329,40 @@ function audiovisual(player) {
 
         animation = requestAnimationFrame(animate4);
     }
+    let previousselectedThemeKey = null;
+    let currentselectedThemeKey = null;
 
     function partyTheme() {
         if (dataArray.length === 0) return; // handle empty data
-        let avg = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
-        //console.log("Average:", avg);
+        const sum = dataArray.reduce((sum, value) => sum + value, 0);
+
+        //console.log("Average:", sum);
 
         const themeKeys = Object.keys(themes);
-        let themeIndex = Math.floor(avg) % themeKeys.length;
-        //console.log("Theme Index:", themeIndex);
+        let themeIndex = Math.floor(sum) % themeKeys.length;
+        //console.log("Theme Index:", themeIndex);       
 
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
-        //console.log("Selected Theme:", selectedThemeKey);
+        //console.log("Selected Theme:", selectedThemeKey); 
 
+        if (selectedThemeKey !== currentselectedThemeKey && selectedThemeKey !== previousselectedThemeKey) {
 
-        if (selectedTheme) {
-            Object.keys(selectedTheme).forEach(key => {
-                document.documentElement.style.setProperty(key, selectedTheme[key]);
-            });
+            //console.log(previousselectedThemeKey, currentselectedThemeKey, selectedThemeKey);
+
+            previousselectedThemeKey = currentselectedThemeKey;
+            currentselectedThemeKey = selectedThemeKey;
+
+            if (selectedTheme) {
+                Object.keys(selectedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, selectedTheme[key]);
+                });
+            }
+            
+
+        }
+        else {
+            return;
         }
 
     }
