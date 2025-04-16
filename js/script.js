@@ -157,14 +157,13 @@ function audiovisual(player) {
     }
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    let barWidth = (canvas1.width / bufferLength) * 1.5;
+    let barWidth = (canvas1.width / bufferLength) * 1.3;
     let barHeight;
     let x;
 
     function animate1() {
         x = 0;
-        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-        let points = 300; // Number of points to draw
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);       
         analyser.getByteFrequencyData(dataArray);
 
         for (let i = 0; i < bufferLength; i++) {
@@ -190,8 +189,9 @@ function audiovisual(player) {
         ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
         // Circle parameters
-        let points = 300; // Number of points to draw
-        let radius = 40; // Base radius
+        let points = 200; // Number of points to draw circle
+        let radius = 50; // Base radius
+        const numlines = 43; // Number of lines to draw visualizer
         let cX = canvas2.width / 2; // Center X
         let cY = canvas2.height / 2; // Center Y
 
@@ -200,14 +200,14 @@ function audiovisual(player) {
         let scaleY = canvas2.height / Math.max(canvas2.width, canvas2.height);
 
         // Calculate radians per data point
-        let radianAdd = ((Math.PI * 6)) / dataArray.length; // Full circle
+        let radianAdd = ((Math.PI * 6)) / numlines; // Full circle
         let radian = 0;
         let radianc = 0;
 
 
         // Line styles
         ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
-        ctx2.lineWidth = 2;
+        ctx2.lineWidth = 3;
         ctx2.lineCap = 'round';
         ctx2.lineJoin = 'round';
 
@@ -219,7 +219,7 @@ function audiovisual(player) {
             let yStart = radius * Math.sin(radianc) * scaleY + cY;
 
             // Clamp the data value
-            let v = 30;
+            let v = 35;
 
             // Calculate ending point of the line
             let xEnd = v * Math.cos(radianc) * scaleX + cX;
@@ -235,14 +235,15 @@ function audiovisual(player) {
             radianc += ((Math.PI * 2)) / points;
         }
 
+        
         // Draw frequency-based radial lines
-        for (let i = 10; i < dataArray.length - 10; i++) {
+        for (let i = 10; i < numlines + 10 ; i++) {
             // Calculate starting point of the line
             let xStart = radius * Math.cos(radian) * scaleX + cX;
             let yStart = radius * Math.sin(radian) * scaleY + cY;
 
             // Clamp the data value
-            let v = Math.max(dataArray[i] / 2, radius);
+            let v = Math.max(dataArray[i] / 1.65 , radius);
 
             // Calculate ending point of the line
             let xEnd = v * Math.cos(radian) * scaleX + cX;
@@ -300,7 +301,7 @@ function audiovisual(player) {
 
             // Update bubble size and color based on audio data
             const audioValue = dataArray[index % dataArray.length] / 255;
-            bubble.radius = 5 + (audioValue * 100) / 5;
+            bubble.radius = 3 + (audioValue * 200) / 10;
             bubble.color = `hsl(${audioValue * 700}, 100%, 50%)`;
 
             // Draw bubble
@@ -1127,7 +1128,9 @@ searchbtntext.addEventListener("click", function () {
         searchinput.style.display = "none";
         searchbtntext.innerHTML = searchsvg + "Search ";
         searchinput.value = "";
-        document.getElementById("playlist-text").remove();
+        if (document.getElementById('playlist-text')) {
+            document.getElementById('playlist-text').remove();
+        }        
         let songs = document.querySelectorAll('#playlist li');
         songs.forEach((song) => {
             song.style.display = "grid";
