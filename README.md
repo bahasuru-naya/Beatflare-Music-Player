@@ -14,9 +14,10 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 - ▶️ **Play, Pause, and Skip** tracks effortlessly  
 - 📂 **Supports multiple audio formats**  
 - 🌙 **Light & Dark Mode** for any mood  
-- 🎚️ **Customizable Equalizer**  
+- 🎚️ **Customizable Equalizer and Audio Effects**  
 - 📃 **Effortless Song Management**  
-- 🎉 **Surprise Party Mode!**
+- 🔊 **Audio Visualizer**  
+- 🎉 **Party Mode!**
 
 
 ## 📦 Installation & Setup
