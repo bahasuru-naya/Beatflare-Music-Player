@@ -13,12 +13,12 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 
 - ▶️ **Play, Pause, and Skip** tracks effortlessly  
 - 📂 **Supports multiple audio formats**  
-- 🌙 **Light & Dark Mode** for any mood  
-- 🎚️ **Customizable Equalizer and Audio Effects**  
-- 📃 **Effortless Song Management**  
-- 🔊 **Audio Visualizer**  
-- 🎉 **Party Mode!**
-
+- 🌙 **Light & Dark Mode**  
+- 🎨 **Multiple Color Themes** to match your vibe  
+- 🎚️ **Customizable Equalizer & Audio Effects** for enhanced sound control  
+- 📃 **Effortless Song Management** for organizing your library  
+- 🔊 **Audio Visualizer** to watch the music come alive  
+- 🎉 **Surprise Party Mode!** for a fun, unexpected twist
 
 ## 📦 Installation & Setup
 
