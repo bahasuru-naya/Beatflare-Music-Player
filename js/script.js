@@ -163,7 +163,7 @@ function audiovisual(player) {
 
     function animate1() {
         x = 0;
-        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);       
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
         analyser.getByteFrequencyData(dataArray);
 
         for (let i = 0; i < bufferLength; i++) {
@@ -235,15 +235,15 @@ function audiovisual(player) {
             radianc += ((Math.PI * 2)) / points;
         }
 
-        
+
         // Draw frequency-based radial lines
-        for (let i = 10; i < numlines + 10 ; i++) {
+        for (let i = 10; i < numlines + 10; i++) {
             // Calculate starting point of the line
             let xStart = radius * Math.cos(radian) * scaleX + cX;
             let yStart = radius * Math.sin(radian) * scaleY + cY;
 
             // Clamp the data value
-            let v = Math.max(dataArray[i] / 1.65 , radius);
+            let v = Math.max(dataArray[i] / 1.65, radius);
 
             // Calculate ending point of the line
             let xEnd = v * Math.cos(radian) * scaleX + cX;
@@ -330,40 +330,27 @@ function audiovisual(player) {
 
         animation = requestAnimationFrame(animate4);
     }
-    let previousselectedThemeKey = null;
-    let currentselectedThemeKey = null;
+
 
     function partyTheme() {
         if (dataArray.length === 0) return; // handle empty data
-        const sum = dataArray.reduce((sum, value) => sum + value, 0);
+        let sum = dataArray.reduce((sum, value) => sum + value, 0);
+        let average = sum / dataArray.length;
 
-        //console.log("Average:", sum);
+        //console.log("Average:", average);
 
         const themeKeys = Object.keys(themes);
-        let themeIndex = Math.floor(sum) % themeKeys.length;
+        let themeIndex = (Math.floor(average) % (themeKeys.length * 100)) % themeKeys.length;
         //console.log("Theme Index:", themeIndex);       
 
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
         //console.log("Selected Theme:", selectedThemeKey); 
 
-        if (selectedThemeKey !== currentselectedThemeKey && selectedThemeKey !== previousselectedThemeKey) {
-
-            //console.log(previousselectedThemeKey, currentselectedThemeKey, selectedThemeKey);
-
-            previousselectedThemeKey = currentselectedThemeKey;
-            currentselectedThemeKey = selectedThemeKey;
-
-            if (selectedTheme) {
-                Object.keys(selectedTheme).forEach(key => {
-                    document.documentElement.style.setProperty(key, selectedTheme[key]);
-                });
-            }
-            
-
-        }
-        else {
-            return;
+        if (selectedTheme) {
+            Object.keys(selectedTheme).forEach(key => {
+                document.documentElement.style.setProperty(key, selectedTheme[key]);
+            });
         }
 
     }
@@ -1130,7 +1117,7 @@ searchbtntext.addEventListener("click", function () {
         searchinput.value = "";
         if (document.getElementById('playlist-text')) {
             document.getElementById('playlist-text').remove();
-        }        
+        }
         let songs = document.querySelectorAll('#playlist li');
         songs.forEach((song) => {
             song.style.display = "grid";

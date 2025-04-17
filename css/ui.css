@@ -2305,8 +2305,8 @@ li.active {
 .profile {
     flex: 1;
     padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .profile-img {
@@ -2372,23 +2372,23 @@ li.active {
 .mp3-info {
     flex: 1;
     padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     align-items: center;
     justify-items: center;
 }
 
 .mp3-logo {
     width: 110px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 10px;
 }
 
 .mp3-title {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .mp3-description {
@@ -2412,6 +2412,7 @@ li.active {
     font-size: 14px;
     transition: transform 0.3s ease-in-out;
     text-align: justify;
+    padding: 3px;
 }
 
 .features li:hover {
