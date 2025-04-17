@@ -18,7 +18,7 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 - 🎚️ **Customizable Equalizer & Audio Effects** for enhanced sound control  
 - 📃 **Effortless Song Management** for organizing your library  
 - 🔊 **Audio Visualizer** to watch the music come alive  
-- 🎉 **Surprise Party Mode!** for a fun, unexpected twist
+- 🎉 **Surprise Party Mode!** for a fun
 
 ## 📦 Installation & Setup
 
