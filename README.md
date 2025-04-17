@@ -27,7 +27,7 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 2. **Navigate to the project folder**
     ```bash
    cd Beatflare-Music-Player    
-3. **Open index.html in your browser**
+3. **Open `index.html` in your browser**
 
 ## 🤝 Contributing
 Contributions are welcome and appreciated! Whether it’s a bug fix, a new feature, or an improvement to the UI, we’d love your help making Beatflare even better.
