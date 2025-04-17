@@ -82,8 +82,10 @@ If you like this project, please consider giving it a ⭐ on GitHub. It helps th
 
 ## 📬 Feedback & Support
 Have questions, ideas, or feedback?
+We'd love to hear from you!
 
-- Create an Issue
-- Or reach out via email
+- 🐛 **Found a bug?** [Create an issue](https://github.com/bahasuru-naya/Beatflare-Music-Player/issues)
+- 💡 **Have a feature request or idea?** Start a [discussion](https://github.com/bahasuru-naya/Beatflare-Music-Player/discussions)
+- 📧 **Prefer direct contact?** Reach out via [email](mailto:bahasuru_nayanakantha@hotmail.com)
 
 Let’s make music more beautiful together!
