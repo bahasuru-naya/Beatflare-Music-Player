@@ -17,6 +17,7 @@ const visual1 = document.getElementById('visual1');
 const visual2 = document.getElementById('visual2');
 const visual3 = document.getElementById('visual3');
 const player = document.getElementById('player');
+const partytoggle = document.getElementById("party-on-off");
 
 repeatsong.disabled = true;
 randomsong.disabled = true;
@@ -155,6 +156,7 @@ function audiovisual(player) {
         panNode.connect(audioctx.destination);
 
     }
+
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
     let barWidth = (canvas1.width / bufferLength) * 1.3;
@@ -162,15 +164,17 @@ function audiovisual(player) {
     let x;
 
     function animate1() {
-        x = 0;
-        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-        analyser.getByteFrequencyData(dataArray);
+        if (document.querySelector('[data-id="step1"]').classList.contains("live")) {
+            x = 0;
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            analyser.getByteFrequencyData(dataArray);
 
-        for (let i = 0; i < bufferLength; i++) {
-            barHeight = Math.max(dataArray[i] / 2, 10);
-            ctx1.fillStyle = generateRandomColor(dataArray[i]);
-            ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
-            x += barWidth + 1;
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = Math.max(dataArray[i] * 1.2, 10);
+                ctx1.fillStyle = generateRandomColor(dataArray[i]);
+                ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
         }
 
         animation = requestAnimationFrame(animate1);
@@ -178,156 +182,209 @@ function audiovisual(player) {
 
     let hue = 0;
     function animate2() {
-        // Clear the canvas
-        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        if (document.querySelector('[data-id="step2"]').classList.contains("live")) {
 
-        // Get frequency data
-        analyser.getByteFrequencyData(dataArray);
+            // Clear the canvas
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
-        // Set the background color
-        ctx2.fillStyle = '#000'; // Black background
-        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+            // Get frequency data
+            analyser.getByteFrequencyData(dataArray);
 
-        // Circle parameters
-        let points = 200; // Number of points to draw circle
-        let radius = 50; // Base radius
-        const numlines = 43; // Number of lines to draw visualizer
-        let cX = canvas2.width / 2; // Center X
-        let cY = canvas2.height / 2; // Center Y
+            // Set the background color
+            ctx2.fillStyle = '#000'; // Black background
+            ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
-        // Scaling factors for roundness
-        let scaleX = canvas2.width / Math.max(canvas2.width, canvas2.height);
-        let scaleY = canvas2.height / Math.max(canvas2.width, canvas2.height);
+            // Circle parameters
+            let points = 200; // Number of points to draw circle
+            let radius = 50; // Base radius
+            const numlines = 43; // Number of lines to draw visualizer
+            let cX = canvas2.width / 2; // Center X
+            let cY = canvas2.height / 2; // Center Y
 
-        // Calculate radians per data point
-        let radianAdd = ((Math.PI * 6)) / numlines; // Full circle
-        let radian = 0;
-        let radianc = 0;
+            // Scaling factors for roundness
+            let scaleX = canvas2.width / Math.max(canvas2.width, canvas2.height);
+            let scaleY = canvas2.height / Math.max(canvas2.width, canvas2.height);
 
-
-        // Line styles
-        ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
-        ctx2.lineWidth = 3;
-        ctx2.lineCap = 'round';
-        ctx2.lineJoin = 'round';
-
-        // draw circle
-
-        for (let i = 0; i < points; i++) {
-            // Calculate starting point of the line
-            let xStart = radius * Math.cos(radianc) * scaleX + cX;
-            let yStart = radius * Math.sin(radianc) * scaleY + cY;
-
-            // Clamp the data value
-            let v = 35;
-
-            // Calculate ending point of the line
-            let xEnd = v * Math.cos(radianc) * scaleX + cX;
-            let yEnd = v * Math.sin(radianc) * scaleY + cY;
-
-            // Draw the line
-            ctx2.beginPath();
-            ctx2.moveTo(xStart, yStart);
-            ctx2.lineTo(xEnd, yEnd);
-            ctx2.stroke();
-
-            // Increment radian for the next line
-            radianc += ((Math.PI * 2)) / points;
-        }
+            // Calculate radians per data point
+            let radianAdd = ((Math.PI * 6)) / numlines; // Full circle
+            let radian = 0;
+            let radianc = 0;
 
 
-        // Draw frequency-based radial lines
-        for (let i = 10; i < numlines + 10; i++) {
-            // Calculate starting point of the line
-            let xStart = radius * Math.cos(radian) * scaleX + cX;
-            let yStart = radius * Math.sin(radian) * scaleY + cY;
+            // Line styles
+            ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
+            ctx2.lineWidth = 3;
+            ctx2.lineCap = 'round';
+            ctx2.lineJoin = 'round';
 
-            // Clamp the data value
-            let v = Math.max(dataArray[i] / 1.65, radius);
+            // draw circle
 
-            // Calculate ending point of the line
-            let xEnd = v * Math.cos(radian) * scaleX + cX;
-            let yEnd = v * Math.sin(radian) * scaleY + cY;
+            for (let i = 0; i < points; i++) {
+                // Calculate starting point of the line
+                let xStart = radius * Math.cos(radianc) * scaleX + cX;
+                let yStart = radius * Math.sin(radianc) * scaleY + cY;
 
-            // Draw the line
-            ctx2.beginPath();
-            ctx2.moveTo(xStart, yStart);
-            ctx2.lineTo(xEnd, yEnd);
-            ctx2.stroke();
+                // Clamp the data value
+                let v = 35;
 
-            // Increment radian for the next line
-            radian += radianAdd;
-        }
-        hue += 0.5;
-        if (hue > 360) {
-            hue = 0;
+                // Calculate ending point of the line
+                let xEnd = v * Math.cos(radianc) * scaleX + cX;
+                let yEnd = v * Math.sin(radianc) * scaleY + cY;
+
+                // Draw the line
+                ctx2.beginPath();
+                ctx2.moveTo(xStart, yStart);
+                ctx2.lineTo(xEnd, yEnd);
+                ctx2.stroke();
+
+                // Increment radian for the next line
+                radianc += ((Math.PI * 2)) / points;
+            }
+
+
+            // Draw frequency-based radial lines
+            for (let i = 10; i < numlines + 10; i++) {
+                // Calculate starting point of the line
+                let xStart = radius * Math.cos(radian) * scaleX + cX;
+                let yStart = radius * Math.sin(radian) * scaleY + cY;
+
+                // Clamp the data value
+                let v = Math.max(dataArray[i] / 1.65, radius);
+
+                // Calculate ending point of the line
+                let xEnd = v * Math.cos(radian) * scaleX + cX;
+                let yEnd = v * Math.sin(radian) * scaleY + cY;
+
+                // Draw the line
+                ctx2.beginPath();
+                ctx2.moveTo(xStart, yStart);
+                ctx2.lineTo(xEnd, yEnd);
+                ctx2.stroke();
+
+                // Increment radian for the next line
+                radian += radianAdd;
+            }
+            hue += 0.5;
+            if (hue > 360) {
+                hue = 0;
+            }
         }
 
         // Request the next animation frame
         animation = requestAnimationFrame(animate2);
     }
-    const bubbles = []; // Array to hold bubble objects
-    const numBubbles = 100; // Fixed number of bubbles
 
-    // Initialize bubbles with random positions and sizes
-    for (let i = 0; i < numBubbles; i++) {
-        bubbles.push({
-            x: Math.random() * canvas3.width,
-            y: Math.random() * canvas3.height,
-            radius: Math.random() * 20 + 10,
-            dx: (Math.random() - 0.5) * 2, // Random horizontal velocity
-            dy: (Math.random() - 0.5) * 2, // Random vertical velocity
-            color: `hsl(${Math.random() * 360}, 100%, 50%)`
-        });
-    }
+    // --- Circle Animation ---
 
     function animate3() {
-        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+        if (document.querySelector('[data-id="step3"]').classList.contains("live")) {
 
-        analyser.getByteFrequencyData(dataArray);
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+            analyser.getByteTimeDomainData(dataArray);
 
-        bubbles.forEach((bubble, index) => {
-            // Update bubble position
-            bubble.x += bubble.dx;
-            bubble.y += bubble.dy;
+            const bufferLength = analyser.frequencyBinCount;
+            const centerX = canvas3.width / 2;
+            const centerY = canvas3.height / 2;
+            const maxRadius = Math.min(centerX, centerY) * 0.7;
 
-            // Bounce off edges
-            if (bubble.x - bubble.radius < 0 || bubble.x + bubble.radius > canvas3.width) {
-                bubble.dx *= -1;
-            }
-            if (bubble.y - bubble.radius < 0 || bubble.y + bubble.radius > canvas3.height) {
-                bubble.dy *= -1;
-            }
+            const numCircles = 5;
+            const circleColors = [
+                'rgba(77, 218, 248, 0.2)',
+                'rgba(100, 200, 255, 0.3)',
+                'rgba(150, 180, 255, 0.4)',
+                'rgba(200, 150, 255, 0.5)',
+                'rgba(240, 130, 240, 0.6)'
+            ];
+            const radiusStep = maxRadius / numCircles;
 
-            // Update bubble size and color based on audio data
-            const audioValue = dataArray[index % dataArray.length] / 255;
-            bubble.radius = 3 + (audioValue * 200) / 10;
-            bubble.color = `hsl(${audioValue * 700}, 100%, 50%)`;
+            const sliceAngle = (Math.PI * 2) / bufferLength;
 
-            // Draw bubble
-            ctx3.beginPath();
-            ctx3.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
-            ctx3.fillStyle = bubble.color;
-            ctx3.fill();
-        });
+            for (let c = 0; c < numCircles; c++) {
+                const currentBaseRadius = radiusStep * (c + 1);
 
-        // Request the next animation frame
-        animation = requestAnimationFrame(animate3);
-    }
+                ctx3.lineWidth = (c === numCircles - 1) ? 2 : 1.5;
+                ctx3.strokeStyle = circleColors[c % circleColors.length];
+                ctx3.fillStyle = 'rgba(0,0,0,0)';
+                ctx3.lineCap = "round";
 
-    let lastThemeUpdate = 0;
-    let themeUpdateInterval = 250; // update theme every 0.3 seconds 
+                ctx3.beginPath();
 
-    function animate4() {
+                for (let i = 0; i < bufferLength; i++) {
+                    const amplitude = (dataArray[i] / 128.0) - 1.0;
 
-        if (partytoggle.checked) {
-            let now = Date.now();
-            if (now - lastThemeUpdate > themeUpdateInterval) {
-                partyTheme();
-                lastThemeUpdate = now;
+                    // --- Increased this multiplier for larger waves ---
+                    // Previous value was lower (e.g., 0.35)
+                    const amplitudeFactor = currentBaseRadius * 0.65; // Adjust this (0.5 to 0.8 might be good range)
+
+                    const currentRadius = currentBaseRadius + (amplitude * amplitudeFactor);
+                    const angle = (sliceAngle * i) - (Math.PI / 2);
+
+                    const x = centerX + currentRadius * Math.cos(angle);
+                    const y = centerY + currentRadius * Math.sin(angle);
+
+                    if (i === 0) {
+                        ctx3.moveTo(x, y);
+                    } else {
+                        ctx3.lineTo(x, y);
+                    }
+                }
+
+                ctx3.closePath();
+                ctx3.stroke();
             }
         }
 
+        animation = requestAnimationFrame(animate3);
+    }
+
+
+    let lastThemeUpdate = 0;
+    let themeUpdateInterval = 300; // update theme every 0.3 seconds 
+
+    function animate4() {
+        if (partytoggle.checked) {
+
+            now = Date.now();
+            if (now - lastThemeUpdate > themeUpdateInterval) {
+                partyTheme();
+                lastThemeUpdate = now;
+                if (!audioPlayer.paused) {
+                    const end = Date.now() + 50;
+                    (function frame() {
+
+                        confetti({
+                            particleCount: 2,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0 },
+
+                        });
+
+                        confetti({
+                            particleCount: 2,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1 },
+
+                        });
+
+                        if ((Date.now() < end)) {
+                            requestAnimationFrame(frame);
+                        }
+
+                    })();
+                } else {
+                    const selectedTheme = themes[themeSelect.value];
+                    if (selectedTheme) {
+                        Object.keys(selectedTheme).forEach(key => {
+                            document.documentElement.style.setProperty(key, selectedTheme[key]);
+                        });
+                    }
+
+                }
+
+            }
+        }
         animation = requestAnimationFrame(animate4);
     }
 
@@ -351,6 +408,9 @@ function audiovisual(player) {
             Object.keys(selectedTheme).forEach(key => {
                 document.documentElement.style.setProperty(key, selectedTheme[key]);
             });
+            document.documentElement.style.setProperty("--menu-color", "rgb(0, 0, 0)");
+            document.documentElement.style.setProperty("--menu-text-color", "rgb(255, 255, 255)");
+
         }
 
     }
@@ -1464,7 +1524,7 @@ function setdarkmode() {
 
 //party mode
 
-const partytoggle = document.getElementById("party-on-off");
+
 const warn = document.getElementById("warning");
 const agree = document.getElementById("agree");
 const disagree = document.getElementById("disagree");

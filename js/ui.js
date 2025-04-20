@@ -50,10 +50,10 @@ tabs.addEventListener("click", function (e) {
 
 // handle reload
 
-window.onbeforeunload = function (event) {
-  event.preventDefault();
+//window.onbeforeunload = function (event) {
+  //event.preventDefault();
 
-};
+//};
 
 
 //close error msg
