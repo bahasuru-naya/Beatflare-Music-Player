@@ -298,7 +298,7 @@ function audiovisual(player) {
             const sliceAngle = (Math.PI * 2) / (bufferLength * 2);
 
             for (let c = 0; c < numCircles; c++) {
-                const currentBaseRadius = radiusStep * (c + 1);                
+                const currentBaseRadius = radiusStep * (c + 1);
                 const startAngleOffset = (Math.PI * 2 / numCircles) * c;
 
                 ctx3.lineWidth = (c === numCircles - 1) ? 2 : 1.5;

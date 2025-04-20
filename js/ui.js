@@ -51,7 +51,7 @@ tabs.addEventListener("click", function (e) {
 // handle reload
 
 //window.onbeforeunload = function (event) {
-  //event.preventDefault();
+//event.preventDefault();
 
 //};
 
