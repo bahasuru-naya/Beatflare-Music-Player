@@ -278,7 +278,6 @@ function audiovisual(player) {
 
     function animate3() {
         if (document.querySelector('[data-id="step3"]').classList.contains("live")) {
-
             ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
             analyser.getByteTimeDomainData(dataArray);
 
@@ -289,18 +288,18 @@ function audiovisual(player) {
 
             const numCircles = 5;
             const circleColors = [
-                'rgba(77, 218, 248, 0.2)',
-                'rgba(100, 200, 255, 0.3)',
-                'rgba(150, 180, 255, 0.4)',
-                'rgba(200, 150, 255, 0.5)',
-                'rgba(240, 130, 240, 0.6)'
+                'rgba(187, 248, 4, 0.89)',
+                'rgba(5, 249, 41, 0.8)',
+                'rgba(150, 180, 255, 0.93)',
+                'rgba(248, 29, 14, 0.91)',
+                'rgba(248, 7, 248, 0.89)'
             ];
             const radiusStep = maxRadius / numCircles;
-
-            const sliceAngle = (Math.PI * 2) / bufferLength;
+            const sliceAngle = (Math.PI * 2) / (bufferLength * 2);
 
             for (let c = 0; c < numCircles; c++) {
-                const currentBaseRadius = radiusStep * (c + 1);
+                const currentBaseRadius = radiusStep * (c + 1);                
+                const startAngleOffset = (Math.PI * 2 / numCircles) * c;
 
                 ctx3.lineWidth = (c === numCircles - 1) ? 2 : 1.5;
                 ctx3.strokeStyle = circleColors[c % circleColors.length];
@@ -309,15 +308,20 @@ function audiovisual(player) {
 
                 ctx3.beginPath();
 
-                for (let i = 0; i < bufferLength; i++) {
-                    const amplitude = (dataArray[i] / 128.0) - 1.0;
+                let index;
+                for (let i = 0; i < bufferLength * 2; i++) {
 
-                    // --- Increased this multiplier for larger waves ---
-                    // Previous value was lower (e.g., 0.35)
-                    const amplitudeFactor = currentBaseRadius * 0.65; // Adjust this (0.5 to 0.8 might be good range)
-
+                    if (i < bufferLength) {
+                        index = i;
+                    } else {
+                        index = index - 1;
+                    }
+                    const amplitude = (dataArray[index] / 128.0) - 1.0;
+                    const amplitudeFactor = currentBaseRadius * 0.65;
                     const currentRadius = currentBaseRadius + (amplitude * amplitudeFactor);
-                    const angle = (sliceAngle * i) - (Math.PI / 2);
+
+                    // --- MODIFIED: Add the startAngleOffset to the angle calculation ---
+                    const angle = startAngleOffset + (sliceAngle * i) - (Math.PI / 2);
 
                     const x = centerX + currentRadius * Math.cos(angle);
                     const y = centerY + currentRadius * Math.sin(angle);
