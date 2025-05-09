@@ -780,6 +780,78 @@ path.two {
     }
 }
 
+.player-top-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color:var(--black);
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 4px var(--black);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    z-index: 10;
+
+}
+
+.svgIcon.rotated {
+    transform: rotate(180deg);
+}
+
+/* Combine both effects when hovered + rotated */
+.player-top-button:hover .svgIcon.rotated {
+    transform: translateX(-410%) rotate(180deg);
+}
+
+.svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+}
+
+.svgIcon path {
+    fill: var(--white);
+}
+
+.player-top-button:hover {
+    width: 140px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    background-color: var(--black);
+    align-items: center;
+}
+
+.player-top-button:hover .svgIcon {
+    /* width: 20px; */
+    transition: all 0.3s ease;
+    transform: translateX(-410%);
+}
+
+.player-top-button::before {
+    position: absolute;
+    bottom: -20px;
+    right:  20px;
+    content: "Back to Player";
+    color: var(--white);
+    /* transition-duration: .3s; */
+    font-size: 0px;
+}
+
+.player-top-button:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    bottom: unset;
+    /* transform: translateY(-30px); */
+    transition: all 0.3s ease;
+}
+
+
 #playersec {
     display: block;
     background: var(--player-back-color);
@@ -1940,6 +2012,7 @@ li.active {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr;
     justify-items: center;
+    align-items: center;
     width: 100%;
 }
 
@@ -2014,7 +2087,7 @@ li.active {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr;
-    grid-template-rows: 50px 100px 100px 50px 50px 50px 50px 50px ;
+    grid-template-rows: 50px 100px 100px 50px 50px 50px 50px 50px;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -2058,7 +2131,8 @@ li.active {
     font-size: 1.3rem;
 
 }
-#con-filter{
+
+#con-filter {
     grid-column: 1;
     grid-row: 2;
     display: grid;
@@ -2067,7 +2141,7 @@ li.active {
     align-items: center;
 }
 
-#con-filter2{
+#con-filter2 {
     grid-column: 1;
     grid-row: 3;
     display: grid;
@@ -2081,10 +2155,11 @@ li.active {
     color: var(--settings-text-color);
 }
 
-#con-filter input[type="range"] {    
+#con-filter input[type="range"] {
     width: 90%;
 }
-#con-filter2 input[type="range"] {    
+
+#con-filter2 input[type="range"] {
     width: 90%;
 }
 
@@ -2109,32 +2184,34 @@ li.active {
 
 }
 
-#con-filter-frequency { 
-    width: 100%;   
+#con-filter-frequency {
+    width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr ;
-    justify-items: center;
-    align-items: center;
-}
-#con-filter-quality { 
-    width: 100%;  
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
 }
 
-#con-filter2-frequency { 
-    width: 100%;   
+#con-filter-quality {
+    width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
 }
-#con-filter2-quality { 
-    width: 100%;  
+
+#con-filter2-frequency {
+    width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+#con-filter2-quality {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
 }

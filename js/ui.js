@@ -85,3 +85,53 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', checkScreenWidth);
 });
 
+
+const button = document.querySelector(".player-top-button");
+const svgIcon = button?.querySelector(".svgIcon");
+
+const rotateSVG = () => {
+  svgIcon.classList.add("rotated");
+};
+
+const resetSVG = () => {
+  svgIcon.classList.remove("rotated");
+};
+
+
+// Function to hide or show button
+const setButtonVisibility = (visible) => {
+  button.style.transition = "all 0.3s ease";
+  button.style.opacity = visible ? "1" : "0";
+  button.style.pointerEvents = visible ? "auto" : "none";
+};
+
+// Setup observers for #home and #player
+const homeSection = document.querySelector("#home");
+const playerSection = document.querySelector("#player");
+
+const observerOptions = {
+  threshold: 0.6, // Adjust if needed
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.target.id === "home") {
+      if (entry.isIntersecting) {
+        rotateSVG();
+      } else {
+        resetSVG();
+      }
+    }
+
+    if (entry.target.id === "player") {
+      if (entry.isIntersecting) {
+        setButtonVisibility(false);
+      } else {
+        setButtonVisibility(true);
+      }
+    }
+  });
+}, observerOptions);
+
+if (homeSection) observer.observe(homeSection);
+if (playerSection) observer.observe(playerSection);

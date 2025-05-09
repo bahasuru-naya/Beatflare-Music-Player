@@ -146,6 +146,15 @@
             </div>
         </div>
 
+
+        <button class="player-top-button" onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
+            <svg class="svgIcon" viewBox="0 0 384 512">
+                <path
+                    d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
+                </path>
+            </svg>
+        </button>
+
         <section id="home">
             <svg id="home-back" preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
 
@@ -436,13 +445,15 @@
                         <label for="filter" id="low-head" class="s-text">Low Pass Filter: </label>
                         <div id="con-filter-frequency">
                             <label id="filterlabel1" class="filter-label" for="filter-f">24000.00Hz</label>
-                            <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01" value="1">
+                            <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01"
+                                value="1">
                             <label for="filter" class="filter-label">Frequency</label>
 
                         </div>
                         <div id="con-filter-quality">
                             <label id="filterlabel2" class="filter-label" for="filter-q">0.00</label>
-                            <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01"
+                                value="0">
                             <label for="filter" class="filter-label">Quality</label>
 
                         </div>
@@ -452,19 +463,21 @@
                         <label for="filter" id="high-head" class="s-text">High Pass Filter: </label>
                         <div id="con-filter2-frequency">
                             <label id="filter2label1" class="filter-label" for="filter-f">20.00Hz</label>
-                            <input type="range" id="filter2-f" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <input type="range" id="filter2-f" class="filter-range" min="0" max="1" step="0.01"
+                                value="0">
                             <label for="filter" class="filter-label">Frequency</label>
 
                         </div>
                         <div id="con-filter2-quality">
                             <label id="filter2label2" class="filter-label" for="filter-q">0.00</label>
-                            <input type="range" id="filter2-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <input type="range" id="filter2-q" class="filter-range" min="0" max="1" step="0.01"
+                                value="0">
                             <label for="filter" class="filter-label">Quality</label>
 
                         </div>
                         <button id="filter2-reset" class="rest-btn">Reset</button>
                     </div>
-                    
+
 
                     <label id="ui-set-head" class="s-head-text">User Interface Settings</label>
                     <div id="visualizer-set">
