@@ -112,6 +112,8 @@ let filters;
 let panNode;
 let gainNode;
 let jungle;
+let lowfilter;
+let highfilter;
 
 
 //visualizer and other effects
@@ -147,13 +149,25 @@ function audiovisual(player) {
             return curr;
         });
 
+        lowfilter = audioctx.createBiquadFilter();
+        lowfilter.type = "lowpass";
+        lowfilter.frequency.value = 24000;
+
+        highfilter = audioctx.createBiquadFilter();
+        highfilter.type = "highpass";
+        highfilter.frequency.value = 20;
+
         panNode = new StereoPannerNode(audioctx);
         panNode.pan.value = 0;
 
         jungle.output.connect(filters[0]);
 
         filters[filters.length - 1].connect(panNode);
-        panNode.connect(audioctx.destination);
+        panNode.connect(lowfilter);
+        lowfilter.connect(highfilter);
+        highfilter.connect(audioctx.destination);
+
+        //panNode.connect(audioctx.destination);
 
     }
 
@@ -1076,6 +1090,104 @@ stereoRest.addEventListener("click", function () {
 
 });
 
+//lowpass filter
+const lowpassControlF = document.getElementById("filter-f");
+const lowpassLabelF = document.getElementById("filterlabel1");
+const lowpassControlQ = document.getElementById("filter-q");
+const lowpassLabelQ = document.getElementById("filterlabel2");
+const lowpassreset = document.getElementById("filter-reset");
+
+let maxValue = 48000 / 2; // Default max value
+
+lowpassControlF.addEventListener("input", function () {
+    const lowpassValue = parseFloat(this.value);
+    var minValue = 20;
+    if (audioctx) {
+        maxValue = audioctx.sampleRate / 2;
+    } else {
+        maxValue = 48000 / 2;
+    }
+    // Logarithm (base 2) to compute how many octaves fall in the range.
+    var numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2;
+    // Compute a multiplier from 0 to 1 based on an exponential scale.
+    var multiplier = Math.pow(2, numberOfOctaves * (lowpassValue - 1.0));
+    if (lowfilter) {
+        lowfilter.frequency.value = maxValue * multiplier;
+    }
+    lowpassLabelF.textContent = (maxValue * multiplier).toFixed(2) + "Hz";
+});
+
+var QUAL_MUL = 30;
+
+lowpassControlQ.addEventListener("input", function () {
+    const lowpassValueQ = parseFloat(this.value);
+    if (lowfilter) {
+        lowfilter.Q.value = lowpassValueQ * QUAL_MUL;
+    }
+    lowpassLabelQ.textContent = (lowpassValueQ * QUAL_MUL).toFixed(2);
+}
+);
+
+lowpassreset.addEventListener("click", function () {
+    lowpassControlF.value = 1;
+    lowpassControlQ.value = 0;  
+    if (lowfilter) {
+        lowfilter.frequency.value = maxValue;
+        lowfilter.Q.value = 0;
+    }
+    lowpassLabelF.textContent = "24000.00Hz";
+    lowpassLabelQ.textContent = "0.00";
+});
+
+//highpass filter
+const highpassControlF = document.getElementById("filter2-f");
+const highpassLabelF = document.getElementById("filter2label1");
+const highpassControlQ = document.getElementById("filter2-q");
+const highpassLabelQ = document.getElementById("filter2label2");
+const highpassreset = document.getElementById("filter2-reset");
+
+let maxValue2 = 0;
+
+highpassControlF.addEventListener("input", function () {
+    const highpassValue = parseFloat(this.value);
+    var minValue2 = 20;
+    if (audioctx) {
+        maxValue2 = audioctx.sampleRate / 2;
+    } else {
+        maxValue2 = 48000 / 2;
+    }
+    // Logarithm (base 2) to compute how many octaves fall in the range.
+    var numberOfOctaves2 = Math.log(maxValue2 / minValue2) / Math.LN2;
+    // Compute a multiplier from 0 to 1 based on an exponential scale.
+    var multiplier2 = Math.pow(2, numberOfOctaves2 * (highpassValue - 1.0));
+    if (highfilter) {
+        highfilter.frequency.value = maxValue2 * multiplier2;
+    }
+    highpassLabelF.textContent = (maxValue2 * multiplier2).toFixed(2) + "Hz";
+});
+
+var QUAL_MUL2 = 30;
+
+highpassControlQ.addEventListener("input", function () {
+    const highpassValueQ = parseFloat(this.value);
+    if (highfilter) {
+        highfilter.Q.value = highpassValueQ * QUAL_MUL2;
+    }
+    highpassLabelQ.textContent = (highpassValueQ * QUAL_MUL2).toFixed(2);
+}
+);
+
+highpassreset.addEventListener("click", function () {
+    highpassControlF.value = 0;
+    highpassControlQ.value = 0;  
+    if (highfilter) {
+        highfilter.frequency.value = 20;
+        highfilter.Q.value = 0;
+    }
+    highpassLabelF.textContent = "20.00Hz";
+    highpassLabelQ.textContent = "0.00";
+}
+);
 
 
 //visualizer on off

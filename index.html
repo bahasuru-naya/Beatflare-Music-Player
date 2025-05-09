@@ -432,6 +432,40 @@
                         <label id="Stereolabel2" for="Stereo"><i class="fa-solid fa-volume-low"></i> 0</label>
                         <button id="Stereo-reset" class="rest-btn">Reset</button>
                     </div>
+                    <div id="con-filter">
+                        <label for="filter" id="low-head" class="s-text">Low Pass Filter: </label>
+                        <div id="con-filter-frequency">
+                            <label id="filterlabel1" class="filter-label" for="filter-f">24000.00Hz</label>
+                            <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01" value="1">
+                            <label for="filter" class="filter-label">Frequency</label>
+
+                        </div>
+                        <div id="con-filter-quality">
+                            <label id="filterlabel2" class="filter-label" for="filter-q">0.00</label>
+                            <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <label for="filter" class="filter-label">Quality</label>
+
+                        </div>
+                        <button id="filter-reset" class="rest-btn">Reset</button>
+                    </div>
+                    <div id="con-filter2">
+                        <label for="filter" id="high-head" class="s-text">High Pass Filter: </label>
+                        <div id="con-filter2-frequency">
+                            <label id="filter2label1" class="filter-label" for="filter-f">20.00Hz</label>
+                            <input type="range" id="filter2-f" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <label for="filter" class="filter-label">Frequency</label>
+
+                        </div>
+                        <div id="con-filter2-quality">
+                            <label id="filter2label2" class="filter-label" for="filter-q">0.00</label>
+                            <input type="range" id="filter2-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                            <label for="filter" class="filter-label">Quality</label>
+
+                        </div>
+                        <button id="filter2-reset" class="rest-btn">Reset</button>
+                    </div>
+                    
+
                     <label id="ui-set-head" class="s-head-text">User Interface Settings</label>
                     <div id="visualizer-set">
                         <label for="visualizer-on-off" class="s-text">Visualizer On/Off : </label>
@@ -479,7 +513,7 @@
                         </select>
                     </div>
                     <div id="darkmode-set">
-                        <label for="darkmode-on-off" class="s-text">Dark Mode On/Off : </label>
+                        <label for="darkmode-on-off" class="s-text">Dark Mode : </label>
                         <label class="switch">
                             <input type="checkbox" id="darkmode-on-off">
                             <div class="slider">
@@ -509,7 +543,7 @@
                         </label>
                     </div>
                     <div id="partymode">
-                        <label for="party-on-off" class="s-text">Party Mode: </label>
+                        <label for="party-on-off" class="s-text">Party Mode : </label>
                         <label class="switch">
                             <input type="checkbox" id="party-on-off">
                             <div class="slider">
