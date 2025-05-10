@@ -28,6 +28,8 @@ let listItemMap = new Map();
 let isAudioConnected = false;
 
 audioPlayer.volume = 0.5;
+audioPlayer.playbackRate = 1;
+let speed = 1;
 
 const ctx1 = canvas1.getContext('2d');
 const ctx2 = canvas2.getContext('2d');
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     seekBar.disabled = true;
     removeAll.disabled = true;
     searchbtntext.disabled = true;
+    audiovisual(audioPlayer);
 });
 
 window.addEventListener('resize', setWidthHeight);
@@ -718,6 +721,7 @@ function playFile(index) {
         const fileURL = URL.createObjectURL(files[index]);
         audioPlayer.src = fileURL;
         audioPlayer.currentTime = 0; // Reset current time to 0
+        audioPlayer.playbackRate =parseFloat(speed);
         audioPlayer.play();
         playPauseButton.innerHTML = pausesvg;
         updatePlaylistHighlight(index);
@@ -924,6 +928,7 @@ speedControl.addEventListener("input", function () {
 
     audioPlayer.playbackRate = parseFloat(this.value);
     speedlablel.textContent = this.value + 'x';
+    speed =this.value;
 
 });
 
@@ -931,6 +936,7 @@ speedreset.addEventListener("click", function () {
     speedControl.value = 1;
     audioPlayer.playbackRate = 1;
     speedlablel.textContent = '1x';
+    speed =1;
 });
 
 

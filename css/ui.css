@@ -527,6 +527,9 @@ section {
     color: rgba(107, 114, 128, 1);
     text-align: justify;
 }
+.msg-bold{
+    font-weight: 1000;
+}
 
 .actions {
     margin-top: 1rem;
@@ -2106,7 +2109,7 @@ li.active {
 /* Track: webkit browsers */
 #Stereo::-webkit-slider-runnable-track {
     height: 19px;
-    background: #ccc;
+    background: var(--home-c3-color);
     border-radius: 16px;
     border: var(--black) 2px solid;
     overflow: hidden;
@@ -2116,10 +2119,11 @@ li.active {
 #Stereo::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 0;
-    height: 0;
+    width: 4px;
+    height: 20px;
+    background-color: var(--black);
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
-    box-shadow: -200px 0 0 200px var(--home-c1-color);
+    box-shadow: -200px 0 0 200px var(--home-c1-color); 
 
 }
 
