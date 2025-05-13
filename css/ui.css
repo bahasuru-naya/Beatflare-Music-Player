@@ -2427,6 +2427,7 @@ li.active {
 
 #about {
     max-height: 100vh;
+    min-height: 100vh;
     height: auto;
     padding: 0px;
     margin: 0px;

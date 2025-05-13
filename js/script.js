@@ -1459,7 +1459,7 @@ const themes = {
     lavender: {
         "--black": " #3d348b",
         "--white": " #fdf7fa",
-        "--menu-color": " #9a8c98",
+        "--menu-color": "rgb(93, 31, 112)",
         "--home-c1-color": " #c77dff",
         "--home-c2-color": " #f3c4fb",
         "--home-c3-color": " #d8b4e2",
@@ -1617,7 +1617,7 @@ const darktheme = {
         "--player-tab-active-back-color": " #4b4646",
         "--player-tab-active-text-color": " #ffffff",
         "--settings-head-text-color": " #ffffff",
-        "--settings-text-color": " #ffffff",
+        "--settings-text-color": "rgb(216, 215, 215)",
         "--about-text-color": " #ffffff",
     },
 };
