@@ -187,7 +187,7 @@ function audiovisual(player) {
             analyser.getByteFrequencyData(dataArray);
 
             for (let i = 0; i < bufferLength; i++) {
-                barHeight = Math.max(dataArray[i] * 1.2, 10);
+                barHeight = Math.max(dataArray[i] * 1.2, 2);
                 ctx1.fillStyle = generateRandomColor(dataArray[i]);
                 ctx1.fillRect(x, canvas1.height - barHeight, barWidth, barHeight);
                 x += barWidth + 1;
@@ -444,8 +444,13 @@ function audiovisual(player) {
 
 //generate random color
 function generateRandomColor(barHeight) {
+    if (barHeight === undefined || barHeight === null) {
+        barHeight = 0;
+    }  
+    else   {                                          
     // Ensure barHeight is within a reasonable range
     barHeight = Math.max(0, Math.min(255, barHeight));
+    }
 
     // Use barHeight to influence hue and convert HSL to RGB for rainbow effect
     let hue = (barHeight * 1.5 + Math.floor(Math.random() * 60)) % 360; // create variation

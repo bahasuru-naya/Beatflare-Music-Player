@@ -38,6 +38,8 @@
 
 }
 
+
+
 * {
     font-family: "Rethink Sans", sans-serif;
     font-weight: 600;
@@ -53,9 +55,6 @@ body {
     margin: 0;
 }
 
-nav {
-    z-index: 99;
-}
 
 *:disabled {
     cursor: not-allowed;
@@ -113,8 +112,8 @@ nav {
 }
 
 #preloader {
-    width: 175px;
-    height: 175px;
+    width: 50%;
+    height: 50%;
     background-color: #CEAB93;
     border-radius: 10px;
     position: fixed;
@@ -281,7 +280,14 @@ section {
 
 .menu {
     position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    z-index: 99;
+
 }
+
 
 .menu__toggle {
     opacity: 0;
@@ -527,7 +533,8 @@ section {
     color: rgba(107, 114, 128, 1);
     text-align: justify;
 }
-.msg-bold{
+
+.msg-bold {
     font-weight: 1000;
 }
 
@@ -787,7 +794,7 @@ path.two {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color:var(--black);
+    background-color: var(--black);
     position: fixed;
     bottom: 25px;
     right: 25px;
@@ -839,7 +846,7 @@ path.two {
 .player-top-button::before {
     position: absolute;
     bottom: -20px;
-    right:  20px;
+    right: 20px;
     content: "Back to Player";
     color: var(--white);
     /* transition-duration: .3s; */
@@ -871,6 +878,7 @@ path.two {
     text-align: center;
     font-weight: bold;
     font-size: 3rem;
+    line-height: 3rem;
     padding: 10px;
     width: 75%;
     margin: 0;
@@ -918,6 +926,7 @@ path.two {
     font-size: 1.3rem;
     font-weight: bold;
     border: #000000 2px solid;
+    
 }
 
 #file-input {
@@ -1755,7 +1764,8 @@ li.active {
     display: grid;
     background: var(--player-tab-active-back-color);
     border-radius: 0.8rem;
-    grid-template-rows: 1fr 8fr
+    grid-template-rows: 1fr 8fr;
+    
 }
 
 .tbtn-container {
@@ -1838,7 +1848,7 @@ li.active {
 }
 
 #settings {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-items: center;
     background-color: var(--settings-back-color);
@@ -1848,6 +1858,7 @@ li.active {
     padding-right: 5%;
     align-items: center;
     height: auto;
+    max-height: 100vh;
 }
 
 .s-text {
@@ -1863,26 +1874,23 @@ li.active {
 #sethead {
     color: var(--settings-head-text-color);
     padding: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-weight: bold;
     justify-self: center;
+    font-size: 3rem;
+    line-height: 3rem;
     align-self: center;
     margin: 0px;
     z-index: 1;
-
 }
 
 .settings-content {
     display: grid;
-    grid-template-rows: 1fr auto;
-    font-size: 2rem;
     color: var(--settings-text-color);
     gap: 2rem;
     padding: 10px;
-    padding-bottom: 40px;
     z-index: 1;
-    width: 100%;
-
+    width: 100%;   
 }
 
 .column-1 {
@@ -1892,9 +1900,7 @@ li.active {
     gap: 10px;
     width: 100%;
     align-items: center;
-    justify-items: center;
-
-
+    justify-items: center;  
 }
 
 #audio-set-head {
@@ -2094,6 +2100,8 @@ li.active {
     gap: 10px;
     justify-content: center;
     align-items: center;
+    
+
 }
 
 #con-Stereo {
@@ -2123,7 +2131,7 @@ li.active {
     height: 20px;
     background-color: var(--black);
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
-    box-shadow: -200px 0 0 200px var(--home-c1-color); 
+    box-shadow: -200px 0 0 200px var(--home-c1-color);
 
 }
 
@@ -2418,7 +2426,7 @@ li.active {
 }
 
 #about {
-    min-height: 100vh;
+    max-height: 100vh;
     height: auto;
     padding: 0px;
     margin: 0px;
@@ -2442,17 +2450,18 @@ li.active {
 .container {
     display: flex;
     flex-wrap: wrap;
-    background: white;
-    border-radius: 15px;
+    background: var(--home-c2-color);
+    border-radius: 20px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 1000px;
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
     box-shadow: 0.2em 0.2em;
     margin-bottom: 40px;
+    border: #000000 2px solid;
 }
 
 /* Section Title */
@@ -2477,6 +2486,10 @@ li.active {
     padding: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin: 5px;
+    border-radius: 20px;
+    border: #000000 2px solid;
+    background-color: white;
 }
 
 .profile-img {
@@ -2515,6 +2528,7 @@ li.active {
     justify-content: center;
     gap: 15px;
     margin-top: 15px;
+    margin: 10px;
 }
 
 
@@ -2546,11 +2560,16 @@ li.active {
     padding-bottom: 5px;
     align-items: center;
     justify-items: center;
+    line-height: 1.2rem;
+    border-radius: 20px;
+    border: #000000 2px solid;
+    margin: 5px;
+    background: white;
 }
 
 .mp3-logo {
     width: 110px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     margin-top: 5px;
     border-radius: 10px;
 }
@@ -2558,7 +2577,8 @@ li.active {
 .mp3-title {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px
 }
 
 .mp3-description {
@@ -2574,6 +2594,7 @@ li.active {
     justify-items: center;
     padding: 10px;
     margin: 0;
+    line-height: 1.2rem;
 
 }
 
@@ -2697,6 +2718,26 @@ li.active {
     }
 
 }
+
+@media (max-width: 1050px) {
+    #settings {
+
+        max-height: none;
+    }
+
+    .settings-content {
+
+        font-size: 2rem;
+        align-items: center;
+
+    }
+
+    #about {
+        max-height: none;
+        height: auto;
+    }
+}
+
 
 @media (max-width: 1000px) {
     .home-text h1 {
