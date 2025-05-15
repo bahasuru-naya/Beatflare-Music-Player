@@ -926,7 +926,7 @@ path.two {
     font-size: 1.3rem;
     font-weight: bold;
     border: #000000 2px solid;
-    
+
 }
 
 #file-input {
@@ -1765,7 +1765,7 @@ li.active {
     background: var(--player-tab-active-back-color);
     border-radius: 0.8rem;
     grid-template-rows: 1fr 8fr;
-    
+
 }
 
 .tbtn-container {
@@ -1884,13 +1884,17 @@ li.active {
     z-index: 1;
 }
 
+.changinglabel {
+    font-size: 1.5rem;
+}
+
 .settings-content {
     display: grid;
     color: var(--settings-text-color);
     gap: 2rem;
     padding: 10px;
     z-index: 1;
-    width: 100%;   
+    width: 100%;
 }
 
 .column-1 {
@@ -1900,7 +1904,7 @@ li.active {
     gap: 10px;
     width: 100%;
     align-items: center;
-    justify-items: center;  
+    justify-items: center;
 }
 
 #audio-set-head {
@@ -1970,11 +1974,6 @@ li.active {
     box-shadow: -200px 0 0 200px var(--home-c1-color);
 
 }
-
-#speedlabel {
-    font-size: 1.5rem;
-}
-
 #con-pitch {
     grid-column: 1;
     grid-row: 3;
@@ -2009,9 +2008,7 @@ li.active {
 #pitchlabel {
     display: inline-flex;
     grid-column: 3;
-    align-items: center;
-    font-size: 1.5rem;
-
+    align-items: center;  
 }
 
 #equalizer {
@@ -2100,7 +2097,7 @@ li.active {
     gap: 10px;
     justify-content: center;
     align-items: center;
-    
+
 
 }
 

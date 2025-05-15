@@ -1,0 +1,230 @@
+:root {
+    --test: #1a2a4d;
+}
+
+
+@media (max-width: 500px) {
+    .pre-back {
+        width: 300px;
+        height: 300px;
+    }
+
+    #preloader .plate .black {
+        width: 130px;
+        height: 130px;
+    }
+
+    .preloaderback .dance-text {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        top: calc(50% - 250px);
+        left: calc(50% - 125px);
+        width: 250px;
+        height: 430px;
+    }
+
+    .player-top-button {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .home-text h1 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    .home-text p {
+        font-size: 1rem;
+    }
+
+    .home-text h3 {
+        font-size: 1.2rem;
+
+    }
+
+    .cta {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+
+    }
+
+    #playersec h1 {
+        font-size: 1.7rem;
+
+    }
+
+    button {
+        font-size: 10px;
+    }
+
+    ul {
+        font-size: 0.7rem;
+    }
+
+    #albumArt {
+        width: 80px;
+        height: 80px;
+    }
+
+    .volumemute .checkb {
+        width: 50px;
+        height: 50px;
+    }
+
+    .details-volume {
+        font-size: 1rem;
+    }
+
+    .checkb {
+        width: 50px;
+        height: 50px;
+    }
+
+    .controlbtn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .play-pause-back {
+        width: 55px;
+        height: 55px;
+    }
+
+    #play-pause {
+        width: 50px;
+        height: 50px;
+    }
+
+    .seek-bar-container {
+        font-size: 1rem;
+    }
+
+    .tbutton {
+        font-size: 1rem;
+    }
+
+    #canvas2 {
+        width: 250px;
+        height: 250px;
+    }
+
+    #canvas3 {
+        width: 250px;
+        height: 250px;
+    }
+
+    #sethead {
+        font-size: 1.7rem;
+        line-height: 1.7rem;
+    }
+
+    .s-text {
+        font-size: 1.1rem;
+    }
+
+    .changinglabel {
+        font-size: 1.1rem;
+    }
+
+    .rest-btn {
+        font-size: 0.8rem;
+    }
+
+    #equ-select {
+        font-size: 0.8rem;
+    }
+
+    .sliderlabel {
+        font-size: 0.5rem;
+    }
+
+    #Stereolabel1 {
+        font-size: 1rem;
+    }
+
+    #Stereolabel2 {
+        font-size: 1rem;
+
+    }
+
+    .filter-label {
+        font-size: 1rem;
+    }
+
+    .switch {
+        /* switch */
+        --switch-width: 60px;
+        --switch-height: 30px;
+        --circle-diameter: 23px;
+    }
+
+    #theme-select {
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .creator-name-head {
+        font-size: 20px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .creator-name {
+        font-size: 16px;
+    }
+
+    .creator-description {
+        font-size: 14px;
+    }
+
+    .social-btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .mp3-title {
+        font-size: 20px;
+    }
+
+    .mp3-logo {
+        width: 100px;
+
+    }
+
+    .mp3-description {
+        font-size: 14px;
+    }
+
+    .features {
+        line-height: 1rem;
+    }
+
+    .features li {
+        font-size: 12px;
+    }
+
+    .github-btn {
+        font-size: 14px;
+    }
+
+    .contribution-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {}
+
+
+@media (max-width: 350px) {}
+
+@media (max-width: 300px) {}

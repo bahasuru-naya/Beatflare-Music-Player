@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beatflare Music Player</title>
     <link rel="stylesheet" href="css/ui.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/art.png">
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
@@ -409,13 +409,13 @@
                     <div id="playback-speed">
                         <label for="speed" class="s-text">Speed: </label>
                         <input type="range" id="speed" min="0.3" max="1.7" step="0.1" value="1">
-                        <label id="speedlabel" for="speed">1x</label>
+                        <label id="speedlabel" for="speed" class="changinglabel">1x</label>
                         <button id="speed-reset" class="rest-btn">Reset</button>
                     </div>
                     <div id="con-pitch">
                         <label for="pitch" class="s-text">Pitch: </label>
                         <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
-                        <label id="pitchlabel" for="pitch">0x</label>
+                        <label id="pitchlabel" for="pitch" class="changinglabel">0x</label>
                         <button id="pitch-reset" class="rest-btn">Reset</button>
                     </div>
                     <div id="equalizer">
@@ -436,9 +436,9 @@
                 <div class="column-2">
                     <div id="con-Stereo">
                         <label for="Stereo" class="s-text">Stereo: </label>
-                        <label id="Stereolabel1" for="Stereo"><i class="fa-solid fa-volume-low"></i> 0</label>
+                        <label id="Stereolabel1" for="Stereo" class="changinglabel" ><i class="fa-solid fa-volume-low"></i> 0</label>
                         <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
-                        <label id="Stereolabel2" for="Stereo"><i class="fa-solid fa-volume-low"></i> 0</label>
+                        <label id="Stereolabel2" for="Stereo" class="changinglabel" ><i class="fa-solid fa-volume-low"></i> 0</label>
                         <button id="Stereo-reset" class="rest-btn">Reset</button>
                     </div>
                     <div id="con-filter">
