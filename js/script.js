@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     seekBar.disabled = true;
     removeAll.disabled = true;
     searchbtntext.disabled = true;
-    audiovisual(audioPlayer);
+    audiovisual(audioPlayer);    
 });
 
 window.addEventListener('resize', setWidthHeight);
