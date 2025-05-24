@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     seekBar.disabled = true;
     removeAll.disabled = true;
     searchbtntext.disabled = true;
-    audiovisual(audioPlayer);    
+    audiovisual(audioPlayer);
 });
 
 window.addEventListener('resize', setWidthHeight);
@@ -446,10 +446,10 @@ function audiovisual(player) {
 function generateRandomColor(barHeight) {
     if (barHeight === undefined || barHeight === null) {
         barHeight = 0;
-    }  
-    else   {                                          
-    // Ensure barHeight is within a reasonable range
-    barHeight = Math.max(0, Math.min(255, barHeight));
+    }
+    else {
+        // Ensure barHeight is within a reasonable range
+        barHeight = Math.max(0, Math.min(255, barHeight));
     }
 
     // Use barHeight to influence hue and convert HSL to RGB for rainbow effect
@@ -517,10 +517,16 @@ repeatsong.addEventListener('change', () => {
     }
 
 });
+
+const playedrandomArray = [];
+
 randomsong.addEventListener('change', () => {
     if (randomsong.checked) {
         // Checkbox is checked
         repeatsong.checked = false;
+    }
+    else {
+        playedrandomArray = [];
     }
 });
 
@@ -601,6 +607,36 @@ function updatePlaylist() {
         listItemtext.textContent = file.name;
         listItemtext.textContent = listItemtext.textContent.replace(/_/g, " ");
         listItem.setAttribute('data-index', index);
+        listItem.appendChild(listItemtext);
+
+        if (index !== 0) {
+            const upbutton = document.createElement("button");
+            upbutton.classList.add("up");
+            // Create the SVG element (as innerHTML)
+            upbutton.innerHTML = `
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+            </svg>`;
+            listItem.appendChild(upbutton);
+            upbutton.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+            });
+        }
+
+        if (index !== files.length - 1) {
+            const downbutton = document.createElement("button");
+            downbutton.classList.add("down");
+            // Create the SVG element (as innerHTML)
+            downbutton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+            </svg>`;
+            listItem.appendChild(downbutton);
+            downbutton.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+            });
+        }
 
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove');
@@ -613,7 +649,6 @@ function updatePlaylist() {
 
         removeButton.appendChild(removeButtonspan);
         removeButton.appendChild(removeButtonicon);
-        listItem.appendChild(listItemtext);
         listItem.appendChild(removeButton);
 
         listItem.addEventListener('click', () => playFile(index));
@@ -726,7 +761,7 @@ function playFile(index) {
         const fileURL = URL.createObjectURL(files[index]);
         audioPlayer.src = fileURL;
         audioPlayer.currentTime = 0; // Reset current time to 0
-        audioPlayer.playbackRate =parseFloat(speed);
+        audioPlayer.playbackRate = parseFloat(speed);
         audioPlayer.play();
         playPauseButton.innerHTML = pausesvg;
         updatePlaylistHighlight(index);
@@ -867,11 +902,16 @@ audioPlayer.addEventListener('ended', function () {
         playFile(currentIndex);
     }
     else if (randomsong.checked) {
+        if (playedrandomArray.length == files.length) {
+            playedrandomArray.splice(0, playedrandomArray.length - 1);
+        }
         var randomIndex = Math.floor(Math.random() * files.length);
-        while (randomIndex === currentIndex) {
+        while (randomIndex === currentIndex || playedrandomArray.includes(randomIndex)) {
             randomIndex = Math.floor(Math.random() * files.length);
         }
+        playedrandomArray.push(randomIndex);
         playFile(randomIndex);
+
     }
     else if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
@@ -933,7 +973,7 @@ speedControl.addEventListener("input", function () {
 
     audioPlayer.playbackRate = parseFloat(this.value);
     speedlablel.textContent = this.value + 'x';
-    speed =this.value;
+    speed = this.value;
 
 });
 
@@ -941,7 +981,7 @@ speedreset.addEventListener("click", function () {
     speedControl.value = 1;
     audioPlayer.playbackRate = 1;
     speedlablel.textContent = '1x';
-    speed =1;
+    speed = 1;
 });
 
 
@@ -1141,7 +1181,7 @@ lowpassControlQ.addEventListener("input", function () {
 
 lowpassreset.addEventListener("click", function () {
     lowpassControlF.value = 1;
-    lowpassControlQ.value = 0;  
+    lowpassControlQ.value = 0;
     if (lowfilter) {
         lowfilter.frequency.value = maxValue;
         lowfilter.Q.value = 0;
@@ -1190,7 +1230,7 @@ highpassControlQ.addEventListener("input", function () {
 
 highpassreset.addEventListener("click", function () {
     highpassControlF.value = 0;
-    highpassControlQ.value = 0;  
+    highpassControlQ.value = 0;
     if (highfilter) {
         highfilter.frequency.value = 20;
         highfilter.Q.value = 0;
