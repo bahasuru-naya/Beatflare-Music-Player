@@ -1073,7 +1073,7 @@ ul {
 
 li {
     display: grid;
-    grid-template-columns: 5fr 50px 50px 110px;
+    grid-template-columns: 5fr 50px 50px 50px;
     padding: 5px;
     padding-right: 10px;
     cursor: pointer;
@@ -1096,97 +1096,69 @@ li.active {
     margin-right: 5px;
 }
 
+li svg {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    justify-self: center;
+}
+
 .up {
     grid-column: 2;
     background: black;
+    display: flex;
     color: white;
     width: 40px;
     height: 30px;
-    border-radius: 10px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    border-radius: 20px;
     justify-content: center;
+    justify-self: center;
+    align-items: center;
 }
 
 
 .down {
     grid-column: 3;
     background: black;
+    display: flex;
     color: white;
     width: 40px;
     height: 30px;
-    border-radius: 10px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    border-radius: 20px;
+    align-items: center;
     justify-content: center;
+    justify-self: center;
 }
 
 .remove {
     grid-column: 4;
     margin: 0px;
     font-size: 12px;
-    width: 100px;
+    width: 40px;
     height: 30px;
     padding: 0px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-    background: #eb5e5e;
+    background: #ee4141;
+    color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
-    border-radius: 10px;
-    justify-self: end;
-}
-
-.remove,
-.remove span {
-    transition: 200ms;
-}
-
-.remove .removespan {
-    transform: translateX(0px);
-    color: white;
-    font-weight: bold;
-}
-
-.remove .removeicon {
-    position: relative;
-    border-left: 3px solid #ee4141;
-    transform: translateX(10px);
-    background: #ee4141;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
-    border-radius: 0 10px 10px 0;
-}
-
-.remove svg {
-    width: 10px;
-    fill: #eee;
+    border-radius: 20px;
+    justify-self: center;
 }
 
 .remove:hover {
-    background-color: #ee4141;
+    background-color: #ee0a0a;
 }
 
-.remove:hover .removespan {
-    color: transparent;
-
-}
-
-.remove:hover .removeicon {
-    width: 100px;
-    border-left: none;
-    transform: translateX(-23px);
-}
-
-.remove:focus {
-    outline: none;
-}
-
-.remove:active .removeicon svg {
-    transform: scale(0.8);
-}
 
 .seek-bar-container {
     display: grid;
