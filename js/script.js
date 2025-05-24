@@ -1407,6 +1407,9 @@ searchbtntext.addEventListener("click", function () {
         searchbtn.style["max-width"] = "none";
         searchinput.style.display = "flex";
         searchbtntext.innerHTML = closesvg + "Close";
+        document.querySelectorAll('.up, .down').forEach(button => {
+            button.style.display = 'none';
+        });
 
     }
     else {
@@ -1424,6 +1427,9 @@ searchbtntext.addEventListener("click", function () {
         let songs = document.querySelectorAll('#playlist li');
         songs.forEach((song) => {
             song.style.display = "grid";
+        });
+        document.querySelectorAll('.up, .down').forEach(button => {
+            button.style.display = 'block';
         });
     }
 
