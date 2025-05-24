@@ -620,6 +620,7 @@ function updatePlaylist() {
             listItem.appendChild(upbutton);
             upbutton.addEventListener('click', (e) => {
                 e.stopPropagation();
+                handleupFile(index)
 
             });
         }
@@ -634,6 +635,7 @@ function updatePlaylist() {
             listItem.appendChild(downbutton);
             downbutton.addEventListener('click', (e) => {
                 e.stopPropagation();
+                handledownFile(index);
 
             });
         }
@@ -671,9 +673,83 @@ function updatePlaylist() {
     }
     if (files.length < 2) {
         randomsong.disabled = true;
+        randomsong.checked = false;
+
     } else if (files.length > 1) {
         randomsong.disabled = false;
     }
+}
+
+function handleupFile(index) {
+    const listItem1 = listItemMap.get(index);
+    const listItem2 = listItemMap.get(index - 1);
+    if (listItem1 && listItem2) {
+        // Swap the list items in the DOM
+        const parent = listItem1.parentNode;
+        parent.insertBefore(listItem1, listItem2);
+        parent.insertBefore(listItem2, listItem1.nextSibling);
+
+        // Update the indices in the files array
+        const temp = files[index];
+        files[index] = files[index - 1];
+        files[index - 1] = temp;
+
+        // Update the data-index attributes
+        listItem1.setAttribute('data-index', index - 1);
+        listItem2.setAttribute('data-index', index);
+
+        // Update the listItemMap
+        listItemMap.set(index, listItem1);
+        listItemMap.set(index - 1, listItem2);
+
+        // If currentIndex is affected, update it
+        if (currentIndex === index) {
+            currentIndex--;
+
+        } else if (currentIndex === index - 1) {
+            currentIndex++;
+
+        }
+        updateIndicesAndMap();
+        updatePlaylist();
+    }
+    updatePlaylistHighlight(currentIndex);
+}
+
+function handledownFile(index) {
+    const listItem1 = listItemMap.get(index);
+    const listItem2 = listItemMap.get(index + 1);
+    if (listItem1 && listItem2) {
+        // Swap the list items in the DOM
+        const parent = listItem1.parentNode;
+        parent.insertBefore(listItem2, listItem1);
+        parent.insertBefore(listItem1, listItem2.nextSibling);
+
+        // Update the indices in the files array
+        const temp = files[index];
+        files[index] = files[index + 1];
+        files[index + 1] = temp;
+
+        // Update the data-index attributes
+        listItem1.setAttribute('data-index', index + 1);
+        listItem2.setAttribute('data-index', index);
+
+        // Update the listItemMap
+        listItemMap.set(index, listItem2);
+        listItemMap.set(index + 1, listItem1);
+
+        // If currentIndex is affected, update it
+        if (currentIndex === index) {
+            currentIndex++;
+
+        } else if (currentIndex === index + 1) {
+            currentIndex--;
+
+        }
+        updateIndicesAndMap();
+        updatePlaylist();
+    }
+    updatePlaylistHighlight(currentIndex);
 }
 
 function handleRemoveFile(index) {
