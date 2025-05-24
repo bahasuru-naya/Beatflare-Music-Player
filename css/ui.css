@@ -1110,6 +1110,7 @@ li svg {
     color: white;
     width: 40px;
     height: 30px;
+    padding-top: 2px;
     padding: 0px;
     margin: 0px;
     border: none;
@@ -1117,6 +1118,10 @@ li svg {
     justify-content: center;
     justify-self: center;
     align-items: center;
+}
+
+.up:hover {
+    background-color: #333;
 }
 
 
@@ -1127,6 +1132,7 @@ li svg {
     color: white;
     width: 40px;
     height: 30px;
+    padding-top: 2px;
     padding: 0px;
     margin: 0px;
     border: none;
@@ -1134,6 +1140,10 @@ li svg {
     align-items: center;
     justify-content: center;
     justify-self: center;
+}
+
+.down:hover {
+    background-color: #333;
 }
 
 .remove {
@@ -1156,7 +1166,7 @@ li svg {
 }
 
 .remove:hover {
-    background-color: #ee0a0a;
+    background-color: #fe0000;
 }
 
 
