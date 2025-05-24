@@ -1079,8 +1079,12 @@ li {
     cursor: pointer;
     align-items: center;
     margin-right: 5px;
+    border-bottom: 1px solid #000000;
 
 
+}
+li:last-child {
+    border-bottom: none;
 }
 
 li p {
