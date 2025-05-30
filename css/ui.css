@@ -1081,8 +1081,8 @@ li {
     margin-right: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000000;  
-    border-radius: 10px; 
+    border: 1px solid #000000;
+    border-radius: 10px;
 }
 
 
@@ -1095,7 +1095,7 @@ li p {
 }
 
 li.active {
-    background-color: #d3d3d3;    
+    background-color: #d3d3d3;
     margin-right: 5px;
 }
 
@@ -2620,14 +2620,15 @@ li svg {
 }
 
 .features {
-    list-style: none;    
+    list-style: none;
     justify-items: left;
     padding: 10px;
     margin: 0;
     line-height: 1.2rem;
 
 }
-.mp3-info h4{
+
+.mp3-info h4 {
     font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
@@ -2640,10 +2641,10 @@ li svg {
     transition: transform 0.3s ease-in-out;
     text-align: justify;
     padding: 3px;
-    border:none;
+    border: none;
     border-radius: 10px;
     line-height: 14px;
-   
+
 }
 
 .features li:hover {
@@ -2848,6 +2849,10 @@ li svg {
         font-size: 1.5rem;
         align-items: center;
 
+    }
+
+    ul {
+        font-size: 0.8rem;
     }
 
     .section-title {
