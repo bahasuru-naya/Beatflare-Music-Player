@@ -1708,6 +1708,13 @@ li svg {
 
 }
 
+#currentsonglink {
+    color: inherit;
+}
+#currentsonglink:hover{
+    color: var(--home-c3-color);
+}
+
 .volumemute {
     display: grid;
     grid-template-columns: 2fr 6fr 2fr;

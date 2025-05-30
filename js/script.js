@@ -489,8 +489,18 @@ function updateSongName(newText) {
     const songNameElement = document.getElementById("songName");
     const maqcontainer = document.querySelector(".volumemute").offsetWidth;
 
-    // Update the text content
-    songNameElement.textContent = newText;
+    // Split text into prefix and song name after colon
+    const parts = newText.split(':');
+    if (parts.length > 1) {
+        const prefix = parts[0] + ':';
+        const songTitle = parts.slice(1).join(':').trim(); // handle cases with multiple colons
+
+        // Create link for the song name
+        songNameElement.innerHTML = `${prefix} <a id="currentsonglink" href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
+    } else {
+        // No colon, just set the text
+        songNameElement.textContent = newText;
+    }
 
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
 
@@ -503,12 +513,31 @@ function updateSongName(newText) {
     // Calculate the animation duration based on text width
     const containerWidth = document.querySelector(".marquee").offsetWidth;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 100; // Adjust speed factor as needed
+    const animationDuration = (textWidth + containerWidth) / 90; // Adjust speed factor as needed
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
 
 }
+
+function scrollToActive() {
+    if (search) {
+        search = false;
+        closeserch();
+    }
+    const list = document.getElementById('playlist');
+    const activeItem = list.querySelector('li.active');
+
+    if (activeItem) {
+        activeItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest' // Or 'center' or 'start'
+        });
+    } else {
+        console.log('No active item found.');
+    }
+}
+
 
 repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
@@ -751,9 +780,13 @@ function handledownFile(index) {
 
 function handleRemoveFile(index) {
     const listItem = listItemMap.get(index);
-    listItem.remove();    
+    listItem.remove();
 
     if (index === currentIndex) {
+        let pt = false;
+        if (audioPlayer.paused) {
+            pt = true;
+        }
         audioPlayer.pause();
 
         if (files.length === 1) {
@@ -799,7 +832,18 @@ function handleRemoveFile(index) {
             // Update indices and listItemMap
             updateIndicesAndMap();
             updatePlaylist();
+
             playFile(currentIndex);
+            if (pt) {
+                audioPlayer.pause();
+                playPauseButton.innerHTML = playsvg;
+                if (audioctx) audioctx.suspend();
+                if (animation) window.cancelAnimationFrame(animation);
+
+            } else {
+                pt = false;
+            }
+
         }
     } else {
         // For other items, just hide and remove them
