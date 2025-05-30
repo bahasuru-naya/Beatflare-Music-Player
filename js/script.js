@@ -623,6 +623,7 @@ function updatePlaylist() {
                 handleupFile(index)
 
             });
+
         }
 
         if (index !== files.length - 1) {
@@ -638,6 +639,7 @@ function updatePlaylist() {
                 handledownFile(index);
 
             });
+
         }
 
         const removeButton = document.createElement('button');
@@ -749,8 +751,7 @@ function handledownFile(index) {
 
 function handleRemoveFile(index) {
     const listItem = listItemMap.get(index);
-    listItem.remove();
-
+    listItem.remove();    
 
     if (index === currentIndex) {
         audioPlayer.pause();
@@ -767,6 +768,8 @@ function handleRemoveFile(index) {
             audioPlayer.src = '';
             img.src = "./images/art.png";
             updateSongName('Add songs to your playlist and let the music begin! 🎵✨');
+            search = false;
+            closeserch();
             const playlisttext = document.createElement('p');
             playlisttext.setAttribute("id", "playlist-text");
             playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
@@ -779,6 +782,7 @@ function handleRemoveFile(index) {
             removeAll.disabled = true;
             searchbtntext.disabled = true;
             repeatsong.disabled = true;
+
 
         } else {
             // Determine the next or previous file to play
@@ -812,6 +816,11 @@ function handleRemoveFile(index) {
         }
     }
     updatePlaylistHighlight(currentIndex);
+    if (search) {
+        document.querySelectorAll('.up, .down').forEach(button => {
+            button.style.display = 'none';
+        });
+    }
 
 }
 
@@ -1388,6 +1397,26 @@ const closesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden
 `;
 
 let search = false;
+function closeserch() {
+    playerhead.style["grid-template-columns"] = "1fr 1fr 1fr";
+    addbtn.style.display = "flex";
+    deletebtn.style.display = "flex";
+    searchbtn.style["grid-template-columns"] = "1fr ";
+    searchbtn.style["max-width"] = "150px";
+    searchinput.style.display = "none";
+    searchbtntext.innerHTML = searchsvg + "Search ";
+    searchinput.value = "";
+    if (document.getElementById('playlist-text')) {
+        document.getElementById('playlist-text').remove();
+    }
+    let songs = document.querySelectorAll('#playlist li');
+    songs.forEach((song) => {
+        song.style.display = "grid";
+    });
+    document.querySelectorAll('.up, .down').forEach(button => {
+        button.style.display = 'block';
+    });
+}
 
 searchbtntext.addEventListener("click", function () {
     if (searchbtntext.disabled) {
@@ -1405,27 +1434,12 @@ searchbtntext.addEventListener("click", function () {
         document.querySelectorAll('.up, .down').forEach(button => {
             button.style.display = 'none';
         });
+        searchsongs();
 
     }
     else {
-        playerhead.style["grid-template-columns"] = "1fr 1fr 1fr";
-        addbtn.style.display = "flex";
-        deletebtn.style.display = "flex";
-        searchbtn.style["grid-template-columns"] = "1fr ";
-        searchbtn.style["max-width"] = "150px";
-        searchinput.style.display = "none";
-        searchbtntext.innerHTML = searchsvg + "Search ";
-        searchinput.value = "";
-        if (document.getElementById('playlist-text')) {
-            document.getElementById('playlist-text').remove();
-        }
-        let songs = document.querySelectorAll('#playlist li');
-        songs.forEach((song) => {
-            song.style.display = "grid";
-        });
-        document.querySelectorAll('.up, .down').forEach(button => {
-            button.style.display = 'block';
-        });
+
+        closeserch();
     }
 
 
