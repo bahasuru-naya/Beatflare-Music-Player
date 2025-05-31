@@ -496,7 +496,7 @@ function updateSongName(newText) {
         const songTitle = parts.slice(1).join(':').trim(); // handle cases with multiple colons
 
         // Create link for the song name
-        songNameElement.innerHTML = `${prefix} <a id="currentsonglink" title="Scroll playlist to now playing." href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
+        songNameElement.innerHTML = `${prefix} <a id="currentsonglink" title="Scroll playlist to now playing" href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
     } else {
         // No colon, just set the text
         songNameElement.textContent = newText;
