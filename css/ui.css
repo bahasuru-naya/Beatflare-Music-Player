@@ -1705,11 +1705,13 @@ li svg {
     padding: 0px;
     font-weight: 600;
     animation: marquee 10s linear infinite;
+    cursor: default;
 
 }
 
 #currentsonglink {
     color: inherit;
+    cursor:pointer ;
 }
 #currentsonglink:hover{
     color: var(--home-c3-color);

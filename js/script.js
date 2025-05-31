@@ -496,7 +496,7 @@ function updateSongName(newText) {
         const songTitle = parts.slice(1).join(':').trim(); // handle cases with multiple colons
 
         // Create link for the song name
-        songNameElement.innerHTML = `${prefix} <a id="currentsonglink" href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
+        songNameElement.innerHTML = `${prefix} <a id="currentsonglink" title="Scroll playlist to now playing." href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
     } else {
         // No colon, just set the text
         songNameElement.textContent = newText;
@@ -519,6 +519,15 @@ function updateSongName(newText) {
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
 
 }
+const elementsongname = document.querySelector('#songName');
+
+elementsongname.addEventListener('mouseenter', () => {
+    elementsongname.style.animationPlayState = 'paused';
+});
+
+elementsongname.addEventListener('mouseleave', () => {
+    elementsongname.style.animationPlayState = 'running';
+});
 
 function scrollToActive() {
     if (search) {
@@ -835,6 +844,10 @@ function handleRemoveFile(index) {
 
             playFile(currentIndex);
             if (pt) {
+                const file = files[currentIndex];
+                const songTitle = file.name.replace('.mp3', '');
+                // Display the song name in the marquee        
+                updateSongName(`Paused: ${songTitle}`);
                 audioPlayer.pause();
                 playPauseButton.innerHTML = playsvg;
                 if (audioctx) audioctx.suspend();
@@ -957,15 +970,22 @@ const pausesvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden
 `;
 
 playPauseButton.addEventListener('click', function () {
+    const file = files[currentIndex];
+    const songTitle = file.name.replace('.mp3', '');
+
     if (audioPlayer.paused) {
         audioPlayer.play();
         playPauseButton.innerHTML = pausesvg;
+        // Display the song name in the marquee        
+        updateSongName(`Now Playing: ${songTitle}`);
         audioctx.resume();
         audiovisual(audioPlayer);
 
     } else {
         audioPlayer.pause();
         playPauseButton.innerHTML = playsvg;
+        // Display the song name in the marquee        
+        updateSongName(`Paused: ${songTitle}`);
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);
 
