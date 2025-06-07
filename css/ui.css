@@ -2516,7 +2516,7 @@ li svg {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 1000px;
-    width: 100%;
+    width: 100%;    
     padding: 10px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
@@ -2558,6 +2558,7 @@ li svg {
     height: 120px;
     border-radius: 50%;
     transition: transform 0.3s ease-in-out;
+    margin: 5px;
 }
 
 .profile-img:hover {
@@ -2567,13 +2568,15 @@ li svg {
 .creator-name-head {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .creator-name {
     font-size: 18px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .creator-description {
