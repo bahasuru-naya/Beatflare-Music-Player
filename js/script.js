@@ -641,10 +641,18 @@ function updatePlaylist() {
     listItemMap.clear();
     files.forEach((file, index) => {
         const listItem = document.createElement('li');
+        const listItemindexc = document.createElement('div');
+        listItemindexc.classList.add('liindexc');
+        const listItemindex = document.createElement('p');
+        listItemindex.classList.add('liindex');        
+        listItemindex.textContent = index + 1;
+        listItemindexc.appendChild(listItemindex);
         const listItemtext = document.createElement('p');
+        listItemtext.classList.add('litext');
         listItemtext.textContent = file.name;
         listItemtext.textContent = listItemtext.textContent.replace(/_/g, " ");
         listItem.setAttribute('data-index', index);
+        listItem.appendChild(listItemindexc);
         listItem.appendChild(listItemtext);
 
         if (index !== 0) {
