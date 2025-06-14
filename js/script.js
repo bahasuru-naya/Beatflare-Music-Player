@@ -547,6 +547,15 @@ function scrollToActive() {
     }
 }
 
+function scrollToBottomPlaylist() {
+    const list = document.getElementById('playlist');
+    list.scrollTo({
+        top: list.scrollHeight,
+        behavior: 'smooth'
+    });
+}
+
+
 
 repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
@@ -622,6 +631,7 @@ fileInput.addEventListener('change', function (event) {
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
         fileInput.value = ''; // Reset the input value to allow selecting the same file again
+        scrollToBottomPlaylist();
 
         // Handle edge case when no file is playing
         if (currentIndex === -1 && files.length > 0) {
@@ -1539,7 +1549,7 @@ function closeserch() {
         song.style.display = "grid";
     });
     document.querySelectorAll('.up, .down').forEach(button => {
-        button.style.display = 'block';
+        button.style.display = 'flex';
     });
 }
 

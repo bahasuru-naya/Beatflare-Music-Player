@@ -2240,7 +2240,7 @@ li svg {
 #Stereo::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 4px;
+    width: 2px;
     height: 20px;
     background-color: var(--black);
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
