@@ -318,7 +318,7 @@ function audiovisual(player) {
                 const currentBaseRadius = radiusStep * (c + 1);
                 const startAngleOffset = (Math.PI * 2 / numCircles) * c;
 
-                ctx3.lineWidth = (c === numCircles - 1) ? 2 : 1.5;
+                ctx3.lineWidth = 2;
                 ctx3.strokeStyle = circleColors[c % circleColors.length];
                 ctx3.fillStyle = 'rgba(0,0,0,0)';
                 ctx3.lineCap = "round";
@@ -1327,8 +1327,11 @@ stereoControl.addEventListener("input", function () {
     if (panNode) {
         panNode.pan.value = stereoValue;
     }
-    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + -stereoValue;
-    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue;
+    // Update the labels with the new stereo values
+    const stereoValue1 = 1 + (-stereoValue);
+    const stereoValue2 = 1 + stereoValue;
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue1.toFixed(1) ;
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue2.toFixed(1) ;
 
 });
 
@@ -1338,8 +1341,8 @@ stereoRest.addEventListener("click", function () {
     if (panNode) {
         panNode.pan.value = 0;
     }
-    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
-    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + 0;
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
 
 });
 
@@ -1458,7 +1461,7 @@ visualonoff.addEventListener("click", function () {
     } else {
         tabs.style.display = 'none';
         playersection.style.gridTemplateColumns = '1fr';
-        playersection.style.maxWidth = '1000px';
+        playersection.style.maxWidth = '900px';
         playersection.style.justifyContent = 'center';
         setWidthHeight();
 
