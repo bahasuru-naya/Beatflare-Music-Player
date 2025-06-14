@@ -1095,9 +1095,10 @@ ul {
     justify-content: center;
     margin: 0px;
     height: 90%;
+    min-width: 30px;
 }
 
-.liindex {   
+.liindex {
     margin: 0px;
 }
 
@@ -1124,6 +1125,54 @@ li svg {
     height: 20px;
     align-self: center;
     justify-self: center;
+}
+
+.loading {
+    display: flex;
+    align-items: end;
+    height: 100%;
+    max-height: 20px;
+    gap: 2px;
+    
+
+}
+
+.load {
+    width: 2px;
+    height: 50%;
+    background-color: #000000;
+    animation: 1s move6 infinite;
+    border-radius: 5px;   
+}
+
+.load:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.load:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.load:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes move6 {
+    0% {
+        height: 20%;
+    }
+
+    25% {
+        height: 70%;
+    }
+
+    50% {
+        height: 100%;
+    }
+
+    100% {
+        height: 20%;
+    }
 }
 
 .up {
@@ -1723,7 +1772,7 @@ li svg {
     color: var(--menu-color);
     margin: 0px;
     padding: 0px;
-    font-weight: 600;
+    font-weight: 700;
     animation: marquee 10s linear infinite;
     cursor: default;
 
@@ -1732,10 +1781,14 @@ li svg {
 #currentsonglink {
     color: inherit;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+
 }
 
 #currentsonglink:hover {
     color: var(--home-c3-color);
+    text-decoration: underline;
 }
 
 .volumemute {
@@ -2516,7 +2569,7 @@ li svg {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 1000px;
-    width: 100%;    
+    width: 100%;
     padding: 10px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;

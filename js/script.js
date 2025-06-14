@@ -644,7 +644,7 @@ function updatePlaylist() {
         const listItemindexc = document.createElement('div');
         listItemindexc.classList.add('liindexc');
         const listItemindex = document.createElement('p');
-        listItemindex.classList.add('liindex');        
+        listItemindex.classList.add('liindex');
         listItemindex.textContent = index + 1;
         listItemindexc.appendChild(listItemindex);
         const listItemtext = document.createElement('p');
@@ -708,9 +708,16 @@ function updatePlaylist() {
         playlist.appendChild(listItem);
         listItemMap.set(index, listItem);
 
+
     });
     updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
+    if (audioPlayer.paused) {
+        restoreActiveIndexText();
+    } else {
+        replaceActiveWithLoading();
+    }
+
     if (files.length > 0) {
         repeatsong.disabled = false;
     }
@@ -721,6 +728,7 @@ function updatePlaylist() {
     } else if (files.length > 1) {
         randomsong.disabled = false;
     }
+
 }
 
 function handleupFile(index) {
@@ -860,6 +868,7 @@ function handleRemoveFile(index) {
                 playPauseButton.innerHTML = playsvg;
                 if (audioctx) audioctx.suspend();
                 if (animation) window.cancelAnimationFrame(animation);
+                restoreActiveIndexText();
 
             } else {
                 pt = false;
@@ -914,6 +923,7 @@ function playFile(index) {
         currentIndex = index;
         audioctx.resume();
         audiovisual(audioPlayer);
+        replaceActiveWithLoading();
         const file = files[index];
 
         const songTitle = file.name.replace('.mp3', '');
@@ -988,6 +998,8 @@ playPauseButton.addEventListener('click', function () {
         updateSongName(`Now Playing: ${songTitle}`);
         audioctx.resume();
         audiovisual(audioPlayer);
+        replaceActiveWithLoading();
+
 
     } else {
         audioPlayer.pause();
@@ -996,9 +1008,47 @@ playPauseButton.addEventListener('click', function () {
         updateSongName(`Paused: ${songTitle}`);
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);
+        restoreActiveIndexText();
 
     }
 });
+
+function replaceActiveWithLoading() {
+    const allItems = document.querySelectorAll('#playlist li');
+
+    allItems.forEach(li => {
+        const container = li.querySelector('.liindexc');
+        if (!container) return;
+
+        const index = parseInt(li.getAttribute('data-index'), 10);
+
+        if (li.classList.contains('active')) {
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="load"></div>
+                    <div class="load"></div>
+                    <div class="load"></div>
+                    <div class="load"></div>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `<p class="liindex">${index + 1}</p>`;
+        }
+    });
+}
+
+
+function restoreActiveIndexText() {
+    const activeLi = document.querySelector('#playlist li.active');
+    if (!activeLi) return;
+
+    const index = parseInt(activeLi.getAttribute('data-index'), 10);
+    const container = activeLi.querySelector('.liindexc');
+    if (!container || isNaN(index)) return;
+
+    container.innerHTML = `<p class="liindex">${index + 1}</p>`;
+}
+
 
 prevButton.addEventListener('click', function () {
     updateIndicesAndMap();
