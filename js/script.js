@@ -585,54 +585,57 @@ function showerror(message) {
 }
 
 function playsamplemusic() {
-    const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3']; // You must define names
+    const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
     const folderPath = '../sample-music/';
 
-    sampleFileNames.forEach(fileName => {
+    const fetchPromises = sampleFileNames.map(fileName => {
         const fileUrl = folderPath + fileName;
-
-        fetch(fileUrl)
+        return fetch(fileUrl)
             .then(response => {
                 if (!response.ok) throw new Error(`Failed to load ${fileName}`);
                 return response.blob();
             })
-            .then(blob => {
-                const file = new File([blob], fileName, { type: blob.type });
-
-                files.push(file); // Add to playlist
-
-                // If playlist text is visible, remove it
-                const playlistText = document.getElementById('playlist-text');
-                if (playlistText) playlistText.remove();
-
-                document.querySelector(".play-pause-back").style.opacity = "1";
-                document.querySelector(".cssbuttons-io").style.opacity = "1";
-                document.querySelector(".cssbuttons-io").style.cursor = "pointer";
-                playPauseButton.disabled = false;
-                seekBar.disabled = false;
-                removeAll.disabled = false;
-                searchbtntext.disabled = false;
-
-                // Call necessary update functions
-                updatePlaylist();
-                setWidthHeight();
-                updateButtonsState(currentIndex);
-                audiovisual(audioPlayer);
-                fileInput.value = '';
-                scrollToBottomPlaylist();
-
-                // Handle edge case when no file is playing
-                if (currentIndex === -1 && files.length > 0) {
-                    playFile(0);
-                }
-            })
-            .catch(err => {
-                console.error('An error occurred while processing the file input:', err.message);
-                showerror(err.message);
-                fileInput.value = ''; // Clear the input on error
-            });
+            .then(blob => new File([blob], fileName, { type: blob.type }));
     });
+
+    Promise.all(fetchPromises)
+        .then(fetchedFiles => {
+            // Add all files to the playlist
+            fetchedFiles.forEach(file => files.push(file));
+
+            // Remove playlist text if visible
+            const playlistText = document.getElementById('playlist-text');
+            if (playlistText) playlistText.remove();
+
+            // Enable UI controls
+            document.querySelector(".play-pause-back").style.opacity = "1";
+            document.querySelector(".cssbuttons-io").style.opacity = "1";
+            document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+            playPauseButton.disabled = false;
+            seekBar.disabled = false;
+            removeAll.disabled = false;
+            searchbtntext.disabled = false;
+
+            // Update UI
+            updatePlaylist();
+            setWidthHeight();
+            updateButtonsState(currentIndex);
+            audiovisual(audioPlayer);
+            fileInput.value = '';
+            scrollToBottomPlaylist();
+        })
+        .catch(err => {
+            console.error('An error occurred while processing the file input:', err.message);
+            showerror(err.message);
+            fileInput.value = '';
+        })
+        .finally(() => {
+            if (currentIndex === -1 && files.length > 0) {
+                playFile(0);
+            }
+        });
 }
+
 
 
 
@@ -684,15 +687,17 @@ fileInput.addEventListener('change', function (event) {
         fileInput.value = ''; // Reset the input value to allow selecting the same file again
         scrollToBottomPlaylist();
 
-        // Handle edge case when no file is playing
-        if (currentIndex === -1 && files.length > 0) {
-            playFile(0);
-        }
     } catch (error) {
         console.error('An error occurred while processing the file input:', error.message);
         showerror(error.message);
         fileInput.value = ''; // Clear the input on error
     }
+
+    // Handle edge case when no file is playing
+    if (currentIndex === -1 && files.length > 0) {
+        playFile(0);
+    }
+
 });
 
 
@@ -869,12 +874,7 @@ function handleRemoveFile(index) {
     listItem.remove();
 
     if (index === currentIndex) {
-        let pt = false;
-        if (audioPlayer.paused) {
-            pt = true;
-        }
-        audioPlayer.pause();
-
+        const wasPaused = audioPlayer.paused;
         if (files.length === 1) {
             // If only one file, remove it completely
             files = [];
@@ -920,19 +920,17 @@ function handleRemoveFile(index) {
             updatePlaylist();
 
             playFile(currentIndex);
-            if (pt) {
-                const file = files[currentIndex];
-                const songTitle = file.name.replace('.mp3', '');
-                // Display the song name in the marquee        
-                updateSongName(`Paused: ${songTitle}`);
+            if (wasPaused) {
                 audioPlayer.pause();
                 playPauseButton.innerHTML = playsvg;
+
                 if (audioctx) audioctx.suspend();
                 if (animation) window.cancelAnimationFrame(animation);
-                restoreActiveIndexText();
 
-            } else {
-                pt = false;
+                const file = files[currentIndex];
+                const songTitle = file.name.replace('.mp3', '');
+                updateSongName(`Paused: ${songTitle}`);
+                restoreActiveIndexText();
             }
 
         }
@@ -971,58 +969,82 @@ function updateIndicesAndMap() {
 
 const img = document.getElementById('albumArt');
 
+var missingFileTitles = [];
+
+//close error msg
+document.querySelector('#error_ok').addEventListener('click', function () {
+    document.querySelector('#error').style.display = 'none';
+    missingFileTitles = []
+});
+
+audioPlayer.onerror = function () {
+    const file = files[currentIndex];
+    const songTitle = file.name.replace('.mp3', '');
+    missingFileTitles.push(songTitle);
+    missingFileNames = missingFileTitles.join(', ');
+    console.error('Audio playback failed:', error);
+    if (missingFileNames.includes(",")) {
+        showerror(`Songs ${missingFileNames} are not found. They are removed from the playlist. You can relocate them by clicking on the "Add Songs" button.`);
+    } else {
+        showerror(`Song ${missingFileNames} is not found. It is removed from the playlist. You can relocate it by clicking on the "Add Songs" button.`);
+    }
+    handleRemoveFile(currentIndex);
+}
+
 function playFile(index) {
     if (index >= 0 && index < files.length) {
+        const file = files[index];
+        const songTitle = file.name.replace('.mp3', '');
         const fileURL = URL.createObjectURL(files[index]);
         audioPlayer.src = fileURL;
         audioPlayer.currentTime = 0; // Reset current time to 0
         audioPlayer.playbackRate = parseFloat(speed);
-        audioPlayer.play();
-        playPauseButton.innerHTML = pausesvg;
-        updatePlaylistHighlight(index);
-        updateButtonsState(index);
         currentIndex = index;
-        audioctx.resume();
-        audiovisual(audioPlayer);
-        replaceActiveWithLoading();
-        const file = files[index];
 
-        const songTitle = file.name.replace('.mp3', '');
-        // Display the song name in the marquee        
-        updateSongName(`Now Playing: ${songTitle}`);
+        audioPlayer.play()
+            .then(() => {
+                playPauseButton.innerHTML = pausesvg;
+                updatePlaylistHighlight(index);
+                updateButtonsState(index);
+                audioctx.resume();
+                audiovisual(audioPlayer);
+                replaceActiveWithLoading();
+
+                // Display the song name in the marquee        
+                updateSongName(`Now Playing: ${songTitle}`);
 
 
+                // Use jsmediatags to read the MP3 file
+                jsmediatags.read(file, {
+                    onSuccess: function (tag) {
+                        const { picture } = tag.tags;
+                        if (picture) {
+                            // Convert the album art data into a Blob URL
+                            const base64String = picture.data
+                                .map((char) => String.fromCharCode(char))
+                                .join('');
+                            const dataUrl = `data:${picture.format};base64,${btoa(base64String)}`;
+                            // Set the image source to the album art
+                            img.src = dataUrl;
+                            img.style.display = 'block';
+                        } else {
+                            img.style.display = 'block';
+                            img.src = "./images/art.png";
+                        }
+                    },
+                    onError: function (error) {
+                        console.error('Error reading MP3 file:', error);
+                        img.style.display = 'block';
+                        img.src = "./images/art.png";
 
-        // Use jsmediatags to read the MP3 file
-        jsmediatags.read(file, {
-            onSuccess: function (tag) {
-                const { picture } = tag.tags;
+                    }
+                });
+            });
 
-                if (picture) {
-                    // Convert the album art data into a Blob URL
-                    const base64String = picture.data
-                        .map((char) => String.fromCharCode(char))
-                        .join('');
-                    const dataUrl = `data:${picture.format};base64,${btoa(base64String)}`;
-
-                    // Set the image source to the album art
-
-                    img.src = dataUrl;
-                    img.style.display = 'block';
-
-                } else {
-                    img.style.display = 'block';
-                    img.src = "./images/art.png";
-                }
-            },
-            onError: function (error) {
-                console.error('Error reading MP3 file:', error);
-                img.style.display = 'block';
-                img.src = "./images/art.png";
-
-            }
-        });
-
+    }
+    else {
+        console.error('Invalid index:', index);
+        showerror('Invalid index: ' + index);
     }
 }
 
@@ -1181,7 +1203,7 @@ audioPlayer.addEventListener('ended', function () {
     } else {
 
         audioPlayer.pause();
-        playPauseButton.innerHTML = playsvg;              
+        playPauseButton.innerHTML = playsvg;
         updateSongName(`The playlist has reached its end....`);
         if (audioctx) audioctx.suspend();
         if (animation) window.cancelAnimationFrame(animation);

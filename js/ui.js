@@ -56,12 +56,6 @@ tabs.addEventListener("click", function (e) {
 //};
 
 
-//close error msg
-document.querySelector('#error_ok').addEventListener('click', function () {
-  document.querySelector('#error').style.display = 'none';
-});
-
-
 // handle small screen
 // Script to detect small screens and show the warning message
 document.addEventListener('DOMContentLoaded', function () {

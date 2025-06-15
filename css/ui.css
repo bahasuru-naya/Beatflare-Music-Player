@@ -603,7 +603,7 @@ nav {
 
 #error {
     display: none;
-    height: 200px;
+    height: fit-content;
     top: calc(50% - 100px);
 }
 
