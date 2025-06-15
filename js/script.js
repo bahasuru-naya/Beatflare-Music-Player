@@ -628,7 +628,7 @@ function playsamplemusic() {
             })
             .catch(err => {
                 console.error('An error occurred while processing the file input:', error.message);
-                showerror(error.message);
+                showerror(err.message);
                 fileInput.value = ''; // Clear the input on error
             });
     });
