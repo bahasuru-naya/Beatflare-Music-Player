@@ -1406,9 +1406,14 @@ li svg {
     height: 50px;
 }
 
-#playlist-text {
-    display: flex;
+#playlist-text {    
     justify-self: center;
+    text-align: center;
+}
+
+#sample-music{
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .cssbuttons-io {

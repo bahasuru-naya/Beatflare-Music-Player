@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const playlisttext = document.createElement('p');
     playlisttext.setAttribute("id", "playlist-text");
-    playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+    playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
     playlist.appendChild(playlisttext);
     document.querySelector(".play-pause-back").style.opacity = "0.5";
     document.querySelector(".cssbuttons-io").style.opacity = "0.5";
@@ -584,6 +584,57 @@ function showerror(message) {
     error.style.display = 'block';
 }
 
+function playsamplemusic() {
+    const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3']; // You must define names
+    const folderPath = '../sample-music/';
+
+    sampleFileNames.forEach(fileName => {
+        const fileUrl = folderPath + fileName;
+
+        fetch(fileUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`Failed to load ${fileName}`);
+                return response.blob();
+            })
+            .then(blob => {
+                const file = new File([blob], fileName, { type: blob.type });
+
+                files.push(file); // Add to playlist
+
+                // If playlist text is visible, remove it
+                const playlistText = document.getElementById('playlist-text');
+                if (playlistText) playlistText.remove();
+
+                document.querySelector(".play-pause-back").style.opacity = "1";
+                document.querySelector(".cssbuttons-io").style.opacity = "1";
+                document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+                playPauseButton.disabled = false;
+                seekBar.disabled = false;
+                removeAll.disabled = false;
+                searchbtntext.disabled = false;
+
+                // Call necessary update functions
+                updatePlaylist();
+                setWidthHeight();
+                updateButtonsState(currentIndex);
+                audiovisual(audioPlayer);
+                fileInput.value = ''; 
+                scrollToBottomPlaylist();
+
+                // Handle edge case when no file is playing
+                if (currentIndex === -1 && files.length > 0) {
+                    playFile(0);
+                }
+            })
+            .catch(err => {
+                console.error('An error occurred while processing the file input:', error.message);
+                showerror(error.message);
+                fileInput.value = ''; // Clear the input on error
+            });
+    });
+}
+
+
 
 fileInput.addEventListener('change', function (event) {
     try {
@@ -840,7 +891,7 @@ function handleRemoveFile(index) {
             closeserch();
             const playlisttext = document.createElement('p');
             playlisttext.setAttribute("id", "playlist-text");
-            playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+            playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
             playlist.appendChild(playlisttext);
             document.querySelector(".play-pause-back").style.opacity = "0.5";
             document.querySelector(".cssbuttons-io").style.opacity = "0.5";
@@ -1340,8 +1391,8 @@ stereoControl.addEventListener("input", function () {
     // Update the labels with the new stereo values
     const stereoValue1 = 1 + (-stereoValue);
     const stereoValue2 = 1 + stereoValue;
-    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue1.toFixed(1) ;
-    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue2.toFixed(1) ;
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue1.toFixed(1);
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + stereoValue2.toFixed(1);
 
 });
 
@@ -1498,7 +1549,7 @@ removeAll.addEventListener('click', function () {
         if (animation) window.cancelAnimationFrame(animation);
         const playlisttext = document.createElement('p');
         playlisttext.setAttribute("id", "playlist-text");
-        playlisttext.textContent = 'Playlist is empty... Add songs to start playing.';
+        playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
         playlist.appendChild(playlisttext);
         document.querySelector(".play-pause-back").style.opacity = "0.5";
         document.querySelector(".cssbuttons-io").style.opacity = "0.5";
