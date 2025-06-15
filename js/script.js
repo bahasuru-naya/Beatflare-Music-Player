@@ -618,7 +618,7 @@ function playsamplemusic() {
                 setWidthHeight();
                 updateButtonsState(currentIndex);
                 audiovisual(audioPlayer);
-                fileInput.value = ''; 
+                fileInput.value = '';
                 scrollToBottomPlaylist();
 
                 // Handle edge case when no file is playing
@@ -1179,7 +1179,13 @@ audioPlayer.addEventListener('ended', function () {
     else if (currentIndex < files.length - 1) {
         playFile(currentIndex + 1);
     } else {
-        playPauseButton.innerHTML = playsvg;
+
+        audioPlayer.pause();
+        playPauseButton.innerHTML = playsvg;              
+        updateSongName(`The playlist has reached its end....`);
+        if (audioctx) audioctx.suspend();
+        if (animation) window.cancelAnimationFrame(animation);
+        restoreActiveIndexText();
     }
 });
 
