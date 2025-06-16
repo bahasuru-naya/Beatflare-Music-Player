@@ -41,13 +41,10 @@ let animation;
 let audioctx;
 
 document.addEventListener('DOMContentLoaded', function () {
-
     // Set the canvas height initially
     setWidthHeight();
-
     // Optionally, update the canvas height on window resize
     window.addEventListener('resize', setWidthHeight);
-
     const playlisttext = document.createElement('p');
     playlisttext.setAttribute("id", "playlist-text");
     playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
@@ -60,7 +57,64 @@ document.addEventListener('DOMContentLoaded', function () {
     removeAll.disabled = true;
     searchbtntext.disabled = true;
     audiovisual(audioPlayer);
+    loadFilesFromStorage();
 });
+
+
+async function saveFilesToStorage() {
+    await saveFilesToIndexedDB();
+}
+
+async function loadFilesFromStorage() {
+    try {
+        files = await loadFilesFromIndexedDB();
+        if (files.length > 0) {
+            if (document.getElementById('playlist-text')) {
+                document.getElementById('playlist-text').remove();
+            }
+
+            document.querySelector(".play-pause-back").style.opacity = "1";
+            document.querySelector(".cssbuttons-io").style.opacity = "1";
+            document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+            playPauseButton.disabled = false;
+            seekBar.disabled = false;
+            removeAll.disabled = false;
+            searchbtntext.disabled = false;
+
+            // Call necessary update functions
+            updatePlaylist();
+            setWidthHeight();
+            currentIndex = 0; // Reset currentIndex to 0
+            updateButtonsState(currentIndex);
+            audiovisual(audioPlayer);
+            fileInput.value = '';
+            updatePlaylistHighlight(currentIndex);
+            const file = files[currentIndex];
+            const songTitle = file.name.replace('.mp3', '');
+            const fileURL = URL.createObjectURL(files[currentIndex]);
+            audioPlayer.src = fileURL;
+            audioPlayer.currentTime = 0; // Reset current time to 0
+            audioPlayer.playbackRate = parseFloat(speed);
+            audioPlayer.pause();
+            playPauseButton.innerHTML = playsvg;
+            // Display the song name in the marquee        
+            updateSongName(`Paused: ${songTitle}`);
+            if (audioctx) audioctx.suspend();
+            if (animation) window.cancelAnimationFrame(animation);
+            restoreActiveIndexText();
+
+        } else {
+            files = [];
+            listItemMap = new Map();
+        }
+        console.log('Files loaded from storage');
+    } catch (error) {
+        console.error(error);
+        files = [];
+        listItemMap = new Map();
+    }
+}
+
 
 window.addEventListener('resize', setWidthHeight);
 
@@ -555,7 +609,13 @@ function scrollToBottomPlaylist() {
     });
 }
 
-
+function scrollToTopPlaylist() {
+    const list = document.getElementById('playlist');
+    list.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 
 repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
@@ -778,6 +838,9 @@ function updatePlaylist() {
     });
     updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
+
+    saveFilesToStorage();
+
     if (audioPlayer.paused) {
         restoreActiveIndexText();
     } else {
@@ -978,17 +1041,19 @@ document.querySelector('#error_ok').addEventListener('click', function () {
 });
 
 audioPlayer.onerror = function () {
-    const file = files[currentIndex];
-    const songTitle = file.name.replace('.mp3', '');
-    missingFileTitles.push(songTitle);
-    missingFileNames = missingFileTitles.join(', ');
-    console.error('Audio playback failed:', error);
-    if (missingFileNames.includes(",")) {
-        showerror(`Songs ${missingFileNames} are not found. They are removed from the playlist. You can relocate them by clicking on the "Add Songs" button.`);
-    } else {
-        showerror(`Song ${missingFileNames} is not found. It is removed from the playlist. You can relocate it by clicking on the "Add Songs" button.`);
+    if (files.length > 0) {
+        const file = files[currentIndex];
+        const songTitle = file.name.replace('.mp3', '');
+        missingFileTitles.push(songTitle);
+        missingFileNames = missingFileTitles.join(', ');
+        console.error('Audio playback failed:', error);
+        if (missingFileNames.includes(",")) {
+            showerror(`Songs ${missingFileNames} are not found. They are removed from the playlist. You can relocate them by clicking on the "Add Songs" button.`);
+        } else {
+            showerror(`Song ${missingFileNames} is not found. It is removed from the playlist. You can relocate it by clicking on the "Add Songs" button.`);
+        }
+        handleRemoveFile(currentIndex);
     }
-    handleRemoveFile(currentIndex);
 }
 
 function playFile(index) {
@@ -1648,6 +1713,7 @@ searchbtntext.addEventListener("click", function () {
         document.querySelectorAll('.up, .down').forEach(button => {
             button.style.display = 'none';
         });
+        scrollToTopPlaylist();
         searchsongs();
 
     }
