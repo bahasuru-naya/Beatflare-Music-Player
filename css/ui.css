@@ -1780,8 +1780,9 @@ li svg {
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    border: #000000 2px solid;
-    border-radius: 12px;
+    background:  radial-gradient(circle at 50% 50%,#eeeeee, #eeeeee, rgba(255, 255, 255, 1));
+    border-radius: 10px;
+    
 
 }
 

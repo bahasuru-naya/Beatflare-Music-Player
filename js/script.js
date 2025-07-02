@@ -184,7 +184,7 @@ function audiovisual(player) {
 
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
-        audiosrc.connect(analyser);
+        
         analyser.fftSize = 256;
         isAudioConnected = true;
 
@@ -223,6 +223,7 @@ function audiovisual(player) {
         panNode.connect(lowfilter);
         lowfilter.connect(highfilter);
         highfilter.connect(audioctx.destination);
+        highfilter.connect(analyser);
 
         //panNode.connect(audioctx.destination);
 
