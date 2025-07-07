@@ -483,7 +483,7 @@ nav {
 .card {
     display: none;
     position: fixed;
-    top: calc(50% - 200px);
+    top: calc(50% - 230px);
     left: calc(50% - 160px);
     width: 320px;
     height: 400px;
@@ -491,10 +491,23 @@ nav {
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 1);
     padding: 1rem;
-    z-index: 9;
+    z-index: 99;
     box-shadow: #000000 0px 0px 10px;
     -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.blur-back{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); 
 }
 
 @-webkit-keyframes scale-in-center {
@@ -530,7 +543,7 @@ nav {
     display: flex;
     align-items: center;
     grid-gap: 0.5rem;
-    gap: 1rem;
+    gap: 1rem;    
 }
 
 .icon {
@@ -550,7 +563,7 @@ nav {
 }
 
 .alert {
-    font-weight: 600;
+    font-weight: 800;
     color: rgba(107, 114, 128, 1);
 }
 
@@ -616,7 +629,23 @@ nav {
     background-color: red;
     color: white;
     font-weight: bold;
+}
 
+#delete-warning {
+    display: none;
+    height: fit-content;
+    top: calc(50% - 150px);
+}
+
+#delete-warning .icon {
+    background-color: #f20909;
+    color: white;
+}
+
+#delete-warning .read {
+    background-color: red;
+    color: white;
+    font-weight: bold;
 }
 
 
@@ -1276,7 +1305,7 @@ li svg {
     display: block;
     overflow: hidden;
     cursor: pointer;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
 }
 
 #seek-bar::-webkit-slider-runnable-track {
@@ -1764,6 +1793,7 @@ li svg {
     width: 100px;
     height: 100px;
     border-radius: 10px;
+    border: #000000 2px solid;
     object-fit: contain;
     object-position: center;
 
@@ -1780,9 +1810,9 @@ li svg {
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    background:  radial-gradient(circle at 50% 50%,#eeeeee, #eeeeee, rgba(255, 255, 255, 1));
+    background: radial-gradient(circle at 50% 50%, #eeeeee, #eeeeee, rgba(255, 255, 255, 1));
     border-radius: 10px;
-    
+
 
 }
 
@@ -1855,7 +1885,7 @@ li svg {
     -o-transition: height var(--level-transition-duration);
     transition: height var(--level-transition-duration);
     cursor: pointer;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
 
 }
 
@@ -2058,7 +2088,7 @@ li svg {
     padding: 0.6em 1.3em;
     font-weight: 900;
     font-size: 18px;
-    border: 3px solid var(--settings-text-color);
+    border: 3px solid black;
     border-radius: 0.4em;
     box-shadow: 0.1em 0.1em;
     cursor: pointer;
@@ -2075,13 +2105,27 @@ li svg {
 }
 
 .select-menu {
+    appearance: none;
+    /* For most modern browsers */
+    -webkit-appearance: none;
+    /* Safari/Chrome */
+    -moz-appearance: none;
+    /* Firefox */
     font-family: inherit;
-    padding: 0.6em 1.3em;
+    padding: 0.6em 0.6em;
+    padding-right: 40px;
     font-weight: 900;
     font-size: 18px;
-    border: 3px solid var(--settings-text-color);
+    border: 3px solid black;
     border-radius: 0.4em;
     box-shadow: 0.1em 0.1em;
+
+    background-color: white;
+    /* Add space for the custom arrow */
+    background-image: url('./icon/down-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 30px;
 }
 
 
@@ -2101,7 +2145,7 @@ li svg {
     height: 19px;
     background: #ccc;
     border-radius: 16px;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
     overflow: hidden;
 }
 
@@ -2132,7 +2176,7 @@ li svg {
     height: 19px;
     background: #ccc;
     border-radius: 16px;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
     overflow: hidden;
 }
 
@@ -2217,7 +2261,7 @@ li svg {
     background: #ccc;
     border-radius: 16px;
     width: 100%;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
     overflow: hidden;
 }
 
@@ -2228,6 +2272,7 @@ li svg {
     height: 0;
     -webkit-box-shadow: 0 200px 0 200px var(--home-c1-color);
     box-shadow: 0 200px 0 200px var(--home-c1-color);
+
 
 }
 
@@ -2253,25 +2298,51 @@ li svg {
 
 }
 
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0px;
+    /* or set specific width */
+}
+
+#Stereo {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin: 0px;
+}
+
 /* Track: webkit browsers */
 #Stereo::-webkit-slider-runnable-track {
     height: 19px;
-    background: var(--home-c3-color);
+    background: #ccc;
     border-radius: 16px;
-    border: var(--black) 2px solid;
-    overflow: hidden;
+    border: black 2px solid;
+    overflow: hidden;   
 }
 
 /* Thumb: webkit */
 #Stereo::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 2px;
-    height: 20px;
-    background-color: var(--black);
-    -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
-    box-shadow: -200px 0 0 200px var(--home-c1-color);
+    width: 50%;
+    height: 16px;
+    background-color: var(--home-c1-color);
+}
 
+.center-line {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    /* taller than track */
+    width: 2px;    
+    background-color: black;
+    z-index: 2;
+    /* ensure it stays above thumb */
+    pointer-events: none;
+    /* allow slider interaction */
 }
 
 #Stereolabel1 {
@@ -2320,7 +2391,7 @@ li svg {
     height: 19px;
     background: #ccc;
     border-radius: 16px;
-    border: var(--black) 2px solid;
+    border: black 2px solid;
     overflow: hidden;
 }
 
@@ -2449,7 +2520,7 @@ li svg {
     height: var(--switch-height);
     background: var(--switch-bg);
     border-radius: 999px;
-    box-shadow: 0.1em 0.1em;
+    box-shadow: black 0.1em 0.1em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

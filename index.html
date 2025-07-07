@@ -90,64 +90,100 @@
 
 
     <main>
+        <div class="blur-back" id="warning-back">
+            <div class="card" id="warning">
+                <div class="header">
+                    <span class="icon">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </span>
+                    <p class="alert">Warning: Party Mode Activation <i class="fa-solid fa-toggle-on"></i></p>
+                </div>
 
-        <div class="card" id="warning">
-            <div class="header">
-                <span class="icon">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </span>
-                <p class="alert">Warning: Party Mode Activation <i class="fa-solid fa-toggle-on"></i></p>
-            </div>
+                <p class="message">
+                    Party Mode rapidly changes UI colors <span class="msg-bold">while music is playing</span> to create
+                    a
+                    dynamic experience.
+                    This feature may cause discomfort for some sensitive users, including those prone to seizures or
+                    motion
+                    sickness.<br>
 
-            <p class="message">
-                Party Mode rapidly changes UI colors <span class="msg-bold">while music is playing</span> to create a
-                dynamic experience.
-                This feature may cause discomfort for some sensitive users, including those prone to seizures or motion
-                sickness.<br>
+                    Do you want to continue?<br><br>
 
-                Do you want to continue?<br><br>
+                    Learn more about photosensitivity and safety <a
+                        href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity"
+                        target="_blank" rel="noopener noreferrer">here</a>.
+                </p>
 
-                Learn more about photosensitivity and safety <a
-                    href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity" target="_blank"
-                    rel="noopener noreferrer">here</a>.
-            </p>
+                <div class="actions">
+                    <button class="read" id="agree">
+                        Yes, Enable
+                    </button>
 
-            <div class="actions">
-                <button class="read" id="agree">
-                    Yes, Enable
-                </button>
-
-                <button class="mark-as-read" id="disagree">
-                    Cancel
-                </button>
+                    <button class="mark-as-read" id="disagree">
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="card" id="error">
-            <div class="header">
-                <span class="icon">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </span>
-                <p class="alert">Error</p>
+
+        <div class="blur-back" id="delete-back">
+            <div class="card" id="delete-warning">
+                <div class="header">
+                    <span class="icon">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </span>
+                    <p class="alert">Warning: Clear Playlist? </p>
+                </div>
+
+                <p class="message">
+                    Are you sure you want to clear the entire playlist? 
+                    <br>This action cannot be undone and will remove all songs.
+                </p>
+
+                <div class="actions">
+                    <button class="read" id="agree-delete">
+                        Yes, Clear Playlist
+                    </button>
+
+                    <button class="mark-as-read" id="disagree-delete">
+                        Cancel
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <p class="message">
-                Your browser does not support the audio element. Please update your browser to the latest version.
-            </p>
+        <div class="blur-back" id="error-back">
+            <div class="card" id="error">
+                <div class="header">
+                    <span class="icon">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </span>
+                    <p class="alert">Error</p>
+                </div>
 
-            <div class="actions">
-                <button class="read" id="error_ok">
-                    OK
-                </button>
+                <p class="message">
+                    Your browser does not support the audio element. Please update your browser to the latest version.
+                </p>
 
+                <div class="actions">
+                    <button class="read" id="error_ok">
+                        OK
+                    </button>
+
+                </div>
             </div>
         </div>
 
@@ -456,7 +492,10 @@
                         <label for="Stereo" class="s-text">Stereo: </label>
                         <label id="Stereolabel1" for="Stereo" class="changinglabel"><i
                                 class="fa-solid fa-volume-low"></i> 1.0</label>
-                        <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
+                        <div class="slider-wrapper">
+                            <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
+                            <div class="center-line"></div>
+                        </div>
                         <label id="Stereolabel2" for="Stereo" class="changinglabel"><i
                                 class="fa-solid fa-volume-low"></i> 1.0</label>
                         <button id="Stereo-reset" class="rest-btn">Reset</button>

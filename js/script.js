@@ -184,7 +184,7 @@ function audiovisual(player) {
 
         audiosrc = audioctx.createMediaElementSource(audio);
         analyser = audioctx.createAnalyser();
-        
+
         analyser.fftSize = 256;
         isAudioConnected = true;
 
@@ -222,10 +222,8 @@ function audiovisual(player) {
         filters[filters.length - 1].connect(panNode);
         panNode.connect(lowfilter);
         lowfilter.connect(highfilter);
-        highfilter.connect(audioctx.destination);
         highfilter.connect(analyser);
-
-        //panNode.connect(audioctx.destination);
+        analyser.connect(audioctx.destination);
 
     }
 
@@ -640,9 +638,11 @@ randomsong.addEventListener('change', () => {
 
 function showerror(message) {
     const error = document.querySelector('#error');
+    const errorBack = document.querySelector('#error-back');
     const errorText = document.querySelector('#error .message');
     errorText.textContent = message;
     error.style.display = 'block';
+    errorBack.style.display = 'block';
 }
 
 function playsamplemusic() {
@@ -1038,6 +1038,7 @@ var missingFileTitles = [];
 //close error msg
 document.querySelector('#error_ok').addEventListener('click', function () {
     document.querySelector('#error').style.display = 'none';
+    document.querySelector('#error-back').style.display = 'none';
     missingFileTitles = []
 });
 
@@ -1160,6 +1161,30 @@ playPauseButton.addEventListener('click', function () {
         restoreActiveIndexText();
 
     }
+});
+
+audioPlayer.addEventListener("play", () => {
+    const file = files[currentIndex];
+    const songTitle = file.name.replace('.mp3', '');
+    playPauseButton.innerHTML = pausesvg;
+    // Display the song name in the marquee        
+    updateSongName(`Now Playing: ${songTitle}`);
+    audioctx.resume();
+    audiovisual(audioPlayer);
+    replaceActiveWithLoading();
+
+});
+
+
+audioPlayer.addEventListener("pause", () => {
+    const file = files[currentIndex];
+    const songTitle = file.name.replace('.mp3', '');
+    playPauseButton.innerHTML = playsvg;
+    // Display the song name in the marquee        
+    updateSongName(`Paused: ${songTitle}`);
+    if (audioctx) audioctx.suspend();
+    if (animation) window.cancelAnimationFrame(animation);
+    restoreActiveIndexText();
 });
 
 function replaceActiveWithLoading() {
@@ -1625,8 +1650,17 @@ visualonoff.addEventListener("click", function () {
 
 //remove all songs
 const removeAll = document.getElementById("remove-all");
+const deleteback = document.getElementById("delete-back");
+const deletecard = document.getElementById("delete-warning");
+const deleteagree = document.getElementById("agree-delete");
+const deletecancel = document.getElementById("disagree-delete");
 
 removeAll.addEventListener('click', function () {
+    deleteback.style.display = 'block';
+    deletecard.style.display = 'block';
+});
+
+deleteagree.addEventListener('click', function () {
     if (files.length > 0) {
         files = [];
         listItemMap.clear();
@@ -1654,6 +1688,14 @@ removeAll.addEventListener('click', function () {
         searchbtntext.disabled = true;
         repeatsong.disabled = true;
     }
+
+    deleteback.style.display = 'none';
+    deletecard.style.display = 'none';
+});
+
+deletecancel.addEventListener('click', function () {
+    deleteback.style.display = 'none';
+    deletecard.style.display = 'none';
 });
 
 
@@ -2012,7 +2054,7 @@ themeSelect.addEventListener("change", function () {
 //dark mode
 const darktheme = {
     dark: {
-        "--black": "rgb(204, 204, 204)",
+        "--black": "rgb(244, 242, 242)",
         "--white": " #121212",
         "--menu-color": " #000000",
         "--home-c1-color": " #3700b3",
@@ -2029,7 +2071,7 @@ const darktheme = {
         "--player-tab-active-back-color": " #4b4646",
         "--player-tab-active-text-color": " #ffffff",
         "--settings-head-text-color": " #ffffff",
-        "--settings-text-color": "rgb(216, 215, 215)",
+        "--settings-text-color": "rgb(238, 237, 237)",
         "--about-text-color": " #ffffff",
     },
 };
@@ -2065,6 +2107,7 @@ function setdarkmode() {
 
 
 const warn = document.getElementById("warning");
+const warnback = document.getElementById("warning-back");
 const agree = document.getElementById("agree");
 const disagree = document.getElementById("disagree");
 
@@ -2073,6 +2116,7 @@ partytoggle.addEventListener("click", function () {
     if (firstclick === 0) {
         partytoggle.checked = false;
         warn.style.display = 'block';
+        warnback.style.display = 'block';
     } else {
         if (partytoggle.checked) {
             const selectedTheme = themes[themeSelect.value];
@@ -2107,6 +2151,7 @@ agree.addEventListener("click", function () {
     firstclick = 1;
     partytoggle.checked = true;
     warn.style.display = 'none';
+    warnback.style.display = 'none';
     themeSelect.disabled = true;
     darkModeToggle.checked = false;
     darkModeToggle.disabled = true;
@@ -2122,6 +2167,7 @@ agree.addEventListener("click", function () {
 disagree.addEventListener("click", function () {
     partytoggle.checked = false;
     warn.style.display = 'none';
+    warnback.style.display = 'none';
 });
 
 
