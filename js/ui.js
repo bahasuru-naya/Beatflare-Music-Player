@@ -1,13 +1,11 @@
 //preloader
 const preloader = document.querySelector(".preloaderback");
 window.addEventListener("load", () => {
-
+  const preloadback = document.querySelector(".pre-back");
+  preloadback.style.opacity = "1";
   setTimeout(() => {
     preloader.style.display = "none";
   }, 3000);
-  //preloader.style.animation = "fade-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530)  both";
-
-
 });
 
 //add button
@@ -47,14 +45,6 @@ tabs.addEventListener("click", function (e) {
     element.classList.add("live");
   }
 });
-
-// handle reload
-
-//window.onbeforeunload = function (event) {
-//event.preventDefault();
-
-//};
-
 
 // handle small screen
 // Script to detect small screens and show the warning message

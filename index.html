@@ -7,7 +7,41 @@
     <title>Beatflare Music Player</title>
     <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="css/mobile.css">
-    <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/art.png">
+    <link data-n-head="ssr" rel="icon" type="image/png" sizes="96x96" href="images/art.png">    
+    
+    <script src="js/themes.js"></script>
+    <script>
+        console.log("Welcome to Beatflare Music Player! 🎶")    ;
+        const darkModeSaved = localStorage.getItem('darkModeEnabled');
+
+        if (darkModeSaved === 'true') {
+            const dtheme = darktheme['dark'];
+            Object.keys(dtheme).forEach(key => {
+                document.documentElement.style.setProperty(key, dtheme[key]);
+            });
+        } else {
+            const savedThemeKey = localStorage.getItem('selectedTheme');
+            if (savedThemeKey && themes[savedThemeKey]) {
+                // Apply the theme
+                const savedTheme = themes[savedThemeKey];
+                Object.keys(savedTheme).forEach(key => {
+                    document.documentElement.style.setProperty(key, savedTheme[key]);
+                });
+            }
+        } 
+       
+    </script>
+    <script>
+        if (!window.console) {
+            window.console = {
+                log: function () { },
+                warn: function () { },
+                error: function () { },
+                info: function () { }
+            };
+        }
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
@@ -19,9 +53,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
         rel="stylesheet">
 
-    <script>
-        window.console = window.console || function (t) { };
-    </script>
 
 </head>
 
@@ -145,7 +176,7 @@
                 </div>
 
                 <p class="message">
-                    Are you sure you want to clear the entire playlist? 
+                    Are you sure you want to clear the entire playlist?
                     <br>This action cannot be undone and will remove all songs.
                 </p>
 
@@ -254,7 +285,7 @@
         </section>
         <section id="playersec">
 
-            <h1>Beatflare Music Player</h1>
+            <h1><i class="fa-solid fa-music"></i> Beatflare Music Player</h1>
             <div class="section-center">
                 <div class="play">
                     <div id="player" class="player">
@@ -460,8 +491,8 @@
             <div class="settings-content">
                 <div class="column-1">
                     <div id="audio-set-head">
-                    <label class="s-head-text">Audio Settings</label>
-                    <button id="all-reset" class="rest-btn">Reset all</button>
+                        <label class="s-head-text">Audio Settings</label>
+                        <button id="all-reset" class="rest-btn">Reset all</button>
                     </div>
                     <div id="playback-speed">
                         <label for="speed" class="s-text">Speed: </label>

@@ -18,10 +18,10 @@
     --white: #ffffff;
     --menu-color: #463f3a;
     --menu-text-color: #ffffff;
-    --home-c1-color: #97766c;
-    --home-c2-color: #e6b2a3;
-    --home-c3-color: #8a817c;
-    --home-c4-color: #bcb8b1;
+    --home-c1-color: white;
+    --home-c2-color: white;
+    --home-c3-color: white;
+    --home-c4-color:white ;
     --player-back-color: #f4f3ee;
     --player-text-color: #000000;
     --player-tab-back-color: #E3CAA5;
@@ -90,6 +90,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+   
 }
 
 @-webkit-keyframes fade-out {
@@ -113,6 +116,7 @@ body {
 }
 
 #preloader {
+    
     width: 50%;
     height: 50%;
     background-color: var(--home-c2-color);
@@ -123,6 +127,7 @@ body {
     transform: translate(-50%, -50%);
     box-shadow: 5px 5px 0 0 var(--home-c1-color);
     z-index: 99;
+    
 }
 
 #preloader .plate {
@@ -928,8 +933,8 @@ path.two {
 }
 
 #playersec h1 {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    flex-direction: row;
     color: var(--player-text-color);
     text-align: center;
     font-weight: bold;
@@ -938,6 +943,7 @@ path.two {
     padding: 10px;
     width: 75%;
     margin: 0;
+    align-items: center;
 }
 
 .section-center {
@@ -2035,13 +2041,15 @@ li svg {
 .s-text {
     width: 100%;
     line-height: 95%;
+    font-weight: 500;
 }
 
 .s-head-text {
     font-weight: 800;
     width: 100%;
-    padding-right:10px ;    
-    text-decoration: underline dashed rgb(11, 11, 11) 2px;
+    padding-right:10px;
+        
+    
 }
 
 #sethead {
@@ -2087,7 +2095,8 @@ li svg {
     grid-template-columns: auto 1fr;
     width: 100%;
     align-items: center;   
-    padding: 5px 0px;
+    padding-bottom: 5px;
+   
 }
 
 #all-reset{
@@ -2456,6 +2465,7 @@ li svg {
     grid-row: 4;
     align-self: center;    
     padding: 5px 0px;
+   
 }
 
 #visualizer-set {
@@ -2955,6 +2965,10 @@ li svg {
 }
 
 @media (max-width: 1050px) {
+    #playersec h1 {
+        font-size: 2.8rem;
+
+    }
     #settings {
 
         max-height: none;
@@ -2995,6 +3009,10 @@ li svg {
         width: 33px;
         height: 21px;
     }
+    #playersec h1 {
+        font-size: 2.5rem;
+
+    }
 
 }
 
@@ -3028,7 +3046,7 @@ li svg {
     }
 
     #playersec h1 {
-        font-size: 2.3rem;
+        font-size: 2rem;
 
     }
 
