@@ -115,13 +115,13 @@ body {
 #preloader {
     width: 50%;
     height: 50%;
-    background-color: #CEAB93;
+    background-color: var(--home-c2-color);
     border-radius: 10px;
     position: fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 5px 5px 0 0 #675D50;
+    box-shadow: 5px 5px 0 0 var(--home-c1-color);
     z-index: 99;
 }
 
@@ -148,7 +148,7 @@ body {
 #preloader .plate .black {
     width: 150px;
     height: 150px;
-    background-color: #675D50;
+    background-color: var(--home-c1-color);
     animation: rotation 2s infinite linear;
 }
 
@@ -217,7 +217,7 @@ body {
 #preloader .plate .center {
     width: 20px;
     height: 20px;
-    background-color: #675D50;
+    background-color: var(--home-c2-color);
 }
 
 #preloader .plate .border {
@@ -225,8 +225,8 @@ body {
     height: 111px;
     border-top: 3px solid #F3DEBA;
     border-bottom: 3px solid #F3DEBA;
-    border-left: 3px solid #675D50;
-    border-right: 3px solid #675D50;
+    border-left: 3px solid var(--home-c1-color);
+    border-right: 3px solid var(--home-c1-color);
 }
 
 #preloader .p {
@@ -2040,6 +2040,8 @@ li svg {
 .s-head-text {
     font-weight: 800;
     width: 100%;
+    padding-right:10px ;    
+    text-decoration: underline dashed rgb(11, 11, 11) 2px;
 }
 
 #sethead {
@@ -2075,23 +2077,34 @@ li svg {
     gap: 10px;
     width: 100%;
     align-items: center;
-    justify-items: center;
+    justify-items: center;    
 }
 
 #audio-set-head {
     grid-column: 1;
     grid-row: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    width: 100%;
+    align-items: center;   
+    padding: 5px 0px;
+}
+
+#all-reset{
+    width: fit-content;   
+    padding: 0.5vh 10px;
 }
 
 .rest-btn {
     font-family: inherit;
     padding: 0.6em 1.3em;
-    font-weight: 900;
+    font-weight: 800;
     font-size: 18px;
     border: 3px solid black;
     border-radius: 0.4em;
     box-shadow: 0.1em 0.1em;
     cursor: pointer;
+    width: fit-content;    
 }
 
 .rest-btn:hover {
@@ -2441,7 +2454,8 @@ li svg {
 #ui-set-head {
     grid-column: 1;
     grid-row: 4;
-    align-self: center;
+    align-self: center;    
+    padding: 5px 0px;
 }
 
 #visualizer-set {

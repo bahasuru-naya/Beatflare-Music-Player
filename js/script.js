@@ -57,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
     removeAll.disabled = true;
     searchbtntext.disabled = true;
     audiovisual(audioPlayer);
+    loadsettings();
     loadFilesFromStorage();
+    
 });
 
 
@@ -1264,6 +1266,11 @@ const vpresent = document.getElementById('vpresentage');
 volumeSlider.addEventListener('input', function () {
     audioPlayer.volume = volumeSlider.value;
     vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
+
+    const volume = parseFloat(volumeSlider.value);
+    // Save volume to localStorage
+    localStorage.setItem('playerVolume', volume);
+
     if (Math.floor(volumeSlider.value * 100) === 0) {
         mute.checked = true;
         muteicon.innerHTML = mutesvg;
@@ -1329,6 +1336,9 @@ mute.addEventListener('click', function () {
         volumeSlider.value = 0;
         vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
         audioPlayer.volume = volumeSlider.value;
+        const volume = parseFloat(volumeSlider.value);
+        // Save volume to localStorage
+        localStorage.setItem('playerVolume', volume);
 
     } else {
         if (Math.floor(vvalue * 100) === 0) {
@@ -1340,6 +1350,9 @@ mute.addEventListener('click', function () {
         muteicon.innerHTML = unmutesvg;
         vpresent.textContent = Math.floor(volumeSlider.value * 100) + '%';
         audioPlayer.volume = volumeSlider.value;
+        const volume = parseFloat(volumeSlider.value);
+        // Save volume to localStorage
+        localStorage.setItem('playerVolume', volume);
 
     }
 });
@@ -1357,6 +1370,9 @@ speedControl.addEventListener("input", function () {
     speedlablel.textContent = this.value + 'x';
     speed = this.value;
 
+    // Save to localStorage
+    localStorage.setItem('playbackSpeed', speed);
+
 });
 
 speedreset.addEventListener("click", function () {
@@ -1364,6 +1380,9 @@ speedreset.addEventListener("click", function () {
     audioPlayer.playbackRate = 1;
     speedlablel.textContent = '1x';
     speed = 1;
+
+    // Save to localStorage
+    localStorage.setItem('playbackSpeed', speed);
 });
 
 
@@ -1381,6 +1400,9 @@ pitchControl.addEventListener("input", function () {
     }
     pitchLabel.textContent = pitchValue + "x";
 
+    // Save pitch to localStorage
+    localStorage.setItem('pitchValue', pitchValue);
+
 });
 
 // Event listener for pitch reset
@@ -1390,6 +1412,9 @@ pitchRest.addEventListener("click", function () {
         jungle.setPitchTranspose(0, 0);
     }
     pitchLabel.textContent = "0x";
+
+    // Save pitch to localStorage
+    localStorage.setItem('pitchValue', pitchControl.value);
 });
 
 //equlizer
@@ -1426,6 +1451,8 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
         equSelect.value = 'Custom';
+        
+        saveEQSettings();        
     });
     slider.addEventListener('change', (event) => {
         if (filters) {
@@ -1433,6 +1460,8 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
         equSelect.value = 'Custom';
+        localStorage.setItem('eqPreset', equSelect.value);
+        saveEQSettings();
     });
     divslider.appendChild(slidervlabel);
     divslider.appendChild(slider);
@@ -1440,6 +1469,12 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
     eqcontainer.appendChild(divslider);
     return slider;
 });
+
+
+const saveEQSettings = () => {
+    const values = sliders.map(slider => parseFloat(slider.value));
+    localStorage.setItem('eqSettings', JSON.stringify(values));
+};
 
 const eqreset = document.getElementById("equalizer-reset");
 const eqlablels = document.querySelectorAll(".sliderlabelvalue");
@@ -1460,7 +1495,8 @@ eqreset.addEventListener("click", function () {
         label.textContent = '0 dB';
 
     });
-
+    saveEQSettings();
+    localStorage.setItem('eqPreset', equSelect.value);    
 });
 
 // EQ Preset Select
@@ -1492,6 +1528,8 @@ equSelect.addEventListener("change", function () {
             label.textContent = gains[idx] + ' dB';
         });
     }
+    saveEQSettings();
+    localStorage.setItem('eqPreset', preset);
 });
 
 //stereo change
@@ -1507,6 +1545,9 @@ stereoControl.addEventListener("input", function () {
     if (panNode) {
         panNode.pan.value = stereoValue;
     }
+
+    localStorage.setItem('stereoValue', stereoValue);
+
     // Update the labels with the new stereo values
     const stereoValue1 = 1 + (-stereoValue);
     const stereoValue2 = 1 + stereoValue;
@@ -1521,6 +1562,7 @@ stereoRest.addEventListener("click", function () {
     if (panNode) {
         panNode.pan.value = 0;
     }
+    localStorage.setItem('stereoValue', stereoControl.value);
     stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
     stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
 
@@ -1537,6 +1579,7 @@ let maxValue = 48000 / 2; // Default max value
 
 lowpassControlF.addEventListener("input", function () {
     const lowpassValue = parseFloat(this.value);
+    localStorage.setItem('lowpassControlF', lowpassValue);
     var minValue = 20;
     if (audioctx) {
         maxValue = audioctx.sampleRate / 2;
@@ -1551,12 +1594,14 @@ lowpassControlF.addEventListener("input", function () {
         lowfilter.frequency.value = maxValue * multiplier;
     }
     lowpassLabelF.textContent = (maxValue * multiplier).toFixed(2) + "Hz";
+    
 });
 
 var QUAL_MUL = 30;
 
 lowpassControlQ.addEventListener("input", function () {
     const lowpassValueQ = parseFloat(this.value);
+    localStorage.setItem('lowpassControlQ', lowpassValueQ);
     if (lowfilter) {
         lowfilter.Q.value = lowpassValueQ * QUAL_MUL;
     }
@@ -1567,6 +1612,10 @@ lowpassControlQ.addEventListener("input", function () {
 lowpassreset.addEventListener("click", function () {
     lowpassControlF.value = 1;
     lowpassControlQ.value = 0;
+
+    localStorage.setItem('lowpassControlF', lowpassControlF.value);
+    localStorage.setItem('lowpassControlQ', lowpassControlQ.value);
+
     if (lowfilter) {
         lowfilter.frequency.value = maxValue;
         lowfilter.Q.value = 0;
@@ -1586,6 +1635,8 @@ let maxValue2 = 0;
 
 highpassControlF.addEventListener("input", function () {
     const highpassValue = parseFloat(this.value);
+    localStorage.setItem('highpassControlF', highpassValue);
+
     var minValue2 = 20;
     if (audioctx) {
         maxValue2 = audioctx.sampleRate / 2;
@@ -1606,6 +1657,7 @@ var QUAL_MUL2 = 30;
 
 highpassControlQ.addEventListener("input", function () {
     const highpassValueQ = parseFloat(this.value);
+    localStorage.setItem('highpassControlQ', highpassValueQ);
     if (highfilter) {
         highfilter.Q.value = highpassValueQ * QUAL_MUL2;
     }
@@ -1616,6 +1668,8 @@ highpassControlQ.addEventListener("input", function () {
 highpassreset.addEventListener("click", function () {
     highpassControlF.value = 0;
     highpassControlQ.value = 0;
+    localStorage.setItem('highpassControlF', highpassControlF.value);
+    localStorage.setItem('highpassControlQ', highpassControlQ.value);
     if (highfilter) {
         highfilter.frequency.value = 20;
         highfilter.Q.value = 0;
@@ -1625,13 +1679,87 @@ highpassreset.addEventListener("click", function () {
 }
 );
 
+//reset all filters
+const resetAllFilters = document.getElementById("all-reset");
+resetAllFilters.addEventListener("click", function () {
+
+    speedControl.value = 1;
+    audioPlayer.playbackRate = 1;
+    speedlablel.textContent = '1x';
+    speed = 1;
+
+    // Save to localStorage
+    localStorage.setItem('playbackSpeed', speed);
+
+    pitchControl.value = 0;
+    if (jungle) {
+        jungle.setPitchTranspose(0, 0);
+    }
+    pitchLabel.textContent = "0x";
+
+    // Save pitch to localStorage
+    localStorage.setItem('pitchValue', pitchControl.value);
+
+    equSelect.value = 'Flat';
+    sliders.forEach((slider) => {
+        slider.value = 0;
+
+    });
+    if (filters) {
+        filters.forEach((filter) => {
+            filter.gain.value = 0;
+
+        });
+    }
+    eqlablels.forEach((label) => {
+        label.textContent = '0 dB';
+
+    });
+    saveEQSettings();
+    localStorage.setItem('eqPreset', equSelect.value);    
+
+    stereoControl.value = 0;
+    if (panNode) {
+        panNode.pan.value = 0;
+    }
+    localStorage.setItem('stereoValue', stereoControl.value);
+    stereoLabel1.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
+    stereoLabel2.innerHTML = "<i class='fa-solid fa-volume-low'></i> " + "1.0";
+
+    lowpassControlF.value = 1;
+    lowpassControlQ.value = 0;
+
+    localStorage.setItem('lowpassControlF', lowpassControlF.value);
+    localStorage.setItem('lowpassControlQ', lowpassControlQ.value);
+
+    if (lowfilter) {
+        lowfilter.frequency.value = maxValue;
+        lowfilter.Q.value = 0;
+    }
+    lowpassLabelF.textContent = "24000.00Hz";
+    lowpassLabelQ.textContent = "0.00";
+
+    highpassControlF.value = 0;
+    highpassControlQ.value = 0;
+    localStorage.setItem('highpassControlF', highpassControlF.value);
+    localStorage.setItem('highpassControlQ', highpassControlQ.value);
+    if (highfilter) {
+        highfilter.frequency.value = 20;
+        highfilter.Q.value = 0;
+    }
+    highpassLabelF.textContent = "20.00Hz";
+    highpassLabelQ.textContent = "0.00";
+
+}) ;
+
 
 //visualizer on off
 
 const visualonoff = document.getElementById("visualizer-on-off");
 const playersection = document.querySelector(".section-center");
 
-visualonoff.addEventListener("click", function () {
+visualonoff.addEventListener("click", function () {   
+
     if (visualonoff.checked) {
         tabs.style.display = 'grid';
         playersection.style.gridTemplateColumns = '1fr 1fr';
@@ -1646,6 +1774,8 @@ visualonoff.addEventListener("click", function () {
         setWidthHeight();
 
     }
+
+    localStorage.setItem('visualToggle', visualonoff.checked ? 'true' : 'false');
 });
 
 //remove all songs
@@ -1914,8 +2044,8 @@ const themes = {
         "--black": " #3d348b",
         "--white": " #fdf7fa",
         "--menu-color": "rgb(93, 31, 112)",
-        "--home-c1-color": " #c77dff",
-        "--home-c2-color": " #f3c4fb",
+        "--home-c1-color": "rgb(180, 96, 245)",
+        "--home-c2-color": "rgb(237, 178, 246)",
         "--home-c3-color": " #d8b4e2",
         "--home-c4-color": " #b185db",
         "--player-back-color": "rgb(224, 176, 252)",
@@ -1923,9 +2053,9 @@ const themes = {
         "--about-back-color": " #6a0572",
         "--menu-text-color": " #ffffff",
         "--player-text-color": " #3d348b",
-        "--player-tab-back-color": " #c77dff",
+        "--player-tab-back-color": "rgb(176, 84, 247)",
         "--player-tab-text-color": " #3d348b",
-        "--player-tab-active-back-color": "rgb(214, 149, 251)",
+        "--player-tab-active-back-color": "rgb(210, 141, 249)",
         "--player-tab-active-text-color": " #3d348b",
         "--settings-head-text-color": " #3d348b",
         "--settings-text-color": " #3d348b",
@@ -1936,7 +2066,7 @@ const themes = {
         "--white": " #ffffff",
         "--menu-color": " #ff007f",
         "--home-c1-color": " #ff00ff",
-        "--home-c2-color": " #ff5733",
+        "--home-c2-color": "rgb(250, 46, 0)",
         "--home-c3-color": " #00ff00",
         "--home-c4-color": " #00ffff",
         "--player-back-color": " #ffcc00",
@@ -1958,7 +2088,7 @@ const themes = {
         "--white": " #f0e68c",
         "--menu-color": "rgb(228, 194, 0)",
         "--home-c1-color": " #b8860b",
-        "--home-c2-color": " #daa520",
+        "--home-c2-color": "rgb(235, 183, 52)",
         "--home-c3-color": " #f4a460",
         "--home-c4-color": " #ffdead",
         "--player-back-color": "rgb(220, 188, 83)",
@@ -1979,7 +2109,7 @@ const themes = {
         "--white": " #edf2f4",
         "--menu-color": "rgb(172, 114, 135)",
         "--home-c1-color": "rgb(249, 130, 176)",
-        "--home-c2-color": "rgb(164, 212, 255)",
+        "--home-c2-color": "rgb(46, 149, 240)",
         "--home-c3-color": "rgb(124, 189, 250)",
         "--home-c4-color": "rgb(196, 150, 222)",
         "--player-back-color": "rgb(249, 133, 162)",
@@ -2043,6 +2173,7 @@ const themeSelect = document.getElementById("theme-select");
 
 themeSelect.addEventListener("change", function () {
     const selectedTheme = themes[this.value];
+    localStorage.setItem('selectedTheme', this.value);
     if (selectedTheme) {
         Object.keys(selectedTheme).forEach(key => {
             document.documentElement.style.setProperty(key, selectedTheme[key]);
@@ -2078,6 +2209,7 @@ const darktheme = {
 
 const darkModeToggle = document.getElementById("darkmode-on-off");
 darkModeToggle.addEventListener("change", function () {
+    localStorage.setItem('darkModeEnabled', darkModeToggle.checked ? 'true' : 'false');
     setdarkmode();
 });
 
