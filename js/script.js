@@ -42,8 +42,7 @@ let audioctx;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Set the canvas height initially
-    setWidthHeight();
-    // Optionally, update the canvas height on window resize
+    setWidthHeight();    
     window.addEventListener('resize', setWidthHeight);
     const playlisttext = document.createElement('p');
     playlisttext.setAttribute("id", "playlist-text");
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     audiovisual(audioPlayer);
     loadsettings();
     loadFilesFromStorage();
-    
+
 });
 
 
@@ -86,7 +85,7 @@ async function loadFilesFromStorage() {
             // Call necessary update functions
             updatePlaylist();
             setWidthHeight();
-            currentIndex = 0; // Reset currentIndex to 0
+            currentIndex = 0; 
             updateButtonsState(currentIndex);
             audiovisual(audioPlayer);
             fileInput.value = '';
@@ -95,7 +94,7 @@ async function loadFilesFromStorage() {
             const songTitle = file.name.replace('.mp3', '');
             const fileURL = URL.createObjectURL(files[currentIndex]);
             audioPlayer.src = fileURL;
-            audioPlayer.currentTime = 0; // Reset current time to 0
+            audioPlayer.currentTime = 0; 
             audioPlayer.playbackRate = parseFloat(speed);
             audioPlayer.pause();
             playPauseButton.innerHTML = playsvg;
@@ -146,9 +145,7 @@ function setWidthHeight() {
     const songNameElement = document.getElementById("songName");
     var maqcontainer = 0;
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
-
     maqcontainer = document.querySelector(".volumemute").offsetWidth;
-
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
 
     // Reset animation
@@ -157,7 +154,7 @@ function setWidthHeight() {
     // Calculate the animation duration based on text width
     const containerWidth = maqcontainer;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 100; // Adjust speed factor as needed
+    const animationDuration = (textWidth + containerWidth) / 100; 
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
@@ -176,7 +173,6 @@ let highfilter;
 
 
 //visualizer and other effects
-
 function audiovisual(player) {
     audio = player;
     audioctx = new AudioContext();
@@ -255,7 +251,6 @@ function audiovisual(player) {
     let hue = 0;
     function animate2() {
         if (document.querySelector('[data-id="step2"]').classList.contains("live")) {
-
             // Clear the canvas
             ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
@@ -267,11 +262,11 @@ function audiovisual(player) {
             ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
             // Circle parameters
-            let points = 200; // Number of points to draw circle
-            let radius = 50; // Base radius
-            const numlines = 43; // Number of lines to draw visualizer
-            let cX = canvas2.width / 2; // Center X
-            let cY = canvas2.height / 2; // Center Y
+            let points = 200; 
+            let radius = 50; 
+            const numlines = 43; 
+            let cX = canvas2.width / 2; 
+            let cY = canvas2.height / 2; 
 
             // Scaling factors for roundness
             let scaleX = canvas2.width / Math.max(canvas2.width, canvas2.height);
@@ -282,7 +277,6 @@ function audiovisual(player) {
             let radian = 0;
             let radianc = 0;
 
-
             // Line styles
             ctx2.strokeStyle = "hsl(" + hue + ", 100%, 50%)";
             ctx2.lineWidth = 3;
@@ -290,7 +284,6 @@ function audiovisual(player) {
             ctx2.lineJoin = 'round';
 
             // draw circle
-
             for (let i = 0; i < points; i++) {
                 // Calculate starting point of the line
                 let xStart = radius * Math.cos(radianc) * scaleX + cX;
@@ -340,13 +333,9 @@ function audiovisual(player) {
             if (hue > 360) {
                 hue = 0;
             }
-        }
-
-        // Request the next animation frame
+        }       
         animation = requestAnimationFrame(animate2);
-    }
-
-    // --- Circle Animation ---
+    }    
 
     function animate3() {
         if (document.querySelector('[data-id="step3"]').classList.contains("live")) {
@@ -391,8 +380,7 @@ function audiovisual(player) {
                     const amplitude = (dataArray[index] / 128.0) - 1.0;
                     const amplitudeFactor = currentBaseRadius * 0.65;
                     const currentRadius = currentBaseRadius + (amplitude * amplitudeFactor);
-
-                    // --- MODIFIED: Add the startAngleOffset to the angle calculation ---
+                    
                     const angle = startAngleOffset + (sliceAngle * i) - (Math.PI / 2);
 
                     const x = centerX + currentRadius * Math.cos(angle);
@@ -415,41 +403,13 @@ function audiovisual(player) {
 
 
     let lastThemeUpdate = 0;
-    let themeUpdateInterval = 300; // update theme every 0.3 seconds 
+    let themeUpdateInterval = 250; // update theme every 250ms
 
     function animate4() {
         if (partytoggle.checked) {
-
             now = Date.now();
             if (now - lastThemeUpdate > themeUpdateInterval) {
-                partyTheme();
-                lastThemeUpdate = now;
-                if (!audioPlayer.paused) {
-                    const end = Date.now() + 50;
-                    (function frame() {
-
-                        confetti({
-                            particleCount: 2,
-                            angle: 60,
-                            spread: 55,
-                            origin: { x: 0 },
-
-                        });
-
-                        confetti({
-                            particleCount: 2,
-                            angle: 120,
-                            spread: 55,
-                            origin: { x: 1 },
-
-                        });
-
-                        if ((Date.now() < end)) {
-                            requestAnimationFrame(frame);
-                        }
-
-                    })();
-                } else {
+                if (audioPlayer.paused) {
                     const selectedTheme = themes[themeSelect.value];
                     if (selectedTheme) {
                         Object.keys(selectedTheme).forEach(key => {
@@ -457,6 +417,9 @@ function audiovisual(player) {
                         });
                     }
 
+                } else {
+                    partyTheme();
+                    lastThemeUpdate = now;
                 }
 
             }
@@ -466,19 +429,15 @@ function audiovisual(player) {
 
 
     function partyTheme() {
-        if (dataArray.length === 0) return; // handle empty data
+        if (dataArray.length === 0) return; 
         let sum = dataArray.reduce((sum, value) => sum + value, 0);
         let average = sum / dataArray.length;
 
-        //console.log("Average:", average);
-
         const themeKeys = Object.keys(themes);
         let themeIndex = (Math.floor(average) % (themeKeys.length * 100)) % themeKeys.length;
-        //console.log("Theme Index:", themeIndex);       
 
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
-        //console.log("Selected Theme:", selectedThemeKey); 
 
         if (selectedTheme) {
             Object.keys(selectedTheme).forEach(key => {
@@ -497,20 +456,55 @@ function audiovisual(player) {
     animate4();
 }
 
+let confettiRunning = false;
+let confettiAnimationId = null;
+
+function startConfetti() {
+    function frame() {
+        if (!partytoggle.checked || audioPlayer.paused) {
+            confettiRunning = false;
+            return; 
+        }
+
+        confetti({
+            particleCount: 1,
+            angle: 60,
+            spread: 90,
+            origin: { x: 0 },
+
+        });
+
+        confetti({
+            particleCount: 1,
+            angle: 120,
+            spread: 90,
+            origin: { x: 1 },
+
+        });
+
+
+        confettiAnimationId = requestAnimationFrame(frame);
+    }
+
+    if (!confettiRunning) {
+        confettiRunning = true;
+        frame();
+    }
+}
+
 //generate random color
 function generateRandomColor(barHeight) {
     if (barHeight === undefined || barHeight === null) {
         barHeight = 0;
     }
     else {
-        // Ensure barHeight is within a reasonable range
         barHeight = Math.max(0, Math.min(255, barHeight));
     }
 
-    // Use barHeight to influence hue and convert HSL to RGB for rainbow effect
-    let hue = (barHeight * 1.5 + Math.floor(Math.random() * 60)) % 360; // create variation
-    let saturation = 90; // full saturation for bright rainbow colors
-    let lightness = 40; // balanced lightness
+    // Use barHeight to influence hue 
+    let hue = (barHeight * 1.5 + Math.floor(Math.random() * 60)) % 360;
+    let saturation = 90;
+    let lightness = 40;
 
     // Convert HSL to RGB
     function hslToRgb(h, s, l) {
@@ -548,29 +542,20 @@ function updateSongName(newText) {
     const parts = newText.split(':');
     if (parts.length > 1) {
         const prefix = parts[0] + ':';
-        const songTitle = parts.slice(1).join(':').trim(); // handle cases with multiple colons
-
-        // Create link for the song name
+        const songTitle = parts.slice(1).join(':').trim();
         songNameElement.innerHTML = `${prefix} <a id="currentsonglink" title="Scroll playlist to now playing" href="#" onclick="scrollToActive(); return false;">${songTitle}</a>`;
     } else {
-        // No colon, just set the text
         songNameElement.textContent = newText;
     }
 
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
-
-    // Reset animation
     songNameElement.style.animation = "none";
-
-    // Wait for a reflow to apply the animation again
     void songNameElement.offsetWidth;
 
-    // Calculate the animation duration based on text width
     const containerWidth = document.querySelector(".marquee").offsetWidth;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 90; // Adjust speed factor as needed
+    const animationDuration = (textWidth + containerWidth) / 90;
 
-    // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
 
 }
@@ -620,17 +605,14 @@ function scrollToTopPlaylist() {
 
 repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
-        // Checkbox is checked
         randomsong.checked = false;
     }
-
 });
 
 const playedrandomArray = [];
 
 randomsong.addEventListener('change', () => {
     if (randomsong.checked) {
-        // Checkbox is checked
         repeatsong.checked = false;
     }
     else {
@@ -665,7 +647,6 @@ function playsamplemusic() {
         .then(fetchedFiles => {
             // Add all files to the playlist
             fetchedFiles.forEach(file => files.push(file));
-
             // Remove playlist text if visible
             const playlistText = document.getElementById('playlist-text');
             if (playlistText) playlistText.remove();
@@ -699,16 +680,12 @@ function playsamplemusic() {
         });
 }
 
-
-
-
 fileInput.addEventListener('change', function (event) {
     try {
         // Ensure files exist in the input event
         if (!event.target.files) {
             throw new Error('No files were selected.');
         }
-
         const newFiles = Array.from(event.target.files);
 
         // Validate files array before updating
@@ -747,7 +724,7 @@ fileInput.addEventListener('change', function (event) {
         setWidthHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
-        fileInput.value = ''; // Reset the input value to allow selecting the same file again
+        fileInput.value = ''; 
         scrollToBottomPlaylist();
 
     } catch (error) {
@@ -762,8 +739,6 @@ fileInput.addEventListener('change', function (event) {
     }
 
 });
-
-
 
 function updatePlaylist() {
     playlist.innerHTML = '';
@@ -787,7 +762,7 @@ function updatePlaylist() {
         if (index !== 0) {
             const upbutton = document.createElement("button");
             upbutton.classList.add("up");
-            // Create the SVG element (as innerHTML)
+            // Create the SVG element 
             upbutton.innerHTML = `
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
@@ -796,9 +771,7 @@ function updatePlaylist() {
             upbutton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 handleupFile(index)
-
             });
-
         }
 
         if (index !== files.length - 1) {
@@ -814,7 +787,6 @@ function updatePlaylist() {
                 handledownFile(index);
 
             });
-
         }
 
         const removeButton = document.createElement('button');
@@ -822,7 +794,6 @@ function updatePlaylist() {
         removeButton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
         </svg>`;
-
         listItem.appendChild(removeButton);
 
         listItem.addEventListener('click', () => playFile(index));
@@ -836,12 +807,9 @@ function updatePlaylist() {
 
         playlist.appendChild(listItem);
         listItemMap.set(index, listItem);
-
-
     });
     updateButtonsState(currentIndex);
     updatePlaylistHighlight(currentIndex);
-
     saveFilesToStorage();
 
     if (audioPlayer.paused) {
@@ -972,9 +940,9 @@ function handleRemoveFile(index) {
         } else {
             // Determine the next or previous file to play
             if (index < files.length - 1) {
-                currentIndex = index; // Play the next file
+                currentIndex = index;
             } else {
-                currentIndex = index - 1; // Play the previous file
+                currentIndex = index - 1;
             }
 
             // Remove the file from the array
@@ -1066,7 +1034,7 @@ function playFile(index) {
         const songTitle = file.name.replace('.mp3', '');
         const fileURL = URL.createObjectURL(files[index]);
         audioPlayer.src = fileURL;
-        audioPlayer.currentTime = 0; // Reset current time to 0
+        audioPlayer.currentTime = 0;
         audioPlayer.playbackRate = parseFloat(speed);
         currentIndex = index;
 
@@ -1165,6 +1133,8 @@ playPauseButton.addEventListener('click', function () {
     }
 });
 
+
+
 audioPlayer.addEventListener("play", () => {
     const file = files[currentIndex];
     const songTitle = file.name.replace('.mp3', '');
@@ -1174,6 +1144,9 @@ audioPlayer.addEventListener("play", () => {
     audioctx.resume();
     audiovisual(audioPlayer);
     replaceActiveWithLoading();
+    if (partytoggle.checked) {
+        startConfetti();
+    }
 
 });
 
@@ -1187,6 +1160,10 @@ audioPlayer.addEventListener("pause", () => {
     if (audioctx) audioctx.suspend();
     if (animation) window.cancelAnimationFrame(animation);
     restoreActiveIndexText();
+    confettiRunning = false;
+    if (confettiAnimationId) {
+        cancelAnimationFrame(confettiAnimationId);
+    }
 });
 
 function replaceActiveWithLoading() {
@@ -1358,7 +1335,6 @@ mute.addEventListener('click', function () {
 });
 
 //changing speed of audio
-
 const speedControl = document.getElementById("speed");
 const speedreset = document.getElementById("speed-reset");
 const speedlablel = document.getElementById("speedlabel");
@@ -1399,7 +1375,6 @@ pitchControl.addEventListener("input", function () {
         jungle.setPitchTranspose(0, pitchValue);
     }
     pitchLabel.textContent = pitchValue + "x";
-
     // Save pitch to localStorage
     localStorage.setItem('pitchValue', pitchValue);
 
@@ -1412,7 +1387,6 @@ pitchRest.addEventListener("click", function () {
         jungle.setPitchTranspose(0, 0);
     }
     pitchLabel.textContent = "0x";
-
     // Save pitch to localStorage
     localStorage.setItem('pitchValue', pitchControl.value);
 });
@@ -1420,7 +1394,7 @@ pitchRest.addEventListener("click", function () {
 //equlizer
 const equSelect = document.getElementById("equ-select");
 
-const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
+const sliders = eqBands.map((freq, idx) => {  
     const divslider = document.createElement('div');
     divslider.classList.add('divslider');
     const sliderlabel = document.createElement('label');
@@ -1446,17 +1420,17 @@ const sliders = eqBands.map((freq, idx) => {  // Use 'idx' instead of 'index'
 
     slider.addEventListener('input', (event) => {
         if (filters) {
-            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
+            filters[idx].gain.value = parseFloat(event.target.value);            
 
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
         equSelect.value = 'Custom';
-        
-        saveEQSettings();        
+
+        saveEQSettings();
     });
     slider.addEventListener('change', (event) => {
         if (filters) {
-            filters[idx].gain.value = parseFloat(event.target.value);// Use 'idx' correctly here            
+            filters[idx].gain.value = parseFloat(event.target.value);           
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
         equSelect.value = 'Custom';
@@ -1496,11 +1470,10 @@ eqreset.addEventListener("click", function () {
 
     });
     saveEQSettings();
-    localStorage.setItem('eqPreset', equSelect.value);    
+    localStorage.setItem('eqPreset', equSelect.value);
 });
 
 // EQ Preset Select
-
 // EQ Preset Gain Values (in dB)
 const eqPresets = {
     "Flat": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -1509,7 +1482,7 @@ const eqPresets = {
     "Laptop": [-3, -3, -2, -1, 0, +1, +2, +3, +3, +4],
     "Portable speakers": [3, 3, 2, 1, 0, -1, -2, -3, -3, -4],
     "TV": [0, 0, 1, 1, 2, 3, 2, 1, 0, -1],
-    "Custom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // Custom values will be set manually
+    "Custom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
 };
 
 document.querySelector("#equ-select option[value='Custom']").style.display = "none";
@@ -1594,7 +1567,7 @@ lowpassControlF.addEventListener("input", function () {
         lowfilter.frequency.value = maxValue * multiplier;
     }
     lowpassLabelF.textContent = (maxValue * multiplier).toFixed(2) + "Hz";
-    
+
 });
 
 var QUAL_MUL = 30;
@@ -1716,7 +1689,7 @@ resetAllFilters.addEventListener("click", function () {
 
     });
     saveEQSettings();
-    localStorage.setItem('eqPreset', equSelect.value);    
+    localStorage.setItem('eqPreset', equSelect.value);
 
     stereoControl.value = 0;
     if (panNode) {
@@ -1750,15 +1723,14 @@ resetAllFilters.addEventListener("click", function () {
     highpassLabelF.textContent = "20.00Hz";
     highpassLabelQ.textContent = "0.00";
 
-}) ;
+});
 
 
 //visualizer on off
-
 const visualonoff = document.getElementById("visualizer-on-off");
 const playersection = document.querySelector(".section-center");
 
-visualonoff.addEventListener("click", function () {   
+visualonoff.addEventListener("click", function () {
 
     if (visualonoff.checked) {
         tabs.style.display = 'grid';
@@ -1830,7 +1802,6 @@ deletecancel.addEventListener('click', function () {
 
 
 //search button
-
 const playerhead = document.querySelector("#playerhead");
 const addbtn = document.querySelector(".buttonadd");
 const searchbtn = document.querySelector(".cssbuttons-io");
@@ -1872,7 +1843,7 @@ function closeserch() {
 
 searchbtntext.addEventListener("click", function () {
     if (searchbtntext.disabled) {
-        return; // Prevent action if the button is disabled
+        return; 
     }
     search = !search;
     if (search) {
@@ -1888,21 +1859,15 @@ searchbtntext.addEventListener("click", function () {
         });
         scrollToTopPlaylist();
         searchsongs();
-
     }
     else {
-
         closeserch();
     }
-
-
 });
 
 
 //search songs
-
 const searchinputbox = document.getElementById("search-list");
-
 
 searchinputbox.addEventListener('input', function () {
     searchsongs();
@@ -1925,8 +1890,6 @@ function searchsongs() {
     songs.forEach((song) => {
         if (searchinputbox.value === '') {
             song.style.display = 'grid';
-
-
         } else {
             if (song.textContent.toLowerCase().includes(searchinputbox.value.toLowerCase())) {
                 song.style.display = 'grid';
@@ -1936,15 +1899,12 @@ function searchsongs() {
                 song.style.display = 'none';
             }
         }
-
-
     });
     if (numsongs === 0) {
         playlisttext.textContent = 'No songs found';
         if (searchinputbox.value === '') {
             playlisttext.textContent = 'Type to search';
         }
-
     }
     else {
         playlisttext.textContent = numsongs + ' song/s found';
@@ -1953,8 +1913,7 @@ function searchsongs() {
 
 }
 
-
-
+//theme change
 const themeSelect = document.getElementById("theme-select");
 
 themeSelect.addEventListener("change", function () {
@@ -1967,9 +1926,7 @@ themeSelect.addEventListener("change", function () {
     }
 });
 
-
-
-
+//dark mode
 const darkModeToggle = document.getElementById("darkmode-on-off");
 darkModeToggle.addEventListener("change", function () {
     localStorage.setItem('darkModeEnabled', darkModeToggle.checked ? 'true' : 'false');
@@ -1999,8 +1956,6 @@ function setdarkmode() {
 }
 
 //party mode
-
-
 const warn = document.getElementById("warning");
 const warnback = document.getElementById("warning-back");
 const agree = document.getElementById("agree");
@@ -2024,7 +1979,7 @@ partytoggle.addEventListener("click", function () {
             darkModeToggle.checked = false;
             darkModeToggle.disabled = true;
 
-
+            startConfetti();
         }
         else {
             themeSelect.disabled = false;
@@ -2035,10 +1990,11 @@ partytoggle.addEventListener("click", function () {
                     document.documentElement.style.setProperty(key, selectedTheme[key]);
                 });
             }
-
+            confettiRunning = false;
+            if (confettiAnimationId) {
+                cancelAnimationFrame(confettiAnimationId);
+            }
         }
-
-
     }
 });
 
@@ -2056,7 +2012,7 @@ agree.addEventListener("click", function () {
             document.documentElement.style.setProperty(key, selectedTheme[key]);
         });
     }
-
+    startConfetti();
 });
 
 disagree.addEventListener("click", function () {

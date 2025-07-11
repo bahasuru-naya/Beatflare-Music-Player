@@ -85,8 +85,8 @@ const themes = {
         "--player-tab-text-color": " #370617",
         "--player-tab-active-back-color": " #ff5733",
         "--player-tab-active-text-color": " #370617",
-        "--settings-head-text-color": " #370617",
-        "--settings-text-color": " #370617",
+        "--settings-head-text-color": " #f9f900ff",
+        "--settings-text-color": " #f9f900ff",
         "--about-text-color": " #ffba08"
     },
     forest: {
