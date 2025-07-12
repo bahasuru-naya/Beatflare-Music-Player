@@ -201,6 +201,9 @@
     .sliderlabel {
         font-size: 0.5rem;
     }
+    .center-line {
+        top: 40%;
+    }
 
     #Stereolabel1 {
         font-size: 1rem;

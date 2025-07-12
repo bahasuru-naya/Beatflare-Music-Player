@@ -2324,6 +2324,8 @@ li svg {
     position: relative;
     width: 100%;
     padding: 0px;
+    margin: 0px;    
+    align-content: center;
     /* or set specific width */
 }
 
@@ -3064,6 +3066,9 @@ li svg {
         font-size: 1.5rem;
         align-items: center;
 
+    }
+    .center-line {
+        top: 50%;
     }
 
     ul {
