@@ -91,10 +91,10 @@ const setButtonVisibility = (visible) => {
 
 // Setup observers for #home and #player
 const homeSection = document.querySelector("#home");
-const playerSection = document.querySelector("#player");
+const playerSection = document.querySelector("#playersec");
 
 const observerOptions = {
-  threshold: 0.6, // Adjust if needed
+  threshold: 0.45, // Adjust if needed
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -107,7 +107,7 @@ const observer = new IntersectionObserver((entries) => {
       }
     }
 
-    if (entry.target.id === "player") {
+    if (entry.target.id === "playersec") {
       if (entry.isIntersecting) {
         setButtonVisibility(false);
       } else {

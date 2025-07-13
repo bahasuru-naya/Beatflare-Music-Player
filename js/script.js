@@ -42,7 +42,7 @@ let audioctx;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Set the canvas height initially
-    setWidthHeight();    
+    setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
     const playlisttext = document.createElement('p');
     playlisttext.setAttribute("id", "playlist-text");
@@ -85,7 +85,7 @@ async function loadFilesFromStorage() {
             // Call necessary update functions
             updatePlaylist();
             setWidthHeight();
-            currentIndex = 0; 
+            currentIndex = 0;
             updateButtonsState(currentIndex);
             audiovisual(audioPlayer);
             fileInput.value = '';
@@ -94,7 +94,7 @@ async function loadFilesFromStorage() {
             const songTitle = file.name.replace('.mp3', '');
             const fileURL = URL.createObjectURL(files[currentIndex]);
             audioPlayer.src = fileURL;
-            audioPlayer.currentTime = 0; 
+            audioPlayer.currentTime = 0;
             audioPlayer.playbackRate = parseFloat(speed);
             audioPlayer.pause();
             playPauseButton.innerHTML = playsvg;
@@ -154,7 +154,7 @@ function setWidthHeight() {
     // Calculate the animation duration based on text width
     const containerWidth = maqcontainer;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 100; 
+    const animationDuration = (textWidth + containerWidth) / 100;
 
     // Apply the new animation with dynamic duration
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
@@ -262,11 +262,11 @@ function audiovisual(player) {
             ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
             // Circle parameters
-            let points = 200; 
-            let radius = 50; 
-            const numlines = 43; 
-            let cX = canvas2.width / 2; 
-            let cY = canvas2.height / 2; 
+            let points = 200;
+            let radius = 50;
+            const numlines = 43;
+            let cX = canvas2.width / 2;
+            let cY = canvas2.height / 2;
 
             // Scaling factors for roundness
             let scaleX = canvas2.width / Math.max(canvas2.width, canvas2.height);
@@ -333,9 +333,9 @@ function audiovisual(player) {
             if (hue > 360) {
                 hue = 0;
             }
-        }       
+        }
         animation = requestAnimationFrame(animate2);
-    }    
+    }
 
     function animate3() {
         if (document.querySelector('[data-id="step3"]').classList.contains("live")) {
@@ -380,7 +380,7 @@ function audiovisual(player) {
                     const amplitude = (dataArray[index] / 128.0) - 1.0;
                     const amplitudeFactor = currentBaseRadius * 0.65;
                     const currentRadius = currentBaseRadius + (amplitude * amplitudeFactor);
-                    
+
                     const angle = startAngleOffset + (sliceAngle * i) - (Math.PI / 2);
 
                     const x = centerX + currentRadius * Math.cos(angle);
@@ -429,7 +429,7 @@ function audiovisual(player) {
 
 
     function partyTheme() {
-        if (dataArray.length === 0) return; 
+        if (dataArray.length === 0) return;
         let sum = dataArray.reduce((sum, value) => sum + value, 0);
         let average = sum / dataArray.length;
 
@@ -458,30 +458,39 @@ function audiovisual(player) {
 
 let confettiRunning = false;
 let confettiAnimationId = null;
+let canvasConfetti = null;
 
-function startConfetti() {
+async function startConfetti() {
+    const canvas = document.getElementById("my-canvas-confetti");
+
+    // Initialize confetti only once
+    if (!canvas.confetti) {
+        canvas.confetti = await confetti.create(canvas, { resize: true });
+    }
+
+    canvasConfetti = canvas.confetti;
+
     function frame() {
         if (!partytoggle.checked || audioPlayer.paused) {
             confettiRunning = false;
-            return; 
+            return;
         }
 
-        confetti({
+        // Fire from left
+        canvasConfetti({
             particleCount: 1,
             angle: 60,
             spread: 90,
             origin: { x: 0 },
-
         });
 
-        confetti({
+        // Fire from right
+        canvasConfetti({
             particleCount: 1,
             angle: 120,
             spread: 90,
             origin: { x: 1 },
-
         });
-
 
         confettiAnimationId = requestAnimationFrame(frame);
     }
@@ -724,7 +733,7 @@ fileInput.addEventListener('change', function (event) {
         setWidthHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
-        fileInput.value = ''; 
+        fileInput.value = '';
         scrollToBottomPlaylist();
 
     } catch (error) {
@@ -1394,7 +1403,7 @@ pitchRest.addEventListener("click", function () {
 //equlizer
 const equSelect = document.getElementById("equ-select");
 
-const sliders = eqBands.map((freq, idx) => {  
+const sliders = eqBands.map((freq, idx) => {
     const divslider = document.createElement('div');
     divslider.classList.add('divslider');
     const sliderlabel = document.createElement('label');
@@ -1420,7 +1429,7 @@ const sliders = eqBands.map((freq, idx) => {
 
     slider.addEventListener('input', (event) => {
         if (filters) {
-            filters[idx].gain.value = parseFloat(event.target.value);            
+            filters[idx].gain.value = parseFloat(event.target.value);
 
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
@@ -1430,7 +1439,7 @@ const sliders = eqBands.map((freq, idx) => {
     });
     slider.addEventListener('change', (event) => {
         if (filters) {
-            filters[idx].gain.value = parseFloat(event.target.value);           
+            filters[idx].gain.value = parseFloat(event.target.value);
         }
         slidervlabel.textContent = parseFloat(event.target.value) + ' dB';
         equSelect.value = 'Custom';
@@ -1482,7 +1491,7 @@ const eqPresets = {
     "Laptop": [-3, -3, -2, -1, 0, +1, +2, +3, +3, +4],
     "Portable speakers": [3, 3, 2, 1, 0, -1, -2, -3, -3, -4],
     "TV": [0, 0, 1, 1, 2, 3, 2, 1, 0, -1],
-    "Custom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+    "Custom": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
 
 document.querySelector("#equ-select option[value='Custom']").style.display = "none";
@@ -1843,7 +1852,7 @@ function closeserch() {
 
 searchbtntext.addEventListener("click", function () {
     if (searchbtntext.disabled) {
-        return; 
+        return;
     }
     search = !search;
     if (search) {
