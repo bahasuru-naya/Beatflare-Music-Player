@@ -589,7 +589,13 @@ function scrollToActive() {
     if (activeItem) {
         activeItem.scrollIntoView({
             behavior: 'smooth',
-            block: 'nearest' // Or 'center' or 'start'
+            block: 'nearest'
+        });
+        activeItem.classList.add('blink-1');
+        // Remove the class after animation ends to allow retriggering later
+        activeItem.addEventListener('animationend', function handleAnimationEnd() {
+            activeItem.classList.remove('blink-1');
+            activeItem.removeEventListener('animationend', handleAnimationEnd);
         });
     } else {
         console.log('No active item found.');
@@ -805,7 +811,26 @@ function updatePlaylist() {
         </svg>`;
         listItem.appendChild(removeButton);
 
-        listItem.addEventListener('click', () => playFile(index));
+        listItem.addEventListener('click', () => {
+            if (search) {
+                search = false;
+                closeserch();
+                listItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest' 
+                });
+                listItem.classList.add('blink-1');
+                // Remove the class after animation ends to allow retriggering later
+                listItem.addEventListener('animationend', function handleAnimationEnd() {
+                    listItem.classList.remove('blink-1');
+                    listItem.removeEventListener('animationend', handleAnimationEnd);
+                });
+            }
+            else {
+                playFile(index);
+
+            }
+        });
         removeButton.addEventListener('click', (e) => {
             e.stopPropagation();
             handleRemoveFile(index);
