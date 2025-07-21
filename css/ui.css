@@ -1445,6 +1445,8 @@ li svg {
     appearance: none;
     width: 0;
     height: 0;
+    padding: 0px;
+    margin: 0px;
     -webkit-box-shadow: -800px 0 0 800px var(--home-c1-color);
     box-shadow: -800px 0 0 800px var(--home-c1-color);
 
@@ -2026,6 +2028,8 @@ li svg {
     appearance: none;
     width: 0;
     height: 0;
+    padding: 0px;
+    margin: 0px;
     -webkit-box-shadow: -200px 0 0 200px var(--level-color);
     box-shadow: -200px 0 0 200px var(--level-color);
 }
@@ -2333,6 +2337,8 @@ li svg {
     appearance: none;
     width: 0;
     height: 0;
+    padding: 0px;
+    margin: 0px;
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
     box-shadow: -200px 0 0 200px var(--home-c1-color);
 
@@ -2417,6 +2423,8 @@ li svg {
     appearance: none;
     width: 0;
     height: 0;
+    padding: 0px;
+    margin: 0px;
     -webkit-box-shadow: 0 200px 0 200px var(--home-c1-color);
     box-shadow: 0 200px 0 200px var(--home-c1-color);
 
@@ -2475,6 +2483,8 @@ li svg {
     appearance: none;
     width: 50%;
     height: 16px;
+    padding: 0px;
+    margin: 0px;
     background-color: var(--home-c1-color);
 }
 
@@ -2549,6 +2559,8 @@ li svg {
     appearance: none;
     width: 0;
     height: 0;
+    padding: 0px;
+    margin: 0px;
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
     box-shadow: -200px 0 0 200px var(--home-c1-color);
 

@@ -1,4 +1,30 @@
 function loadsettings() {
+    //current index
+    const savedIndex = localStorage.getItem('currentIndex');
+    if (savedIndex !== null) {
+        currentIndex = parseInt(savedIndex);
+    }
+    else {
+        currentIndex = -1;
+    }
+
+    //reapeat and random
+    const repeatEnabled = localStorage.getItem('repeatEnabled');
+    const randomEnabled = localStorage.getItem('randomEnabled');
+    if (repeatEnabled === 'true') {
+        repeatsong.checked = true;
+    }
+    else {
+        repeatsong.checked = false;
+    }
+
+    if (randomEnabled === 'true') {
+        randomsong.checked = true;
+    } else {
+        randomsong.checked = false;
+    }
+    
+
     //volume
     const savedVolume = localStorage.getItem('playerVolume');
     if (savedVolume !== null) {

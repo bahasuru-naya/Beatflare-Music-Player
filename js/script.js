@@ -85,7 +85,8 @@ async function loadFilesFromStorage() {
             // Call necessary update functions
             updatePlaylist();
             setWidthHeight();
-            currentIndex = 0;
+            //currentIndex = 0;
+            //localStorage.setItem('currentIndex', currentIndex);
             updateButtonsState(currentIndex);
             audiovisual(audioPlayer);
             fileInput.value = '';
@@ -103,6 +104,7 @@ async function loadFilesFromStorage() {
             if (audioctx) audioctx.suspend();
             if (animation) window.cancelAnimationFrame(animation);
             restoreActiveIndexText();
+            scrollToActive();
 
         } else {
             files = [];
@@ -587,10 +589,23 @@ function scrollToActive() {
     const activeItem = list.querySelector('li.active');
 
     if (activeItem) {
-        activeItem.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest'
-        });
+        // Compute relative offset of activeItem inside playlist container
+        const itemTop = activeItem.getBoundingClientRect().top;
+        const listTop = list.getBoundingClientRect().top;
+        const relativeOffsetTop = itemTop - listTop;
+
+        const listHeight = list.clientHeight;
+        const itemHeight = activeItem.offsetHeight;
+
+        // Check if item is outside visible area
+        if (relativeOffsetTop < 0 || relativeOffsetTop + itemHeight > listHeight) {
+            const scrollTo = list.scrollTop + relativeOffsetTop - (listHeight / 2) + (itemHeight / 2);
+            list.scrollTo({
+                top: scrollTo,
+                behavior: 'smooth'
+            });
+        }
+
         activeItem.classList.add('blink-1');
         // Remove the class after animation ends to allow retriggering later
         activeItem.addEventListener('animationend', function handleAnimationEnd() {
@@ -622,17 +637,20 @@ repeatsong.addEventListener('change', () => {
     if (repeatsong.checked) {
         randomsong.checked = false;
     }
+    localStorage.setItem('repeatEnabled', repeatsong.checked ? 'true' : 'false');
+    localStorage.setItem('randomEnabled', randomsong.checked ? 'true' : 'false');
 });
 
-const playedrandomArray = [];
+let playedrandomArray = [];
 
 randomsong.addEventListener('change', () => {
     if (randomsong.checked) {
         repeatsong.checked = false;
-    }
-    else {
+    } else {
         playedrandomArray = [];
     }
+    localStorage.setItem('repeatEnabled', repeatsong.checked ? 'true' : 'false');
+    localStorage.setItem('randomEnabled', randomsong.checked ? 'true' : 'false');
 });
 
 function showerror(message) {
@@ -691,6 +709,9 @@ function playsamplemusic() {
         .finally(() => {
             if (currentIndex === -1 && files.length > 0) {
                 playFile(0);
+            }
+            else if (currentIndex >= 0 && currentIndex < files.length) {
+                playFile(currentIndex);
             }
         });
 }
@@ -815,10 +836,24 @@ function updatePlaylist() {
             if (search) {
                 search = false;
                 closeserch();
-                listItem.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest' 
-                });
+                const list = document.getElementById('playlist');
+                // Compute relative offset of activeItem inside playlist container
+                const itemTop = listItem.getBoundingClientRect().top;
+                const listTop = list.getBoundingClientRect().top;
+                const relativeOffsetTop = itemTop - listTop;
+
+                const listHeight = list.clientHeight;
+                const itemHeight = listItem.offsetHeight;
+
+                // Check if item is outside visible area
+                if (relativeOffsetTop < 0 || relativeOffsetTop + itemHeight > listHeight) {
+                    const scrollTo = list.scrollTop + relativeOffsetTop - (listHeight / 2) + (itemHeight / 2);
+                    list.scrollTo({
+                        top: scrollTo,
+                        behavior: 'smooth'
+                    });
+                }
+                
                 listItem.classList.add('blink-1');
                 // Remove the class after animation ends to allow retriggering later
                 listItem.addEventListener('animationend', function handleAnimationEnd() {
@@ -890,9 +925,11 @@ function handleupFile(index) {
         // If currentIndex is affected, update it
         if (currentIndex === index) {
             currentIndex--;
+            localStorage.setItem('currentIndex', currentIndex);
 
         } else if (currentIndex === index - 1) {
             currentIndex++;
+            localStorage.setItem('currentIndex', currentIndex);
 
         }
         updateIndicesAndMap();
@@ -926,9 +963,11 @@ function handledownFile(index) {
         // If currentIndex is affected, update it
         if (currentIndex === index) {
             currentIndex++;
+            localStorage.setItem('currentIndex', currentIndex);
 
         } else if (currentIndex === index + 1) {
             currentIndex--;
+            localStorage.setItem('currentIndex', currentIndex);
 
         }
         updateIndicesAndMap();
@@ -951,6 +990,7 @@ function handleRemoveFile(index) {
             updatePlaylist();
             playlist.innerHTML = '';
             currentIndex = -1;
+            localStorage.setItem('currentIndex', currentIndex);
             playPauseButton.innerHTML = playsvg;
             audioPlayer.src = '';
             img.src = "./images/art.png";
@@ -975,8 +1015,10 @@ function handleRemoveFile(index) {
             // Determine the next or previous file to play
             if (index < files.length - 1) {
                 currentIndex = index;
+                localStorage.setItem('currentIndex', currentIndex);
             } else {
                 currentIndex = index - 1;
+                localStorage.setItem('currentIndex', currentIndex);
             }
 
             // Remove the file from the array
@@ -1014,6 +1056,7 @@ function handleRemoveFile(index) {
         // Update currentIndex if it is after the removed item
         if (index < currentIndex) {
             currentIndex--;
+            localStorage.setItem('currentIndex', currentIndex);
         }
     }
     updatePlaylistHighlight(currentIndex);
@@ -1071,6 +1114,7 @@ function playFile(index) {
         audioPlayer.currentTime = 0;
         audioPlayer.playbackRate = parseFloat(speed);
         currentIndex = index;
+        localStorage.setItem('currentIndex', currentIndex);
 
         audioPlayer.play()
             .then(() => {
@@ -1804,6 +1848,7 @@ deleteagree.addEventListener('click', function () {
         updatePlaylist();
         playlist.innerHTML = '';
         currentIndex = -1;
+        localStorage.setItem('currentIndex', currentIndex);
         updateButtonsState(currentIndex);
         playPauseButton.innerHTML = playsvg;
         audioPlayer.src = '';
