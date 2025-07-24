@@ -8,9 +8,34 @@ window.addEventListener("load", () => {
   }, 3000);
 });
 
-//add button
-document.querySelector('.buttonadd').addEventListener('click', function () {
+//add files button
+document.querySelector('#import-files').addEventListener('click', function () {
   document.getElementById('file-input').click();
+});
+
+//add folder button
+document.querySelector('#import-folder').addEventListener('click', function () {
+  document.getElementById('folder-input').click();
+});
+
+const addbutton = document.getElementById('addButton');
+const addmenu = document.getElementById('addbtn-menu');
+
+let isMenuOpen = false;
+
+// Toggle menu visibility on click
+addbutton.addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevent bubbling
+  isMenuOpen = !isMenuOpen;
+  addmenu.style.display = isMenuOpen ? 'block' : 'none';
+});
+
+// Hide menu if clicked outside
+document.addEventListener('click', (e) => {
+  if (!addmenu.contains(e.target) && !addbutton.contains(e.target)) {
+    addmenu.style.display = 'none';
+    isMenuOpen = false;
+  }
 });
 
 const menutoggle = document.getElementById('menu-toggle');

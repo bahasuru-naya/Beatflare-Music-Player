@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
     playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
     playlist.appendChild(playlisttext);
     document.querySelector(".play-pause-back").style.opacity = "0.5";
-    document.querySelector(".cssbuttons-io").style.opacity = "0.5";
-    document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+    document.querySelector(".searchbtn").style.opacity = "0.5";
+    document.querySelector(".searchbtn").style.cursor = "not-allowed";
     playPauseButton.disabled = true;
     seekBar.disabled = true;
     removeAll.disabled = true;
@@ -75,8 +75,8 @@ async function loadFilesFromStorage() {
             }
 
             document.querySelector(".play-pause-back").style.opacity = "1";
-            document.querySelector(".cssbuttons-io").style.opacity = "1";
-            document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+            document.querySelector(".searchbtn").style.opacity = "1";
+            document.querySelector(".searchbtn").style.cursor = "pointer";
             playPauseButton.disabled = false;
             seekBar.disabled = false;
             removeAll.disabled = false;
@@ -90,6 +90,7 @@ async function loadFilesFromStorage() {
             updateButtonsState(currentIndex);
             audiovisual(audioPlayer);
             fileInput.value = '';
+            folderInput.value = '';
             updatePlaylistHighlight(currentIndex);
             const file = files[currentIndex];
             const songTitle = file.name.replace('.mp3', '');
@@ -686,8 +687,8 @@ function playsamplemusic() {
 
             // Enable UI controls
             document.querySelector(".play-pause-back").style.opacity = "1";
-            document.querySelector(".cssbuttons-io").style.opacity = "1";
-            document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+            document.querySelector(".searchbtn").style.opacity = "1";
+            document.querySelector(".searchbtn").style.cursor = "pointer";
             playPauseButton.disabled = false;
             seekBar.disabled = false;
             removeAll.disabled = false;
@@ -699,12 +700,14 @@ function playsamplemusic() {
             updateButtonsState(currentIndex);
             audiovisual(audioPlayer);
             fileInput.value = '';
+            folderInput.value = '';
             scrollToBottomPlaylist();
         })
         .catch(err => {
             console.error('An error occurred while processing the file input:', err.message);
             showerror(err.message);
             fileInput.value = '';
+            folderInput.value = '';
         })
         .finally(() => {
             if (currentIndex === -1 && files.length > 0) {
@@ -748,8 +751,8 @@ fileInput.addEventListener('change', function (event) {
         }
 
         document.querySelector(".play-pause-back").style.opacity = "1";
-        document.querySelector(".cssbuttons-io").style.opacity = "1";
-        document.querySelector(".cssbuttons-io").style.cursor = "pointer";
+        document.querySelector(".searchbtn").style.opacity = "1";
+        document.querySelector(".searchbtn").style.cursor = "pointer";
         playPauseButton.disabled = false;
         seekBar.disabled = false;
         removeAll.disabled = false;
@@ -760,8 +763,7 @@ fileInput.addEventListener('change', function (event) {
         setWidthHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
-        fileInput.value = '';
-        scrollToBottomPlaylist();
+        fileInput.value = '';        
 
     } catch (error) {
         console.error('An error occurred while processing the file input:', error.message);
@@ -772,8 +774,66 @@ fileInput.addEventListener('change', function (event) {
     // Handle edge case when no file is playing
     if (currentIndex === -1 && files.length > 0) {
         playFile(0);
+    } else {
+        scrollToBottomPlaylist();
     }
 
+});
+
+const folderInput = document.getElementById('folder-input');
+
+folderInput.addEventListener('change', function (event) {
+    try {
+        const selectedFiles = Array.from(event.target.files);
+
+        if (!selectedFiles || selectedFiles.length === 0) {
+            throw new Error('No files were selected.');
+        }
+
+        // Filter only .mp3 and .wav files
+        const audioFiles = selectedFiles.filter(file => {
+            const extension = file.name.split('.').pop().toLowerCase();
+            return ['mp3', 'wav'].includes(extension);
+        });
+
+        if (audioFiles.length === 0) {
+            throw new Error('The selected folder does not contain any songs(.mp3 or .wav files). Please try again with a different folder.');
+        }
+
+        // Add to global file list
+        files = [...files, ...audioFiles];
+
+        // Update UI
+        if (document.getElementById('playlist-text')) {
+            document.getElementById('playlist-text').remove();
+        }
+
+        document.querySelector(".play-pause-back").style.opacity = "1";
+        document.querySelector(".searchbtn").style.opacity = "1";
+        document.querySelector(".searchbtn").style.cursor = "pointer";
+        playPauseButton.disabled = false;
+        seekBar.disabled = false;
+        removeAll.disabled = false;
+        searchbtntext.disabled = false;
+
+        updatePlaylist();
+        setWidthHeight();
+        updateButtonsState(currentIndex);
+        audiovisual(audioPlayer);
+        folderInput.value = '';
+
+        // Auto-play first file if nothing playing
+        if (currentIndex === -1 && files.length > 0) {
+            playFile(0);
+        } else {
+            scrollToBottomPlaylist();
+        }
+
+    } catch (error) {
+        console.error('File processing error:', error.message);
+        showerror(error.message);
+        folderInput.value = ''; // Clear input
+    }
 });
 
 function updatePlaylist() {
@@ -853,7 +913,7 @@ function updatePlaylist() {
                         behavior: 'smooth'
                     });
                 }
-                
+
                 listItem.classList.add('blink-1');
                 // Remove the class after animation ends to allow retriggering later
                 listItem.addEventListener('animationend', function handleAnimationEnd() {
@@ -1002,8 +1062,8 @@ function handleRemoveFile(index) {
             playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
             playlist.appendChild(playlisttext);
             document.querySelector(".play-pause-back").style.opacity = "0.5";
-            document.querySelector(".cssbuttons-io").style.opacity = "0.5";
-            document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+            document.querySelector(".searchbtn").style.opacity = "0.5";
+            document.querySelector(".searchbtn").style.cursor = "not-allowed";
             playPauseButton.disabled = true;
             seekBar.disabled = true;
             removeAll.disabled = true;
@@ -1861,8 +1921,8 @@ deleteagree.addEventListener('click', function () {
         playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
         playlist.appendChild(playlisttext);
         document.querySelector(".play-pause-back").style.opacity = "0.5";
-        document.querySelector(".cssbuttons-io").style.opacity = "0.5";
-        document.querySelector(".cssbuttons-io").style.cursor = "not-allowed";
+        document.querySelector(".searchbtn").style.opacity = "0.5";
+        document.querySelector(".searchbtn").style.cursor = "not-allowed";
         playPauseButton.disabled = true;
         seekBar.disabled = true;
         removeAll.disabled = true;
@@ -1882,10 +1942,10 @@ deletecancel.addEventListener('click', function () {
 
 //search button
 const playerhead = document.querySelector("#playerhead");
-const addbtn = document.querySelector(".buttonadd");
-const searchbtn = document.querySelector(".cssbuttons-io");
+const addbtn = document.querySelector("#dropdownContainer");
+const searchbtn = document.querySelector(".searchbtn");
 const deletebtn = document.querySelector(".delbutton");
-const searchbtntext = document.querySelector(".cssbuttons-io span");
+const searchbtntext = document.querySelector(".searchbtn span");
 const searchinput = document.querySelector("#search-list");
 
 const searchsvg = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
