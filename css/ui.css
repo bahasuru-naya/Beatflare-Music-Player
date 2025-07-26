@@ -949,7 +949,7 @@ path.two {
 
 #playersec h1 {
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
     justify-content: center;
     color: var(--player-text-color);
     text-align: center;
@@ -1105,7 +1105,7 @@ path.two {
     list-style: none;
     padding: 0;
     margin: 0;
-    z-index: 10;    
+    z-index: 10;
 }
 
 #addbtn-menu li {
@@ -2419,6 +2419,47 @@ li svg {
     outline: none;
 }
 
+@supports (appearance: base-select) {
+    #equ-select {
+        color: #000;
+
+        &,
+        &::picker(select) {
+            appearance: base-select;
+            top: 7px;
+            bottom: 7px;
+            border: 2px solid black;
+            border-radius: 0.4em;
+            box-shadow: 0.1em 0.1em;
+            border-radius: 10px;
+        }
+
+        &::picker-icon {
+            display: none;
+        }
+
+        selectedcontent {
+            display: none;
+        }
+
+        option {
+            padding: 10px;
+            border-bottom: 2px solid black;
+
+            &::checkmark {
+                display: none;
+            }
+        }
+
+        option:checked {
+            background-color: black;
+            color: #f8f6f6;
+
+        }
+
+    }
+}
+
 #equalizer-reset {
     grid-row: 1;
     grid-column: 3;
@@ -2827,7 +2868,52 @@ li svg {
 }
 
 #theme-select {
+    grid-column: 2;
+    width: 70%;
+    max-width: 210px;
+    min-width: 180px;
     outline: none;
+}
+
+@supports (appearance: base-select) {
+    #theme-select {
+        color: #000;
+
+        &,
+        &::picker(select) {
+            appearance: base-select;
+            top: 7px;
+            bottom: 7px;
+            border: 2px solid black;
+            border-radius: 0.4em;
+            box-shadow: 0.1em 0.1em;
+            border-radius: 10px;
+        }
+
+        &::picker-icon {
+            display: none;
+        }
+
+        selectedcontent {
+            display: none;
+        }
+
+        option {
+            padding: 8px;
+            border-bottom: 2px solid black;
+
+            &::checkmark {
+                display: none;
+            }
+        }
+
+        option:checked {
+            background-color: black;
+            color: #f8f6f6;
+
+        }
+
+    }
 }
 
 #darkmode-set {
