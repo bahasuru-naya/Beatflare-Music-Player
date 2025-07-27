@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
     seekBar.disabled = true;
     removeAll.disabled = true;
     searchbtntext.disabled = true;
-    audiovisual(audioPlayer);
     loadsettings();
     loadFilesFromStorage();
 
@@ -85,10 +84,7 @@ async function loadFilesFromStorage() {
             // Call necessary update functions
             updatePlaylist();
             setWidthHeight();
-            //currentIndex = 0;
-            //localStorage.setItem('currentIndex', currentIndex);
             updateButtonsState(currentIndex);
-            audiovisual(audioPlayer);
             fileInput.value = '';
             folderInput.value = '';
             updatePlaylistHighlight(currentIndex);
@@ -763,7 +759,7 @@ fileInput.addEventListener('change', function (event) {
         setWidthHeight();
         updateButtonsState(currentIndex);
         audiovisual(audioPlayer);
-        fileInput.value = '';        
+        fileInput.value = '';
 
     } catch (error) {
         console.error('An error occurred while processing the file input:', error.message);
@@ -1181,8 +1177,8 @@ function playFile(index) {
                 playPauseButton.innerHTML = pausesvg;
                 updatePlaylistHighlight(index);
                 updateButtonsState(index);
-                audioctx.resume();
                 audiovisual(audioPlayer);
+                audioctx.resume();
                 replaceActiveWithLoading();
 
                 // Display the song name in the marquee        
@@ -1254,9 +1250,34 @@ playPauseButton.addEventListener('click', function () {
         playPauseButton.innerHTML = pausesvg;
         // Display the song name in the marquee        
         updateSongName(`Now Playing: ${songTitle}`);
-        audioctx.resume();
         audiovisual(audioPlayer);
+        audioctx.resume();
         replaceActiveWithLoading();
+        // Use jsmediatags to read the MP3 file
+        jsmediatags.read(file, {
+            onSuccess: function (tag) {
+                const { picture } = tag.tags;
+                if (picture) {
+                    // Convert the album art data into a Blob URL
+                    const base64String = picture.data
+                        .map((char) => String.fromCharCode(char))
+                        .join('');
+                    const dataUrl = `data:${picture.format};base64,${btoa(base64String)}`;
+                    // Set the image source to the album art
+                    img.src = dataUrl;
+                    img.style.display = 'block';
+                } else {
+                    img.style.display = 'block';
+                    img.src = "./images/art.png";
+                }
+            },
+            onError: function (error) {
+                console.error('Error reading MP3 file:', error);
+                img.style.display = 'block';
+                img.src = "./images/art.png";
+
+            }
+        });
 
 
     } else {
@@ -1279,8 +1300,9 @@ audioPlayer.addEventListener("play", () => {
     playPauseButton.innerHTML = pausesvg;
     // Display the song name in the marquee        
     updateSongName(`Now Playing: ${songTitle}`);
-    audioctx.resume();
     audiovisual(audioPlayer);
+    audioctx.resume();
+    loadsettings();
     replaceActiveWithLoading();
     if (partytoggle.checked) {
         startConfetti();
@@ -1479,7 +1501,6 @@ const speedlablel = document.getElementById("speedlabel");
 
 
 speedControl.addEventListener("input", function () {
-
     audioPlayer.playbackRate = parseFloat(this.value);
     speedlablel.textContent = this.value + 'x';
     speed = this.value;
@@ -1490,6 +1511,7 @@ speedControl.addEventListener("input", function () {
 });
 
 speedreset.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     speedControl.value = 1;
     audioPlayer.playbackRate = 1;
     speedlablel.textContent = '1x';
@@ -1507,6 +1529,10 @@ const pitchRest = document.getElementById("pitch-reset");
 
 
 // Event listener for pitch control
+pitchControl.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
 pitchControl.addEventListener("input", function () {
     const pitchValue = parseFloat(this.value);
     if (jungle) {
@@ -1520,6 +1546,7 @@ pitchControl.addEventListener("input", function () {
 
 // Event listener for pitch reset
 pitchRest.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     pitchControl.value = 0;
     if (jungle) {
         jungle.setPitchTranspose(0, 0);
@@ -1567,6 +1594,7 @@ const sliders = eqBands.map((freq, idx) => {
         saveEQSettings();
     });
     slider.addEventListener('change', (event) => {
+        audiovisual(audioPlayer);
         if (filters) {
             filters[idx].gain.value = parseFloat(event.target.value);
         }
@@ -1592,6 +1620,7 @@ const eqreset = document.getElementById("equalizer-reset");
 const eqlablels = document.querySelectorAll(".sliderlabelvalue");
 
 eqreset.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     equSelect.value = 'Flat';
     sliders.forEach((slider) => {
         slider.value = 0;
@@ -1626,6 +1655,7 @@ const eqPresets = {
 document.querySelector("#equ-select option[value='Custom']").style.display = "none";
 
 equSelect.addEventListener("change", function () {
+    audiovisual(audioPlayer);
     const preset = this.value;
     const gains = eqPresets[preset];
     if (gains) {
@@ -1650,8 +1680,12 @@ const stereoLabel2 = document.getElementById("Stereolabel2");
 const stereoRest = document.getElementById("Stereo-reset");
 
 
-// Event listener for pitch control
-stereoControl.addEventListener("input", function () {
+// Event listener for stereo control
+stereoControl.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
+stereoControl.addEventListener("input", function () {    
     const stereoValue = parseFloat(this.value);
     if (panNode) {
         panNode.pan.value = stereoValue;
@@ -1669,6 +1703,7 @@ stereoControl.addEventListener("input", function () {
 
 // Event listener for pitch reset
 stereoRest.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     stereoControl.value = 0;
     if (panNode) {
         panNode.pan.value = 0;
@@ -1688,7 +1723,11 @@ const lowpassreset = document.getElementById("filter-reset");
 
 let maxValue = 48000 / 2; // Default max value
 
-lowpassControlF.addEventListener("input", function () {
+lowpassControlF.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
+lowpassControlF.addEventListener("input", function () {    
     const lowpassValue = parseFloat(this.value);
     localStorage.setItem('lowpassControlF', lowpassValue);
     var minValue = 20;
@@ -1710,7 +1749,11 @@ lowpassControlF.addEventListener("input", function () {
 
 var QUAL_MUL = 30;
 
-lowpassControlQ.addEventListener("input", function () {
+lowpassControlQ.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
+lowpassControlQ.addEventListener("input", function () {    
     const lowpassValueQ = parseFloat(this.value);
     localStorage.setItem('lowpassControlQ', lowpassValueQ);
     if (lowfilter) {
@@ -1721,6 +1764,7 @@ lowpassControlQ.addEventListener("input", function () {
 );
 
 lowpassreset.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     lowpassControlF.value = 1;
     lowpassControlQ.value = 0;
 
@@ -1744,7 +1788,11 @@ const highpassreset = document.getElementById("filter2-reset");
 
 let maxValue2 = 0;
 
-highpassControlF.addEventListener("input", function () {
+highpassControlF.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
+highpassControlF.addEventListener("input", function () {    
     const highpassValue = parseFloat(this.value);
     localStorage.setItem('highpassControlF', highpassValue);
 
@@ -1766,7 +1814,11 @@ highpassControlF.addEventListener("input", function () {
 
 var QUAL_MUL2 = 30;
 
-highpassControlQ.addEventListener("input", function () {
+highpassControlQ.addEventListener("change", function () {
+    audiovisual(audioPlayer);
+});
+
+highpassControlQ.addEventListener("input", function () {    
     const highpassValueQ = parseFloat(this.value);
     localStorage.setItem('highpassControlQ', highpassValueQ);
     if (highfilter) {
@@ -1777,6 +1829,7 @@ highpassControlQ.addEventListener("input", function () {
 );
 
 highpassreset.addEventListener("click", function () {
+    audiovisual(audioPlayer);
     highpassControlF.value = 0;
     highpassControlQ.value = 0;
     localStorage.setItem('highpassControlF', highpassControlF.value);
@@ -1794,6 +1847,7 @@ highpassreset.addEventListener("click", function () {
 const resetAllFilters = document.getElementById("all-reset");
 resetAllFilters.addEventListener("click", function () {
 
+    audiovisual(audioPlayer);
     speedControl.value = 1;
     audioPlayer.playbackRate = 1;
     speedlablel.textContent = '1x';

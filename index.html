@@ -13,14 +13,14 @@
     <script>
         console.log("Welcome to Beatflare Music Player! 🎶");
         const darkModeSaved = localStorage.getItem('darkModeEnabled');
+        const savedThemeKey = localStorage.getItem('selectedTheme');
 
         if (darkModeSaved === 'true') {
             const dtheme = darktheme['dark'];
             Object.keys(dtheme).forEach(key => {
                 document.documentElement.style.setProperty(key, dtheme[key]);
             });
-        } else {
-            const savedThemeKey = localStorage.getItem('selectedTheme');
+        } else {            
             if (savedThemeKey && themes[savedThemeKey]) {
                 // Apply the theme
                 const savedTheme = themes[savedThemeKey];

@@ -1970,6 +1970,7 @@ li svg {
     width: 100px;
     height: 100px;
     border-radius: 10px;
+    background-color: black;
     border: #000000 2px solid;
     object-fit: contain;
     object-position: center;
@@ -2892,6 +2893,11 @@ li svg {
 
         &::picker-icon {
             display: none;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.3;
         }
 
         selectedcontent {
