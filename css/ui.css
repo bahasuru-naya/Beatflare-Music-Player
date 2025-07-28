@@ -1630,12 +1630,18 @@ li svg {
 
 #playlist-text {
     justify-self: center;
-    text-align: center;
+    text-align: center;  
+    line-height: 25px;  
 }
 
 #sample-music {
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
+    color: white;
+    background-color: #000;
+    border-radius: 20px;
+    padding: 0px 8px;
+    padding-bottom: 2px;   
 }
 
 .searchbtn {
@@ -2218,7 +2224,7 @@ li svg {
 
 .s-text {
     width: 100%;
-    line-height: 95%;    
+    line-height: 95%;
     font-weight: 500;
 }
 
@@ -2656,7 +2662,7 @@ li svg {
     background: #ccc;
     border-radius: 16px;
     border: black 2px solid;
-    overflow: hidden;   
+    overflow: hidden;
 }
 
 /* Thumb: webkit */
@@ -2666,7 +2672,7 @@ li svg {
     width: 0px;
     height: 16px;
     -webkit-box-shadow: -200px 0 0 200px var(--home-c1-color);
-    box-shadow: -200px 0 0 200px var(--home-c1-color); 
+    box-shadow: -200px 0 0 200px var(--home-c1-color);
 }
 
 #con-filter-frequency {

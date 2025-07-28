@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', setWidthHeight);
     const playlisttext = document.createElement('p');
     playlisttext.setAttribute("id", "playlist-text");
-    playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
+    playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a> `;
     playlist.appendChild(playlisttext);
     document.querySelector(".play-pause-back").style.opacity = "0.5";
     document.querySelector(".searchbtn").style.opacity = "0.5";
@@ -1066,7 +1066,7 @@ function handleRemoveFile(index) {
             closeserch();
             const playlisttext = document.createElement('p');
             playlisttext.setAttribute("id", "playlist-text");
-            playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
+            playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a> `;
             playlist.appendChild(playlisttext);
             document.querySelector(".play-pause-back").style.opacity = "0.5";
             document.querySelector(".searchbtn").style.opacity = "0.5";
@@ -1985,7 +1985,7 @@ deleteagree.addEventListener('click', function () {
         if (animation) window.cancelAnimationFrame(animation);
         const playlisttext = document.createElement('p');
         playlisttext.setAttribute("id", "playlist-text");
-        playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>.`;
+        playlisttext.innerHTML = `Playlist is empty... Add songs to start playing.<br>Can't find any songs? Try <a id="sample-music" title="Add sample music to the playlist." href="#" onclick="playsamplemusic(); return false;" >sample music</a>`;
         playlist.appendChild(playlisttext);
         document.querySelector(".play-pause-back").style.opacity = "0.5";
         document.querySelector(".searchbtn").style.opacity = "0.5";
