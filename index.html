@@ -47,9 +47,8 @@
                 info: function () { }
             };
         }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"> </script>
+    </script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.5.0/jquery.marquee.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
@@ -580,19 +579,19 @@
                         <button id="Stereo-reset" class="rest-btn">Reset</button>
                     </div>
                     <div id="con-filter">
-                        <label for="filter-f" id="low-head" class="s-text">Low Pass Filter: </label>
+                        <label for="filter-f" title="Low Pass Filter" id="low-head" class="s-text">Low Pass Filter: </label>
                         <div id="con-filter-frequency">
-                            <label id="filterlabel1" class="filter-label" for="filter-f">24000.00Hz</label>
+                            <label id="filterlabel1" title="Frequency" class="filter-label" for="filter-f">24000.00Hz</label>
                             <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01"
                                 value="1">
-                            <label for="filter-f" class="filter-label">Frequency</label>
+                            <label for="filter-f" title="Frequency" class="filter-label">Frequency</label>
 
                         </div>
                         <div id="con-filter-quality">
-                            <label id="filterlabel2" class="filter-label" for="filter-q">0.00</label>
+                            <label id="filterlabel2" title="Quality" class="filter-label" for="filter-q">0.00</label>
                             <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01"
                                 value="0">
-                            <label for="filter-q" class="filter-label">Quality</label>
+                            <label for="filter-q" title="Quality" class="filter-label">Quality</label>
 
                         </div>
                         <button id="filter-reset" class="rest-btn">Reset</button>

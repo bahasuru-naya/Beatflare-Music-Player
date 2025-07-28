@@ -1584,6 +1584,7 @@ const sliders = eqBands.map((freq, idx) => {
     slider.classList.add('eqslider');
     slider.type = 'range';
     slider.orient = 'vertical';
+    slider.title = 'Gain';
     slider.style.direction = 'rtl';
     slider.style.writingMode = 'vertical-lr';
     slider.style.width = '30%';
@@ -2182,6 +2183,7 @@ partytoggle.addEventListener("click", function () {
             }
             themeSelect.disabled = true;
             darkModeToggle.checked = false;
+            localStorage.setItem('darkModeEnabled', darkModeToggle.checked ? 'true' : 'false');
             darkModeToggle.disabled = true;
 
             startConfetti();
@@ -2210,6 +2212,7 @@ agree.addEventListener("click", function () {
     warnback.style.display = 'none';
     themeSelect.disabled = true;
     darkModeToggle.checked = false;
+    localStorage.setItem('darkModeEnabled', darkModeToggle.checked ? 'true' : 'false');
     darkModeToggle.disabled = true;
     const selectedTheme = themes[themeSelect.value];
     if (selectedTheme) {
