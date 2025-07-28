@@ -42,7 +42,15 @@ let audioctx;
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    
+    const preloaderbackground = document.querySelector('.preloaderback');
+    if (darkModeSaved === 'true') {
+        preloaderbackground.style.backgroundImage = 'url("./images/pre-back-dark.jpg")';
+        preloaderbackground.style.backgroundColor = 'black';
+    }
+    else{
+        preloaderbackground.style.backgroundImage = 'url("./images/pre-back.jpg")';
+        preloaderbackground.style.backgroundColor = 'white';
+    }
 
     // Set the canvas height initially
     setWidthHeight();
@@ -59,17 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     removeAll.disabled = true;
     searchbtntext.disabled = true;
     loadsettings();
-    loadFilesFromStorage();
-
-    const preloaderbackground = document.querySelector('.preloaderback');
-    if (darkModeSaved === 'true') {
-        preloaderbackground.style.backgroundImage = 'url("./images/pre-back-dark.jpg")';
-        preloaderbackground.style.backgroundColor = 'black';
-    }
-    else{
-        preloaderbackground.style.backgroundImage = 'url("./images/pre-back.jpg")';
-        preloaderbackground.style.backgroundColor = 'white';
-    }
+    loadFilesFromStorage();   
 
 });
 
