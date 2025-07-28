@@ -41,6 +41,9 @@ let animation;
 let audioctx;
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    
+
     // Set the canvas height initially
     setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
@@ -57,6 +60,16 @@ document.addEventListener('DOMContentLoaded', function () {
     searchbtntext.disabled = true;
     loadsettings();
     loadFilesFromStorage();
+
+    const preloaderbackground = document.querySelector('.preloaderback');
+    if (darkModeSaved === 'true') {
+        preloaderbackground.style.backgroundImage = 'url("./images/pre-back-dark.jpg")';
+        preloaderbackground.style.backgroundColor = 'black';
+    }
+    else{
+        preloaderbackground.style.backgroundImage = 'url("./images/pre-back.jpg")';
+        preloaderbackground.style.backgroundColor = 'white';
+    }
 
 });
 
@@ -429,11 +442,11 @@ function audiovisual(player) {
 
     function partyTheme() {
         if (dataArray.length === 0) return;
-        let sum = dataArray.reduce((sum, value) => sum + value , 0);
+        let sum = dataArray.reduce((sum, value) => sum + value, 0);
         let average = sum / dataArray.length;
 
         const themeKeys = Object.keys(themes);
-        let themeIndex = (Math.floor(average) % (themeKeys.length * 100)) % themeKeys.length;        
+        let themeIndex = (Math.floor(average) % (themeKeys.length * 100)) % themeKeys.length;
 
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
@@ -1686,7 +1699,7 @@ stereoControl.addEventListener("change", function () {
     audiovisual(audioPlayer);
 });
 
-stereoControl.addEventListener("input", function () {    
+stereoControl.addEventListener("input", function () {
     const stereoValue = parseFloat(this.value);
     if (panNode) {
         panNode.pan.value = stereoValue;
@@ -1728,7 +1741,7 @@ lowpassControlF.addEventListener("change", function () {
     audiovisual(audioPlayer);
 });
 
-lowpassControlF.addEventListener("input", function () {    
+lowpassControlF.addEventListener("input", function () {
     const lowpassValue = parseFloat(this.value);
     localStorage.setItem('lowpassControlF', lowpassValue);
     var minValue = 20;
@@ -1754,7 +1767,7 @@ lowpassControlQ.addEventListener("change", function () {
     audiovisual(audioPlayer);
 });
 
-lowpassControlQ.addEventListener("input", function () {    
+lowpassControlQ.addEventListener("input", function () {
     const lowpassValueQ = parseFloat(this.value);
     localStorage.setItem('lowpassControlQ', lowpassValueQ);
     if (lowfilter) {
@@ -1793,7 +1806,7 @@ highpassControlF.addEventListener("change", function () {
     audiovisual(audioPlayer);
 });
 
-highpassControlF.addEventListener("input", function () {    
+highpassControlF.addEventListener("input", function () {
     const highpassValue = parseFloat(this.value);
     localStorage.setItem('highpassControlF', highpassValue);
 
@@ -1819,7 +1832,7 @@ highpassControlQ.addEventListener("change", function () {
     audiovisual(audioPlayer);
 });
 
-highpassControlQ.addEventListener("input", function () {    
+highpassControlQ.addEventListener("input", function () {
     const highpassValueQ = parseFloat(this.value);
     localStorage.setItem('highpassControlQ', highpassValueQ);
     if (highfilter) {
