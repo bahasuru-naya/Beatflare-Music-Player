@@ -70,7 +70,7 @@ body {
 .preloaderback {
     position: fixed;
     height: 100%;
-    width: 100%;
+    width: 100%;    
     background-image: none;
     background-color: white;
     background-repeat: repeat;
