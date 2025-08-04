@@ -386,8 +386,7 @@ nav {
     background: var(--menu-color);
     margin: 0;
     display: block;
-    list-style-type: none;
-    z-index: -1;
+    list-style-type: none;    
     filter: url("#goo");
     position: absolute;
     top: 0;
@@ -395,7 +394,6 @@ nav {
     width: 0;
     left: 0;
     z-index: 2;
-
 }
 
 .menu__content:after {
@@ -408,7 +406,6 @@ nav {
     width: calc(var(--size, 20) * 1vmin);
     top: 0;
     left: 0;
-
 }
 
 .menu__item {
@@ -428,7 +425,6 @@ nav {
     transform: translate(-50%, -50%) scale(var(--scale, 0.75));
     transition: all calc(var(--speed, 1) * 1s) calc(var(--delay, 0) * 1s) var(--ease);
     width: calc(var(--size, 20) * 1vmin);
-
 }
 
 @media (min-width: 750px) {
