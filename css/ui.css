@@ -88,6 +88,7 @@ body {
     position: absolute;
     inset: 0;
     background-image: var(--bg-url);
+    background-color: none;
     background-repeat: repeat;
     background-size: contain;
     animation: var(--img-ani);
