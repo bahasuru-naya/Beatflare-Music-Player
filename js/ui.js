@@ -1,12 +1,38 @@
 //preloader
 const preloader = document.querySelector(".preloaderback");
-window.addEventListener("load", () => {
-  const preloadback = document.querySelector(".pre-back");
-  preloadback.style.opacity = "1";
-  setTimeout(() => {
-    preloader.style.display = "none";
-  }, 3000);
-});
+const preloadImage = new Image();
+
+if (darkModeSaved === 'true') {
+  preloadImage.src = './images/pre-back-dark.jpg';
+  preloader.style.backgroundColor = 'black';
+} else {
+  preloadImage.src = './images/pre-back.jpg';
+  preloader.style.backgroundColor = 'white';
+}
+
+const preloadback = document.querySelector(".pre-back");
+setTimeout(() => {
+preloadback.style.opacity = "1";
+}, 300);
+
+// Wait for the background image to load
+preloadImage.onload = () => {  
+  preloader.style.setProperty('--bg-url', `url("${preloadImage.src}")`);
+  preloader.style.setProperty('--img-ani', "fade-in 0.5s ease-in-out forwards");
+  preloader.style.setProperty('--img-op', "1");
+
+  // Then wait for window load
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      preloader.style.animation = "fade-out 0.5s ease-in-out forwards";
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 500);
+    }, 3000);
+  });
+};
+
+
 
 //add files button
 document.querySelector('#import-files').addEventListener('click', function () {

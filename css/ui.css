@@ -34,21 +34,16 @@
     --about-back-color: #AD8B73;
     --about-text-color: #302b28;
 
-    transition: all 0.5s ase-out;
+    transition: all 0.5s ease-out;
 
 }
-
-
 
 * {
     font-family: "Rethink Sans", sans-serif;
     font-weight: 600;
     user-select: none;
-    /* Standard */
     -webkit-user-select: none;
-    /* Chrome, Safari */
     -moz-user-select: none;
-    /* Firefox */
     -ms-user-select: none;
 }
 
@@ -70,7 +65,7 @@ body {
 .preloaderback {
     position: fixed;
     height: 100%;
-    width: 100%;    
+    width: 100%;
     background-image: none;
     background-color: white;
     background-repeat: repeat;
@@ -81,9 +76,23 @@ body {
     align-items: center;
     overflow: hidden;
     z-index: 999;
-    animation: fade-out 0.5s ease-in-out forwards;
-    animation-delay: 2.5s;
+    transition: all 0.5s ease-in-out;
+    --bg-url: none;
+    --img-ani: none;
+    --img-op: 0;
 
+}
+
+.preloaderback::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-url);
+    background-repeat: repeat;
+    background-size: contain;
+    animation: var(--img-ani);
+    opacity: var(--img-op);
+    transition: all 0.5s ease-in-out;
 }
 
 .pre-back {
@@ -98,8 +107,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
-    transition: all 0.3s ease-in-out;
-
+    transition: all 0.5s ease-in-out;
 }
 
 @-webkit-keyframes fade-out {
@@ -122,8 +130,27 @@ body {
     }
 }
 
-#preloader {
+@-webkit-keyframes fade-in {
+    0% {
+        transform: scale(1);
+    }
 
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+#preloader {
     width: 50%;
     height: 50%;
     background-color: var(--home-c2-color);
@@ -134,7 +161,6 @@ body {
     transform: translate(-50%, -50%);
     box-shadow: 5px 5px 0 0 var(--home-c1-color);
     z-index: 99;
-
 }
 
 #preloader .plate {
@@ -166,15 +192,14 @@ body {
 
 .preloaderback .dance-text {
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     position: absolute;
     top: calc(30% + 150px);
     left: 50%;
     width: 300px;
     text-align: center;
     transform: translate(-50%, -50%);
-    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-    animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    letter-spacing: 0.1em;
 }
 
 @-webkit-keyframes tracking-in-expand {
@@ -386,7 +411,7 @@ nav {
     background: var(--menu-color);
     margin: 0;
     display: block;
-    list-style-type: none;    
+    list-style-type: none;
     filter: url("#goo");
     position: absolute;
     top: 0;
@@ -1626,8 +1651,8 @@ li svg {
 
 #playlist-text {
     justify-self: center;
-    text-align: center;  
-    line-height: 25px;  
+    text-align: center;
+    line-height: 25px;
 }
 
 #sample-music {
@@ -1637,7 +1662,7 @@ li svg {
     background-color: #000;
     border-radius: 20px;
     padding: 0px 8px;
-    padding-bottom: 2px;   
+    padding-bottom: 2px;
 }
 
 .searchbtn {

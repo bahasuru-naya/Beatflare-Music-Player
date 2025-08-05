@@ -40,18 +40,7 @@ let analyser;
 let animation;
 let audioctx;
 
-document.addEventListener('DOMContentLoaded', function () {
-
-    const preloaderbackground = document.querySelector('.preloaderback');
-    if (darkModeSaved === 'true') {
-        preloaderbackground.style.backgroundImage = 'url("./images/pre-back-dark.jpg")';
-        preloaderbackground.style.backgroundColor = 'black';
-    }
-    else{
-        preloaderbackground.style.backgroundImage = 'url("./images/pre-back.jpg")';
-        preloaderbackground.style.backgroundColor = 'white';
-    }
-
+document.addEventListener('DOMContentLoaded', function () { 
     // Set the canvas height initially
     setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
@@ -2109,7 +2098,7 @@ function searchsongs() {
     if (numsongs === 0) {
         playlisttext.textContent = 'No songs found';
         if (searchinputbox.value === '') {
-            playlisttext.textContent = 'Type to search';
+            playlisttext.textContent = 'Type to search...';
         }
     }
     else {
