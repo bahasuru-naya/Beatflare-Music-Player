@@ -40,7 +40,7 @@ let analyser;
 let animation;
 let audioctx;
 
-document.addEventListener('DOMContentLoaded', function () { 
+document.addEventListener('DOMContentLoaded', function () {
     // Set the canvas height initially
     setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     removeAll.disabled = true;
     searchbtntext.disabled = true;
     loadsettings();
-    loadFilesFromStorage();   
+    loadFilesFromStorage();
 
 });
 
@@ -663,14 +663,17 @@ function playsamplemusic() {
     const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
     const folderPath = '../sample-music/';
 
-    const fetchPromises = sampleFileNames.map(fileName => {
+    const loadingOverlay = document.getElementById('loading-back');
+    // Show loading overlay
+    if (loadingOverlay) loadingOverlay.style.display = 'block';
+
+
+    const fetchPromises = sampleFileNames.map(async fileName => {
         const fileUrl = folderPath + fileName;
-        return fetch(fileUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`Failed to load ${fileName}`);
-                return response.blob();
-            })
-            .then(blob => new File([blob], fileName, { type: blob.type }));
+        const response = await fetch(fileUrl);
+        if (!response.ok) throw new Error(`Failed to load ${fileName}`);
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type });
     });
 
     Promise.all(fetchPromises)
@@ -700,17 +703,23 @@ function playsamplemusic() {
             scrollToBottomPlaylist();
         })
         .catch(err => {
+            loadingOverlay.style.display = 'none';
             console.error('An error occurred while processing the file input:', err.message);
             showerror(err.message);
             fileInput.value = '';
             folderInput.value = '';
         })
         .finally(() => {
-            if (currentIndex === -1 && files.length > 0) {
-                playFile(0);
-            }
-            else if (currentIndex >= 0 && currentIndex < files.length) {
-                playFile(currentIndex);
+            if (loadingOverlay) {
+                setTimeout(() => {
+                    if (currentIndex === -1 && files.length > 0) {
+                        playFile(0);
+                    }
+                    else if (currentIndex >= 0 && currentIndex < files.length) {
+                        playFile(currentIndex);
+                    }
+                    loadingOverlay.style.display = 'none';
+                }, 2000);
             }
         });
 }
@@ -1143,6 +1152,16 @@ document.querySelector('#error_ok').addEventListener('click', function () {
     document.querySelector('#error').style.display = 'none';
     document.querySelector('#error-back').style.display = 'none';
     missingFileTitles = []
+});
+
+const errorblurback = document.getElementById('error-back');
+
+errorblurback.addEventListener('click', function (e) {
+    if (e.target === errorblurback) {
+        document.querySelector('#error').style.display = 'none';
+        document.querySelector('#error-back').style.display = 'none';
+        missingFileTitles = []
+    }
 });
 
 audioPlayer.onerror = function () {
@@ -1995,6 +2014,15 @@ deletecancel.addEventListener('click', function () {
     deletecard.style.display = 'none';
 });
 
+const deleteblurback = document.getElementById("delete-back");
+
+deleteblurback.addEventListener('click', function (e) {
+    if (e.target === deleteblurback) {
+        deleteback.style.display = 'none';
+        deletecard.style.display = 'none';
+    }
+});
+
 
 //search button
 const playerhead = document.querySelector("#playerhead");
@@ -2218,6 +2246,14 @@ disagree.addEventListener("click", function () {
     warnback.style.display = 'none';
 });
 
+const warnblurback = document.getElementById("warning-back");
 
+warnblurback.addEventListener("click", function (e) {
+    if (e.target === warnblurback) {
+        partytoggle.checked = false;
+        warn.style.display = 'none';
+        warnback.style.display = 'none';
+    }
+});
 
 
