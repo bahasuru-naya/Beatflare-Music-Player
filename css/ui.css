@@ -3086,6 +3086,7 @@ li svg {
     height: 120px;
     border-radius: 50%;
     transition: transform 0.3s ease-in-out;
+    border: #000000 4px solid;
     margin: 5px;
 }
 
@@ -3103,7 +3104,7 @@ li svg {
 .creator-name {
     font-size: 18px;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-bottom: 10px;
 }
 
@@ -3161,8 +3162,8 @@ li svg {
 
 .mp3-logo {
     width: 100px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
     border-radius: 10px;
 }
 
