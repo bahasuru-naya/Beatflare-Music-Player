@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to check screen width and show/hide warning
   function checkScreenWidth() {
-    if (window.innerWidth < 350) {
+    if (window.innerWidth < 390) {
       overlay.style.display = 'block';
       document.body.style.overflow = 'hidden'; // Prevent scrolling
     } else {

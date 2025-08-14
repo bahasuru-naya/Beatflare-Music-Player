@@ -659,8 +659,9 @@ function showerror(message) {
     errorBack.style.display = 'block';
 }
 
+const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
+
 function playsamplemusic() {
-    const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
     const folderPath = '../sample-music/';
 
     const loadingOverlay = document.getElementById('loading-back');
@@ -860,6 +861,20 @@ function updatePlaylist() {
         listItem.appendChild(listItemindexc);
         listItem.appendChild(listItemtext);
 
+        if (sampleFileNames.includes(file.name)) {            
+            const infobutton = document.createElement("button");
+            infobutton.classList.add("info");
+            // Create the SVG element 
+            infobutton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>`;
+            listItemtext.appendChild(infobutton);
+            infobutton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                //show info
+            });
+        } 
+
         if (index !== 0) {
             const upbutton = document.createElement("button");
             upbutton.classList.add("up");
@@ -878,7 +893,7 @@ function updatePlaylist() {
         if (index !== files.length - 1) {
             const downbutton = document.createElement("button");
             downbutton.classList.add("down");
-            // Create the SVG element (as innerHTML)
+            // Create the SVG element 
             downbutton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
             </svg>`;

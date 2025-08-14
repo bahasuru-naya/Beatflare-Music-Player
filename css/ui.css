@@ -1378,6 +1378,9 @@ ul {
 }
 
 .litext {
+    display: grid;
+    grid-template-columns: auto 40px;
+    align-items: center;    
     grid-column: 2;
     padding-left: 8px;
     padding-right: 8px;
@@ -1514,6 +1517,31 @@ li svg {
 
 .remove:hover {
     background-color: #fe0000;
+}
+
+.info{   
+    grid-column: 2;
+    margin-left: 5px;
+    font-size: 12px;
+    width: 30px ;
+    height: 30px;
+    padding: 0px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    background: #07af04;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    border: none;
+    border-radius: 20px;
+    justify-self: center;
+}
+
+.info:hover {
+    background-color: #44db04;
+    
 }
 
 
