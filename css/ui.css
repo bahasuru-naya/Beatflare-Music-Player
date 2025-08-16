@@ -530,6 +530,7 @@ nav {
     width: 320px;
     height: 400px;
     border: #000000 2px solid;
+    transform: translate(-50%, -50%);
     border-radius: 1rem;
     background-color: rgba(255, 255, 255, 1);
     padding: 1rem;
@@ -618,7 +619,10 @@ nav {
     display: flex;
     align-items: center;
     grid-gap: 0.5rem;
-    gap: 1rem;
+    gap: 1rem;    
+    border-radius: 15px;
+    padding: 5px;    
+    background-color: #e6e6e6;
 }
 
 .icon {
@@ -639,14 +643,16 @@ nav {
 
 .alert {
     font-weight: 800;
-    color: rgba(107, 114, 128, 1);
+    color: #2c2b2b;
 }
 
 .message {
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
-    color: rgba(107, 114, 128, 1);
-    text-align: justify;
+    color: rgb(100, 100, 100);
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .msg-bold {
@@ -689,6 +695,10 @@ nav {
     background-color: rgb(230, 231, 233);
 }
 
+#warning .message {    
+    text-align: justify;    
+}
+
 #error {
     display: none;
     height: fit-content;
@@ -709,7 +719,7 @@ nav {
 #info {
     display: none;
     height: fit-content;
-    top: calc(50% - 100px);
+    top: calc(50% - 155px);
 }
 
 #info .icon {

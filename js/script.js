@@ -657,8 +657,10 @@ function showerror(message) {
     errorBack.style.display = 'block';
 }
 
-const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
-const attributions = ['atrib 1', 'atribu 2'];
+const sampleFileNames = ['Elektronomia - Energy [NCS Release].mp3', 'Elektronomia - Limitless [NCS Release].mp3', 'LFZ - Popsicle [NCS Release].mp3'];
+const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/energy \n Watch: http://youtu.be/fzNMd3Tu1Zw", 
+    "Song: Elektronomia - Limitless [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Limitless \n Watch: http://youtu.be/cNcy3J4x62M",
+"Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
 
 const attributionMap = Object.fromEntries(
     sampleFileNames.map((file, index) => [file, attributions[index]])
