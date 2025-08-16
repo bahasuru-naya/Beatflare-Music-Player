@@ -145,18 +145,16 @@ function setWidthHeight() {
     var maqcontainer = 0;
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
     maqcontainer = document.querySelector(".volumemute").offsetWidth;
-    document.querySelector(".marquee").style.width = maqcontainer + 'px';
-
-    // Reset animation
-    songNameElement.style.animation = "none";
-
-    // Calculate the animation duration based on text width
+    document.querySelector(".marquee").style.width = maqcontainer + 'px';   
+    songNameElement.style.animation = "none";    
     const containerWidth = maqcontainer;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 100;
-
-    // Apply the new animation with dynamic duration
+    const animationDuration = (textWidth + containerWidth) / 100;    
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
+
+    const settingsback = document.querySelector("#settings");
+    settingsback.style.maxHeight = "none";
+    settingsback.style.height = "auto";
 
 }
 
@@ -660,6 +658,27 @@ function showerror(message) {
 }
 
 const sampleFileNames = ['angelsbymyside.mp3', 'Welcome to Beatflare.mp3'];
+const attributions = ['atrib 1', 'atribu 2'];
+
+const attributionMap = Object.fromEntries(
+    sampleFileNames.map((file, index) => [file, attributions[index]])
+);
+
+function getAttribution(filename) {
+    return attributionMap[filename] || "No attribution found";
+}
+
+function showinfo(filename) {
+    const info = document.querySelector('#info');
+    const infoBack = document.querySelector('#info-back');
+    const infoTitle = document.querySelector('#info .header .alert');
+    const infoText = document.querySelector('#info .message');
+    infoTitle.textContent = "\"" + filename.replace(/\.[^/.]+$/, "") + "\" Attribution";
+    infoText.textContent = getAttribution(filename);
+    infoText.style.whiteSpace = "pre-line";
+    info.style.display = 'block';
+    infoBack.style.display = 'block';
+}
 
 function playsamplemusic() {
     const folderPath = '../sample-music/';
@@ -861,9 +880,10 @@ function updatePlaylist() {
         listItem.appendChild(listItemindexc);
         listItem.appendChild(listItemtext);
 
-        if (sampleFileNames.includes(file.name)) {            
+        if (sampleFileNames.includes(file.name)) {
             const infobutton = document.createElement("button");
             infobutton.classList.add("info");
+            infobutton.title = "See attribution";
             // Create the SVG element 
             infobutton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -871,13 +891,14 @@ function updatePlaylist() {
             listItemtext.appendChild(infobutton);
             infobutton.addEventListener('click', (e) => {
                 e.stopPropagation();
-                //show info
+                showinfo(file.name);
             });
-        } 
+        }
 
         if (index !== 0) {
             const upbutton = document.createElement("button");
             upbutton.classList.add("up");
+            upbutton.title = "Move up";
             // Create the SVG element 
             upbutton.innerHTML = `
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -893,6 +914,7 @@ function updatePlaylist() {
         if (index !== files.length - 1) {
             const downbutton = document.createElement("button");
             downbutton.classList.add("down");
+            downbutton.title = "Move down";
             // Create the SVG element 
             downbutton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
@@ -907,6 +929,7 @@ function updatePlaylist() {
 
         const removeButton = document.createElement('button');
         removeButton.classList.add('remove');
+        removeButton.title = "Remove from playlist";
         removeButton.innerHTML = `<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
         </svg>`;
@@ -1176,6 +1199,21 @@ errorblurback.addEventListener('click', function (e) {
         document.querySelector('#error').style.display = 'none';
         document.querySelector('#error-back').style.display = 'none';
         missingFileTitles = []
+    }
+});
+
+//close info msg
+document.querySelector('#info_ok').addEventListener('click', function () {
+    document.querySelector('#info').style.display = 'none';
+    document.querySelector('#info-back').style.display = 'none';
+});
+
+const infoBlurback = document.getElementById('info-back');
+
+infoBlurback.addEventListener('click', function (e) {
+    if (e.target === infoBlurback) {
+        document.querySelector('#info').style.display = 'none';
+        document.querySelector('#info-back').style.display = 'none';
     }
 });
 

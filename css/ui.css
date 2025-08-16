@@ -307,8 +307,7 @@ main {
 }
 
 section {
-    align-items: center;
-    display: flex;
+    align-items: center;    
     font-size: 3rem;
     height: 100vh;
     justify-content: center;
@@ -707,6 +706,23 @@ nav {
     font-weight: bold;
 }
 
+#info {
+    display: none;
+    height: fit-content;
+    top: calc(50% - 100px);
+}
+
+#info .icon {
+    background-color: #08ba1d;
+    color: white;
+}
+
+#info .read {
+    background-color: #0ab71f;
+    color: white;
+    font-weight: bold;
+}
+
 #delete-warning {
     display: none;
     height: fit-content;
@@ -727,12 +743,14 @@ nav {
 
 #home {
     height: 100vh;
+    min-height: 640px;
+    position: relative;
 }
 
 #home-back {
 
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 1;
 }
 
@@ -780,7 +798,8 @@ nav {
     transform: translate(-50%, -50%);
     padding: 20px;
     width: 70%;
-    height: auto;
+    height: 80%;
+    min-height: 550px;
     max-height: 90%;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -1012,7 +1031,8 @@ path.two {
     font-weight: bold;
     font-size: 3rem;
     line-height: 3rem;
-    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 5px;    
     width: 75%;
     margin: 0;
     align-items: center;
@@ -2294,15 +2314,14 @@ li svg {
 #settings {
     display: inline-flex;
     flex-direction: column;
-    justify-items: center;
-    background-color: var(--settings-back-color);
-    padding: 10px;
-    padding-top: 5px;
+    justify-content: start;
+    background-color: var(--settings-back-color); 
+    padding-top: 10px;   
     padding-left: 5%;
     padding-right: 5%;
     align-items: center;
     height: auto;
-    max-height: 100vh;
+    min-height: 100vh;
 }
 
 .s-text {
@@ -2315,11 +2334,10 @@ li svg {
     font-weight: 800;
     width: 100%;
     padding-right: 10px;
-
-
 }
 
 #sethead {
+    display: flex;
     color: var(--settings-head-text-color);
     padding: 10px;
     padding-bottom: 5px;
@@ -2327,6 +2345,8 @@ li svg {
     justify-self: center;
     font-size: 3rem;
     line-height: 3rem;
+    align-items: center;
+    align-content: center;
     align-self: center;
     margin: 0px;
     z-index: 1;
@@ -2346,8 +2366,7 @@ li svg {
     z-index: 10;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
-    border-radius: 10px;
-
+    border-radius: 10px; 
 }
 
 .column-1 {
@@ -3041,11 +3060,13 @@ li svg {
 }
 
 #about {
+    display: block;
     max-height: 100vh;
     min-height: 100vh;
     height: auto;
-    padding: 0px;
+    padding: 0px ;
     margin: 0px;
+    justify-items: center;    
     background: var(--about-back-color);
 }
 
@@ -3058,8 +3079,10 @@ li svg {
     height: inherit;
     width: 100%;
     background: var(--about-back-color);
+    padding-top: 0px;
     padding-left: 10%;
     padding-right: 10%;
+    
 }
 
 /* Container */
@@ -3071,11 +3094,11 @@ li svg {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 1000px;
-    width: 100%;
+    width: 90%;
     padding: 10px;
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
-    box-shadow: 0.2em 0.2em;
+    box-shadow: 0.2em 0.2em;    
     margin-bottom: 40px;
     border: #000000 2px solid;
     z-index: 10;
@@ -3083,6 +3106,9 @@ li svg {
 
 /* Section Title */
 .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 3rem;
     font-weight: bold;
     color: var(--about-text-color);
@@ -3090,7 +3116,8 @@ li svg {
     max-width: 900px;
     width: 100%;
     margin: 0px;
-    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 15px;
     border-radius: 10px;
 
 }
@@ -3139,7 +3166,8 @@ li svg {
 .creator-description {
     font-size: 16px;
     color: #555;
-    margin: 10px 0;
+    margin-top: 10px ;
+    margin-bottom: 30px ;
     text-align: justify;
 }
 
@@ -3148,11 +3176,9 @@ li svg {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 15px;
+    margin-top: 25px;
     margin: 10px;
 }
-
-
 
 .social-btn {
     display: flex;
@@ -3230,7 +3256,7 @@ li svg {
     font-size: 14px;
     transition: transform 0.3s ease-in-out;
     text-align: justify;
-    padding: 3px;
+    padding: 4px;
     border: none;
     border-radius: 10px;
     line-height: 14px;
@@ -3266,6 +3292,7 @@ li svg {
     font-size: 14px;
     color: #777;
     margin: 0px;
+    padding-bottom: 10px;
     font-style: italic;
 }
 
@@ -3283,7 +3310,7 @@ li svg {
 }
 
 /* Responsive Design */
-@media (max-width: 1194px) {
+@media (max-width: 1220px) {
     .home-text h1 {
         font-size: 4rem;
     }
@@ -3297,7 +3324,7 @@ li svg {
     }
 }
 
-@media (max-width: 1125px) {
+@media (max-width: 1160px) {
     .home-text h1 {
         font-size: 3.6rem;
     }
@@ -3424,10 +3451,24 @@ li svg {
     }
 }
 
+@media (max-width: 700px) {
+    .home-text h1 {
+        font-size: 2.6rem;
+    }
+
+    .home-text p {
+        font-size: 1.2rem;
+    }
+}
+
+
 @media (max-width: 650px) {
     .home-text h1 {
-        font-size: 2.5rem;
-        line-height: 2.5rem;
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+    }
+    .home-text p {
+        font-size: 1.1rem;
     }
 
     #playersec h1 {
@@ -3461,6 +3502,16 @@ li svg {
 
     .section-title {
         font-size: 2.3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .home-text h1 {
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+    }
+    .home-text p {
+        font-size: 1rem;
     }
 }
 

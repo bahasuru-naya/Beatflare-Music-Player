@@ -193,7 +193,7 @@
 
                 <p class="message">
                     Are you sure you want to clear the entire playlist?
-                    <br>This action cannot be undone and will remove all songs.
+                    <br>This will remove all songs and this action cannot be undone.
                 </p>
 
                 <div class="actions">
@@ -228,6 +228,32 @@
                 <div class="actions">
                     <button class="read" id="error_ok">
                         OK
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="blur-back" id="info-back">
+            <div class="card" id="info">
+                <div class="header">
+                    <span class="icon">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </span>
+                    <p class="alert">info</p>
+                </div>
+
+                <p class="message">
+                    song info.
+                </p>
+
+                <div class="actions">
+                    <button class="read" id="info_ok">
+                        Got it
                     </button>
 
                 </div>
@@ -302,8 +328,7 @@
 
         </section>
         <section id="playersec">
-
-            <h1><i class="fa-solid fa-music fa-sm" style="padding: 0px 10px;"></i> Beatflare Music Player</h1>
+            <h1> Beatflare Music Player</h1>
             <div class="section-center">
                 <div class="play">
                     <div id="player" class="player">
@@ -542,7 +567,9 @@
             </div>
         </section>
         <section id="settings">
-            <div id="sethead" class="headding">Settings</div>
+            <div id="sethead" class="headding">                
+                Settings
+            </div>
             <div class="settings-content">
                 <div class="column-1">
                     <div id="audio-set-head">
@@ -742,7 +769,9 @@
         </section>
         <section id="about">
             <section class="about-creator">
-                <h1 class="section-title">About</h1>
+                <h1 class="section-title">                    
+                    About
+                </h1>
                 <div class="container">
 
                     <div class="profile">
