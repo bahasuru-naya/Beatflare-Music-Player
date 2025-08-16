@@ -6,7 +6,7 @@ function loadsettings() {
     }
     else {
         currentIndex = -1;
-    }
+    }    
 
     //reapeat and random
     const repeatEnabled = localStorage.getItem('repeatEnabled');
@@ -23,7 +23,7 @@ function loadsettings() {
     } else {
         randomsong.checked = false;
     }
-    
+
 
     //volume
     const savedVolume = localStorage.getItem('playerVolume');

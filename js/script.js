@@ -102,6 +102,30 @@ async function loadFilesFromStorage() {
             if (animation) window.cancelAnimationFrame(animation);
             restoreActiveIndexText();
             scrollToActive();
+            const cfile = files[currentIndex];
+            jsmediatags.read(cfile, {
+                onSuccess: function (tag) {
+                    const { picture } = tag.tags;
+                    if (picture) {
+                        // Convert the album art data into a Blob URL
+                        const byteArray = new Uint8Array(picture.data);
+                        let binary = '';
+                        byteArray.forEach(byte => binary += String.fromCharCode(byte));
+                        const dataUrl = `data:${picture.format};base64,${btoa(binary)}`;
+
+                        img.src = dataUrl;
+                        img.style.display = 'block';
+                    } else {
+                        img.style.display = 'block';
+                        img.src = "./images/art.png";
+                    }
+                },
+                onError: function (error) {
+                    console.error('Error reading MP3 file:', error);
+                    img.style.display = 'block';
+                    img.src = "./images/art.png";
+                }
+            });
 
         } else {
             files = [];
@@ -145,11 +169,11 @@ function setWidthHeight() {
     var maqcontainer = 0;
     document.querySelector(".marquee").style.width = maqcontainer + 'px';
     maqcontainer = document.querySelector(".volumemute").offsetWidth;
-    document.querySelector(".marquee").style.width = maqcontainer + 'px';   
-    songNameElement.style.animation = "none";    
+    document.querySelector(".marquee").style.width = maqcontainer + 'px';
+    songNameElement.style.animation = "none";
     const containerWidth = maqcontainer;
     const textWidth = songNameElement.offsetWidth;
-    const animationDuration = (textWidth + containerWidth) / 100;    
+    const animationDuration = (textWidth + containerWidth) / 100;
     songNameElement.style.animation = `marquee ${animationDuration}s linear infinite`;
 
     const settingsback = document.querySelector("#settings");
@@ -657,10 +681,10 @@ function showerror(message) {
     errorBack.style.display = 'block';
 }
 
-const sampleFileNames = ['Elektronomia - Energy [NCS Release].mp3', 'Elektronomia - Limitless [NCS Release].mp3', 'LFZ - Popsicle [NCS Release].mp3'];
-const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/energy \n Watch: http://youtu.be/fzNMd3Tu1Zw", 
+const sampleFileNames = ['Elektronomia - Energy [Sample Music].mp3', 'Elektronomia - Limitless [Sample Music].mp3', 'LFZ - Popsicle [Sample Music].mp3'];
+const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/energy \n Watch: http://youtu.be/fzNMd3Tu1Zw",
     "Song: Elektronomia - Limitless [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Limitless \n Watch: http://youtu.be/cNcy3J4x62M",
-"Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
+    "Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
 
 const attributionMap = Object.fromEntries(
     sampleFileNames.map((file, index) => [file, attributions[index]])
@@ -1185,6 +1209,31 @@ function updateIndicesAndMap() {
 
 const img = document.getElementById('albumArt');
 
+img.addEventListener('click', function () {
+    document.querySelector('#album-art-card').style.display = 'block';
+    document.querySelector('#album-art-back').style.display = 'block';
+    const albumArtimg = document.querySelector('#album-art-image');
+    const albummsg = document.querySelector('#album-art-card .message');
+    const fileName = img.src.split("/").pop();
+    if (currentIndex >= 0) {
+        const file = files[currentIndex];
+        const songTitle = file.name.replace('.mp3', '');
+        if (fileName !== "art.png") {
+            albumArtimg.src = img.src;
+            albummsg.textContent = "Album Art for " + songTitle;
+            albummsg.style.color = "rgb(74, 74, 74)";
+        } else {
+            albumArtimg.src = "./images/art.png";
+            albummsg.textContent = "Album Art not found for " + songTitle;
+            albummsg.style.color = "red";
+        }
+    } else {
+        albumArtimg.src = "./images/art.png";
+        albummsg.textContent = "Album Art unavailable and playlist is empty. Add songs to the playlist.";
+        albummsg.style.color = "red";
+    }
+});
+
 var missingFileTitles = [];
 
 //close error msg
@@ -1201,6 +1250,21 @@ errorblurback.addEventListener('click', function (e) {
         document.querySelector('#error').style.display = 'none';
         document.querySelector('#error-back').style.display = 'none';
         missingFileTitles = []
+    }
+});
+
+//close album art msg
+document.querySelector('#album-art-ok').addEventListener('click', function () {
+    document.querySelector('#album-art-card').style.display = 'none';
+    document.querySelector('#album-art-back').style.display = 'none';
+});
+
+const albumBlurback = document.getElementById('album-art-back');
+
+albumBlurback.addEventListener('click', function (e) {
+    if (e.target === albumBlurback) {
+        document.querySelector('#album-art-card').style.display = 'none';
+        document.querySelector('#album-art-back').style.display = 'none';
     }
 });
 
