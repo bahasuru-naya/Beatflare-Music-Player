@@ -3120,13 +3120,16 @@ li svg {
 
 /* About Section */
 .about-creator {
-    display: flex;
+    display: block;
+    height:80% ;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: inherit;
     background: var(--about-back-color);
     padding-top: 0px;
+    padding-bottom: 0px;
     padding-left: 10%;
     padding-right: 10%;
 
