@@ -687,9 +687,18 @@ const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provid
     "Song: Elektronomia - Limitless [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Limitless \n Watch: http://youtu.be/cNcy3J4x62M",
     "Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
 
+const samplefileurls=["https://github.com/bahasuru-naya/Beatflare-Music-Player/raw/refs/heads/main/sample-music/Elektronomia-Energy-Sample-Music.mp3?raw=true",
+"https://github.com/bahasuru-naya/Beatflare-Music-Player/raw/refs/heads/main/sample-music/Elektronomia-Limitless-Sample-Music.mp3?raw=true",
+"https://github.com/bahasuru-naya/Beatflare-Music-Player/raw/refs/heads/main/sample-music/LFZ-Popsicle-Sample-Music.mp3?raw=true"];
+
 const attributionMap = Object.fromEntries(
     sampleFileNames.map((file, index) => [file, attributions[index]])
 );
+
+function getSampleFileUrl(filename) {
+    const index = sampleFileNames.indexOf(filename);
+    return index !== -1 ? samplefileurls[index] : null;
+}
 
 function getAttribution(filename) {
     return attributionMap[filename] || "No attribution found";
@@ -716,7 +725,7 @@ function playsamplemusic() {
 
 
     const fetchPromises = sampleFileNames.map(async fileName => {
-        const fileUrl = folderPath + fileName;
+        const fileUrl = getSampleFileUrl(fileName);
         const response = await fetch(fileUrl);
         if (!response.ok) throw new Error(`Failed to load ${fileName}`);
         const blob = await response.blob();
