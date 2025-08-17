@@ -682,7 +682,7 @@ function showerror(message) {
     errorBack.style.display = 'block';
 }
 
-const sampleFileNames = ['Elektronomia - Energy [Sample Music].mp3', 'Elektronomia - Limitless [Sample Music].mp3', 'LFZ - Popsicle [Sample Music].mp3'];
+const sampleFileNames = ['Elektronomia-Energy-Sample-Music.mp3', 'Elektronomia-Limitless-Sample-Music.mp3', 'LFZ-Popsicle-Sample-Music.mp3'];
 const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/energy \n Watch: http://youtu.be/fzNMd3Tu1Zw",
     "Song: Elektronomia - Limitless [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Limitless \n Watch: http://youtu.be/cNcy3J4x62M",
     "Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
@@ -708,7 +708,7 @@ function showinfo(filename) {
 }
 
 function playsamplemusic() {
-    const folderPath = '../sample-music/';
+    const folderPath = '../src/Audio/';
 
     const loadingOverlay = document.getElementById('loading-back');
     // Show loading overlay
