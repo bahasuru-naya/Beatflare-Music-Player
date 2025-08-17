@@ -1,4 +1,2 @@
-# _config.yml
-exclude: []        # Don’t exclude anything
-include:
-  - sample-music   # Force-include your music folder
+# _config.yml        
+include: [".htaccess",".mp3"]
