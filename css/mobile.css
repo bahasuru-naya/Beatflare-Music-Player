@@ -37,10 +37,30 @@
     }
 
     .card {
-        top: calc(50% - 250px);
-        left: calc(50% - 125px);
+        top: calc(50% - 260px);
+        left: calc(50% - 140px);
         width: 250px;
-        height: 430px;
+        height: 450px;
+    }
+
+    #album-art-card {
+        display: none;
+        top: calc(50% - 290px);
+        left: calc(50% - 200px);
+        width: 360px;
+        min-height: 520px;
+        height: auto;
+    }
+
+    #album-art-card img {
+        display: flex;
+        width: 350px;
+        height: 350px;
+        margin: 10px;
+        border-radius: 20px;
+        background-color: #000;
+        border: #000000 2px solid;
+        justify-self: center;
     }
 
     .player-top-button {
@@ -77,6 +97,10 @@
 
     #playerhead {
         font-size: 0.9rem;
+    }
+
+    #search-list {
+        font-size: 0.7rem;
     }
 
     button {
@@ -206,9 +230,14 @@
         font-size: 0.8rem;
     }
 
+    .eqslider {
+        width: 50% !important;
+    }
+
     .sliderlabel {
         font-size: 0.5rem;
     }
+
     .center-line {
         top: 40%;
     }
@@ -293,14 +322,391 @@
     }
 }
 
-@media (max-width: 430px) {
-    #playersec h1 {
-        font-size: 1.5rem;
+@media (max-width: 420px) {
+    .pre-back {
+        width: 270px;
+        height: 280px;
+    }
 
+    #preloader {
+        width: 55%;
+        height: 55%;
+    }
+
+    #preloader .plate .black {
+        width: 130px;
+        height: 130px;
+    }
+
+    #preloader .p .circ {
+        width: 15px;
+        height: 15px;
+    }
+
+    #preloader .p .rect {
+        width: 5px;
+        height: 40px;
+
+    }
+
+    .preloaderback .dance-text {
+        font-size: 1.2rem;
+        top: calc(30% + 130px);
+    }
+
+    .card {
+        top: calc(50% - 260px);
+        left: calc(50% - 140px);
+        width: 250px;
+        height: 460px;
+    }
+
+    #album-art-card {
+        display: none;
+        top: calc(50% - 290px);
+        left: calc(50% - 170px);
+        width: 300px;
+        min-height: 490px;
+        height: auto;
+    }
+
+    #album-art-card img {
+        display: flex;
+        width: 280px;
+        height: 280px;
+        margin: 10px;
+        border-radius: 20px;
+        background-color: #000;
+        border: #000000 2px solid;
+        justify-self: center;
+    }
+
+    .player-top-button {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .home-text h1 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    .home-text p {
+        font-size: 1rem;
+    }
+
+    .home-text h3 {
+        font-size: 1.2rem;
+
+    }
+
+    .cta {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+
+    }
+
+    #playersec h1 {
+        font-size: 1.7rem;
+
+    }
+
+    #playerhead {
+        font-size: 0.7rem;
+    }
+
+    #search-list {
+        font-size: 0.6rem;
+    }
+
+    button {
+        font-size: 8px;
+    }
+
+    ul {
+        font-size: 0.6rem;
+    }
+
+    #playlist li {
+        grid-template-columns: auto 5fr 30px 30px 30px;
+    }
+
+    .liindexc {
+        min-width: 20px;
+    }
+
+
+    li svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .up {
+        width: 20px;
+        height: 20px;
+
+    }
+
+    .down {
+        width: 20px;
+        height: 20px;
+
+    }
+
+    .remove {
+        width: 20px;
+        height: 20px;
+
+    }
+
+    .info {
+        width: 15px;
+        height: 15px;
+
+    }
+
+
+    #albumArt {
+        width: 70px;
+        height: 70px;
+    }
+
+    .volumemute .checkb {
+        width: 40px;
+        height: 40px;
+    }
+
+    .details-volume {
+        font-size: 0.8rem;
+    }
+
+    .checkb {
+        width: 40px;
+        height: 40px;
+    }
+
+    .controlbtn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .play-pause-back {
+        width: 45px;
+        height: 45px;
+    }
+
+    #play-pause {
+        width: 40px;
+        height: 40px;
+    }
+
+    .seek-bar-container {
+        font-size: 0.8rem;
+    }
+
+    .tbutton {
+        font-size: 0.8rem;
+    }
+
+    #canvas2 {
+        width: 250px;
+        height: 250px;
+    }
+
+    #canvas3 {
+        width: 250px;
+        height: 250px;
+    }
+
+    .settings-content {
+
+        font-size: 1.1rem;
+        align-items: center;
+
+    }
+
+    #sethead {
+        font-size: 1.7rem;
+        line-height: 1.7rem;
+    }
+
+    .s-text {
+        font-size: 1.1rem;
+    }
+
+    .changinglabel {
+        font-size: 1.1rem;
+    }
+
+    .rest-btn {
+        font-size: 0.7rem;
+    }
+
+    #equ-select {
+        font-size: 0.8rem;
+    }
+
+    .sliderlabel {
+        font-size: 0.5rem;
+    }
+
+    .center-line {
+        top: 40%;
+    }
+
+    #Stereolabel1 {
+        font-size: 1rem;
+    }
+
+    #Stereolabel2 {
+        font-size: 1rem;
+
+    }
+
+    .filter-label {
+        font-size: 1rem;
+    }
+
+    .switch {
+        /* switch */
+        --switch-width: 60px;
+        --switch-height: 30px;
+        --circle-diameter: 23px;
+    }
+
+    #theme-select {
+        font-size: 0.8rem;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .creator-name-head {
+        font-size: 20px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .creator-name {
+        font-size: 16px;
+    }
+
+    .creator-description {
+        font-size: 14px;
+    }
+
+    .social-btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .mp3-title {
+        font-size: 20px;
+    }
+
+    .mp3-logo {
+        width: 100px;
+
+    }
+
+    .mp3-description {
+        font-size: 14px;
+    }
+
+    .features {
+        line-height: 1rem;
+    }
+
+    .features li {
+        font-size: 12px;
+    }
+
+    .github-btn {
+        font-size: 14px;
+    }
+
+    .contribution-text {
+        font-size: 12px;
     }
 }
 
+@media (max-width: 380px) {
+    #albumArt {
+        width: 60px;
+        height: 60px;
+    }
 
-@media (max-width: 350px) {}
+    #canvas2 {
+        width: 220px;
+        height: 220px;
+    }
 
-@media (max-width: 300px) {}
+    .rest-btn {
+        font-size: 0.6rem;
+    }
+
+    #canvas3 {
+        width: 220px;
+        height: 220px;
+    }
+
+    .social-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .features li {
+        font-size: 12px;
+    }
+
+    .github-btn {
+        width: 130px;
+    }
+}
+
+@media (max-width: 360px) {
+    #playersec h1 {
+        font-size: 1.4rem;
+
+    }
+
+    #playerhead {
+        font-size: 0.6rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    #sethead {
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+    }
+    #album-art-card {
+        display: none;
+        top: calc(50% - 270px);
+        left: calc(50% - 160px);
+        width: 280px;
+        min-height: 450px;
+        height: auto;
+    }
+
+    #album-art-card img {
+        display: flex;
+        width: 250px;
+        height: 250px;
+        margin: 10px;
+        border-radius: 20px;
+        background-color: #000;
+        border: #000000 2px solid;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 340px) {}

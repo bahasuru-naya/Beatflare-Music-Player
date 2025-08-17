@@ -184,7 +184,7 @@ function setWidthHeight() {
     const overlay = document.getElementById('mobileWarning');
 
     // Function to check screen width and show/hide warning
-    if (window.innerWidth < 390) {
+    if (window.innerWidth < 340) {
         overlay.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Prevent scrolling
     } else {
@@ -1724,8 +1724,7 @@ const sliders = eqBands.map((freq, idx) => {
     slider.orient = 'vertical';
     slider.title = 'Gain';
     slider.style.direction = 'rtl';
-    slider.style.writingMode = 'vertical-lr';
-    slider.style.width = '30%';
+    slider.style.writingMode = 'vertical-lr';    
     slider.style.height = '100%';
     slider.style.alignSelf = 'center';
     slider.style.transition = "all 0.5s ease-in-out";
