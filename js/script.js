@@ -1,3 +1,4 @@
+//Created by Bahasuru Nayanakantha
 const fileInput = document.getElementById('file-input');
 const audioPlayer = document.getElementById('audio-player');
 const playPauseButton = document.getElementById('play-pause');

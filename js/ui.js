@@ -1,3 +1,4 @@
+//Created by Bahasuru Nayanakantha
 //preloader
 const preloader = document.querySelector(".preloaderback");
 const preloadImage = new Image();

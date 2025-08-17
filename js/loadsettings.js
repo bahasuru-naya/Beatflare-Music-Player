@@ -1,3 +1,4 @@
+//Created by Bahasuru Nayanakantha
 function loadsettings() {
     //current index
     const savedIndex = localStorage.getItem('currentIndex');

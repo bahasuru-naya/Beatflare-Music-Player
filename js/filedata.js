@@ -1,3 +1,4 @@
+//Created by Bahasuru Nayanakantha
 // Open or create IndexedDB
 function openDatabase() {
     return new Promise((resolve, reject) => {
