@@ -7,8 +7,11 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 
 ## 🖼️ Preview
 
-![image](https://github.com/user-attachments/assets/36aff6e6-3c44-458c-b13d-29e65b7f8daf)
+### Player
+![image](https://github.com/user-attachments/assets/7c9ca073-01df-4119-a401-e902d00b1582)
 
+### Settings
+![image](https://github.com/user-attachments/assets/018ade94-fe4b-4acd-9e4b-039a5b820d20)
 
 ## 🚀 Features
 
@@ -30,6 +33,20 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
     ```bash
    cd Beatflare-Music-Player    
 3. **Open `index.html` in your browser**
+
+## 🎶 Sample Music Attribution
+
+1. Song: Elektronomia - Energy [NCS Release] Music provided by NoCopyrightSounds
+   - Free Download/Stream: http://ncs.io/energy
+   - Watch: http://youtu.be/fzNMd3Tu1Zw
+
+2. Song: Elektronomia - Limitless [NCS Release] Music provided by NoCopyrightSounds
+   - Free Download/Stream: http://ncs.io/Limitless
+   - Watch: http://youtu.be/cNcy3J4x62M
+
+3. Song: LFZ - Popsicle [NCS Release] Music provided by NoCopyrightSounds
+   - Free Download/Stream: http://ncs.io/Popsicle
+   - Watch: http://youtu.be/K8DUjObr_tU
 
 ## 🤝 Contributing
 Contributions are welcome and appreciated! Whether it’s a bug fix, a new feature, or an improvement to the UI, we’d love your help making Beatflare even better.
