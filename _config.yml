@@ -1,3 +1,0 @@
-# _config.yml        
-include: [".htaccess",".mp3"]
-keep_files: [".git", ".mp3"]
