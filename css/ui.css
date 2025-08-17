@@ -3108,14 +3108,15 @@ li svg {
 }
 
 #about {
-    display: block;
-    max-height: 100vh;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     height: auto;
+    min-height: 100vh;   
     padding: 0px;
     margin: 0px;
     justify-items: center;
     background: var(--about-back-color);
+    box-sizing: border-box;
 }
 
 /* About Section */
