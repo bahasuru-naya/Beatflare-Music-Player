@@ -7,10 +7,10 @@ A modern, sleek, and open-source music player built with love by [Bahasuru Nayan
 
 ## 🖼️ Preview
 
-# Player
+### Player
 ![image](https://github.com/user-attachments/assets/7c9ca073-01df-4119-a401-e902d00b1582)
 
-# Settings
+### Settings
 ![image](https://github.com/user-attachments/assets/018ade94-fe4b-4acd-9e4b-039a5b820d20)
 
 ## 🚀 Features
