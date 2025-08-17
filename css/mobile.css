@@ -4,7 +4,6 @@
     --test: #1a2a4d;
 }
 
-
 @media (max-width: 500px) {
     .pre-back {
         width: 270px;

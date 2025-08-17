@@ -18,7 +18,7 @@ preloadback.style.opacity = "1";
 
 // Wait for the background image to load
 preloadImage.onload = () => {  
-  preloader.style.setProperty('--bg-url', `url("${preloadImage.src}")`);
+  preloader.style.setProperty('--bg-url', `url("${preloadImage.src}")`);  
   preloader.style.setProperty('--img-ani', "fade-in 0.5s ease-in-out forwards");
   preloader.style.setProperty('--img-op', "1");
 
@@ -96,29 +96,6 @@ tabs.addEventListener("click", function (e) {
     const element = document.getElementById(id);
     element.classList.add("live");
   }
-});
-
-// handle small screen
-// Script to detect small screens and show the warning message
-document.addEventListener('DOMContentLoaded', function () {
-  const overlay = document.getElementById('mobileWarning');
-
-  // Function to check screen width and show/hide warning
-  function checkScreenWidth() {
-    if (window.innerWidth < 390) {
-      overlay.style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-    } else {
-      overlay.style.display = 'none';
-      document.body.style.overflow = ''; // Enable scrolling
-    }
-  }
-
-  // Check on initial load
-  checkScreenWidth();
-
-  // Check when window is resized
-  window.addEventListener('resize', checkScreenWidth);
 });
 
 

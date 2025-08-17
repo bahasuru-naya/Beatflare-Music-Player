@@ -181,6 +181,16 @@ function setWidthHeight() {
     settingsback.style.maxHeight = "none";
     settingsback.style.height = "auto";
 
+    const overlay = document.getElementById('mobileWarning');
+
+    // Function to check screen width and show/hide warning
+    if (window.innerWidth < 390) {
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    } else {
+        overlay.style.display = 'none';
+        document.body.style.overflow = ''; // Enable scrolling
+    }
 }
 
 const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];

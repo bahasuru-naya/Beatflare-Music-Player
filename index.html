@@ -112,7 +112,7 @@
             </li>
         </ul>
     </nav>
-    <svg style="position: absolute; left: 100%">
+    <svg style="position: absolute;">
         <defs>
             <filter id="goo">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="BLUR"></feGaussianBlur>
@@ -122,742 +122,733 @@
             </filter>
         </defs>
     </svg>
+    
+    <canvas id="my-canvas-confetti"></canvas>
 
+    <div class="blur-back" id="loading-back">
+        <div class="card" id="loading-card">
+            <div class="loader"></div>
+            <p class="message">
+                Loading... Please wait.
+            </p>
+        </div>
+    </div>
 
-    <main>
+    <div class="blur-back" id="album-art-back">
+        <div class="card" id="album-art-card">
+            <div class="header">
+                <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-palette" viewBox="0 0 16 16">
+                        <path
+                            d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                        <path
+                            d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
+                    </svg>
+                </span>
+                <p class="alert">Album Art</p>
+            </div>
+            <img id="album-art-image" src="" alt="">
 
-        <canvas id="my-canvas-confetti"></canvas>
+            <p class="message">
+                Your browser does not support the audio element. Please update your browser to the latest version.
+            </p>
 
-        <div class="blur-back" id="loading-back">
-            <div class="card" id="loading-card">
-                <div class="loader"></div>
-                <p class="message">
-                    Loading... Please wait.
-                </p>
+            <div class="actions">
+                <button class="read" id="album-art-ok">
+                    Close
+                </button>
+
             </div>
         </div>
+    </div>
 
-        <div class="blur-back" id="album-art-back">
-            <div class="card" id="album-art-card">
-                <div class="header">
-                    <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-palette" viewBox="0 0 16 16">
-                            <path
-                                d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
-                            <path
-                                d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
-                        </svg>
-                    </span>
-                    <p class="alert">Album Art</p>
-                </div>
-                <img id="album-art-image" src="" alt="">
+    <div class="blur-back" id="warning-back">
+        <div class="card" id="warning">
+            <div class="header">
+                <span class="icon">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+                <p class="alert">Warning: Party Mode Activation <i class="fa-solid fa-toggle-on"></i></p>
+            </div>
 
-                <p class="message">
-                    Your browser does not support the audio element. Please update your browser to the latest version.
-                </p>
+            <p class="message">
+                Party Mode rapidly changes UI colors <span class="msg-bold">while music is playing</span> to create
+                a
+                dynamic experience.
+                This feature may cause discomfort for some sensitive users, including those prone to seizures or
+                motion
+                sickness.<br>
 
-                <div class="actions">
-                    <button class="read" id="album-art-ok">
-                        Close
-                    </button>
+                Do you want to continue?<br><br>
 
-                </div>
+                Learn more about photosensitivity and safety <a
+                    href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity" target="_blank"
+                    rel="noopener noreferrer">here</a>.
+            </p>
+
+            <div class="actions">
+                <button class="read" id="agree">
+                    Yes, Enable
+                </button>
+
+                <button class="mark-as-read" id="disagree">
+                    Cancel
+                </button>
             </div>
         </div>
+    </div>
 
-        <div class="blur-back" id="warning-back">
-            <div class="card" id="warning">
-                <div class="header">
-                    <span class="icon">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </span>
-                    <p class="alert">Warning: Party Mode Activation <i class="fa-solid fa-toggle-on"></i></p>
-                </div>
 
-                <p class="message">
-                    Party Mode rapidly changes UI colors <span class="msg-bold">while music is playing</span> to create
-                    a
-                    dynamic experience.
-                    This feature may cause discomfort for some sensitive users, including those prone to seizures or
-                    motion
-                    sickness.<br>
+    <div class="blur-back" id="delete-back">
+        <div class="card" id="delete-warning">
+            <div class="header">
+                <span class="icon">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+                <p class="alert">Warning: Clear Playlist? </p>
+            </div>
 
-                    Do you want to continue?<br><br>
+            <p class="message">
+                Are you sure you want to clear the entire playlist?
+                <br>This will remove all songs and this action cannot be undone.
+            </p>
 
-                    Learn more about photosensitivity and safety <a
-                        href="https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity"
-                        target="_blank" rel="noopener noreferrer">here</a>.
-                </p>
+            <div class="actions">
+                <button class="read" id="agree-delete">
+                    Yes, Clear Playlist
+                </button>
 
-                <div class="actions">
-                    <button class="read" id="agree">
-                        Yes, Enable
-                    </button>
-
-                    <button class="mark-as-read" id="disagree">
-                        Cancel
-                    </button>
-                </div>
+                <button class="mark-as-read" id="disagree-delete">
+                    Cancel
+                </button>
             </div>
         </div>
+    </div>
 
+    <div class="blur-back" id="error-back">
+        <div class="card" id="error">
+            <div class="header">
+                <span class="icon">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+                <p class="alert">Error</p>
+            </div>
 
-        <div class="blur-back" id="delete-back">
-            <div class="card" id="delete-warning">
-                <div class="header">
-                    <span class="icon">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </span>
-                    <p class="alert">Warning: Clear Playlist? </p>
-                </div>
+            <p class="message">
+                Your browser does not support the audio element. Please update your browser to the latest version.
+            </p>
 
-                <p class="message">
-                    Are you sure you want to clear the entire playlist?
-                    <br>This will remove all songs and this action cannot be undone.
-                </p>
+            <div class="actions">
+                <button class="read" id="error_ok">
+                    OK
+                </button>
 
-                <div class="actions">
-                    <button class="read" id="agree-delete">
-                        Yes, Clear Playlist
-                    </button>
-
-                    <button class="mark-as-read" id="disagree-delete">
-                        Cancel
-                    </button>
-                </div>
             </div>
         </div>
+    </div>
 
-        <div class="blur-back" id="error-back">
-            <div class="card" id="error">
-                <div class="header">
-                    <span class="icon">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                d="m6 6 12 12m3-6a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </span>
-                    <p class="alert">Error</p>
-                </div>
+    <div class="blur-back" id="info-back">
+        <div class="card" id="info">
+            <div class="header">
+                <span class="icon">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+                <p class="alert">info</p>
+            </div>
 
-                <p class="message">
-                    Your browser does not support the audio element. Please update your browser to the latest version.
-                </p>
+            <p class="message">
+                song info.
+            </p>
 
-                <div class="actions">
-                    <button class="read" id="error_ok">
-                        OK
-                    </button>
+            <div class="actions">
+                <button class="read" id="info_ok">
+                    Got it
+                </button>
 
-                </div>
             </div>
         </div>
+    </div>
 
-        <div class="blur-back" id="info-back">
-            <div class="card" id="info">
-                <div class="header">
-                    <span class="icon">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </span>
-                    <p class="alert">info</p>
+
+    <button class="player-top-button" title="player-top"
+        onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
+        <svg class="svgIcon" viewBox="0 0 384 512">
+            <path
+                d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
+            </path>
+        </svg>
+    </button>
+
+    <section id="home">
+        <svg id="home-back" preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
+
+            <path class="out-top"
+                d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
+            <path class="in-top"
+                d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
+            <path class="out-bottom"
+                d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
+            <path class="in-bottom"
+                d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
+        </svg>
+        <div class="home-section">
+            <div class="home-sec-head">
+                <div class="home-logo">
+                    <svg id="homelogo-svg" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M18.6216 3.21667c.2391.1897.3784.47817.3784.78334V15.6667c0 .0412-.0025.0818-.0073.1218.0048.0698.0073.1404.0073.2115 0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3c.3506 0 .6872.0602 1 .1707V9.2602l-8 1.8667V18l-.00001.0032C8.99824 19.6586 7.65577 21 6 21c-1.65685 0-3-1.3431-3-3s1.34315-3 3-3c.35064 0 .68722.0602 1 .1707V6.33334c0-.46474.32018-.86823.77277-.97384l9.99953-2.33321c.1486-.03477.3012-.03465.4467-.00201.1427.03202.2783.09532.3964.18752.0021.00162.0041.00324.0062.00487Z" />
+                    </svg>
                 </div>
-
-                <p class="message">
-                    song info.
-                </p>
-
-                <div class="actions">
-                    <button class="read" id="info_ok">
-                        Got it
-                    </button>
-
-                </div>
-            </div>
-        </div>
-
-
-        <button class="player-top-button" title="player-top"
-            onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
-            <svg class="svgIcon" viewBox="0 0 384 512">
-                <path
-                    d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
-                </path>
-            </svg>
-        </button>
-
-        <section id="home">
-            <svg id="home-back" preserveAspectRatio="xMidYMid slice" viewBox="10 10 80 80">
-
-                <path class="out-top"
-                    d="M37-5C25.1-14.7,5.7-19.1-9.2-10-28.5,1.8-32.7,31.1-19.8,49c15.5,21.5,52.6,22,67.2,2.3C59.4,35,53.7,8.5,37-5Z" />
-                <path class="in-top"
-                    d="M20.6,4.1C11.6,1.5-1.9,2.5-8,11.2-16.3,23.1-8.2,45.6,7.4,50S42.1,38.9,41,24.5C40.2,14.1,29.4,6.6,20.6,4.1Z" />
-                <path class="out-bottom"
-                    d="M105.9,48.6c-12.4-8.2-29.3-4.8-39.4.8-23.4,12.8-37.7,51.9-19.1,74.1s63.9,15.3,76-5.6c7.6-13.3,1.8-31.1-2.3-43.8C117.6,63.3,114.7,54.3,105.9,48.6Z" />
-                <path class="in-bottom"
-                    d="M102,67.1c-9.6-6.1-22-3.1-29.5,2-15.4,10.7-19.6,37.5-7.6,47.8s35.9,3.9,44.5-12.5C115.5,92.6,113.9,74.6,102,67.1Z" />
-            </svg>
-            <div class="home-section">
-                <div class="home-sec-head">
-                    <div class="home-logo">
-                        <svg id="homelogo-svg" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M18.6216 3.21667c.2391.1897.3784.47817.3784.78334V15.6667c0 .0412-.0025.0818-.0073.1218.0048.0698.0073.1404.0073.2115 0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3c.3506 0 .6872.0602 1 .1707V9.2602l-8 1.8667V18l-.00001.0032C8.99824 19.6586 7.65577 21 6 21c-1.65685 0-3-1.3431-3-3s1.34315-3 3-3c.35064 0 .68722.0602 1 .1707V6.33334c0-.46474.32018-.86823.77277-.97384l9.99953-2.33321c.1486-.03477.3012-.03465.4467-.00201.1427.03202.2783.09532.3964.18752.0021.00162.0041.00324.0062.00487Z" />
-                        </svg>
+                <div class="home-text">
+                    <h1 class="title">Beatflare Music Player</h1>
+                    <p class="description"> Experience the ultimate open-source, free music player built for true
+                        music lovers.
+                        Lightweight, fast, and customizable — it’s not just a music player, it’s your personal
+                        stage.
+                    </p>
+                    <h3> <i class="fa-solid fa-headphones"></i> Your music, your way... </h3>
+                    <div class="wrapper-get-started">
+                        <a class="cta" href="#playersec"
+                            onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
+                            <span id="s1">Get Started</span>
+                            <span id="s2">
+                                <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <path class="one"
+                                            d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                                            fill="#FFFFFF"></path>
+                                        <path class="two"
+                                            d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                                            fill="#FFFFFF"></path>
+                                        <path class="three"
+                                            d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                                            fill="#FFFFFF"></path>
+                                    </g>
+                                </svg>
+                            </span>
+                        </a>
                     </div>
-                    <div class="home-text">
-                        <h1 class="title">Beatflare Music Player</h1>
-                        <p class="description"> Experience the ultimate open-source, free music player built for true
-                            music lovers.
-                            Lightweight, fast, and customizable — it’s not just a music player, it’s your personal
-                            stage.
-                        </p>
-                        <h3> <i class="fa-solid fa-headphones"></i> Your music, your way... </h3>
-                        <div class="wrapper-get-started">
-                            <a class="cta" href="#playersec"
-                                onclick="document.querySelector('#playersec').scrollIntoView({ behavior: 'smooth' }); return false;">
-                                <span id="s1">Get Started</span>
-                                <span id="s2">
-                                    <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <path class="one"
-                                                d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                                                fill="#FFFFFF"></path>
-                                            <path class="two"
-                                                d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                                                fill="#FFFFFF"></path>
-                                            <path class="three"
-                                                d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                                                fill="#FFFFFF"></path>
-                                        </g>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="playersec">
+        <h1> Beatflare Music Player</h1>
+        <div class="section-center">
+            <div class="play">
+                <div id="player" class="player">
+                    <div id="playerhead">
+                        <div class="dropdown-container" id="dropdownContainer">
+                            <button class="buttonadd" type="button" id="addButton">
+                                <span class="button__text">
+                                    <svg class="svg" fill="none" height="24" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="12" x2="12" y1="5" y2="19"></line>
+                                        <line x1="5" x2="19" y1="12" y2="12"></line>
+                                    </svg>
+                                    Add Songs
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M7.119 8h9.762a1 1 0 0 1 .772 1.636l-4.881 5.927a1 1 0 0 1-1.544 0l-4.88-5.927A1 1 0 0 1 7.118 8Z" />
                                     </svg>
                                 </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <section id="playersec">
-            <h1> Beatflare Music Player</h1>
-            <div class="section-center">
-                <div class="play">
-                    <div id="player" class="player">
-                        <div id="playerhead">
-                            <div class="dropdown-container" id="dropdownContainer">
-                                <button class="buttonadd" type="button" id="addButton">
-                                    <span class="button__text">
-                                        <svg class="svg" fill="none" height="24" stroke="currentColor"
-                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                            <line x1="12" x2="12" y1="5" y2="19"></line>
-                                            <line x1="5" x2="19" y1="12" y2="12"></line>
-                                        </svg>
-                                        Add Songs
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M7.119 8h9.762a1 1 0 0 1 .772 1.636l-4.881 5.927a1 1 0 0 1-1.544 0l-4.88-5.927A1 1 0 0 1 7.118 8Z" />
-                                        </svg>
-                                    </span>
-                                </button>
-
-                                <ul id="addbtn-menu">
-                                    <li id="import-files">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Import Files
-                                    </li>
-                                    <li id="import-folder">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M3 6a2 2 0 0 1 2-2h5.532a2 2 0 0 1 1.536.72l1.9 2.28H3V6Zm0 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Import Folder
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <button type="button" class="delbutton" id="remove-all">
-                                <span class="delbutton__text">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="512" viewBox="0 0 512 512"
-                                        height="512" class="svg">
-                                        <title></title>
-                                        <path
-                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-                                            d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320">
-                                        </path>
-                                        <line y2="112" y1="112" x2="432" x1="80"
-                                            style="stroke:#ea0b0b;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px">
-                                        </line>
-                                        <path
-                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
-                                            d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40">
-                                        </path>
-                                        <line y2="400" y1="176" x2="256" x1="256"
-                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
-                                        </line>
-                                        <line y2="400" y1="176" x2="192" x1="184"
-                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
-                                        </line>
-                                        <line y2="400" y1="176" x2="320" x1="328"
-                                            style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
-                                        </line>
-                                    </svg>Remove all
-                                </span>
                             </button>
-                            <div class="searchbtn">
-                                <input type="text" id="search-list" placeholder="Search for songs">
-                                <span>
+
+                            <ul id="addbtn-menu">
+                                <li id="import-files">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Import Files
+                                </li>
+                                <li id="import-folder">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M3 6a2 2 0 0 1 2-2h5.532a2 2 0 0 1 1.536.72l1.9 2.28H3V6Zm0 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Import Folder
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button type="button" class="delbutton" id="remove-all">
+                            <span class="delbutton__text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="512" viewBox="0 0 512 512" height="512"
+                                    class="svg">
+                                    <title></title>
+                                    <path
+                                        style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                                        d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320">
+                                    </path>
+                                    <line y2="112" y1="112" x2="432" x1="80"
+                                        style="stroke:#ea0b0b;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px">
+                                    </line>
+                                    <path
+                                        style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                                        d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40">
+                                    </path>
+                                    <line y2="400" y1="176" x2="256" x1="256"
+                                        style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                    </line>
+                                    <line y2="400" y1="176" x2="192" x1="184"
+                                        style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                    </line>
+                                    <line y2="400" y1="176" x2="320" x1="328"
+                                        style="fill:none;stroke:#ea0b0b;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                    </line>
+                                </svg>Remove all
+                            </span>
+                        </button>
+                        <div class="searchbtn">
+                            <input type="text" id="search-list" placeholder="Search for songs">
+                            <span>
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="3"
+                                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                </svg>
+                                Search
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <input title="file-input" type="file" id="file-input" accept=".mp3,.wav" multiple>
+                    <input title="folder-input" type="file" id="folder-input" accept=".mp3,.wav" webkitdirectory
+                        directory multiple>
+                    <ul id="playlist">
+
+                    </ul>
+                    <audio id="audio-player"></audio>
+                    <div id="audio-control">
+                        <div class="details-volume">
+                            <img id="albumArt" alt="Album Art" src="./images/art.png">
+                            <div class="volume-contain">
+                                <div class="marquee">
+                                    <p id="songName">Add songs to your playlist and let the music begin! 🎵✨</p>
+                                </div>
+
+                                <div class="volumemute">
+
+                                    <div class="checkb">
+                                        <input title="Mute/Unmute" type="checkbox" name="mute" id="mute" class="cbox">
+                                        <div class="c-icon" id="mutei">
+                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+                                    <label id="vpresentage" for="volume">50%</label>
+
+                                    <button class="checkb" id="go-settings" title="Settings"
+                                        onclick="document.querySelector('#settings').scrollIntoView({ behavior: 'smooth' }); return false;">
+                                        <div class="c-icon" id="setb">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-sliders2" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.5 1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4H1.5a.5.5 0 0 1 0-1H10V1.5a.5.5 0 0 1 .5-.5M12 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m-6.5 2A.5.5 0 0 1 6 6v1.5h8.5a.5.5 0 0 1 0 1H6V10a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5M1 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 1 8m9.5 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V13H1.5a.5.5 0 0 1 0-1H10v-1.5a.5.5 0 0 1 .5-.5m1.5 2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+                                            </svg>
+                                        </div>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <div class="checkb">
+                                <input title="Shuffle Songs" type="checkbox" name="randomsong" id="randomsong"
+                                    class="cbox">
+                                <div class="c-icon">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="3"
-                                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3" />
                                     </svg>
-                                    Search
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <input title="file-input" type="file" id="file-input" accept=".mp3,.wav" multiple>
-                        <input title="folder-input" type="file" id="folder-input" accept=".mp3,.wav" webkitdirectory
-                            directory multiple>
-                        <ul id="playlist">
-
-                        </ul>
-                        <audio id="audio-player"></audio>
-                        <div id="audio-control">
-                            <div class="details-volume">
-                                <img id="albumArt" alt="Album Art" src="./images/art.png">
-                                <div class="volume-contain">
-                                    <div class="marquee">
-                                        <p id="songName">Add songs to your playlist and let the music begin! 🎵✨</p>
-                                    </div>
-
-                                    <div class="volumemute">
-
-                                        <div class="checkb">
-                                            <input title="Mute/Unmute" type="checkbox" name="mute" id="mute"
-                                                class="cbox">
-                                            <div class="c-icon" id="mutei">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
-                                        <label id="vpresentage" for="volume">50%</label>
-
-                                        <button class="checkb" id="go-settings" title="Settings"
-                                            onclick="document.querySelector('#settings').scrollIntoView({ behavior: 'smooth' }); return false;">
-                                            <div class="c-icon" id="setb">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-sliders2" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.5 1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4H1.5a.5.5 0 0 1 0-1H10V1.5a.5.5 0 0 1 .5-.5M12 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m-6.5 2A.5.5 0 0 1 6 6v1.5h8.5a.5.5 0 0 1 0 1H6V10a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5M1 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 1 8m9.5 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V13H1.5a.5.5 0 0 1 0-1H10v-1.5a.5.5 0 0 1 .5-.5m1.5 2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
-                                                </svg>
-                                            </div>
-                                        </button>
-
-                                    </div>
                                 </div>
                             </div>
-                            <div class="controls">
-                                <div class="checkb">
-                                    <input title="Shuffle Songs" type="checkbox" name="randomsong" id="randomsong"
-                                        class="cbox">
-                                    <div class="c-icon">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M13.484 9.166 15 7h5m0 0-3-3m3 3-3 3M4 17h4l1.577-2.253M4 7h4l7 10h5m0 0-3 3m3-3-3-3" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <button id="prev" title="Previous Song" class="controlbtn" disabled><svg
+                            <button id="prev" title="Previous Song" class="controlbtn" disabled><svg
+                                    class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="3" d="m15 19-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <div class="play-pause-back">
+                                <button id="play-pause" title="Play/Pause"><svg
                                         class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button id="next" title="Next Song" class="controlbtn" disabled><svg
+                                    class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="3" d="m9 5 7 7-7 7" />
+                                </svg>
+                            </button>
+                            <div class="checkb">
+                                <input title="Repeat song" type="checkbox" name="repeat" id="repeatsong" class="cbox">
+                                <div class="c-icon">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="3" d="m15 19-7-7 7-7" />
+                                            stroke-width="2"
+                                            d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
                                     </svg>
-                                </button>
-                                <div class="play-pause-back">
-                                    <button id="play-pause" title="Play/Pause"><svg
-                                            class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <button id="next" title="Next Song" class="controlbtn" disabled><svg
-                                        class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="3" d="m9 5 7 7-7 7" />
-                                    </svg>
-                                </button>
-                                <div class="checkb">
-                                    <input title="Repeat song" type="checkbox" name="repeat" id="repeatsong"
-                                        class="cbox">
-                                    <div class="c-icon">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
-                                        </svg>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="seek-bar-container">
-                            <span id="current-time">0:00</span>
-                            <input title="seek" type="range" id="seek-bar" value="0">
-                            <span id="duration">0:00</span>
-                        </div>
+                    </div>
+                    <div class="seek-bar-container">
+                        <span id="current-time">0:00</span>
+                        <input title="seek" type="range" id="seek-bar" value="0">
+                        <span id="duration">0:00</span>
+                    </div>
 
-                    </div>
-                </div>
-                <div class="tabs">
-                    <!-- btn container -->
-                    <div class="tbtn-container">
-                        <button class="tbutton live" data-id="step1">Visualizer 1</button>
-                        <button class="tbutton" data-id="step2">Visualizer 2</button>
-                        <button class="tbutton" data-id="step3">Visualizer 3</button>
-                    </div>
-                    <div class="tabs-content">
-                        <!-- single item -->
-                        <div class="tcontent live" id="step1">
-                            <div id="visual1">
-                                <canvas id="canvas1" width="380px" height="380px"></canvas>
-                            </div>
-                        </div>
-                        <!-- end of single item -->
-                        <!-- single item -->
-                        <div class="tcontent" id="step2">
-                            <div id="visual2">
-                                <canvas id="canvas2" width="380px" height="380px"></canvas>
-                            </div>
-
-                        </div>
-                        <!-- end of single item -->
-                        <!-- single item -->
-                        <div class="tcontent" id="step3">
-                            <div id="visual3">
-                                <canvas id="canvas3" width="380px" height="380px"></canvas>
-                            </div>
-                        </div>
-                        <!-- end of single item -->
-                    </div>
                 </div>
             </div>
-        </section>
-        <section id="settings">
-            <div id="sethead" class="headding">
-                Settings
-            </div>
-            <div class="settings-content">
-                <div class="column-1">
-                    <div id="audio-set-head">
-                        <label class="s-head-text">Audio Settings</label>
-                        <button id="all-reset" class="rest-btn">Reset all</button>
-                    </div>
-                    <div id="playback-speed">
-                        <label for="speed" class="s-text">Speed: </label>
-                        <input type="range" id="speed" min="0.3" max="1.7" step="0.1" value="1">
-                        <label id="speedlabel" for="speed" class="changinglabel">1x</label>
-                        <button id="speed-reset" class="rest-btn">Reset</button>
-                    </div>
-                    <div id="con-pitch">
-                        <label for="pitch" class="s-text">Pitch: </label>
-                        <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
-                        <label id="pitchlabel" for="pitch" class="changinglabel">0x</label>
-                        <button id="pitch-reset" class="rest-btn">Reset</button>
-                    </div>
-                    <div id="equalizer">
-                        <label for="equ-select" class="s-text">Equalizer: </label>
-                        <button id="equalizer-reset" class="rest-btn">Reset</button>
-                        <select id="equ-select" class="select-menu" title="Equalizer Presets">
-                            <option selected value="Flat">Flat</option>
-                            <option value="Treble boost">Treble boost</option>
-                            <option value="Bass boost">Bass boost</option>
-                            <option value="Laptop">Laptop</option>
-                            <option value="Portable speakers">Portable speakers</option>
-                            <option value="TV">TV</option>
-                            <option value="Custom">Custom</option>
-                        </select>
-                    </div>
-                    <div id="equ"></div>
+            <div class="tabs">
+                <!-- btn container -->
+                <div class="tbtn-container">
+                    <button class="tbutton live" data-id="step1">Visualizer 1</button>
+                    <button class="tbutton" data-id="step2">Visualizer 2</button>
+                    <button class="tbutton" data-id="step3">Visualizer 3</button>
                 </div>
-                <div class="column-2">
-                    <div id="con-Stereo">
-                        <label for="Stereo" class="s-text">Stereo: </label>
-                        <label id="Stereolabel1" for="Stereo" class="changinglabel"><i
-                                class="fa-solid fa-volume-low"></i> 1.0</label>
-                        <div class="slider-wrapper">
-                            <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
-                            <div class="center-line"></div>
+                <div class="tabs-content">
+                    <!-- single item -->
+                    <div class="tcontent live" id="step1">
+                        <div id="visual1">
+                            <canvas id="canvas1" width="380px" height="380px"></canvas>
                         </div>
-                        <label id="Stereolabel2" for="Stereo" class="changinglabel"><i
-                                class="fa-solid fa-volume-low"></i> 1.0</label>
-                        <button id="Stereo-reset" class="rest-btn">Reset</button>
                     </div>
-                    <div id="con-filter">
-                        <label for="filter-f" title="Low Pass Filter" id="low-head" class="s-text">Low Pass Filter:
-                        </label>
-                        <div id="con-filter-frequency">
-                            <label id="filterlabel1" title="Frequency" class="filter-label"
-                                for="filter-f">24000.00Hz</label>
-                            <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01"
-                                value="1">
-                            <label for="filter-f" title="Frequency" class="filter-label">Frequency</label>
-
+                    <!-- end of single item -->
+                    <!-- single item -->
+                    <div class="tcontent" id="step2">
+                        <div id="visual2">
+                            <canvas id="canvas2" width="380px" height="380px"></canvas>
                         </div>
-                        <div id="con-filter-quality">
-                            <label id="filterlabel2" title="Quality" class="filter-label" for="filter-q">0.00</label>
-                            <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01"
-                                value="0">
-                            <label for="filter-q" title="Quality" class="filter-label">Quality</label>
 
+                    </div>
+                    <!-- end of single item -->
+                    <!-- single item -->
+                    <div class="tcontent" id="step3">
+                        <div id="visual3">
+                            <canvas id="canvas3" width="380px" height="380px"></canvas>
                         </div>
-                        <button id="filter-reset" class="rest-btn">Reset</button>
                     </div>
-                    <div id="con-filter2">
-                        <label for="filter2-f" id="high-head" class="s-text">High Pass Filter: </label>
-                        <div id="con-filter2-frequency">
-                            <label id="filter2label1" class="filter-label" for="filter2-f">20.00Hz</label>
-                            <input type="range" id="filter2-f" class="filter-range" min="0" max="1" step="0.01"
-                                value="0">
-                            <label for="filter2-f" class="filter-label">Frequency</label>
-
-                        </div>
-                        <div id="con-filter2-quality">
-                            <label id="filter2label2" class="filter-label" for="filter-q">0.00</label>
-                            <input type="range" id="filter2-q" class="filter-range" min="0" max="1" step="0.01"
-                                value="0">
-                            <label for="filter2-q" class="filter-label">Quality</label>
-                        </div>
-                        <button id="filter2-reset" class="rest-btn">Reset</button>
+                    <!-- end of single item -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="settings">
+        <div id="sethead" class="headding">
+            Settings
+        </div>
+        <div class="settings-content">
+            <div class="column-1">
+                <div id="audio-set-head">
+                    <label class="s-head-text">Audio Settings</label>
+                    <button id="all-reset" class="rest-btn">Reset all</button>
+                </div>
+                <div id="playback-speed">
+                    <label for="speed" class="s-text">Speed: </label>
+                    <input type="range" id="speed" min="0.3" max="1.7" step="0.1" value="1">
+                    <label id="speedlabel" for="speed" class="changinglabel">1x</label>
+                    <button id="speed-reset" class="rest-btn">Reset</button>
+                </div>
+                <div id="con-pitch">
+                    <label for="pitch" class="s-text">Pitch: </label>
+                    <input type="range" id="pitch" min="-12" max="12" step="0.1" value="0">
+                    <label id="pitchlabel" for="pitch" class="changinglabel">0x</label>
+                    <button id="pitch-reset" class="rest-btn">Reset</button>
+                </div>
+                <div id="equalizer">
+                    <label for="equ-select" class="s-text">Equalizer: </label>
+                    <button id="equalizer-reset" class="rest-btn">Reset</button>
+                    <select id="equ-select" class="select-menu" title="Equalizer Presets">
+                        <option selected value="Flat">Flat</option>
+                        <option value="Treble boost">Treble boost</option>
+                        <option value="Bass boost">Bass boost</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Portable speakers">Portable speakers</option>
+                        <option value="TV">TV</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </div>
+                <div id="equ"></div>
+            </div>
+            <div class="column-2">
+                <div id="con-Stereo">
+                    <label for="Stereo" class="s-text">Stereo: </label>
+                    <label id="Stereolabel1" for="Stereo" class="changinglabel"><i class="fa-solid fa-volume-low"></i>
+                        1.0</label>
+                    <div class="slider-wrapper">
+                        <input type="range" id="Stereo" min="-1" max="1" step="0.1" value="0">
+                        <div class="center-line"></div>
                     </div>
-
-
-                    <label id="ui-set-head" class="s-head-text">User Interface Settings</label>
-                    <div id="visualizer-set">
-                        <label for="visualizer-on-off" class="s-text">Visualizer On/Off : </label>
-                        <label class="switch">
-                            <input checked="true" type="checkbox" id="visualizer-on-off">
-                            <div class="slider">
-                                <div class="circle">
-                                    <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                        viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path data-original="#000000" fill="currentColor"
-                                                d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <svg class="checkmark" xml:space="preserve"
-                                        style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0"
-                                        height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path class="" data-original="#000000" fill="currentColor"
-                                                d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                    <div id="theme">
-                        <label for="theme-select" class="s-text">Theme: </label>
-                        <select id="theme-select" class="select-menu">
-                            <option value="default" selected>Rustwood (Default)</option>
-                            <option value="ocean">Ocean Breeze</option>
-                            <option value="sunset">Sunset Glow</option>
-                            <option value="forest">Forest Green</option>
-                            <option value="lavender">Lavender Dreams</option>
-                            <option value="neon">Neon Lights</option>
-                            <option value="royal">Royal Gold</option>
-                            <option value="pastel">Pastel Paradise</option>
-                            <option value="midnight">Midnight Mystery</option>
-                            <option value="retro">Retro Vibes</option>
-                        </select>
-                    </div>
-                    <div id="darkmode-set">
-                        <label for="darkmode-on-off" class="s-text">Dark Mode : </label>
-                        <label class="switch">
-                            <input type="checkbox" id="darkmode-on-off">
-                            <div class="slider">
-                                <div class="circle">
-                                    <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                        viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path data-original="#000000" fill="currentColor"
-                                                d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <svg class="checkmark" xml:space="preserve"
-                                        style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0"
-                                        height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path class="" data-original="#000000" fill="currentColor"
-                                                d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                    <div id="partymode">
-                        <label for="party-on-off" class="s-text">Party Mode : </label>
-                        <label class="switch">
-                            <input type="checkbox" id="party-on-off">
-                            <div class="slider">
-                                <div class="circle">
-                                    <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
-                                        viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path data-original="#000000" fill="currentColor"
-                                                d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <svg class="checkmark" xml:space="preserve"
-                                        style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0"
-                                        height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g>
-                                            <path class="" data-original="#000000" fill="currentColor"
-                                                d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </label>
+                    <label id="Stereolabel2" for="Stereo" class="changinglabel"><i class="fa-solid fa-volume-low"></i>
+                        1.0</label>
+                    <button id="Stereo-reset" class="rest-btn">Reset</button>
+                </div>
+                <div id="con-filter">
+                    <label for="filter-f" title="Low Pass Filter" id="low-head" class="s-text">Low Pass Filter:
+                    </label>
+                    <div id="con-filter-frequency">
+                        <label id="filterlabel1" title="Frequency" class="filter-label"
+                            for="filter-f">24000.00Hz</label>
+                        <input type="range" id="filter-f" class="filter-range" min="0" max="1" step="0.01" value="1">
+                        <label for="filter-f" title="Frequency" class="filter-label">Frequency</label>
 
                     </div>
+                    <div id="con-filter-quality">
+                        <label id="filterlabel2" title="Quality" class="filter-label" for="filter-q">0.00</label>
+                        <input type="range" id="filter-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                        <label for="filter-q" title="Quality" class="filter-label">Quality</label>
+
+                    </div>
+                    <button id="filter-reset" class="rest-btn">Reset</button>
+                </div>
+                <div id="con-filter2">
+                    <label for="filter2-f" id="high-head" class="s-text">High Pass Filter: </label>
+                    <div id="con-filter2-frequency">
+                        <label id="filter2label1" class="filter-label" for="filter2-f">20.00Hz</label>
+                        <input type="range" id="filter2-f" class="filter-range" min="0" max="1" step="0.01" value="0">
+                        <label for="filter2-f" class="filter-label">Frequency</label>
+
+                    </div>
+                    <div id="con-filter2-quality">
+                        <label id="filter2label2" class="filter-label" for="filter-q">0.00</label>
+                        <input type="range" id="filter2-q" class="filter-range" min="0" max="1" step="0.01" value="0">
+                        <label for="filter2-q" class="filter-label">Quality</label>
+                    </div>
+                    <button id="filter2-reset" class="rest-btn">Reset</button>
                 </div>
 
+
+                <label id="ui-set-head" class="s-head-text">User Interface Settings</label>
+                <div id="visualizer-set">
+                    <label for="visualizer-on-off" class="s-text">Visualizer On/Off : </label>
+                    <label class="switch">
+                        <input checked="true" type="checkbox" id="visualizer-on-off">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div id="theme">
+                    <label for="theme-select" class="s-text">Theme: </label>
+                    <select id="theme-select" class="select-menu">
+                        <option value="default" selected>Rustwood (Default)</option>
+                        <option value="ocean">Ocean Breeze</option>
+                        <option value="sunset">Sunset Glow</option>
+                        <option value="forest">Forest Green</option>
+                        <option value="lavender">Lavender Dreams</option>
+                        <option value="neon">Neon Lights</option>
+                        <option value="royal">Royal Gold</option>
+                        <option value="pastel">Pastel Paradise</option>
+                        <option value="midnight">Midnight Mystery</option>
+                        <option value="retro">Retro Vibes</option>
+                    </select>
+                </div>
+                <div id="darkmode-set">
+                    <label for="darkmode-on-off" class="s-text">Dark Mode : </label>
+                    <label class="switch">
+                        <input type="checkbox" id="darkmode-on-off">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div id="partymode">
+                    <label for="party-on-off" class="s-text">Party Mode : </label>
+                    <label class="switch">
+                        <input type="checkbox" id="party-on-off">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+
+                </div>
             </div>
 
-        </section>
-        <section id="about">
-            <section class="about-creator">
-                <h1 class="section-title">
-                    About
-                </h1>
-                <div class="container">
+        </div>
 
-                    <div class="profile">
-                        <h2 class="creator-name-head">About Creator </h2>
-                        <div id="profile-background"  style="background: url('./images/pre-back.jpg');background-size: 200px 200px; background-position: center;">
+    </section>
+    <section id="about">
+        <section class="about-creator">
+            <h1 class="section-title">
+                About
+            </h1>
+            <div class="container">
+
+                <div class="profile">
+                    <h2 class="creator-name-head">About Creator </h2>
+                    <div id="profile-background"
+                        style="background: url('./images/pre-back.jpg');background-size: 200px 200px; background-position: center;">
                         <img src="./images/logo.jpg" alt="Creator Profile Image" class="profile-img">
-                        </div>
-                        <h4 class="creator-name">Bahasuru Nayanakantha</h4>
-                        <p class="creator-description">A passionate developer and music enthusiast, dedicated to
-                            crafting seamless digital experiences.
-                            This music player was built with love blending a sleek, modern UI with powerful features
-                            to make every beat feel alive.
-                            It's all about enhancing your music journey. Stay tuned for more updates, and feel free to
-                            contribute and make it even better!</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/bahasuru-nayanakantha/" target="_blank"
-                                rel="noopener noreferrer" class="social-btn linkedin">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://github.com/bahasuru-naya" target="_blank" rel="noopener noreferrer"
-                                class="social-btn github">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="mailto:bahasuru_nayanakantha@hotmail.com" class="social-btn email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </div>
                     </div>
-
-                    <div class="mp3-info">
-                        <h2 class="mp3-title">Beatflare Music Player Project</h2>
-                        <img src="./images/art.png" alt="MP3 Player Logo" class="mp3-logo">
-                        <p class="mp3-description">
-                            Free, open-source music player with easy song control and a user-friendly interface,
-                            designed for smooth navigation and an enjoyable listening experience.
-                        </p>
-                        <h4>Features</h4>
-                        <ul class="features">
-                            <li>▶️ Play, Pause & Skip with ease </li>
-                            <li>📂 Supports multiple audio formats </li>
-                            <li>🌙 Light & Dark Mode </li>
-                            <li>🎨 Multiple Color Themes</li>
-                            <li>🎚️ Customizable Audio Effects </li>
-                            <li>🔊 Audio Visualizer</li>
-                            <li>📃 Effortless Songs management </li>
-                            <li>🎉 Party Mode </li>
-                        </ul>
-                        <a href="https://github.com/bahasuru-naya/Beatflare-Music-Player" target="_blank"
-                            rel="noopener noreferrer" class="github-btn">
-                            <i class="fab fa-github"></i> View on GitHub
+                    <h4 class="creator-name">Bahasuru Nayanakantha</h4>
+                    <p class="creator-description">A passionate developer and music enthusiast, dedicated to
+                        crafting seamless digital experiences.
+                        This music player was built with love blending a sleek, modern UI with powerful features
+                        to make every beat feel alive.
+                        It's all about enhancing your music journey. Stay tuned for more updates, and feel free to
+                        contribute and make it even better!</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/bahasuru-nayanakantha/" target="_blank"
+                            rel="noopener noreferrer" class="social-btn linkedin">
+                            <i class="fab fa-linkedin"></i>
                         </a>
-                        <p class="contribution-text">This project is open-source. Contributions are welcome!</p>
+                        <a href="https://github.com/bahasuru-naya" target="_blank" rel="noopener noreferrer"
+                            class="social-btn github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:bahasuru_nayanakantha@hotmail.com" class="social-btn email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
-            </section>
+
+                <div class="mp3-info">
+                    <h2 class="mp3-title">Beatflare Music Player Project</h2>
+                    <img src="./images/art.png" alt="MP3 Player Logo" class="mp3-logo">
+                    <p class="mp3-description">
+                        Free, open-source music player with easy song control and a user-friendly interface,
+                        designed for smooth navigation and an enjoyable listening experience.
+                    </p>
+                    <h4>Features</h4>
+                    <ul class="features">
+                        <li>▶️ Play, Pause & Skip with ease </li>
+                        <li>📂 Supports multiple audio formats </li>
+                        <li>🌙 Light & Dark Mode </li>
+                        <li>🎨 Multiple Color Themes</li>
+                        <li>🎚️ Customizable Audio Effects </li>
+                        <li>🔊 Audio Visualizer</li>
+                        <li>📃 Effortless Songs management </li>
+                        <li>🎉 Party Mode </li>
+                    </ul>
+                    <a href="https://github.com/bahasuru-naya/Beatflare-Music-Player" target="_blank"
+                        rel="noopener noreferrer" class="github-btn">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <p class="contribution-text">This project is open-source. Contributions are welcome!</p>
+                </div>
+            </div>
         </section>
-    </main>
+    </section>
+
     <div class="mobile-warning-overlay" id="mobileWarning">
         <div class="mobile-warning-message">
             <h2>Screen Size Not Supported</h2>
