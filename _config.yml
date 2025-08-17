@@ -1,0 +1,4 @@
+# _config.yml
+exclude: []        # Don’t exclude anything
+include:
+  - sample-music   # Force-include your music folder

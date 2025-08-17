@@ -708,7 +708,7 @@ function showinfo(filename) {
 }
 
 function playsamplemusic() {
-    const folderPath = '../src/Audio/';
+    const folderPath = '../sample-music/';
 
     const loadingOverlay = document.getElementById('loading-back');
     // Show loading overlay
