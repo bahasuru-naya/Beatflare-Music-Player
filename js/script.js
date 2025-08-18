@@ -41,8 +41,9 @@ let analyser;
 let animation;
 let audioctx;
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Set the canvas height initially
+const loadcontainer = document.getElementById("loading-card"); 
+
+document.addEventListener('DOMContentLoaded', function () {    
     setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
     const playlisttext = document.createElement('p');
@@ -55,9 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
     playPauseButton.disabled = true;
     seekBar.disabled = true;
     removeAll.disabled = true;
-    searchbtntext.disabled = true;
+    searchbtntext.disabled = true; 
+    sampleFileNames.forEach(fileName => {
+        const d = document.createElement("p");
+        d.id = "progress-" + fileName.replace(/\s+/g, "_");
+        d.innerText = `${fileName}: 0%`;
+        loadcontainer.appendChild(d);
+    });
     loadsettings();
-    loadFilesFromStorage();
+    loadFilesFromStorage();   
 
 });
 
@@ -693,9 +700,22 @@ function showerror(message) {
 }
 
 const sampleFileNames = ['Elektronomia-Energy-Sample-Music.mp3', 'Elektronomia-Limitless-Sample-Music.mp3', 'LFZ-Popsicle-Sample-Music.mp3'];
+
 const attributions = ["Song: Elektronomia - Energy [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/energy \n Watch: http://youtu.be/fzNMd3Tu1Zw",
     "Song: Elektronomia - Limitless [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Limitless \n Watch: http://youtu.be/cNcy3J4x62M",
     "Song: LFZ - Popsicle [NCS Release] \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/Popsicle \n Watch: http://youtu.be/K8DUjObr_tU"];
+
+const samplefileurls = ["https://drive.google.com/uc?export=download&id=1xbgHqIwSMw2bxnCkO68Wqfhpq80-tOee",
+    "https://drive.google.com/uc?export=download&id=14JVFSlvpoMiCCz9190-v02pCXWPJDDrw",
+    "https://drive.google.com/uc?export=download&id=1oXHD8T8NMxmyblzmiuoi1mc4bdIFA-Ei"];
+
+const urlMap = Object.fromEntries(
+    sampleFileNames.map((file, index) => [file, samplefileurls[index]])
+);
+
+function geturls(filename) {
+    return urlMap[filename] || "No URL found";
+}
 
 const attributionMap = Object.fromEntries(
     sampleFileNames.map((file, index) => [file, attributions[index]])
@@ -717,27 +737,59 @@ function showinfo(filename) {
     infoBack.style.display = 'block';
 }
 
+async function fetchWithProgress(url, fileName, onProgress) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to load ${fileName}`);
+
+    const contentLength = response.headers.get("content-length");
+    if (!contentLength) {
+        // If server does not send content-length, fallback
+        return await response.blob();
+    }
+
+    const total = parseInt(contentLength, 10);
+    let loaded = 0;
+
+    const reader = response.body.getReader();
+    const chunks = [];
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        loaded += value.length;
+
+        if (onProgress) {
+            const percent = Math.round((loaded / total) * 100);
+            onProgress(percent, fileName);
+        }
+    }
+
+    return new Blob(chunks);
+}
+
 function playsamplemusic() {
-    const folderPath = 'https://bahasuru-naya.github.io/Beatflare-Music-Player/sample-music/';
 
     const loadingOverlay = document.getElementById('loading-back');
-    // Show loading overlay
-    if (loadingOverlay) loadingOverlay.style.display = 'block';
-
+    if (loadingOverlay) loadingOverlay.style.display = 'block'; 
+    
+    sampleFileNames.forEach(fileName => {        
+        const sID = "progress-" + fileName.replace(/\s+/g, "_");
+        document.getElementById(sID).innerText = `${fileName}: 0%`;        
+    });
 
     const fetchPromises = sampleFileNames.map(async fileName => {
-        const fileUrl = folderPath + fileName;
-        const response = await fetch(fileUrl);
-        if (!response.ok) throw new Error(`Failed to load ${fileName}`);
-        const blob = await response.blob();
+        const fileUrl = "https://corsproxy.io/?" + geturls(fileName);
+        const blob = await fetchWithProgress(fileUrl, fileName, (percent, name) => {            
+            const pID = "progress-" + name.replace(/\s+/g, "_");
+            document.getElementById(pID).innerText = `${name}: ${percent}%`;
+        });
         return new File([blob], fileName, { type: blob.type });
     });
 
     Promise.all(fetchPromises)
         .then(fetchedFiles => {
-            // Add all files to the playlist
             fetchedFiles.forEach(file => files.push(file));
-            // Remove playlist text if visible
             const playlistText = document.getElementById('playlist-text');
             if (playlistText) playlistText.remove();
 
@@ -762,28 +814,25 @@ function playsamplemusic() {
         .catch(err => {
             loadingOverlay.style.display = 'none';
             console.error('An error occurred while processing the file input:', err.message);
-            showerror(err.message);
+            showerror(err.message + ". Check your internet connection or try again later.");
             fileInput.value = '';
             folderInput.value = '';
         })
         .finally(() => {
             if (loadingOverlay) {
-                setTimeout(() => {
-                    if (currentIndex === -1 && files.length > 0) {
-                        playFile(0);
-                    }
-                    else if (currentIndex >= 0 && currentIndex < files.length) {
-                        playFile(currentIndex);
-                    }
-                    loadingOverlay.style.display = 'none';
-                }, 2000);
+                if (currentIndex === -1 && files.length > 0) {
+                    playFile(0);
+                }
+                else if (currentIndex >= 0 && currentIndex < files.length) {
+                    playFile(currentIndex);
+                }
+                loadingOverlay.style.display = 'none';
             }
         });
 }
 
 fileInput.addEventListener('change', function (event) {
-    try {
-        // Ensure files exist in the input event
+    try {        
         if (!event.target.files) {
             throw new Error('No files were selected.');
         }
@@ -830,7 +879,7 @@ fileInput.addEventListener('change', function (event) {
     } catch (error) {
         console.error('An error occurred while processing the file input:', error.message);
         showerror(error.message);
-        fileInput.value = ''; // Clear the input on error
+        fileInput.value = ''; 
     }
 
     // Handle edge case when no file is playing
@@ -1724,7 +1773,7 @@ const sliders = eqBands.map((freq, idx) => {
     slider.orient = 'vertical';
     slider.title = 'Gain';
     slider.style.direction = 'rtl';
-    slider.style.writingMode = 'vertical-lr';    
+    slider.style.writingMode = 'vertical-lr';
     slider.style.height = '100%';
     slider.style.alignSelf = 'center';
     slider.style.transition = "all 0.5s ease-in-out";

@@ -560,10 +560,10 @@ nav {
 
 #loading-card {
     display: block;
-    top: calc(50% - 100px);
-    left: calc(50% - 120px);
-    height: 160px;
-    width: 200px;
+    top: calc(50% - 135px);
+    left: calc(50% - 180px);
+    height: 270px;
+    width: 320px;
     justify-content: center;
     justify-items: center;
 }
@@ -579,6 +579,13 @@ nav {
     -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
     mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
     animation: l13 1s infinite linear;
+}
+#loading-card .message{
+    font-size: 25px;
+}
+
+#loading-card P{
+    font-size: 14px;
 }
 
 @keyframes l13 {
