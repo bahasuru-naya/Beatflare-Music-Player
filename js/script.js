@@ -41,9 +41,9 @@ let analyser;
 let animation;
 let audioctx;
 
-const loadcontainer = document.getElementById("loading-card"); 
+const loadcontainer = document.getElementById("loading-card");
 
-document.addEventListener('DOMContentLoaded', function () {    
+document.addEventListener('DOMContentLoaded', function () {
     setWidthHeight();
     window.addEventListener('resize', setWidthHeight);
     const playlisttext = document.createElement('p');
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     playPauseButton.disabled = true;
     seekBar.disabled = true;
     removeAll.disabled = true;
-    searchbtntext.disabled = true; 
+    searchbtntext.disabled = true;
     sampleFileNames.forEach(fileName => {
         const d = document.createElement("p");
         d.id = "progress-" + fileName.replace(/\s+/g, "_");
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadcontainer.appendChild(d);
     });
     loadsettings();
-    loadFilesFromStorage();   
+    loadFilesFromStorage();
 
 });
 
@@ -478,6 +478,8 @@ function audiovisual(player) {
         const selectedThemeKey = themeKeys[themeIndex];
         const selectedTheme = themes[selectedThemeKey];
 
+       document.querySelector(".wrapper-get-started .cta").style.background = "var(--black)";
+
         if (selectedTheme) {
             Object.keys(selectedTheme).forEach(key => {
                 document.documentElement.style.setProperty(key, selectedTheme[key]);
@@ -771,16 +773,16 @@ async function fetchWithProgress(url, fileName, onProgress) {
 function playsamplemusic() {
 
     const loadingOverlay = document.getElementById('loading-back');
-    if (loadingOverlay) loadingOverlay.style.display = 'block'; 
-    
-    sampleFileNames.forEach(fileName => {        
+    if (loadingOverlay) loadingOverlay.style.display = 'block';
+
+    sampleFileNames.forEach(fileName => {
         const sID = "progress-" + fileName.replace(/\s+/g, "_");
-        document.getElementById(sID).innerText = `${fileName}: 0%`;        
+        document.getElementById(sID).innerText = `${fileName}: 0%`;
     });
 
     const fetchPromises = sampleFileNames.map(async fileName => {
         const fileUrl = "https://corsproxy.io/?" + geturls(fileName);
-        const blob = await fetchWithProgress(fileUrl, fileName, (percent, name) => {            
+        const blob = await fetchWithProgress(fileUrl, fileName, (percent, name) => {
             const pID = "progress-" + name.replace(/\s+/g, "_");
             document.getElementById(pID).innerText = `${name}: ${percent}%`;
         });
@@ -832,7 +834,7 @@ function playsamplemusic() {
 }
 
 fileInput.addEventListener('change', function (event) {
-    try {        
+    try {
         if (!event.target.files) {
             throw new Error('No files were selected.');
         }
@@ -879,7 +881,7 @@ fileInput.addEventListener('change', function (event) {
     } catch (error) {
         console.error('An error occurred while processing the file input:', error.message);
         showerror(error.message);
-        fileInput.value = ''; 
+        fileInput.value = '';
     }
 
     // Handle edge case when no file is playing
@@ -1504,7 +1506,9 @@ audioPlayer.addEventListener("play", () => {
     replaceActiveWithLoading();
     if (partytoggle.checked) {
         themeSelect.disabled = true;
-        startConfetti();
+        if (window.innerWidth > 400) {
+            startConfetti();
+        }
     }
 
 });
@@ -1523,6 +1527,7 @@ audioPlayer.addEventListener("pause", () => {
     if (confettiAnimationId) {
         cancelAnimationFrame(confettiAnimationId);
     }
+    document.querySelector(".wrapper-get-started .cta").style.background = "var(--home-c1-color)";
 });
 
 function replaceActiveWithLoading() {
@@ -2381,11 +2386,14 @@ partytoggle.addEventListener("click", function () {
             localStorage.setItem('darkModeEnabled', darkModeToggle.checked ? 'true' : 'false');
             darkModeToggle.disabled = true;
 
-            startConfetti();
+            if (window.innerWidth > 400) {
+                startConfetti();
+            }
         }
         else {
             themeSelect.disabled = false;
             darkModeToggle.disabled = false;
+            document.querySelector(".wrapper-get-started .cta").style.background = "var(--home-c1-color)";
             const selectedTheme = themes[themeSelect.value];
             if (selectedTheme) {
                 Object.keys(selectedTheme).forEach(key => {
@@ -2415,7 +2423,9 @@ agree.addEventListener("click", function () {
             document.documentElement.style.setProperty(key, selectedTheme[key]);
         });
     }
-    startConfetti();
+    if (window.innerWidth > 400) {
+        startConfetti();
+    }
 });
 
 disagree.addEventListener("click", function () {
