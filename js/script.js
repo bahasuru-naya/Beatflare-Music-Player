@@ -1282,11 +1282,11 @@ img.addEventListener('click', function () {
         const songTitle = file.name.replace('.mp3', '');
         if (fileName !== "art.png") {
             albumArtimg.src = img.src;
-            albummsg.textContent = "Album Art for " + songTitle;
+            albummsg.textContent =  songTitle;
             albummsg.style.color = "rgb(74, 74, 74)";
         } else {
             albumArtimg.src = "./images/art.png";
-            albummsg.textContent = "Album Art not found for " + songTitle;
+            albummsg.textContent = "Album Art not found - " + songTitle;
             albummsg.style.color = "red";
         }
     } else {

@@ -3293,7 +3293,7 @@ li svg {
 
 .social-btn:hover {
     transform: scale(1.2);
-    background: var(--about-back-color);
+    background: black;
 }
 
 /* MP3 Player Info */
