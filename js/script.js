@@ -777,14 +777,15 @@ function playsamplemusic() {
 
     sampleFileNames.forEach(fileName => {
         const sID = "progress-" + fileName.replace(/\s+/g, "_");
-        document.getElementById(sID).innerText = `${fileName}: 0%`;
+        document.getElementById(sID).innerText = `${fileName} `;
     });
 
     const fetchPromises = sampleFileNames.map(async fileName => {
-        const fileUrl = "https://corsproxy.io/?" + geturls(fileName);
+        const fileUrl =  "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(geturls(fileName));
+
         const blob = await fetchWithProgress(fileUrl, fileName, (percent, name) => {
-            const pID = "progress-" + name.replace(/\s+/g, "_");
-            document.getElementById(pID).innerText = `${name}: ${percent}%`;
+            //const pID = "Loading .... -" + name.replace(/\s+/g, "_");
+            //document.getElementById(pID).innerText = `${name}`: ${percent}%`;
         });
         return new File([blob], fileName, { type: blob.type });
     });
