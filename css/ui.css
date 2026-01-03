@@ -1095,11 +1095,13 @@ path.two {
 
 
 #playersec {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: var(--player-back-color);
     min-height: 100vh;
     height: auto;
     justify-items: center;
+    align-items: center;
     z-index: 3;
 }
 
@@ -1113,7 +1115,7 @@ path.two {
     font-size: 3rem;
     line-height: 3rem;
     padding-top: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
     width: 75%;
     margin: 0;
     align-items: center;
@@ -1130,7 +1132,7 @@ path.two {
     padding-right: 5%;
     z-index: 10;
     position: relative;
-
+    
 }
 
 .play {
@@ -2396,8 +2398,7 @@ li svg {
 
 #settings {
     display: inline-flex;
-    flex-direction: column;
-    justify-content: start;
+    flex-direction: column;    
     background-color: var(--settings-back-color);
     padding-top: 10px;
     padding-left: 5%;
@@ -2420,12 +2421,12 @@ li svg {
 }
 
 #sethead {
-    display: flex;
+    display: block;   
     color: var(--settings-head-text-color);
     padding: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
     font-weight: bold;
-    justify-self: center;
+    justify-self: start;
     font-size: 3rem;
     line-height: 3rem;
     align-items: center;
@@ -3204,9 +3205,8 @@ li svg {
     width: 100%;
     margin: 0px;
     padding-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
     border-radius: 10px;
-
 }
 
 
