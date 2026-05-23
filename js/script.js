@@ -170,7 +170,7 @@ function setWidthHeight() {
     }
     else {
         acontrol.style.display = 'block';
-        playlist.style.height = '250px';
+        playlist.style.height = '220px';
     }
 
     const songNameElement = document.getElementById("songName");
